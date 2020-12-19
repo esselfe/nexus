@@ -29,40 +29,38 @@ int main(int argc, char **argv) {
 	atexit(NexusExit);
 
 	if (SDL_Init(SDL_INIT_VIDEO) < 0) {
-        printf ("nexus: SDL_Init() failed.\n");
-        exit(1);
-    }
-    SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
-    SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 1);
-    SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 4);
-//    if (verbose) {
-        int major, minor;
-        SDL_GL_GetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, &major);
-        SDL_GL_GetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, &minor);
-        printf("SDL OpenGL %d.%d\n", major, minor);
-//    }
+		printf ("nexus: SDL_Init() failed.\n");
+		exit(1);
+	}
+	SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
+	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 1);
+	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 4);
+	int major, minor;
+	SDL_GL_GetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, &major);
+	SDL_GL_GetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, &minor);
+	printf("SDL OpenGL %d.%d\n", major, minor);
 
 	sprintf(window_title, "nexus %s", nexus_version_string);
-    window = SDL_CreateWindow(window_title, winX, winY + 30, winW, winH,
-        SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN);
-        //SDL_WINDOW_OPENGL | SDL_WINDOW_RESIZABLE);
-    SDL_WarpMouseInWindow(window, winW / 2, winH / 2);
+	window = SDL_CreateWindow(window_title, winX, winY + 30, winW, winH,
+		SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN);
+		//SDL_WINDOW_OPENGL | SDL_WINDOW_RESIZABLE);
+	SDL_WarpMouseInWindow(window, winW / 2, winH / 2);
 
-    context = SDL_GL_CreateContext(window);
-    if (context == NULL) {
-        printf("nexus: Cannot create SDL2/GL context. Error: %s\n",
+	context = SDL_GL_CreateContext(window);
+	if (context == NULL) {
+		printf("nexus: Cannot create SDL2/GL context. Error: %s\n",
 			SDL_GetError());
-        SDL_Quit();
-        exit(1);
-    }
+		SDL_Quit();
+		exit(1);
+	}
 
-    glewExperimental = GL_TRUE;
-    if (glewInit() != GLEW_OK) {
-        printf ("nexus: Cannot initialize GLEW.\n");
-        SDL_GL_DeleteContext(context);
-        SDL_Quit();
-        exit(1);
-    }
+	glewExperimental = GL_TRUE;
+	if (glewInit() != GLEW_OK) {
+		printf ("nexus: Cannot initialize GLEW.\n");
+		SDL_GL_DeleteContext(context);
+		SDL_Quit();
+		exit(1);
+	}
 
 	glEnable(GL_DEPTH_TEST);
 	glFrontFace(GL_CCW);
