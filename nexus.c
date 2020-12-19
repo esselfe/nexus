@@ -10,7 +10,7 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_opengl.h>
 
-char *nexus_version_string = "0.0.1";
+char *nexus_version_string = "0.0.2";
 
 SDL_DisplayMode display_mode;
 SDL_Window *window;
@@ -19,41 +19,49 @@ GLfloat winX = 100.0, winY = 40.0, winW = 800.0, winH = 600.0;
 char window_title[1024];
 SDL_Event event;
 
-int main(int argc, char **argv) {
-	printf("nexus started\n");
+void NexusExit(void) {
+	printf("\nnexus exited\n");
+}
 
-	if (SDL_Init (SDL_INIT_VIDEO) < 0) {
+int main(int argc, char **argv) {
+	printf("nexus %s started\n", nexus_version_string);
+
+	atexit(NexusExit);
+
+	if (SDL_Init(SDL_INIT_VIDEO) < 0) {
         printf ("nexus: SDL_Init() failed.\n");
-        return 1;
+        exit(1);
     }
-    SDL_GL_SetAttribute (SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
-    SDL_GL_SetAttribute (SDL_GL_CONTEXT_MAJOR_VERSION, 1);
-    SDL_GL_SetAttribute (SDL_GL_CONTEXT_MINOR_VERSION, 4);
+    SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
+    SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 1);
+    SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 4);
 //    if (verbose) {
         int major, minor;
-        SDL_GL_GetAttribute (SDL_GL_CONTEXT_MAJOR_VERSION, &major);
-        SDL_GL_GetAttribute (SDL_GL_CONTEXT_MINOR_VERSION, &minor);
-        printf ("SDL GL %d.%d\n", major, minor);
+        SDL_GL_GetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, &major);
+        SDL_GL_GetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, &minor);
+        printf("SDL OpenGL %d.%d\n", major, minor);
 //    }
 
-	sprintf(window_title, "nexus 0.0.0");
-    window = SDL_CreateWindow (window_title, winX, winY + 30, winW, winH,
+	sprintf(window_title, "nexus %s", nexus_version_string);
+    window = SDL_CreateWindow(window_title, winX, winY + 30, winW, winH,
         SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN);
         //SDL_WINDOW_OPENGL | SDL_WINDOW_RESIZABLE);
-    SDL_WarpMouseInWindow (window, winW / 2, winH / 2);
-    context = SDL_GL_CreateContext (window);
+    SDL_WarpMouseInWindow(window, winW / 2, winH / 2);
+
+    context = SDL_GL_CreateContext(window);
     if (context == NULL) {
-        printf ("nexus: Cannot create SDL2/GL context. Error: %s\n",
+        printf("nexus: Cannot create SDL2/GL context. Error: %s\n",
 			SDL_GetError());
-        SDL_Quit ();
-        return 1;
+        SDL_Quit();
+        exit(1);
     }
+
     glewExperimental = GL_TRUE;
-    if (glewInit () != GLEW_OK) {
+    if (glewInit() != GLEW_OK) {
         printf ("nexus: Cannot initialize GLEW.\n");
-        SDL_GL_DeleteContext (context);
-        SDL_Quit ();
-        return 1;
+        SDL_GL_DeleteContext(context);
+        SDL_Quit();
+        exit(1);
     }
 
 	glEnable(GL_DEPTH_TEST);
@@ -117,7 +125,7 @@ int main(int argc, char **argv) {
 		}
 	}
 
-	SDL_GL_DeleteContext (context);
+	SDL_GL_DeleteContext(context);
 	SDL_Quit();
 	return 0;
 }
