@@ -10,14 +10,16 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_opengl.h>
 
+#include "nexus.h"
+
 char *nexus_version_string = "0.0.2";
+int mainloopend;
 
 SDL_DisplayMode display_mode;
 SDL_Window *window;
 SDL_GLContext context;
 GLfloat winX = 100.0, winY = 40.0, winW = 800.0, winH = 600.0;
 char window_title[1024];
-SDL_Event event;
 
 void NexusExit(void) {
 	printf("\nnexus exited\n");
@@ -68,7 +70,6 @@ int main(int argc, char **argv) {
 	glViewport((GLint)0, (GLint)0, (GLsizei)winW, (GLsizei)winH);
 
 	GLfloat delta = 0.0;
-	int mainloopend = 0;
 	int fps = 0;
 	time_t t0, tprev = 0;
 	while (!mainloopend) {
@@ -108,19 +109,7 @@ int main(int argc, char **argv) {
 		if (delta >= 360.0)
 			delta -= 360.0;
 
-		if (SDL_PollEvent(&event)) {
-			if (event.type == SDL_QUIT)
-				mainloopend = 1;
-			else if (event.type == SDL_KEYDOWN) {
-				switch (event.key.keysym.sym) {
-				case SDLK_q:
-					mainloopend = 1;
-					break;
-				default:
-					break;
-				}
-			}
-		}
+		EventCheck();
 	}
 
 	SDL_GL_DeleteContext(context);
