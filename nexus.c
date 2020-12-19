@@ -20,6 +20,8 @@ SDL_Window *window;
 SDL_GLContext context;
 GLfloat winX = 100.0, winY = 40.0, winW = 800.0, winH = 600.0;
 char window_title[1024];
+GLfloat delta;
+int fps;
 
 void NexusExit(void) {
 	printf("\nnexus exited\n");
@@ -69,34 +71,11 @@ int main(int argc, char **argv) {
 	glClearColor(0.0, 0.0, 0.0, 0.0);
 	glViewport((GLint)0, (GLint)0, (GLsizei)winW, (GLsizei)winH);
 
-	GLfloat delta = 0.0;
-	int fps = 0;
 	time_t t0, tprev = 0;
 	while (!mainloopend) {
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-		glMatrixMode(GL_PROJECTION);
-		glLoadIdentity();
-		glOrtho(0.0, winW, winH, 0.0, 0.0, 100.0);
-		glMatrixMode(GL_MODELVIEW);
-		glLoadIdentity();
-		gluLookAt(0.0, 1.0, 10.0,
-				0.0, 1.0, 0.0,
-				0.0, 1.0, 0.0);
-
-		glTranslatef(winW/2, winH/2, 0.0);
-		glRotatef(delta, 0.0, 0.0, 1.0);
-		glBegin(GL_POLYGON);
-		glColor3f(0.6, 0.7, 0.8);
-		glVertex3f(0.0, 0.0, 0.0);
-		glVertex3f(10.0, 0.0, 0.0);
-		glVertex3f(10.0, 10.0, 0.0);
-		glVertex3f(0.0, 10.0, 0.0);
-		glVertex3f(0.0, 0.0, 0.0);
-		glEnd();
+		Render();
 
 		++fps;
-		SDL_GL_SwapWindow(window);
 		t0 = time(NULL);
 		if (t0 - tprev > 0) {
 			tprev = t0;
