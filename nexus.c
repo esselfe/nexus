@@ -19,9 +19,11 @@ SDL_DisplayMode display_mode;
 SDL_Window *window;
 SDL_GLContext context;
 GLfloat winX = 100.0, winY = 40.0, winW = 800.0, winH = 600.0;
+GLfloat flagX, flagY, flagZ;
 char window_title[1024];
 GLfloat delta;
 int fps;
+struct Camera cam;
 
 void NexusExit(void) {
 	printf("\nnexus exited\n");
@@ -70,6 +72,13 @@ int main(int argc, char **argv) {
 		exit(1);
 	}
 
+	cam.x = 0.0;
+	cam.y = 2.0;
+	cam.z = 10.0;
+	cam.lx = 0.0;
+	cam.ly = 2.0;
+	cam.lz = 0.0;
+
 	glEnable(GL_DEPTH_TEST);
 	glFrontFace(GL_CCW);
 	glClearColor(0.0, 0.0, 0.0, 0.0);
@@ -77,6 +86,8 @@ int main(int argc, char **argv) {
 
 	time_t t0, tprev = 0;
 	while (!mainloopend) {
+		EventCheck();
+
 		Render();
 
 		++fps;
@@ -91,8 +102,6 @@ int main(int argc, char **argv) {
 		delta += 1.0;
 		if (delta >= 360.0)
 			delta -= 360.0;
-
-		EventCheck();
 	}
 
 	SDL_GL_DeleteContext(context);
