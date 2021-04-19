@@ -43,7 +43,7 @@ int main(int argc, char **argv) {
 
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 1);
-	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 4);
+	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 1);
 	SDL_GL_GetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, &major);
 	SDL_GL_GetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, &minor);
 	printf("Using OpenGL %d.%d\n", major, minor);
