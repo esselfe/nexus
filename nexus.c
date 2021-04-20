@@ -79,6 +79,8 @@ int main(int argc, char **argv) {
 	cam.ly = 2.0;
 	cam.lz = 0.0;
 
+	FlagInit();
+
 	glEnable(GL_DEPTH_TEST);
 	glFrontFace(GL_CCW);
 	glClearColor(0.0, 0.0, 0.0, 0.0);
@@ -102,6 +104,8 @@ int main(int argc, char **argv) {
 		delta += 1.0;
 		if (delta >= 360.0)
 			delta -= 360.0;
+
+		FlagUpdate();
 	}
 
 	SDL_GL_DeleteContext(context);

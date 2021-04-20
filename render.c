@@ -49,5 +49,7 @@ void Render(void) {
 	glEnd();
 	glPopMatrix();
 
+	FlagRender();
+
 	SDL_GL_SwapWindow(window);
 }
