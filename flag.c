@@ -21,7 +21,7 @@ void FlagInit(void) {
 	flag01.components = 3;
 	flag01.value = (rand()%10000) + 1;
 	flag01.texture_data_size = flag01.width * flag01.height * flag01.components;
-	flag01.texture_data = ImageFromFile_128("flag01-128.raw");
+	flag01.texture_data = ImageFromFile_128("images/flag01-128.raw");
 	//flag01.texture_data = malloc(flag01.texture_data_size);
 	//unsigned int cnt;
 	//for (cnt = 0; cnt < flag01.texture_data_size; cnt++)
@@ -80,16 +80,14 @@ void FlagRender(void) {
     glRotatef(delta, 0.0, 1.0, 0.0);
     glColor3f(0.6, 0.7, 0.8);
     glBegin(GL_POLYGON);
-	glTexCoord2f(0.0, 0.0);
-    glVertex3f(-0.5, -0.5, 0.0);
-	glTexCoord2f(1.0, 0.0);
-    glVertex3f(0.5, -0.5, 0.0);
-	glTexCoord2f(1.0, 1.0);
-    glVertex3f(0.5, 0.5, 0.0);
 	glTexCoord2f(0.0, 1.0);
-    glVertex3f(-0.5, 0.5, 0.0);
-	glTexCoord2f(0.0, 0.0);
     glVertex3f(-0.5, -0.5, 0.0);
+	glTexCoord2f(1.0, 1.0);
+    glVertex3f(0.5, -0.5, 0.0);
+	glTexCoord2f(1.0, 0.0);
+    glVertex3f(0.5, 0.5, 0.0);
+	glTexCoord2f(0.0, 0.0);
+    glVertex3f(-0.5, 0.5, 0.0);
     glEnd();
     glPopMatrix();
 
