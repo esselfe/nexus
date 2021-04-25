@@ -29,10 +29,18 @@ struct Flag {
 extern struct Flag flag01, flag02;
 
 void EventCheck(void);
+
 void FlagInit(void);
 void FlagRender(void);
 void FlagUpdate(void);
+
+void FontInit(void);
+void FontRender(GLfloat x, GLfloat y, GLfloat z, char *text);
+void FontRender2D(int x, int y, char *text);
+
 GLubyte *ImageFromFile_128(char *filename);
+GLubyte *ImageFromFile_884x16(char *filename);
+
 void Render(void);
 
 #endif /* NEXUS_H */

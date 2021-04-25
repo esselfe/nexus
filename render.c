@@ -49,6 +49,8 @@ void Render(void) {
 	glEnd();
 	glPopMatrix();
 
+	FontRender(0.0, 1.2, 0.0, "Voici enfin du texte! !@#$%^&*()_+-={}[]';:/?.><,");
+
 	FlagRender();
 
 	SDL_GL_SwapWindow(window);

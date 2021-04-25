@@ -12,7 +12,7 @@
 
 #include "nexus.h"
 
-char *nexus_version_string = "0.0.4";
+char *nexus_version_string = "0.0.5";
 int mainloopend;
 
 SDL_DisplayMode display_mode;
@@ -79,12 +79,13 @@ int main(int argc, char **argv) {
 	cam.ly = 2.0;
 	cam.lz = 0.0;
 
-	FlagInit();
-
 	glEnable(GL_DEPTH_TEST);
 	glFrontFace(GL_CCW);
 	glClearColor(0.0, 0.0, 0.0, 0.0);
 	glViewport((GLint)0, (GLint)0, (GLsizei)winW, (GLsizei)winH);
+
+	FontInit();
+	FlagInit();
 
 	time_t t0, tprev = 0;
 	while (!mainloopend) {
