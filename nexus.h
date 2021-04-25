@@ -57,9 +57,19 @@ extern void (*RenderFunc)(void);
 #define STATE_BROWSER   1
 #define STATE_EDITOR    2
 #define STATE_MEMORY    3
-extern unsigned int state;
+extern unsigned int state, state_prev;
 
 unsigned int StateGet(void);
 void StateSet(unsigned int newstate);
+
+////////////////////////////////
+// Modules
+////////////////////////////////
+
+void BrowserRender(void);
+
+void EditorRender(void);
+
+void MemoryRender(void);
 
 #endif /* NEXUS_H */

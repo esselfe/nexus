@@ -6,12 +6,15 @@ OBJS = $(OBJDIR)/event.o $(OBJDIR)/flag.o $(OBJDIR)/font.o \
 $(OBJDIR)/image.o $(OBJDIR)/nexus.o $(OBJDIR)/render.o $(OBJDIR)/state.o
 PROGNAME = nexus
 
-.PHONY: all prepare clean
+.PHONY: all modules prepare clean
 
 default: all
 
-all: prepare $(OBJS) $(PROGNAME)
+all: prepare $(OBJS) modules $(PROGNAME)
 	@ls -li --color=auto $(PROGNAME) 2>/dev/null || true
+
+modules:
+	make -C modules
 
 prepare:
 	@[ -d $(OBJDIR) ] || mkdir $(OBJDIR) 2>/dev/null
@@ -38,7 +41,7 @@ $(OBJDIR)/state.o: state.c
 	gcc -c $(CFLAGS) state.c -o $(OBJDIR)/state.o
 
 $(PROGNAME): $(OBJS)
-	gcc $(LDFLAGS) $(OBJS) -o $(PROGNAME)
+	gcc $(LDFLAGS) $(OBJDIR)/*.o -o $(PROGNAME)
 
 clean:
 	@rm -rv $(OBJDIR) $(PROGNAME) 2>/dev/null || true

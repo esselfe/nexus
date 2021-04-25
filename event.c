@@ -43,6 +43,24 @@ void EventCheck(void) {
 				cam.y -= 1.0;
 				cam.ly -= 1.0;
 				break;
+			case SDLK_b:
+				if (state != STATE_BROWSER)
+					StateSet(STATE_BROWSER);
+				else
+					StateSet(state_prev);
+				break;
+			case SDLK_e:
+				if (state != STATE_EDITOR)
+					StateSet(STATE_EDITOR);
+				else
+					StateSet(state_prev);
+				break;
+			case SDLK_m:
+				if (state != STATE_MEMORY)
+					StateSet(STATE_MEMORY);
+				else
+					StateSet(state_prev);
+				break;
 			default:
 				break;
 			}
