@@ -12,7 +12,7 @@
 
 #include "nexus.h"
 
-char *nexus_version_string = "0.0.6";
+char *nexus_version_string = "0.0.7";
 int mainloopend;
 
 SDL_DisplayMode display_mode;
@@ -88,6 +88,8 @@ int main(int argc, char **argv) {
 	fps_text = malloc(128);
 	sprintf(fps_text, "0 fps");
 
+	RenderFunc = Render;
+
 	FontInit();
 	FlagInit();
 
@@ -95,7 +97,7 @@ int main(int argc, char **argv) {
 	while (!mainloopend) {
 		EventCheck();
 
-		Render();
+		RenderFunc();
 
 		++fps;
 		t0 = time(NULL);
