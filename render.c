@@ -6,6 +6,8 @@
 
 void Render(void) {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+	// Switch to 3D rendering (Scene)
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
 	gluPerspective(60.0, winW/winH, 0.01, 1000.0);
@@ -52,6 +54,16 @@ void Render(void) {
 	FontRender(0.0, 1.2, 0.0, "Voici enfin du texte! !@#$%^&*()_+-={}[]';:/?.><,");
 
 	FlagRender();
+
+	// Switch to 2D rendering (HUD)
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+	//glOrtho(0.0, winW, 0.0, winH, 0.0, 10.0);
+	gluOrtho2D(0.0, winW, 0.0, winH);
+	glMatrixMode(GL_MODELVIEW);
+	glLoadIdentity();
+
+	FontRender2D(10, (int)winH-16-10, fps_text);
 
 	SDL_GL_SwapWindow(window);
 }

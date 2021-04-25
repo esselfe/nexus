@@ -21,7 +21,6 @@ static void FontMakeLetter(unsigned char letter) {
 
     GLuint texture;
     glGenTextures(1, &texture);
-    printf("font texture %u:%c: #%u\n", letter, letter, texture);
     glBindTexture(GL_TEXTURE_2D, texture);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
@@ -67,6 +66,25 @@ void FontRender(GLfloat x, GLfloat y, GLfloat z, char *text) {
 }
 
 void FontRender2D(int x, int y, char *text) {
-	return;
+	char *c = text;
+	unsigned int cnt;
+    for (cnt = 0; cnt < strlen(text); cnt++,c++) {
+        glPushMatrix();
+		glBindTexture(GL_TEXTURE_2D, (*c)-31);
+		//glRasterPos2i(x + cnt*9, y);
+		glTranslatef((GLfloat)(x + cnt*9), (GLfloat)y, 0.0);
+		glBegin(GL_POLYGON);
+		glTexCoord2i(0.0, 1.0);
+	     glVertex2i(0, 0);
+		glTexCoord2i(1.0, 1.0);
+	     glVertex2i(8, 0);
+		glTexCoord2i(1.0, 0.0);
+	     glVertex2i(8, 16);
+		glTexCoord2i(0.0, 0.0);
+	     glVertex2i(0, 16);
+	    glEnd();
+		glPopMatrix();
+	}
+	glBindTexture(GL_TEXTURE_2D, 0);
 }
 

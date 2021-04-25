@@ -12,7 +12,7 @@
 
 #include "nexus.h"
 
-char *nexus_version_string = "0.0.5";
+char *nexus_version_string = "0.0.6";
 int mainloopend;
 
 SDL_DisplayMode display_mode;
@@ -22,7 +22,8 @@ GLfloat winX = 100.0, winY = 40.0, winW = 800.0, winH = 600.0;
 GLfloat flagX, flagY, flagZ;
 char window_title[1024];
 GLfloat delta;
-int fps;
+unsigned int fps;
+char *fps_text;
 struct Camera cam;
 
 void NexusExit(void) {
@@ -84,6 +85,9 @@ int main(int argc, char **argv) {
 	glClearColor(0.0, 0.0, 0.0, 0.0);
 	glViewport((GLint)0, (GLint)0, (GLsizei)winW, (GLsizei)winH);
 
+	fps_text = malloc(128);
+	sprintf(fps_text, "0 fps");
+
 	FontInit();
 	FlagInit();
 
@@ -97,7 +101,8 @@ int main(int argc, char **argv) {
 		t0 = time(NULL);
 		if (t0 - tprev > 0) {
 			tprev = t0;
-			printf("\r%d fps", fps);
+			printf("\r%u fps", fps);
+			sprintf(fps_text, "%u fps", fps);
 			fflush(stdout);
 			fps = 0;
 		}

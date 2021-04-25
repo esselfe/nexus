@@ -10,7 +10,8 @@ extern SDL_Window *window;
 extern GLfloat winX, winY, winW, winH;
 extern GLfloat flagX, flagY, flagZ;
 extern GLfloat delta;
-extern int fps;
+extern unsigned int fps;
+extern char *fps_text;
 
 struct Camera {
 	GLfloat x, y, z,
