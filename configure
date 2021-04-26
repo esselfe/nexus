@@ -1,0 +1,8 @@
+#!/bin/bash
+
+[ "$1" = "dev" ] && {
+	echo 'CFLAGS += -O2 -Wall' > config.mk
+} || {
+	rm -v config.mk
+}
+

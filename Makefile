@@ -31,7 +31,7 @@ $(OBJDIR):
 	mkdir $@
 
 clean:
-	$(RM) -v $(OBJ) $(DEP) $(PROG)
+	$(RM) -v $(OBJ) $(DEP) config.mk $(PROG)
 	$(RM) -dv $(OBJDIR)
 
 -include $(DEP)
