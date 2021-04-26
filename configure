@@ -2,6 +2,7 @@
 
 [ "$1" = "dev" ] && {
 	echo 'CFLAGS += -O2 -Wall -g' > config.mk
+	echo 'LDFLAGS += -O2 -g' >> config.mk
 } || {
 	rm -v config.mk
 }
