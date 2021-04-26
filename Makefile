@@ -1,5 +1,5 @@
 
-CFLAGS = -std=c11 -Wall -D_GNU_SOURCE -O2
+CFLAGS = -std=c11 -D_GNU_SOURCE -O2
 LDFLAGS = -lSDL2 -lGLEW -lGL -lGLU -lm
 OBJDIR = obj
 OBJS = $(OBJDIR)/camera.o $(OBJDIR)/delta.o $(OBJDIR)/event.o \
