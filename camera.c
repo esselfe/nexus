@@ -49,7 +49,6 @@ void CameraMove(void) {
 
 void CameraRotateStep(GLfloat angle) {
 	cam.rotation_angle += angle;
-	printf("cam angle: %f\n", cam.rotation_angle);
 
 	if (angle > 0.0) {
         if (cam.rotation_angle >= 3.6) cam.rotation_angle -= 3.6;
