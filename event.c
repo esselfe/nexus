@@ -52,34 +52,22 @@ void EventCheck(void) {
 				terminal_visible = !terminal_visible;
 				break;
 			case SDLK_UP:
-				//flagZ -= 0.5;
-				cam.z -= 1.0;
-				cam.lz -= 1.0;
+				cam.moving |= MOVE_FRONT;
 				break;
 			case SDLK_DOWN:
-				//flagZ += 0.5;
-				cam.z += 1.0;
-				cam.lz += 1.0;
+				cam.moving |= MOVE_BACK;
 				break;
 			case SDLK_LEFT:
-				//flagX -= 0.5;
-				cam.x -= 1.0;
-				cam.lx -= 1.0;
+				cam.moving |= MOVE_LEFT;
 				break;
 			case SDLK_RIGHT:
-				//flagX += 0.5;
-				cam.x += 1.0;
-				cam.lx += 1.0;
+				cam.moving |= MOVE_RIGHT;
 				break;
 			case SDLK_PAGEUP:
-				//flagY += 0.5;
-				cam.y += 1.0;
-				cam.ly += 1.0;
+				cam.moving |= MOVE_UP;
 				break;
 			case SDLK_PAGEDOWN:
-				//flagY -= 0.5;
-				cam.y -= 1.0;
-				cam.ly -= 1.0;
+				cam.moving |= MOVE_DOWN;
 				break;
 			case SDLK_F1:
 				StateSet(STATE_MAIN);
@@ -122,6 +110,24 @@ void EventCheck(void) {
 			case SDLK_LSHIFT:
 			case SDLK_RSHIFT:
 				mods ^= MOD_SHIFT;
+				break;
+			case SDLK_UP:
+				cam.moving ^= MOVE_FRONT;
+				break;
+			case SDLK_DOWN:
+				cam.moving ^= MOVE_BACK;
+				break;
+			case SDLK_LEFT:
+				cam.moving ^= MOVE_LEFT;
+				break;
+			case SDLK_RIGHT:
+				cam.moving ^= MOVE_RIGHT;
+				break;
+			case SDLK_PAGEUP:
+				cam.moving ^= MOVE_UP;
+				break;
+			case SDLK_PAGEDOWN:
+				cam.moving ^= MOVE_DOWN;
 				break;
 			default:
 				break;

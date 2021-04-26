@@ -13,7 +13,7 @@
 
 #include "nexus.h"
 
-char *nexus_version_string = "0.0.10";
+char *nexus_version_string = "0.0.11";
 int mainloopend;
 
 SDL_DisplayMode display_mode;
@@ -97,6 +97,9 @@ int main(int argc, char **argv) {
 //	cam.lx = 0.0;
 	cam.ly = 2.0;
 //	cam.lz = 0.0;
+	cam.moving = MOVE_NONE;
+	cam.thr = 10.0;
+	sprintf(cam.thr_text, "%d%%", (int)cam.thr);
 
 	mouse_x_prev = mouse_x = (int)winW/2;
 	mouse_y_prev = mouse_y = (int)winH/2;
@@ -121,6 +124,8 @@ int main(int argc, char **argv) {
 	gettimeofday(&tv_prev, NULL);
 	while (!mainloopend) {
 		EventCheck();
+
+		CameraMove();
 
 		RenderFunc();
 

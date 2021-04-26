@@ -17,13 +17,24 @@ extern char *fps_text;
 void tvdiff(struct timeval *tv_start, struct timeval *tv_end, struct timeval *tv_diff);
 
 // camera.c
+#define MOVE_NONE   0
+#define MOVE_LEFT   1
+#define MOVE_RIGHT  (1<<1)
+#define MOVE_FRONT  (1<<2)
+#define MOVE_BACK   (1<<3)
+#define MOVE_UP     (1<<4)
+#define MOVE_DOWN   (1<<5)
 struct Camera {
 	GLfloat x, y, z,
 		lx, ly, lz;
 	GLfloat rotation_angle;
+	unsigned int moving;
+	GLfloat thr;
+	char thr_text[5];
 };
 extern struct Camera cam;
 
+void CameraMove(void);
 void CameraRotateStep(GLfloat angle);
 
 // event.c
