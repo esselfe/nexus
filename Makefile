@@ -1,63 +1,39 @@
+-include config.mk
 
-CFLAGS = -std=c11 -D_GNU_SOURCE -O2
-LDFLAGS = -lSDL2 -lGLEW -lGL -lGLU -lm
-OBJDIR = obj
-OBJS = $(OBJDIR)/camera.o $(OBJDIR)/delta.o $(OBJDIR)/event.o \
-$(OBJDIR)/flag.o $(OBJDIR)/font.o $(OBJDIR)/image.o $(OBJDIR)/nexus.o \
-$(OBJDIR)/render.o $(OBJDIR)/sky.o $(OBJDIR)/state.o $(OBJDIR)/terminal.o
-MODOBJS = $(OBJDIR)/browser-render.o $(OBJDIR)/editor-render.o \
-$(OBJDIR)/memory-delta.o $(OBJDIR)/memory-render.o
-PROGNAME = nexus
+PROG := nexus
 
-.PHONY: all modules prepare clean
+PKG_CONFIG ?= pkg-config
 
-default: all
+LIBS := gl sdl2 glew glu
+CFLAGS += $(shell $(PKG_CONFIG) --cflags $(LIBS)) -std=c11 -MMD -MP -I.
+CPPFLAGS += -D_GNU_SOURCE
+LDLIBS += $(shell $(PKG_CONFIG) --libs $(LIBS)) -lm
+OBJDIR := obj
+OBJ := camera.o delta.o event.o flag.o font.o image.o nexus.o render.o sky.o \
+	state.o terminal.o
+include modules/editor/module.mk
+include modules/memory/module.mk
+include modules/browser/module.mk
+OBJ := $(addprefix $(OBJDIR)/,$(OBJ))
+DEP := $(OBJ:.o=.d)
 
-all: prepare $(OBJS) modules $(PROGNAME)
-	@ls -li --color=auto $(PROGNAME) 2>/dev/null || true
+$(OBJDIR)/%.o: %.c
+	$(COMPILE.c) $(OUTPUT_OPTION) $<
 
-modules:
-	make -C modules
+all: $(PROG)
 
-prepare:
-	@[ -d $(OBJDIR) ] || mkdir $(OBJDIR) 2>/dev/null
+$(PROG): $(OBJ)
+	$(LINK.o) $^ $(LDLIBS) -o $@
 
-$(OBJDIR)/camera.o: camera.c
-	gcc -c $(CFLAGS) camera.c -o $(OBJDIR)/camera.o
+$(OBJ): | $(OBJDIR)
 
-$(OBJDIR)/delta.o: delta.c
-	gcc -c $(CFLAGS) delta.c -o $(OBJDIR)/delta.o
-
-$(OBJDIR)/event.o: event.c
-	gcc -c $(CFLAGS) event.c -o $(OBJDIR)/event.o
-
-$(OBJDIR)/flag.o: flag.c
-	gcc -c $(CFLAGS) flag.c -o $(OBJDIR)/flag.o
-
-$(OBJDIR)/font.o: font.c
-	gcc -c $(CFLAGS) font.c -o $(OBJDIR)/font.o
-
-$(OBJDIR)/image.o: image.c
-	gcc -c $(CFLAGS) image.c -o $(OBJDIR)/image.o
-
-$(OBJDIR)/nexus.o: nexus.h nexus.c
-	gcc -c $(CFLAGS) nexus.c -o $(OBJDIR)/nexus.o
-
-$(OBJDIR)/render.o: render.c
-	gcc -c $(CFLAGS) render.c -o $(OBJDIR)/render.o
-
-$(OBJDIR)/sky.o: sky.c
-	gcc -c $(CFLAGS) sky.c -o $(OBJDIR)/sky.o
-
-$(OBJDIR)/state.o: state.c
-	gcc -c $(CFLAGS) state.c -o $(OBJDIR)/state.o
-
-$(OBJDIR)/terminal.o: terminal.c
-	gcc -c $(CFLAGS) terminal.c -o $(OBJDIR)/terminal.o
-
-$(PROGNAME): $(OBJS) $(MODOBJS)
-	gcc $(OBJDIR)/*.o -o $(PROGNAME) $(LDFLAGS)
+$(OBJDIR):
+	mkdir $@
 
 clean:
-	@rm -rv $(OBJDIR) $(PROGNAME) 2>/dev/null || true
+	$(RM) -v $(OBJ) $(DEP) $(PROG)
+	$(RM) -dv $(OBJDIR)
 
+-include $(DEP)
+
+.PHONY: all clean

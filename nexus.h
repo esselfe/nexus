@@ -2,7 +2,7 @@
 #define NEXUS_H 1
 
 #include <GL/gl.h>
-#include <SDL2/SDL.h>
+#include <SDL.h>
 
 // nexus.c
 extern char *nexus_version_string;
