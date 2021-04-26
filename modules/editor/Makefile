@@ -1,5 +1,5 @@
 
-CFLAGS = -std=c11 -Wall -Werror -D_GNU_SOURCE -O2 -I../..
+CFLAGS = -std=c11 -Wall -D_GNU_SOURCE -O2 -I../..
 OBJDIR = ../../obj
 
 default: all
