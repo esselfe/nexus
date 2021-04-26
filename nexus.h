@@ -20,8 +20,11 @@ void tvdiff(struct timeval *tv_start, struct timeval *tv_end, struct timeval *tv
 struct Camera {
 	GLfloat x, y, z,
 		lx, ly, lz;
+	GLfloat rotation_angle;
 };
 extern struct Camera cam;
+
+void CameraRotateStep(GLfloat angle);
 
 // event.c
 #define MOD_NONE    0
@@ -30,6 +33,7 @@ extern struct Camera cam;
 #define MOD_SHIFT   (1<<2)
 extern unsigned int mods;
 extern unsigned int show_keys;
+extern int mouse_x, mouse_y, mouse_x_prev, mouse_y_prev;
 
 void EventCheck(void);
 
@@ -56,10 +60,17 @@ void FontRender2D(int x, int y, char *text);
 // image.c
 GLubyte *ImageFromFile_128(char *filename);
 GLubyte *ImageFromFile_884x16(char *filename);
+GLubyte *ImageFromFile_1024(char *filename);
 
 // render.c
 void Render(void);
 extern void (*RenderFunc)(void);
+
+// sky.c
+extern GLuint sky_texture_1, sky_texture_2, sky_texture_3, sky_texture_4;
+
+void SkyInit(void);
+void SkyRender(void);
 
 // state.c
 #define STATE_MAIN      0

@@ -13,7 +13,7 @@
 
 #include "nexus.h"
 
-char *nexus_version_string = "0.0.9";
+char *nexus_version_string = "0.0.10";
 int mainloopend;
 
 SDL_DisplayMode display_mode;
@@ -91,9 +91,16 @@ int main(int argc, char **argv) {
 	cam.x = 0.0;
 	cam.y = 2.0;
 	cam.z = 10.0;
-	cam.lx = 0.0;
+	cam.rotation_angle = 180.0;
+	cam.lx = (GLfloat)sin(cam.rotation_angle*1.7453293f)+cam.x;
+    cam.lz = (GLfloat)-cos(cam.rotation_angle*1.7453293f)+cam.z;
+//	cam.lx = 0.0;
 	cam.ly = 2.0;
-	cam.lz = 0.0;
+//	cam.lz = 0.0;
+
+	mouse_x_prev = mouse_x = (int)winW/2;
+	mouse_y_prev = mouse_y = (int)winH/2;
+	SDL_WarpMouseInWindow(window, mouse_x, mouse_y);
 
 	glEnable(GL_DEPTH_TEST);
 	glFrontFace(GL_CCW);
@@ -107,6 +114,7 @@ int main(int argc, char **argv) {
 
 	FontInit();
 	FlagInit();
+	SkyInit();
 
 	time_t t0, tprev = 0;
 	struct timeval tv0, tv_prev, tv_diff;

@@ -4,6 +4,7 @@
 
 unsigned int mods;
 unsigned int show_keys;
+int mouse_x, mouse_y, mouse_x_prev, mouse_y_prev;
 SDL_Event event;
 
 void EventCheck(void) {
@@ -125,6 +126,19 @@ void EventCheck(void) {
 			default:
 				break;
 			}
+		}
+		else if (event.type == SDL_MOUSEMOTION) {
+			SDL_GetMouseState(&mouse_x, &mouse_y);
+			if (mouse_x - mouse_x_prev > 0) {
+				CameraRotateStep(0.01);
+			}
+			else if (mouse_x - mouse_x_prev < 0) {
+				CameraRotateStep(-0.01);
+			}
+
+			mouse_x = (int)winW/2;
+			mouse_y = (int)winH/2;
+			SDL_WarpMouseInWindow(window, mouse_x, mouse_y);
 		}
 	}
 }

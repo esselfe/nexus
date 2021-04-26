@@ -1,10 +1,10 @@
 
 CFLAGS = -std=c11 -Wall -Werror -D_GNU_SOURCE -O2
-LDFLAGS = -lSDL2 -lGLEW -lGL -lGLU
+LDFLAGS = -lSDL2 -lGLEW -lGL -lGLU -lm
 OBJDIR = obj
-OBJS = $(OBJDIR)/event.o $(OBJDIR)/flag.o $(OBJDIR)/font.o \
-$(OBJDIR)/image.o $(OBJDIR)/nexus.o $(OBJDIR)/render.o $(OBJDIR)/state.o \
-$(OBJDIR)/terminal.o
+OBJS = $(OBJDIR)/camera.o $(OBJDIR)/event.o $(OBJDIR)/flag.o $(OBJDIR)/font.o \
+$(OBJDIR)/image.o $(OBJDIR)/nexus.o $(OBJDIR)/render.o $(OBJDIR)/sky.o \
+$(OBJDIR)/state.o $(OBJDIR)/terminal.o
 PROGNAME = nexus
 
 .PHONY: all modules prepare clean
@@ -19,6 +19,9 @@ modules:
 
 prepare:
 	@[ -d $(OBJDIR) ] || mkdir $(OBJDIR) 2>/dev/null
+
+$(OBJDIR)/camera.o: camera.c
+	gcc -c $(CFLAGS) camera.c -o $(OBJDIR)/camera.o
 
 $(OBJDIR)/event.o: event.c
 	gcc -c $(CFLAGS) event.c -o $(OBJDIR)/event.o
@@ -37,6 +40,9 @@ $(OBJDIR)/nexus.o: nexus.h nexus.c
 
 $(OBJDIR)/render.o: render.c
 	gcc -c $(CFLAGS) render.c -o $(OBJDIR)/render.o
+
+$(OBJDIR)/sky.o: sky.c
+	gcc -c $(CFLAGS) sky.c -o $(OBJDIR)/sky.o
 
 $(OBJDIR)/state.o: state.c
 	gcc -c $(CFLAGS) state.c -o $(OBJDIR)/state.o

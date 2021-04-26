@@ -19,6 +19,8 @@ void Render(void) {
 			cam.lx, cam.ly, cam.lz,
 			0.0, 1.0, 0.0);
 
+	SkyRender();
+
 	glColor3f(0.1, 0.1, 0.1);
 	glBegin(GL_POLYGON);
 	glVertex3f(-50.0, 0.0, 50.0);

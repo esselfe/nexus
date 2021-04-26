@@ -54,3 +54,27 @@ GLubyte *ImageFromFile_884x16(char *filename) {
 	return data;
 }
 
+GLubyte *ImageFromFile_1024(char *filename) {
+	struct stat st;
+	if (stat(filename, &st) < 0) {
+		printf("nexus:%s:%s error: Cannot open %s: %s\n", __FILE__, __FUNCTION__,
+			filename, strerror(errno));
+		GLubyte *data = malloc(3*1024*1024);
+		return data;
+	}
+
+	FILE *fp = fopen(filename, "r");
+	if (fp == NULL) {
+		printf("nexus:%s:%s error: Cannot open %s: %s\n", __FILE__, __FUNCTION__,
+			filename, strerror(errno));
+		GLubyte *data = malloc(3*1024*1024);
+		return data;
+	}
+
+	GLubyte *data = malloc(3*1024*1024);
+	fread(data, 1, 3*1024*1024, fp);
+	fclose(fp);
+
+	return data;
+}
+
