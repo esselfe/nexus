@@ -4,6 +4,7 @@
 #include <errno.h>
 #include <string.h>
 #include <time.h>
+#include <sys/time.h>
 #include <GL/glew.h>
 #include <GL/gl.h>
 #include <GL/glu.h>
@@ -12,7 +13,7 @@
 
 #include "nexus.h"
 
-char *nexus_version_string = "0.0.8";
+char *nexus_version_string = "0.0.9";
 int mainloopend;
 
 SDL_DisplayMode display_mode;
@@ -28,6 +29,20 @@ struct Camera cam;
 
 void NexusExit(void) {
 	printf("\nnexus exited\n");
+}
+
+void tvdiff(struct timeval *tv_start, struct timeval *tv_end, struct timeval *tv_diff) {
+	tv_diff->tv_sec = tv_end->tv_sec - tv_start->tv_sec;
+
+	if (tv_end->tv_usec >= tv_start->tv_usec)
+		tv_diff->tv_usec = tv_end->tv_usec - tv_start->tv_usec;
+	else
+		tv_diff->tv_usec = tv_end->tv_usec + (1000000-tv_start->tv_usec);
+	
+	if (tv_diff->tv_usec >= 1000000) {
+		++tv_diff->tv_sec;
+		tv_diff->tv_usec -= 1000000;
+	}
 }
 
 int main(int argc, char **argv) {
@@ -94,6 +109,8 @@ int main(int argc, char **argv) {
 	FlagInit();
 
 	time_t t0, tprev = 0;
+	struct timeval tv0, tv_prev, tv_diff;
+	gettimeofday(&tv_prev, NULL);
 	while (!mainloopend) {
 		EventCheck();
 
@@ -103,10 +120,16 @@ int main(int argc, char **argv) {
 		t0 = time(NULL);
 		if (t0 - tprev > 0) {
 			tprev = t0;
-			printf("\r%u fps", fps);
 			sprintf(fps_text, "%u fps", fps);
-			fflush(stdout);
 			fps = 0;
+		}
+
+		gettimeofday(&tv0, NULL);
+		tvdiff(&tv_prev, &tv0, &tv_diff);
+		if (tv_diff.tv_sec >= 1 || tv_diff.tv_usec >= 500000) {
+			tv_prev.tv_sec = tv0.tv_sec;
+			tv_prev.tv_usec = tv0.tv_usec;
+			terminal_cursor_blink = !terminal_cursor_blink;
 		}
 
 		delta += 1.0;

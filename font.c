@@ -47,6 +47,7 @@ void FontInit(void) {
 void FontRender(GLfloat x, GLfloat y, GLfloat z, char *text) {
 	char *c = text;
 	unsigned int cnt;
+	glColor3f(0.7, 0.8, 0.9);
     for (cnt = 0; cnt < strlen(text); cnt++,c++) {
         glPushMatrix();
 		glBindTexture(GL_TEXTURE_2D, (*c)-31);
@@ -68,11 +69,12 @@ void FontRender(GLfloat x, GLfloat y, GLfloat z, char *text) {
 void FontRender2D(int x, int y, char *text) {
 	char *c = text;
 	unsigned int cnt;
+	glColor3f(0.7, 0.8, 0.9);
     for (cnt = 0; cnt < strlen(text); cnt++,c++) {
         glPushMatrix();
 		glBindTexture(GL_TEXTURE_2D, (*c)-31);
 		//glRasterPos2i(x + cnt*9, y);
-		glTranslatef((GLfloat)(x + cnt*9), (GLfloat)y, 0.0);
+		glTranslatef((GLfloat)(x + cnt*8), (GLfloat)y, 1.0);
 		glBegin(GL_POLYGON);
 		glTexCoord2i(0.0, 1.0);
 	     glVertex2i(0, 0);

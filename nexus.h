@@ -14,12 +14,24 @@ extern GLfloat delta;
 extern unsigned int fps;
 extern char *fps_text;
 
+void tvdiff(struct timeval *tv_start, struct timeval *tv_end, struct timeval *tv_diff);
+
 // camera.c
 struct Camera {
 	GLfloat x, y, z,
 		lx, ly, lz;
 };
 extern struct Camera cam;
+
+// event.c
+#define MOD_NONE    0
+#define MOD_CTRL    1
+#define MOD_ALT     (1<<1)
+#define MOD_SHIFT   (1<<2)
+extern unsigned int mods;
+extern unsigned int show_keys;
+
+void EventCheck(void);
 
 // flag.c
 struct Flag {
@@ -35,9 +47,6 @@ extern struct Flag flag01, flag02;
 void FlagInit(void);
 void FlagRender(void);
 void FlagUpdate(void);
-
-// event.c
-void EventCheck(void);
 
 // font.c
 void FontInit(void);
@@ -61,6 +70,15 @@ extern unsigned int state, state_prev;
 
 unsigned int StateGet(void);
 void StateSet(unsigned int newstate);
+
+// terminal.c
+#define TERMINAL_BUFFER_SIZE 4096
+extern unsigned int terminal_visible;
+extern char terminal_buffer[TERMINAL_BUFFER_SIZE];
+extern unsigned int terminal_cursor_pos, terminal_cursor_blink;
+
+void TerminalParse(void);
+void TerminalRender(void);
 
 ////////////////////////////////
 // Modules

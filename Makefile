@@ -3,7 +3,8 @@ CFLAGS = -std=c11 -Wall -Werror -D_GNU_SOURCE -O2
 LDFLAGS = -lSDL2 -lGLEW -lGL -lGLU
 OBJDIR = obj
 OBJS = $(OBJDIR)/event.o $(OBJDIR)/flag.o $(OBJDIR)/font.o \
-$(OBJDIR)/image.o $(OBJDIR)/nexus.o $(OBJDIR)/render.o $(OBJDIR)/state.o
+$(OBJDIR)/image.o $(OBJDIR)/nexus.o $(OBJDIR)/render.o $(OBJDIR)/state.o \
+$(OBJDIR)/terminal.o
 PROGNAME = nexus
 
 .PHONY: all modules prepare clean
@@ -39,6 +40,9 @@ $(OBJDIR)/render.o: render.c
 
 $(OBJDIR)/state.o: state.c
 	gcc -c $(CFLAGS) state.c -o $(OBJDIR)/state.o
+
+$(OBJDIR)/terminal.o: terminal.c
+	gcc -c $(CFLAGS) terminal.c -o $(OBJDIR)/terminal.o
 
 $(PROGNAME): $(OBJS)
 	gcc $(LDFLAGS) $(OBJDIR)/*.o -o $(PROGNAME)

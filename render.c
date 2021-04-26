@@ -67,5 +67,8 @@ void Render(void) {
 
 	FontRender2D(10, (int)winH-16-10, fps_text);
 
+	if (terminal_visible)
+		TerminalRender();
+
 	SDL_GL_SwapWindow(window);
 }
