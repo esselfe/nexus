@@ -24,7 +24,8 @@ GLubyte *ImageFromFile_128(char *filename) {
 	}
 
 	GLubyte *data = malloc(3*128*128);
-	fread(data, 1, 3*128*128, fp);
+	size_t sz = fread(data, 1, 3*128*128, fp);
+	++sz;
 	fclose(fp);
 
 	return data;
@@ -48,7 +49,8 @@ GLubyte *ImageFromFile_884x16(char *filename) {
 	}
 
 	GLubyte *data = malloc(3*884*16);
-	fread(data, 1, 3*884*16, fp);
+	size_t sz = fread(data, 1, 3*884*16, fp);
+	++sz;
 	fclose(fp);
 
 	return data;
@@ -72,7 +74,8 @@ GLubyte *ImageFromFile_1024(char *filename) {
 	}
 
 	GLubyte *data = malloc(3*1024*1024);
-	fread(data, 1, 3*1024*1024, fp);
+	size_t sz = fread(data, 1, 3*1024*1024, fp);
+	++sz;
 	fclose(fp);
 
 	return data;

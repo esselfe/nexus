@@ -56,7 +56,7 @@ $(OBJDIR)/terminal.o: terminal.c
 	gcc -c $(CFLAGS) terminal.c -o $(OBJDIR)/terminal.o
 
 $(PROGNAME): $(OBJS) $(MODOBJS)
-	gcc $(LDFLAGS) $(OBJDIR)/*.o -o $(PROGNAME)
+	gcc $(OBJDIR)/*.o -o $(PROGNAME) $(LDFLAGS)
 
 clean:
 	@rm -rv $(OBJDIR) $(PROGNAME) 2>/dev/null || true

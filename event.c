@@ -5,7 +5,7 @@
 unsigned int mods;
 unsigned int show_keys;
 int mouse_x, mouse_y, mouse_x_prev, mouse_y_prev;
-unsigned int mouse_button, mouse_held = 1;
+unsigned int mouse_button, mouse_held;
 SDL_Event event;
 
 void EventCheck(void) {
