@@ -16,7 +16,11 @@ void BrowserRender(void) {
     gluLookAt(cam.x, cam.y, cam.z,
             cam.lx, cam.ly, cam.lz,
             0.0, 1.0, 0.0);
+
+	SkyRender();
+	RenderFloor();
 	
+	glPushMatrix();
 	glColor3f(0.4, 0.5, 0.6);
 	glBegin(GL_POLYGON);
 	glVertex3f(0.0, 0.0, 0.0);
@@ -24,6 +28,17 @@ void BrowserRender(void) {
 	glVertex3f(1.0, 1.0, 0.0);
 	glVertex3f(1.0, 0.0, 0.0);
 	glEnd();
+	glPopMatrix();
+
+	// Switch to 2D rendering (HUD)
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();
+    gluOrtho2D(0.0, winW, 0.0, winH);
+    glMatrixMode(GL_MODELVIEW);
+    glLoadIdentity();
+
+	if (terminal_visible)
+		TerminalRender();
 
 	SDL_GL_SwapWindow(window);
 }

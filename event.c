@@ -5,6 +5,7 @@
 unsigned int mods;
 unsigned int show_keys;
 int mouse_x, mouse_y, mouse_x_prev, mouse_y_prev;
+unsigned int mouse_button, mouse_held = 1;
 SDL_Event event;
 
 void EventCheck(void) {
@@ -133,18 +134,35 @@ void EventCheck(void) {
 				break;
 			}
 		}
+		else if (event.type == SDL_MOUSEBUTTONDOWN) {
+			if (event.button.button == SDL_BUTTON_RIGHT)
+				mouse_held = !mouse_held;
+
+			if (mouse_held) {
+				mouse_x_prev = mouse_x = (int)winW/2;
+				mouse_y_prev = mouse_y = (int)winH/2;
+				SDL_WarpMouseInWindow(window, mouse_x, mouse_y);
+			}
+		}
 		else if (event.type == SDL_MOUSEMOTION) {
 			SDL_GetMouseState(&mouse_x, &mouse_y);
-			if (mouse_x - mouse_x_prev > 0) {
-				CameraRotateStep(0.01);
-			}
-			else if (mouse_x - mouse_x_prev < 0) {
-				CameraRotateStep(-0.01);
-			}
 
-			mouse_x = (int)winW/2;
-			mouse_y = (int)winH/2;
-			SDL_WarpMouseInWindow(window, mouse_x, mouse_y);
+			if (mouse_held) {
+				if (mouse_x - mouse_x_prev > 0) {
+					CameraRotateStep(0.01);
+				}
+				else if (mouse_x - mouse_x_prev < 0) {
+					CameraRotateStep(-0.01);
+				}
+
+				mouse_x = (int)winW/2;
+				mouse_y = (int)winH/2;
+				SDL_WarpMouseInWindow(window, mouse_x, mouse_y);
+			}
+			else {
+				mouse_x_prev = mouse_x;
+				mouse_y_prev = mouse_y;
+			}
 		}
 	}
 }

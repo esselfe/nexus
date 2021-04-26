@@ -4,7 +4,10 @@ OBJDIR = ../../obj
 
 default: all
 
-all: $(OBJDIR)/memory-render.o
+all: $(OBJDIR)/memory-delta.o $(OBJDIR)/memory-render.o
+
+$(OBJDIR)/memory-delta.o: delta.c
+	gcc -c $(CFLAGS) delta.c -o $(OBJDIR)/memory-delta.o
 
 $(OBJDIR)/memory-render.o: render.c
 	gcc -c $(CFLAGS) render.c -o $(OBJDIR)/memory-render.o

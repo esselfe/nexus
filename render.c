@@ -20,43 +20,7 @@ void Render(void) {
 			0.0, 1.0, 0.0);
 
 	SkyRender();
-
-	glColor3f(0.1, 0.1, 0.1);
-	glBegin(GL_POLYGON);
-	glVertex3f(-50.0, 0.0, 50.0);
-	glVertex3f(50.0, 0.0, 50.0);
-	glVertex3f(50.0, 0.0, -50.0);
-	glVertex3f(-50.0, 0.0, -50.0);
-	glVertex3f(-50.0, 0.0, 50.0);
-	glEnd();
-	glColor3f(0.3, 0.8, 0.3);
-	glBegin(GL_LINES);
-	GLfloat cnt;
-	for (cnt = -50.0; cnt <= 50.0; cnt += 1.0) {
-		glVertex3f(cnt, 0.1, 50.0);
-		glVertex3f(cnt, 0.1, -50.0);
-	}
-	for (cnt = 50.0; cnt >= -50.0; cnt -= 1.0) {
-		glVertex3f(-50.0, 0.1, cnt);
-		glVertex3f(50.0, 0.1, cnt);
-	}
-	glEnd();
-
-	glPushMatrix();
-	glTranslatef(flagX, flagY + 0.5, flagZ);
-	glRotatef(delta, 0.0, 1.0, 0.0);
-	glColor3f(0.6, 0.7, 0.8);
-	glBegin(GL_POLYGON);
-	glVertex3f(-0.5, -0.5, 0.0);
-	glVertex3f(0.5, -0.5, 0.0);
-	glVertex3f(0.5, 0.5, 0.0);
-	glVertex3f(-0.5, 0.5, 0.0);
-	glVertex3f(-0.5, -0.5, 0.0);
-	glEnd();
-	glPopMatrix();
-
-	FontRender(0.0, 1.2, 0.0, "Voici enfin du texte! !@#$%^&*()_+-={}[]';:/?.><,");
-
+	RenderFloor();
 	FlagRender();
 
 	// Switch to 2D rendering (HUD)
@@ -68,9 +32,47 @@ void Render(void) {
 	glLoadIdentity();
 
 	FontRender2D(10, (int)winH-16-10, fps_text);
-
 	if (terminal_visible)
 		TerminalRender();
+	if (!mouse_held)
+		RenderCursor();
 
 	SDL_GL_SwapWindow(window);
 }
+
+void RenderCursor(void) {
+	glColor3f(0.7, 0.8, 0.9);
+	glPushMatrix();
+	glTranslatef((GLfloat)mouse_x, winH - (GLfloat)mouse_y, 0.0);
+	glBegin(GL_LINES);
+	glVertex2f(0.0, -10.0);
+	glVertex2f(0.0, 10.0);
+	glVertex2f(-10.0, 0.0);
+	glVertex2f(10.0, 0.0);
+	glEnd();
+	glPopMatrix();
+}
+
+void RenderFloor(void) {
+	glColor3f(0.1, 0.1, 0.1);
+    glBegin(GL_POLYGON);
+    glVertex3f(-50.0, 0.0, 50.0);
+    glVertex3f(50.0, 0.0, 50.0);
+    glVertex3f(50.0, 0.0, -50.0);
+    glVertex3f(-50.0, 0.0, -50.0);
+    glVertex3f(-50.0, 0.0, 50.0);
+    glEnd();
+    glColor3f(0.15, 0.15, 0.15);
+    glBegin(GL_LINES);
+    GLfloat cnt;
+    for (cnt = -50.0; cnt <= 50.0; cnt += 1.0) {
+        glVertex3f(cnt, 0.02, 50.0);
+        glVertex3f(cnt, 0.02, -50.0);
+    }
+    for (cnt = 50.0; cnt >= -50.0; cnt -= 1.0) {
+        glVertex3f(-50.0, 0.02, cnt);
+        glVertex3f(50.0, 0.02, cnt);
+    }
+    glEnd();
+}
+

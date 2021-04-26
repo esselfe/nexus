@@ -14,7 +14,9 @@ extern GLfloat delta;
 extern unsigned int fps;
 extern char *fps_text;
 
-void tvdiff(struct timeval *tv_start, struct timeval *tv_end, struct timeval *tv_diff);
+extern time_t t0, tprev;
+extern struct timeval tv0, tv_prev, tv_diff;
+void tvdiff(struct timeval *tv_start, struct timeval *tv_end, struct timeval *tv_diff2);
 
 // camera.c
 #define MOVE_NONE   0
@@ -37,6 +39,10 @@ extern struct Camera cam;
 void CameraMove(void);
 void CameraRotateStep(GLfloat angle);
 
+// delta.c
+void DeltaCompute(void);
+extern void (*DeltaFunc)(void);
+
 // event.c
 #define MOD_NONE    0
 #define MOD_CTRL    1
@@ -45,6 +51,7 @@ void CameraRotateStep(GLfloat angle);
 extern unsigned int mods;
 extern unsigned int show_keys;
 extern int mouse_x, mouse_y, mouse_x_prev, mouse_y_prev;
+extern unsigned int mouse_held;
 
 void EventCheck(void);
 
@@ -75,6 +82,8 @@ GLubyte *ImageFromFile_1024(char *filename);
 
 // render.c
 void Render(void);
+void RenderCursor(void);
+void RenderFloor(void);
 extern void (*RenderFunc)(void);
 
 // sky.c
@@ -110,6 +119,9 @@ void BrowserRender(void);
 
 void EditorRender(void);
 
+extern GLfloat memory_value;
+extern char memory_value_text[128];
+void MemoryDeltaCompute(void);
 void MemoryRender(void);
 
 #endif /* NEXUS_H */

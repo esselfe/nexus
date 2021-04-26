@@ -17,6 +17,10 @@ void EditorRender(void) {
             cam.lx, cam.ly, cam.lz,
             0.0, 1.0, 0.0);
 
+	SkyRender();
+	RenderFloor();
+
+	glPushMatrix();
 	glTranslatef(-1.5, 0.0, 0.0);
     glColor3f(0.4, 0.5, 0.6);
     glBegin(GL_POLYGON);
@@ -25,6 +29,17 @@ void EditorRender(void) {
     glVertex3f(3.0, 3.0, 0.0);
     glVertex3f(3.0, 0.0, 0.0);
     glEnd();
+	glPopMatrix();
+
+	// Switch to 2D rendering (HUD)
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();
+    gluOrtho2D(0.0, winW, 0.0, winH);
+    glMatrixMode(GL_MODELVIEW);
+    glLoadIdentity();
+
+    if (terminal_visible)
+        TerminalRender();
 
     SDL_GL_SwapWindow(window);
 }

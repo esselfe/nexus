@@ -13,7 +13,7 @@
 
 #include "nexus.h"
 
-char *nexus_version_string = "0.0.11";
+char *nexus_version_string = "0.0.12";
 int mainloopend;
 
 SDL_DisplayMode display_mode;
@@ -24,6 +24,8 @@ GLfloat flagX, flagY, flagZ;
 char window_title[1024];
 GLfloat delta;
 unsigned int fps;
+time_t t0, tprev;
+struct timeval tv0, tv_prev, tv_diff;
 char *fps_text;
 struct Camera cam;
 
@@ -31,17 +33,17 @@ void NexusExit(void) {
 	printf("\nnexus exited\n");
 }
 
-void tvdiff(struct timeval *tv_start, struct timeval *tv_end, struct timeval *tv_diff) {
-	tv_diff->tv_sec = tv_end->tv_sec - tv_start->tv_sec;
+void tvdiff(struct timeval *tv_start, struct timeval *tv_end, struct timeval *tv_diff2) {
+	tv_diff2->tv_sec = tv_end->tv_sec - tv_start->tv_sec;
 
 	if (tv_end->tv_usec >= tv_start->tv_usec)
-		tv_diff->tv_usec = tv_end->tv_usec - tv_start->tv_usec;
+		tv_diff2->tv_usec = tv_end->tv_usec - tv_start->tv_usec;
 	else
-		tv_diff->tv_usec = tv_end->tv_usec + (1000000-tv_start->tv_usec);
+		tv_diff2->tv_usec = tv_end->tv_usec + (1000000-tv_start->tv_usec);
 	
-	if (tv_diff->tv_usec >= 1000000) {
-		++tv_diff->tv_sec;
-		tv_diff->tv_usec -= 1000000;
+	if (tv_diff2->tv_usec >= 1000000) {
+		++tv_diff2->tv_sec;
+		tv_diff2->tv_usec -= 1000000;
 	}
 }
 
@@ -104,6 +106,7 @@ int main(int argc, char **argv) {
 	mouse_x_prev = mouse_x = (int)winW/2;
 	mouse_y_prev = mouse_y = (int)winH/2;
 	SDL_WarpMouseInWindow(window, mouse_x, mouse_y);
+	SDL_ShowCursor(0);
 
 	glEnable(GL_DEPTH_TEST);
 	glFrontFace(GL_CCW);
@@ -113,43 +116,21 @@ int main(int argc, char **argv) {
 	fps_text = malloc(128);
 	sprintf(fps_text, "0 fps");
 
+	DeltaFunc = DeltaCompute;
 	RenderFunc = Render;
 
 	FontInit();
 	FlagInit();
 	SkyInit();
 
-	time_t t0, tprev = 0;
-	struct timeval tv0, tv_prev, tv_diff;
+	tprev = time(NULL);
 	gettimeofday(&tv_prev, NULL);
 	while (!mainloopend) {
-		EventCheck();
-
-		CameraMove();
-
-		RenderFunc();
-
 		++fps;
-		t0 = time(NULL);
-		if (t0 - tprev > 0) {
-			tprev = t0;
-			sprintf(fps_text, "%u fps", fps);
-			fps = 0;
-		}
-
-		gettimeofday(&tv0, NULL);
-		tvdiff(&tv_prev, &tv0, &tv_diff);
-		if (tv_diff.tv_sec >= 1 || tv_diff.tv_usec >= 500000) {
-			tv_prev.tv_sec = tv0.tv_sec;
-			tv_prev.tv_usec = tv0.tv_usec;
-			terminal_cursor_blink = !terminal_cursor_blink;
-		}
-
-		delta += 1.0;
-		if (delta >= 360.0)
-			delta -= 360.0;
-
-		FlagUpdate();
+		EventCheck();
+		DeltaFunc();
+		CameraMove();
+		RenderFunc();
 	}
 
 	SDL_GL_DeleteContext(context);

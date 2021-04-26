@@ -2,9 +2,11 @@
 CFLAGS = -std=c11 -Wall -Werror -D_GNU_SOURCE -O2
 LDFLAGS = -lSDL2 -lGLEW -lGL -lGLU -lm
 OBJDIR = obj
-OBJS = $(OBJDIR)/camera.o $(OBJDIR)/event.o $(OBJDIR)/flag.o $(OBJDIR)/font.o \
-$(OBJDIR)/image.o $(OBJDIR)/nexus.o $(OBJDIR)/render.o $(OBJDIR)/sky.o \
-$(OBJDIR)/state.o $(OBJDIR)/terminal.o
+OBJS = $(OBJDIR)/camera.o $(OBJDIR)/delta.o $(OBJDIR)/event.o \
+$(OBJDIR)/flag.o $(OBJDIR)/font.o $(OBJDIR)/image.o $(OBJDIR)/nexus.o \
+$(OBJDIR)/render.o $(OBJDIR)/sky.o $(OBJDIR)/state.o $(OBJDIR)/terminal.o
+MODOBJS = $(OBJDIR)/browser-render.o $(OBJDIR)/editor-render.o \
+$(OBJDIR)/memory-delta.o $(OBJDIR)/memory-render.o
 PROGNAME = nexus
 
 .PHONY: all modules prepare clean
@@ -22,6 +24,9 @@ prepare:
 
 $(OBJDIR)/camera.o: camera.c
 	gcc -c $(CFLAGS) camera.c -o $(OBJDIR)/camera.o
+
+$(OBJDIR)/delta.o: delta.c
+	gcc -c $(CFLAGS) delta.c -o $(OBJDIR)/delta.o
 
 $(OBJDIR)/event.o: event.c
 	gcc -c $(CFLAGS) event.c -o $(OBJDIR)/event.o
@@ -50,7 +55,7 @@ $(OBJDIR)/state.o: state.c
 $(OBJDIR)/terminal.o: terminal.c
 	gcc -c $(CFLAGS) terminal.c -o $(OBJDIR)/terminal.o
 
-$(PROGNAME): $(OBJS)
+$(PROGNAME): $(OBJS) $(MODOBJS)
 	gcc $(LDFLAGS) $(OBJDIR)/*.o -o $(PROGNAME)
 
 clean:
