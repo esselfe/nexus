@@ -13,7 +13,7 @@
 
 #include "nexus.h"
 
-char *nexus_version_string = "0.0.15";
+char *nexus_version_string = "0.0.16";
 int mainloopend;
 SDL_DisplayMode display_mode;
 SDL_Window *window;
@@ -120,6 +120,7 @@ int main(int argc, char **argv) {
 	FontInit();
 	FlagInit();
 	SkyInit();
+	BrowserListLoad(get_current_dir_name());
 
 	tprev = time(NULL);
 	gettimeofday(&tv_prev, NULL);

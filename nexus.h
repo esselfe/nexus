@@ -115,6 +115,19 @@ void TerminalRender(void);
 // Modules
 ////////////////////////////////
 
+struct BrowserListEntry {
+	struct BrowserListEntry *prev, *next;
+	unsigned int rank;
+	char *name;
+};
+struct BrowserList {
+	struct BrowserListEntry *first_entry, *last_entry;
+	unsigned long entry_total;
+};
+extern struct BrowserList browser_list;
+void BrowserListAddEntry(char *name);
+void BrowserListLoad(char *path);
+void BrowserListDestroy(void);
 void BrowserRender(void);
 
 void EditorRender(void);

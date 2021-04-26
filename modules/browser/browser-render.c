@@ -19,16 +19,29 @@ void BrowserRender(void) {
 
 	SkyRender();
 	RenderFloor();
-	
-	glPushMatrix();
-	glColor3f(0.4, 0.5, 0.6);
-	glBegin(GL_POLYGON);
-	glVertex3f(0.0, 0.0, 0.0);
-	glVertex3f(0.0, 1.0, 0.0);
-	glVertex3f(1.0, 1.0, 0.0);
-	glVertex3f(1.0, 0.0, 0.0);
-	glEnd();
-	glPopMatrix();
+
+	struct BrowserListEntry *entry = browser_list.first_entry;
+    if (entry == NULL)
+        return;
+
+    while (1) {
+        glPushMatrix();
+        glTranslatef(0.0, 0.2*(entry->rank-1), 0.0);
+        glColor3f(0.2, 0.2, 0.2);
+        glBegin(GL_QUADS);
+        glVertex2f(0.0, 0.0);
+        glVertex2f(0.0, 1.0);
+        glVertex2f(1.0, 1.0);
+        glVertex2f(1.0, 0.0);
+        glEnd();
+        glPopMatrix();
+        FontRender(0.0, 0.2*(entry->rank-1), 0.1, entry->name);
+
+        if (entry->next != NULL)
+            entry = entry->next;
+        else
+            break;
+    }
 
 	// Switch to 2D rendering (HUD)
     glMatrixMode(GL_PROJECTION);
