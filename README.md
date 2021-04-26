@@ -1,7 +1,10 @@
 # Nexus
 
-Nexus is a 3D linux program written in C using OpenGL, GLEW and SDL2.  
-The development status is in alpha stage.  
+Nexus is a 3D Linux program written in C using OpenGL/Mesa, GLU, GLEW and SDL2.  
+The program renders a scene with multidirectional camera movement.  
+Different modules can be implemented, like a file browser, text editor or memory meter.  
+A low OpenGL version (1.1) is used so the project can be run on the most diversified/old hardware.  
+The development status is currently in alpha stage.  
 
 ## Dependencies
 
