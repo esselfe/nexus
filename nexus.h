@@ -119,8 +119,10 @@ void BrowserRender(void);
 
 void EditorRender(void);
 
-extern GLfloat memory_value;
-extern char memory_value_text[128];
+extern GLfloat memory_max, memory_value;
+extern char memory_max_text[128], memory_value_text[128];
+extern GLfloat swap_max, swap_value;
+extern char swap_max_text[128], swap_value_text[128];
 void MemoryDeltaCompute(void);
 void MemoryRender(void);
 

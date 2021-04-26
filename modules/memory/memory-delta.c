@@ -8,8 +8,14 @@
 void MemoryDeltaCompute(void) {
 	struct sysinfo si;
 	sysinfo(&si);
+	memory_max = (GLfloat)si.totalram;
+	sprintf(memory_max_text, "%lu", (unsigned long)memory_max);
 	memory_value = (3.0/(GLfloat)si.totalram) * (si.totalram - si.freeram);
 	sprintf(memory_value_text, "%lu", (unsigned long)(memory_value * 1000000000.0));
+	swap_max = (GLfloat)si.totalswap;
+	sprintf(swap_max_text, "%lu", (unsigned long)swap_max);
+	swap_value = (3.0/(GLfloat)si.totalswap) * (si.totalswap - si.freeswap);
+	sprintf(swap_value_text, "%lu", (unsigned long)(swap_value * 1000000000.0));
 
 	// Once every second
     t0 = time(NULL);

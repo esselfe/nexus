@@ -11,9 +11,9 @@ LDLIBS += $(shell $(PKG_CONFIG) --libs $(LIBS)) -lm
 OBJDIR := obj
 OBJ := camera.o delta.o event.o flag.o font.o image.o nexus.o render.o sky.o \
 	state.o terminal.o
+include modules/browser/module.mk
 include modules/editor/module.mk
 include modules/memory/module.mk
-include modules/browser/module.mk
 OBJ := $(addprefix $(OBJDIR)/,$(OBJ))
 DEP := $(OBJ:.o=.d)
 
