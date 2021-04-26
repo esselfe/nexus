@@ -51,7 +51,7 @@ void FontRender(GLfloat x, GLfloat y, GLfloat z, char *text) {
     for (cnt = 0; cnt < strlen(text); cnt++,c++) {
         glPushMatrix();
 		glBindTexture(GL_TEXTURE_2D, (*c)-31);
-		glTranslatef(cnt*0.08, 1.2, 0.0);
+		glTranslatef(x + cnt*0.08, y, z);
 		glBegin(GL_POLYGON);
 		glTexCoord2f(0.0, 1.0);
 	     glVertex3f(0.0, 0.0, 0.0);
@@ -62,6 +62,7 @@ void FontRender(GLfloat x, GLfloat y, GLfloat z, char *text) {
 		glTexCoord2f(0.0, 0.0);
 	     glVertex3f(0.0, 0.16, 0.0);
 	    glEnd();
+		glBindTexture(GL_TEXTURE_2D, 0);
 		glPopMatrix();
 	}
 }

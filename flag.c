@@ -12,7 +12,6 @@ void FlagInit(void) {
 	glEnable(GL_TEXTURE_2D);
 	glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
 
-
 	flag01.x = -5.0;
 	flag01.y = 0.5;
 	flag01.z = 0.0;
@@ -22,10 +21,6 @@ void FlagInit(void) {
 	flag01.value = (rand()%10000) + 1;
 	flag01.texture_data_size = flag01.width * flag01.height * flag01.components;
 	flag01.texture_data = ImageFromFile_128("images/flag01-128.raw");
-	//flag01.texture_data = malloc(flag01.texture_data_size);
-	//unsigned int cnt;
-	//for (cnt = 0; cnt < flag01.texture_data_size; cnt++)
-	//	flag01.texture_data[cnt] = rand()%256;
 	glGenTextures(1, &flag01.texture_id);
 	glBindTexture(GL_TEXTURE_2D, flag01.texture_id);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);

@@ -78,7 +78,7 @@ void TerminalParse(void) {
 
 void TerminalRender(void) {
 	glColor3f(0.4, 0.4, 0.4);
-	glBegin(GL_POLYGON);
+	glBegin(GL_QUADS);
 	glVertex3i(10, 10, 0);
 	glVertex3i(10, 34, 0);
 	glVertex3i((int)winW-10, 34, 0);
@@ -93,6 +93,6 @@ void TerminalRender(void) {
 		glEnd();
 	}
 
-	FontRender2D(12, 12, terminal_buffer);
+	FontRender2D(12, 14, terminal_buffer);
 }
 

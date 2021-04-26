@@ -8,14 +8,13 @@
 #include <GL/glew.h>
 #include <GL/gl.h>
 #include <GL/glu.h>
-#include <SDL.h>
-#include <SDL_opengl.h>
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_opengl.h>
 
 #include "nexus.h"
 
 char *nexus_version_string = "0.0.14";
 int mainloopend;
-
 SDL_DisplayMode display_mode;
 SDL_Window *window;
 SDL_GLContext context;
@@ -27,7 +26,6 @@ unsigned int fps;
 time_t t0, tprev;
 struct timeval tv0, tv_prev, tv_diff;
 char *fps_text;
-struct Camera cam;
 
 void NexusExit(void) {
 	printf("\nnexus exited\n");

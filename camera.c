@@ -3,6 +3,8 @@
 
 #include "nexus.h"
 
+struct Camera cam;
+
 void CameraMove(void) {
 	GLfloat mx, mz;
     if (cam.moving & MOVE_FRONT) {

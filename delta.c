@@ -24,6 +24,7 @@ void DeltaCompute(void) {
         terminal_cursor_blink = !terminal_cursor_blink;
     }
 
+	// Once every frame
     delta += 1.0;
     if (delta >= 360.0)
 	    delta -= 360.0;

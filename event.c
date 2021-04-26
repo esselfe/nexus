@@ -1,4 +1,4 @@
-#include <SDL.h>
+#include <SDL2/SDL.h>
 
 #include "nexus.h"
 
@@ -16,8 +16,6 @@ void EventCheck(void) {
 			if (show_keys)
 				printf("key: %s\n", SDL_GetKeyName(event.key.keysym.sym));
 
-//			if (terminal_visible && (event.key.keysym.sym >= ' ' && 
-//				event.key.keysym.sym <= '~')) {
 			if (terminal_visible && (event.key.keysym.sym >= SDLK_SPACE && 
 				event.key.keysym.sym <= SDLK_z)) {
 				terminal_buffer[terminal_cursor_pos++] = event.key.keysym.sym;

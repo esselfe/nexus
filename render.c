@@ -1,6 +1,6 @@
 #include <GL/gl.h>
 #include <GL/glu.h>
-#include <SDL.h>
+#include <SDL2/SDL.h>
 
 #include "nexus.h"
 
