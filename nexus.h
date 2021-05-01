@@ -9,7 +9,6 @@ extern char *nexus_version_string;
 extern int mainloopend;
 extern SDL_Window *window;
 extern GLfloat winX, winY, winW, winH;
-extern GLfloat flagX, flagY, flagZ;
 extern GLfloat delta;
 extern unsigned int fps;
 extern char *fps_text;

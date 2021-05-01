@@ -13,13 +13,12 @@
 
 #include "nexus.h"
 
-char *nexus_version_string = "0.0.16";
+char *nexus_version_string = "0.0.17";
 int mainloopend;
 SDL_DisplayMode display_mode;
 SDL_Window *window;
 SDL_GLContext context;
 GLfloat winX = 100.0, winY = 40.0, winW = 800.0, winH = 600.0;
-GLfloat flagX, flagY, flagZ;
 char window_title[1024];
 GLfloat delta;
 unsigned int fps;
@@ -93,10 +92,8 @@ int main(int argc, char **argv) {
 	cam.z = 10.0;
 	cam.rotation_angle = 180.0;
 	cam.lx = (GLfloat)sin(cam.rotation_angle*1.7453293f)+cam.x;
-    cam.lz = (GLfloat)-cos(cam.rotation_angle*1.7453293f)+cam.z;
-//	cam.lx = 0.0;
 	cam.ly = 2.0;
-//	cam.lz = 0.0;
+    cam.lz = (GLfloat)-cos(cam.rotation_angle*1.7453293f)+cam.z;
 	cam.moving = MOVE_NONE;
 	cam.thr = 10.0;
 	sprintf(cam.thr_text, "%d%%", (int)cam.thr);
