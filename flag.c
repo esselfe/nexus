@@ -90,6 +90,11 @@ void FlagRender(void) {
 }
 
 void FlagUpdate(void) {
-	return;
+	flag01.x += (GLfloat)((rand()%3)+1)/100.0 - (GLfloat)(rand()%6)/100.0;
+	flag01.z += (GLfloat)((rand()%3)+1)/100.0 - (GLfloat)(rand()%6)/100.0;
+
+	flag02.z += (GLfloat)(rand()%3)/100.0;
+	if (flag02.z >= 100.0)
+		flag02.z -= 200.0;
 }
 
