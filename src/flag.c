@@ -24,11 +24,11 @@ void FlagInit(void) {
 	glGenTextures(1, &flag01.texture_id);
 	glBindTexture(GL_TEXTURE_2D, flag01.texture_id);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-    glTexImage2D (GL_TEXTURE_2D, 0, GL_RGB, 128, 128, 0, GL_RGB, GL_UNSIGNED_BYTE, flag01.texture_data);
-    glBindTexture(GL_TEXTURE_2D, 0);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glTexImage2D (GL_TEXTURE_2D, 0, GL_RGB, 128, 128, 0, GL_RGB, GL_UNSIGNED_BYTE, flag01.texture_data);
+	glBindTexture(GL_TEXTURE_2D, 0);
 
 	flag02.x = 5.0;
 	flag02.y = 0.5;
@@ -45,48 +45,48 @@ void FlagInit(void) {
 	glGenTextures(1, &flag02.texture_id);
 	glBindTexture(GL_TEXTURE_2D, flag02.texture_id);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-    glTexImage2D (GL_TEXTURE_2D, 0, GL_RGB, 128, 128, 0, GL_RGB, GL_UNSIGNED_BYTE, flag02.texture_data);
-    glBindTexture(GL_TEXTURE_2D, 0);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glTexImage2D (GL_TEXTURE_2D, 0, GL_RGB, 128, 128, 0, GL_RGB, GL_UNSIGNED_BYTE, flag02.texture_data);
+	glBindTexture(GL_TEXTURE_2D, 0);
 }
 
 void FlagRender(void) {
 	glBindTexture(GL_TEXTURE_2D, flag01.texture_id);
 	glPushMatrix();
-    glTranslatef(flag01.x, flag01.y, flag01.z);
-    glColor3f(0.6, 0.7, 0.8);
-    glBegin(GL_POLYGON);
+	glTranslatef(flag01.x, flag01.y, flag01.z);
+	glColor3f(0.6, 0.7, 0.8);
+	glBegin(GL_POLYGON);
 	glTexCoord2f(0.0, 1.0);
-    glVertex3f(-0.5, -0.5, 0.0);
+	glVertex3f(-0.5, -0.5, 0.0);
 	glTexCoord2f(1.0, 1.0);
-    glVertex3f(0.5, -0.5, 0.0);
+	glVertex3f(0.5, -0.5, 0.0);
 	glTexCoord2f(1.0, 0.0);
-    glVertex3f(0.5, 0.5, 0.0);
+	glVertex3f(0.5, 0.5, 0.0);
 	glTexCoord2f(0.0, 0.0);
-    glVertex3f(-0.5, 0.5, 0.0);
-    glEnd();
-    glPopMatrix();
+	glVertex3f(-0.5, 0.5, 0.0);
+	glEnd();
+	glPopMatrix();
 
 	glBindTexture(GL_TEXTURE_2D, flag02.texture_id);
 	glPushMatrix();
-    glTranslatef(flag02.x, flag02.y, flag02.z);
-    glRotatef(delta, 0.0, 1.0, 0.0);
-    glColor3f(0.6, 0.7, 0.8);
-    glBegin(GL_POLYGON);
+	glTranslatef(flag02.x, flag02.y, flag02.z);
+	glRotatef(delta, 0.0, 1.0, 0.0);
+	glColor3f(0.6, 0.7, 0.8);
+	glBegin(GL_POLYGON);
 	glTexCoord2f(0.0, 1.0);
-    glVertex3f(-0.5, -0.5, 0.0);
+	glVertex3f(-0.5, -0.5, 0.0);
 	glTexCoord2f(1.0, 1.0);
-    glVertex3f(0.5, -0.5, 0.0);
+	glVertex3f(0.5, -0.5, 0.0);
 	glTexCoord2f(1.0, 0.0);
-    glVertex3f(0.5, 0.5, 0.0);
+	glVertex3f(0.5, 0.5, 0.0);
 	glTexCoord2f(0.0, 0.0);
-    glVertex3f(-0.5, 0.5, 0.0);
-    glEnd();
-    glPopMatrix();
+	glVertex3f(-0.5, 0.5, 0.0);
+	glEnd();
+	glPopMatrix();
 
-    glBindTexture(GL_TEXTURE_2D, 0);
+	glBindTexture(GL_TEXTURE_2D, 0);
 }
 
 void FlagUpdate(void) {

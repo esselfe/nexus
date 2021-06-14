@@ -93,7 +93,7 @@ int main(int argc, char **argv) {
 	cam.rotation_angle = 180.0;
 	cam.lx = (GLfloat)sin(cam.rotation_angle*1.7453293f)+cam.x;
 	cam.ly = 2.0;
-    cam.lz = (GLfloat)-cos(cam.rotation_angle*1.7453293f)+cam.z;
+	cam.lz = (GLfloat)-cos(cam.rotation_angle*1.7453293f)+cam.z;
 	cam.moving = MOVE_NONE;
 	cam.thr = 10.0;
 	sprintf(cam.thr_text, "%d%%", (int)cam.thr);

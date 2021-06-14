@@ -55,24 +55,24 @@ void RenderCursor(void) {
 
 void RenderFloor(void) {
 	glColor3f(0.1, 0.1, 0.1);
-    glBegin(GL_POLYGON);
-    glVertex3f(-50.0, 0.0, 50.0);
-    glVertex3f(50.0, 0.0, 50.0);
-    glVertex3f(50.0, 0.0, -50.0);
-    glVertex3f(-50.0, 0.0, -50.0);
-    glVertex3f(-50.0, 0.0, 50.0);
-    glEnd();
-    glColor3f(0.15, 0.15, 0.15);
-    glBegin(GL_LINES);
-    GLfloat cnt;
-    for (cnt = -50.0; cnt <= 50.0; cnt += 1.0) {
-        glVertex3f(cnt, 0.02, 50.0);
-        glVertex3f(cnt, 0.02, -50.0);
-    }
-    for (cnt = 50.0; cnt >= -50.0; cnt -= 1.0) {
-        glVertex3f(-50.0, 0.02, cnt);
-        glVertex3f(50.0, 0.02, cnt);
-    }
-    glEnd();
+	glBegin(GL_POLYGON);
+	glVertex3f(-50.0, 0.0, 50.0);
+	glVertex3f(50.0, 0.0, 50.0);
+	glVertex3f(50.0, 0.0, -50.0);
+	glVertex3f(-50.0, 0.0, -50.0);
+	glVertex3f(-50.0, 0.0, 50.0);
+	glEnd();
+	glColor3f(0.15, 0.15, 0.15);
+	glBegin(GL_LINES);
+	GLfloat cnt;
+	for (cnt = -50.0; cnt <= 50.0; cnt += 1.0) {
+		glVertex3f(cnt, 0.02, 50.0);
+		glVertex3f(cnt, 0.02, -50.0);
+	}
+	for (cnt = 50.0; cnt >= -50.0; cnt -= 1.0) {
+		glVertex3f(-50.0, 0.02, cnt);
+		glVertex3f(50.0, 0.02, cnt);
+	}
+	glEnd();
 }
 
