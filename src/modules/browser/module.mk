@@ -1,2 +1,2 @@
 OBJ += browser-list.o browser-render.o
-VPATH += modules/browser
+VPATH += src/modules/browser

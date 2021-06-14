@@ -38,6 +38,8 @@ void EditorRender(void) {
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
 
+	FontRender2D(10, (int)winH-16-10, fps_text);
+
     if (terminal_visible)
         TerminalRender();
 

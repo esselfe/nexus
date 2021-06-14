@@ -1,2 +1,2 @@
 OBJ += memory-render.o memory-delta.o
-VPATH += modules/memory
+VPATH += src/modules/memory
