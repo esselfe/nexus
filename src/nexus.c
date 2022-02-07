@@ -13,7 +13,7 @@
 
 #include "nexus.h"
 
-char *nexus_version_string = "0.1.0";
+char *nexus_version_string = "0.1.1";
 int mainloopend;
 SDL_DisplayMode display_mode;
 SDL_Window *window;
@@ -55,7 +55,6 @@ int main(int argc, char **argv) {
 	}
 
 	int major, minor;
-
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 1);
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 1);
@@ -114,6 +113,8 @@ int main(int argc, char **argv) {
 	DeltaFunc = DeltaCompute;
 	RenderFunc = Render;
 
+    StateSet(STATE_MAIN);
+    //StateSet(STATE_DRIVING);
 	FontInit();
 	FlagInit();
 	SkyInit();
@@ -123,7 +124,7 @@ int main(int argc, char **argv) {
 	gettimeofday(&tv_prev, NULL);
 	while (!mainloopend) {
 		++fps;
-		EventCheck();
+        EventFunc();
 		DeltaFunc();
 		CameraMove();
 		RenderFunc();

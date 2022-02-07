@@ -40,7 +40,7 @@ void CameraRotateStep(GLfloat angle);
 
 // delta.c
 void DeltaCompute(void);
-extern void (*DeltaFunc)(void);
+extern void (*DeltaFunc)(void); // Modules are supposed to associate this handler to their funtion
 
 // event.c
 #define MOD_NONE    0
@@ -53,6 +53,7 @@ extern int mouse_x, mouse_y, mouse_x_prev, mouse_y_prev;
 extern unsigned int mouse_held;
 
 void EventCheck(void);
+extern void (*EventFunc)(void); // Modules are supposed to associate this handler to their funtion
 
 // flag.c
 struct Flag {
@@ -83,7 +84,7 @@ GLubyte *ImageFromFile_1024(char *filename);
 void Render(void);
 void RenderCursor(void);
 void RenderFloor(void);
-extern void (*RenderFunc)(void);
+extern void (*RenderFunc)(void); // Modules are supposed to associate this handler to their funtion
 
 // sky.c
 extern GLuint sky_texture_1, sky_texture_2, sky_texture_3, sky_texture_4;
@@ -94,8 +95,9 @@ void SkyRender(void);
 // state.c
 #define STATE_MAIN      0
 #define STATE_BROWSER   1
-#define STATE_EDITOR    2
-#define STATE_MEMORY    3
+#define STATE_DRIVING   2
+#define STATE_EDITOR    3
+#define STATE_MEMORY    4
 extern unsigned int state, state_prev;
 
 unsigned int StateGet(void);
@@ -128,6 +130,10 @@ void BrowserListAddEntry(char *name);
 void BrowserListLoad(char *path);
 void BrowserListDestroy(void);
 void BrowserRender(void);
+
+void DrivingDelta(void);
+void DrivingEvent(void);
+void DrivingRender(void);
 
 void EditorRender(void);
 

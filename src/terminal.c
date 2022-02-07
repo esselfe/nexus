@@ -27,6 +27,10 @@ void TerminalParse(void) {
 				wcnt = 0;
 				++bcnt;
 			}
+			if (bcnt >= TERMINAL_BUFFER_SIZE)
+				break;
+			else if (wcnt >= 128)
+				break;
 		}
 		else if (current_word == 1) {
 			if (*c != ' ')
@@ -36,6 +40,10 @@ void TerminalParse(void) {
 				wcnt = 0;
 				++bcnt;
 			}
+			if (bcnt >= TERMINAL_BUFFER_SIZE)
+				break;
+			else if (wcnt >= 128)
+				break;
 		}
 		else if (current_word == 2) {
 			if (*c != ' ')
@@ -45,11 +53,21 @@ void TerminalParse(void) {
 				wcnt = 0;
 				++bcnt;
 			}
+			if (bcnt >= TERMINAL_BUFFER_SIZE)
+				break;
+			else if (wcnt >= 128)
+				break;
 		}
 		else if (current_word == 3) {
 			if (*c != ' ')
 				w4[wcnt++] = terminal_buffer[bcnt++];
 			else
+				break;
+			
+			
+			if (bcnt >= TERMINAL_BUFFER_SIZE)
+				break;
+			else if (wcnt >= 128)
 				break;
 		}
 
@@ -93,6 +111,7 @@ void TerminalRender(void) {
 		glEnd();
 	}
 
-	FontRender2D(12, 14, terminal_buffer);
+	if (strlen(terminal_buffer))
+		FontRender2D(12, 14, terminal_buffer);
 }
 

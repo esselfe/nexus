@@ -6,7 +6,9 @@ unsigned int mods;
 unsigned int show_keys;
 int mouse_x, mouse_y, mouse_x_prev, mouse_y_prev;
 unsigned int mouse_button, mouse_held;
-SDL_Event event;
+static SDL_Event event;
+
+void (*EventFunc)(void);
 
 void EventCheck(void) {
 	if (SDL_PollEvent(&event)) {
@@ -18,7 +20,9 @@ void EventCheck(void) {
 
 			if (terminal_visible && (event.key.keysym.sym >= SDLK_SPACE && 
 				event.key.keysym.sym <= SDLK_z)) {
-				terminal_buffer[terminal_cursor_pos++] = event.key.keysym.sym;
+				if (terminal_cursor_pos < TERMINAL_BUFFER_SIZE)
+					terminal_buffer[terminal_cursor_pos++] = event.key.keysym.sym;
+					
 				return;
 			}
 			else if (terminal_visible && event.key.keysym.sym == SDLK_BACKSPACE) {
@@ -77,6 +81,9 @@ void EventCheck(void) {
 				else
 					StateSet(state_prev);
 				break;
+            case SDLK_d:
+                StateSet(STATE_DRIVING);
+                break;
 			case SDLK_e:
 				if (state != STATE_EDITOR)
 					StateSet(STATE_EDITOR);
