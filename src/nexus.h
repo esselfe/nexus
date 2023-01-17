@@ -97,7 +97,8 @@ void SkyRender(void);
 #define STATE_BROWSER   1
 #define STATE_DRIVING   2
 #define STATE_EDITOR    3
-#define STATE_MEMORY    4
+#define STATE_ELEMENT   4
+#define STATE_MEMORY    5
 extern unsigned int state, state_prev;
 
 unsigned int StateGet(void);
@@ -136,6 +137,30 @@ void DrivingEvent(void);
 void DrivingRender(void);
 
 void EditorRender(void);
+
+#define ELEMENT_TYPE_WASTE  0
+#define ELEMENT_TYPE_IRON   1
+#define ELEMENT_TYPE_WOOD   2
+#define ELEMENT_TYPE_MAGNET 3
+#define ELEMENT_TYPE_ROCK   4
+struct Element {
+	struct Element *prev, *next;
+	unsigned int type;
+	unsigned int value;
+	float x, y, z;
+	float width, height;
+	float angle_x, angle_y, angle_z;
+};
+struct ElementList {
+	struct Element *first_element, *last_element;
+	unsigned int total_elements;
+};
+extern struct ElementList element_root_list;
+void ElementAdd(void);
+void ElementListDestroy(void);
+void ElementInit(void);
+void ElementRemove(struct Element *elem);
+void ElementRender(void);
 
 extern GLfloat memory_max, memory_value;
 extern char memory_max_text[128], memory_value_text[128];

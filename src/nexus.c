@@ -114,7 +114,7 @@ int main(int argc, char **argv) {
 	RenderFunc = Render;
 
     StateSet(STATE_MAIN);
-    //StateSet(STATE_DRIVING);
+	ElementInit();
 	FontInit();
 	FlagInit();
 	SkyInit();

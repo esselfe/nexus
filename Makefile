@@ -13,6 +13,7 @@ OBJ := camera.o delta.o event.o flag.o font.o image.o nexus.o render.o sky.o \
 	state.o terminal.o
 include src/modules/browser/module.mk
 include src/modules/editor/module.mk
+include src/modules/element/module.mk
 include src/modules/memory/module.mk
 OBJ := $(addprefix $(OBJDIR)/,$(OBJ))
 DEP := $(OBJ:.o=.d)

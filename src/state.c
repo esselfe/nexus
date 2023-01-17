@@ -37,6 +37,10 @@ void StateSet(unsigned int newstate) {
 		// EventFunc = EditorEventCheck; // todo
 		RenderFunc = EditorRender;
 		break;
+	case STATE_ELEMENT:
+		state = STATE_ELEMENT;
+		RenderFunc = ElementRender;
+		break;
 	case STATE_MEMORY:
 		state = STATE_MEMORY;
 		DeltaFunc = MemoryDeltaCompute;

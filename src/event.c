@@ -85,10 +85,18 @@ void EventCheck(void) {
                 StateSet(STATE_DRIVING);
                 break;
 			case SDLK_e:
-				if (state != STATE_EDITOR)
-					StateSet(STATE_EDITOR);
-				else
-					StateSet(state_prev);
+				if (mods & MOD_SHIFT) {
+					if (state != STATE_ELEMENT)
+						StateSet(STATE_ELEMENT);
+					else
+						StateSet(state_prev);
+				}
+				else {
+					if (state != STATE_EDITOR)
+						StateSet(STATE_EDITOR);
+					else
+						StateSet(state_prev);
+				}
 				break;
 			case SDLK_k:
 				show_keys = !show_keys;
