@@ -81,9 +81,9 @@ void EventCheck(void) {
 				else
 					StateSet(state_prev);
 				break;
-            case SDLK_d:
-                StateSet(STATE_DRIVING);
-                break;
+			case SDLK_d:
+				StateSet(STATE_DRIVING);
+				break;
 			case SDLK_e:
 				if (mods & MOD_SHIFT) {
 					if (state != STATE_ELEMENT)

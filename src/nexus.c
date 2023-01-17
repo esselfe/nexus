@@ -113,7 +113,7 @@ int main(int argc, char **argv) {
 	DeltaFunc = DeltaCompute;
 	RenderFunc = Render;
 
-    StateSet(STATE_MAIN);
+	StateSet(STATE_MAIN);
 	ElementInit();
 	FontInit();
 	FlagInit();
@@ -124,7 +124,7 @@ int main(int argc, char **argv) {
 	gettimeofday(&tv_prev, NULL);
 	while (!mainloopend) {
 		++fps;
-        EventFunc();
+		EventFunc();
 		DeltaFunc();
 		CameraMove();
 		RenderFunc();
