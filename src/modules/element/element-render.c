@@ -48,6 +48,18 @@ void ElementRender(void) {
 
 	FontRender2D(10, (int)winH-16-10, fps_text);
 
+	char text[128];
+	sprintf(text, "%lu waste", total_waste);
+	FontRender2D(10, (int)winH-16-26, text);
+	sprintf(text, "%lu iron", total_iron);
+	FontRender2D(10, (int)winH-16-42, text);
+	sprintf(text, "%lu wood", total_wood);
+	FontRender2D(10, (int)winH-16-58, text);
+	sprintf(text, "%lu magnet", total_magnet);
+	FontRender2D(10, (int)winH-16-74, text);
+	sprintf(text, "%lu rock", total_rock);
+	FontRender2D(10, (int)winH-16-90, text);
+
 	if (terminal_visible)
 		TerminalRender();
 

@@ -2,6 +2,8 @@
 
 #include "nexus.h"
 
+unsigned long total_waste, total_iron, total_wood,
+	total_magnet, total_rock;
 struct ElementList element_root_list;
 
 void ElementInit(void) {
@@ -39,5 +41,21 @@ void ElementAdd(void) {
 
 void ElementListDestroy(void);
 
-void ElementRemove(struct Element *elem);
+void ElementRemove(struct Element *elem) {
+	if (elem->next == NULL && elem->prev != NULL) {
+		elem->prev->next = NULL;
+		element_root_list.last_element = elem->prev;
+	}
+	else if (elem->next != NULL && elem->prev == NULL) {
+		elem->next->prev = NULL;
+		element_root_list.first_element = elem->next;
+	}
+	else if (elem->prev != NULL && elem->next != NULL) {
+		elem->next->prev = elem->prev;
+		elem->prev->next = elem->next;
+	}
+
+	free(elem);
+	--element_root_list.total_elements;
+}
 

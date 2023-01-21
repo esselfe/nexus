@@ -39,6 +39,7 @@ void StateSet(unsigned int newstate) {
 		break;
 	case STATE_ELEMENT:
 		state = STATE_ELEMENT;
+		DeltaFunc = ElementDelta;
 		RenderFunc = ElementRender;
 		break;
 	case STATE_MEMORY:

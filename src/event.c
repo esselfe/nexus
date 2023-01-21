@@ -107,6 +107,10 @@ void EventCheck(void) {
 				else
 					StateSet(state_prev);
 				break;
+			case SDLK_p:
+				printf("position: x: %f y: %f z: %f\n",
+					cam.x, cam.y, cam.z);
+				break;
 			default:
 				break;
 			}

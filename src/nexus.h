@@ -156,7 +156,10 @@ struct ElementList {
 	unsigned int total_elements;
 };
 extern struct ElementList element_root_list;
+extern unsigned long total_waste, total_iron, total_wood,
+	total_magnet, total_rock;
 void ElementAdd(void);
+void ElementDelta(void);
 void ElementListDestroy(void);
 void ElementInit(void);
 void ElementRemove(struct Element *elem);
