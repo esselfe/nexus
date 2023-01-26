@@ -158,6 +158,7 @@ struct ElementList {
 extern struct ElementList element_root_list;
 extern unsigned long long total_waste, total_iron, total_wood,
 	total_magnet, total_rock;
+extern struct timeval tv_score_saved;
 void ElementAdd(unsigned int count);
 void ElementDelta(void);
 void ElementListDestroy(void);

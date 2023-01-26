@@ -1,4 +1,5 @@
 #include <stdlib.h>
+#include <sys/time.h>
 
 #include "nexus.h"
 
@@ -7,6 +8,7 @@ unsigned long long total_waste, total_iron, total_wood,
 struct ElementList element_root_list;
 
 void ElementInit(void) {
+	gettimeofday(&tv_score_saved, NULL);
 	ElementScoreLoad();
 	ElementAdd(10);
 }

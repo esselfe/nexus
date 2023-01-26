@@ -1,8 +1,11 @@
 #include <stdio.h>
 #include <string.h>
 #include <errno.h>
+#include <sys/time.h>
 
 #include "nexus.h"
+
+struct timeval tv_score_saved;
 
 void ElementScoreLoad(void) {
 	FILE *fp = fopen("element-score.dat", "rb");

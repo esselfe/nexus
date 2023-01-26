@@ -40,9 +40,17 @@ void ElementCheckCollision(void) {
 
 void ElementDelta(void) {
 	gettimeofday(&tv0, NULL);
+	
 	tvdiff(&tv_prev, &tv0, &tv_diff);
 	if (tv_diff.tv_sec > 0 || tv_diff.tv_usec > 250000) {
 		ElementCheckCollision();
+	}
+
+	tvdiff(&tv_score_saved, &tv0, &tv_diff);
+	if (tv_diff.tv_sec > 30) {
+		ElementScoreSave();
+		tv_score_saved.tv_sec = tv0.tv_sec;
+		tv_score_saved.tv_usec = tv0.tv_usec;
 	}
 }
 
