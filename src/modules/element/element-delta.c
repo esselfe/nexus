@@ -8,10 +8,10 @@ void ElementCheckCollision(void) {
 
 	struct Element *el = element_root_list.first_element;
 	while (1) {
-		if (cam.x > el->x - 0.5 &&
-			cam.x < el->x + 0.5) {
-			if (cam.z > el->z - 1.0 &&
-				cam.z < el->z + 0.5) {
+		if (cam.x > el->x - 1.5 &&
+			cam.x < el->x + 1.5) {
+			if (cam.z > el->z - 1.5 &&
+				cam.z < el->z + 1.5) {
 				if (el->type == ELEMENT_TYPE_WASTE)
 					total_waste += el->value;
 				else if (el->type == ELEMENT_TYPE_IRON)
