@@ -156,7 +156,7 @@ struct ElementList {
 	unsigned int total_elements;
 };
 extern struct ElementList element_root_list;
-extern unsigned long total_waste, total_iron, total_wood,
+extern unsigned long long total_waste, total_iron, total_wood,
 	total_magnet, total_rock;
 void ElementAdd(void);
 void ElementDelta(void);
@@ -164,6 +164,8 @@ void ElementListDestroy(void);
 void ElementInit(void);
 void ElementRemove(struct Element *elem);
 void ElementRender(void);
+void ElementScoreLoad(void);
+void ElementScoreSave(void);
 
 extern GLfloat memory_max, memory_value;
 extern char memory_max_text[128], memory_value_text[128];

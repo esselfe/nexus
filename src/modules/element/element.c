@@ -2,11 +2,13 @@
 
 #include "nexus.h"
 
-unsigned long total_waste, total_iron, total_wood,
+unsigned long long total_waste, total_iron, total_wood,
 	total_magnet, total_rock;
 struct ElementList element_root_list;
 
 void ElementInit(void) {
+	ElementScoreLoad();
+
 	int cnt;
 	for (cnt = 0; cnt < 10; cnt ++) {
 		ElementAdd();
