@@ -52,5 +52,9 @@ void ElementDelta(void) {
 		tv_score_saved.tv_sec = tv0.tv_sec;
 		tv_score_saved.tv_usec = tv0.tv_usec;
 	}
+
+	delta += 0.1;
+	if (delta >= 360.0)
+		delta -= 360.0;
 }
 

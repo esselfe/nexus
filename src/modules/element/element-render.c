@@ -25,6 +25,7 @@ void ElementRender(void) {
 		glBindTexture(GL_TEXTURE_2D, el->texture_id);
 		glPushMatrix();
 		glTranslatef(el->x, el->y, el->z);
+		glRotatef(delta, 0.0, 1.0, 0.0);
 		glColor3f(0.4, 0.5, 0.6);
 		glBegin(GL_POLYGON);
 		glTexCoord2f(0.0, 0.0);
