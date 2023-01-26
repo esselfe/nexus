@@ -10,6 +10,7 @@ struct ElementList element_root_list;
 void ElementInit(void) {
 	gettimeofday(&tv_score_saved, NULL);
 	ElementScoreLoad();
+	ElementTextureInit();
 	ElementAdd(10);
 }
 
@@ -32,6 +33,23 @@ void ElementAdd(unsigned int count) {
 		gettimeofday(&tv0, NULL);
 		srand((unsigned int)tv0.tv_usec);
 		elem->type = rand() % 5;
+		switch (elem->type) {
+		case ELEMENT_TYPE_WASTE:
+			elem->texture_id = texture_waste;
+			break;
+		case ELEMENT_TYPE_IRON:
+			elem->texture_id = texture_iron;
+			break;
+		case ELEMENT_TYPE_WOOD:
+			elem->texture_id = texture_wood;
+			break;
+		case ELEMENT_TYPE_MAGNET:
+			elem->texture_id = texture_magnet;
+			break;
+		case ELEMENT_TYPE_ROCK:
+			elem->texture_id = texture_rock;
+			break;
+		}
 		elem->value = (rand() % 1000) + 100;
 		elem->x = (rand() % 100) - 50;
 		elem->y = 0.5;

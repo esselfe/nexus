@@ -84,6 +84,12 @@ void TerminalParse(void) {
 			StateSet(STATE_BROWSER);
 		else if (strcmp(w1, "editor") == 0)
 			StateSet(STATE_EDITOR);
+		else if (strcmp(w1, "element") == 0 && !strlen(w2))
+			StateSet(STATE_ELEMENT);
+		else if (strcmp(w1, "element") == 0 && strlen(w2)) {
+			if (strcmp(w2, "add") == 0)
+				ElementAdd(atoi(w3));
+		}
 		else if (strcmp(w1, "main") == 0)
 			StateSet(STATE_MAIN);
 		else if (strcmp(w1, "memory") == 0)

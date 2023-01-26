@@ -115,8 +115,8 @@ int main(int argc, char **argv) {
 	RenderFunc = Render;
 
 	StateSet(STATE_MAIN);
-	ElementInit();
 	FontInit();
+	ElementInit();
 	FlagInit();
 	SkyInit();
 	BrowserListLoad(get_current_dir_name());

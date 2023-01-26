@@ -22,16 +22,22 @@ void ElementRender(void) {
 
 	struct Element *el = element_root_list.first_element;
 	while (1) {
+		glBindTexture(GL_TEXTURE_2D, el->texture_id);
 		glPushMatrix();
 		glTranslatef(el->x, el->y, el->z);
 		glColor3f(0.4, 0.5, 0.6);
 		glBegin(GL_POLYGON);
+		glTexCoord2f(0.0, 0.0);
 		glVertex3f(-el->width/2, -el->height/2, 0.0);
+		glTexCoord2f(0.0, 1.0);
 		glVertex3f(-el->width/2, el->height/2, 0.0);
+		glTexCoord2f(1.0, 1.0);
 		glVertex3f(el->width/2, el->height/2, 0.0);
+		glTexCoord2f(1.0, 0.0);
 		glVertex3f(el->width/2, -el->height/2, 0.0);
 		glEnd();
 		glPopMatrix();
+		glBindTexture(GL_TEXTURE_2D, 0);
 
 		if (el->next != NULL)
 			el = el->next;

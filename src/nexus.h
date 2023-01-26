@@ -150,6 +150,7 @@ struct Element {
 	float x, y, z;
 	float width, height;
 	float angle_x, angle_y, angle_z;
+	GLuint texture_id;
 };
 struct ElementList {
 	struct Element *first_element, *last_element;
@@ -158,6 +159,8 @@ struct ElementList {
 extern struct ElementList element_root_list;
 extern unsigned long long total_waste, total_iron, total_wood,
 	total_magnet, total_rock;
+extern GLuint texture_waste, texture_iron, texture_wood,
+	texture_magnet, texture_rock;
 extern struct timeval tv_score_saved;
 void ElementAdd(unsigned int count);
 void ElementDelta(void);
@@ -167,6 +170,7 @@ void ElementRemove(struct Element *elem);
 void ElementRender(void);
 void ElementScoreLoad(void);
 void ElementScoreSave(void);
+void ElementTextureInit(void);
 
 extern GLfloat memory_max, memory_value;
 extern char memory_max_text[128], memory_value_text[128];
