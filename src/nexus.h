@@ -177,6 +177,7 @@ void ElementRender(void);
 void ElementScoreLoad(void);
 void ElementScoreSave(void);
 void ElementTextureInit(void);
+void ElementThreadStart(void);
 
 extern GLfloat memory_max, memory_value;
 extern char memory_max_text[128], memory_value_text[128];

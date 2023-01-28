@@ -11,7 +11,8 @@ void ElementInit(void) {
 	gettimeofday(&tv_score_saved, NULL);
 	ElementScoreLoad();
 	ElementTextureInit();
-	ElementAdd(10);
+	ElementAdd(8);
+	ElementThreadStart();
 }
 
 void ElementAdd(unsigned int count) {
@@ -27,6 +28,7 @@ void ElementAdd(unsigned int count) {
 			element_root_list.last_element->next = elem;
 			elem->prev = element_root_list.last_element;
 		}
+		++element_root_list.total_elements;
 		element_root_list.last_element = elem;
 		elem->next = NULL;
 

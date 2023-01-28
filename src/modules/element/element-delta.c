@@ -24,7 +24,6 @@ void ElementCheckCollision(void) {
 					total_rock += el->value;
 
 				ElementRemove(el);
-				ElementAdd(2);
 			}
 		}
 
