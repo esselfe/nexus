@@ -47,8 +47,8 @@ void ElementMoveFlying(void) {
 		return;
 	
 	while (1) {
-		if (el->y > 1.0) {
-			if (el->y < 2.5) {
+		if (el->y > el->height/2 + 0.1) {
+			if (el->y < el->height/2 + 1.0) {
 				el->x -= 0.1;
 				el->y -= 0.1;
 				el->z -= 0.1;
