@@ -27,6 +27,8 @@ struct timeval tv0, tv_prev, tv_diff;
 char *fps_text;
 
 void NexusExit(void) {
+	ElementScoreSave();
+	
 	printf("\nnexus exited\n");
 }
 
@@ -121,7 +123,7 @@ int main(int argc, char **argv) {
 		EventFunc();
 		DeltaFunc();
 		CameraMove();
-		RenderFunc();
+		if (render) RenderFunc();
 	}
 
 	SDL_GL_DeleteContext(context);

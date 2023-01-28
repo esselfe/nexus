@@ -2,6 +2,8 @@
 
 #include "nexus.h"
 
+struct timeval tv_collision_prev;
+
 void ElementCheckCollision(void) {
 	if (element_root_list.first_element == NULL)
 		return;
@@ -24,6 +26,8 @@ void ElementCheckCollision(void) {
 					total_rock += el->value;
 
 				ElementRemove(el);
+				el = element_root_list.first_element;
+				continue;
 			}
 		}
 
@@ -66,8 +70,10 @@ void ElementMoveFlying(void) {
 void ElementDelta(void) {
 	gettimeofday(&tv0, NULL);
 	
-	tvdiff(&tv_prev, &tv0, &tv_diff);
+	tvdiff(&tv_collision_prev, &tv0, &tv_diff);
 	if (tv_diff.tv_sec > 0 || tv_diff.tv_usec > 250000) {
+		tv_collision_prev.tv_sec = tv0.tv_sec;
+		tv_collision_prev.tv_usec = tv0.tv_usec;
 		ElementCheckCollision();
 	}
 

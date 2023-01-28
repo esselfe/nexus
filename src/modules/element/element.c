@@ -16,6 +16,8 @@ void ElementInit(void) {
 }
 
 void ElementAdd(unsigned int count) {
+	render = 0;
+	
 	unsigned int cnt;
 	for (cnt = 0; cnt < count; cnt++) {
 		struct Element *elem = malloc(sizeof(struct Element));
@@ -62,11 +64,15 @@ void ElementAdd(unsigned int count) {
 		elem->angle_y = 0.0;
 		elem->angle_z = 0.0;
 	}
+	
+	render = 1;
 }
 
 void ElementListDestroy(void);
 
 void ElementRemove(struct Element *elem) {
+	render = 0;
+
 	if (elem->next == NULL && elem->prev != NULL) {
 		elem->prev->next = NULL;
 		element_root_list.last_element = elem->prev;
@@ -79,8 +85,38 @@ void ElementRemove(struct Element *elem) {
 		elem->next->prev = elem->prev;
 		elem->prev->next = elem->next;
 	}
-
+	
 	free(elem);
 	--element_root_list.total_elements;
+	
+	render = 1;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

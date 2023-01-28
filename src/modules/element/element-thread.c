@@ -5,7 +5,6 @@
 
 void *ElementThreadFunc(void *argp) {
 	while (1) {
-		printf("total: %lu\n", element_root_list.total_elements);
 		if (element_root_list.total_elements < 5000)
 			ElementAdd(2);
 	

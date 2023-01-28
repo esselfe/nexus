@@ -86,6 +86,7 @@ GLubyte *ImageFromFile_884x16(char *filename);
 GLubyte *ImageFromFile_1024(char *filename);
 
 // render.c
+extern int render;
 void Render(void);
 void RenderCursor(void);
 void RenderFloor(void);
