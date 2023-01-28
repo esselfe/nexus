@@ -51,9 +51,9 @@ void ElementAdd(unsigned int count) {
 			break;
 		}
 		elem->value = (rand() % 1000) + 100;
-		elem->x = (rand() % 100) - 50;
-		elem->y = 0.5;
-		elem->z = (rand() % 100) - 50;
+		elem->x = (rand() % 100) + 50;
+		elem->y = 100.0;
+		elem->z = (rand() % 100) + 50;
 		elem->width = elem->value / 1000.0;
 		elem->height = elem->value / 1000.0;
 		elem->angle_x = 0.0;

@@ -38,6 +38,32 @@ void ElementCheckCollision(void) {
 	}
 }
 
+void ElementMoveFlying(void) {
+	struct Element *el = element_root_list.first_element;
+	if (el == NULL)
+		return;
+	
+	while (1) {
+		if (el->y > 1.0) {
+			if (el->y < 2.5) {
+				el->x -= 0.1;
+				el->y -= 0.1;
+				el->z -= 0.1;
+			}
+			else {
+				el->x -= delta_move;
+				el->y -= delta_move;
+				el->z -= delta_move;
+			}
+		}
+		
+		if (el->next == NULL)
+			break;
+		else
+			el = el->next;
+	}
+}
+
 void ElementDelta(void) {
 	gettimeofday(&tv0, NULL);
 	
@@ -54,6 +80,8 @@ void ElementDelta(void) {
 	}
 	
 	DeltaMove();
+	
+	ElementMoveFlying();
 
 	delta += delta_move;
 	if (delta >= 360.0)
