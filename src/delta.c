@@ -6,6 +6,13 @@
 
 void (*DeltaFunc)(void);
 
+GLfloat delta_move;
+struct timeval tv_prev_frame;
+
+void DeltaInit(void) {
+	gettimeofday(&tv_prev_frame, NULL);
+}
+
 void DeltaCompute(void) {
 	// Once every second
 	t0 = time(NULL);
@@ -24,11 +31,21 @@ void DeltaCompute(void) {
 		terminal_cursor_blink = !terminal_cursor_blink;
 	}
 
+	DeltaMove();
+
 	// Once every frame
-	delta += 1.0;
+	delta += delta_move; //1.0;
 	if (delta >= 360.0)
 		delta -= 360.0;
 
 	FlagUpdate();
+}
+
+void DeltaMove(void) {
+	tvdiff(&tv_prev_frame, &tv0, &tv_diff);
+	tv_prev_frame.tv_sec = tv0.tv_sec;
+	tv_prev_frame.tv_usec = tv0.tv_usec;
+	delta_move = ((GLfloat)tv_diff.tv_sec +
+		(GLfloat)tv_diff.tv_usec/1000000) * 50.0;
 }
 

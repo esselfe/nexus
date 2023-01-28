@@ -39,8 +39,11 @@ void CameraMove(void);
 void CameraRotateStep(GLfloat angle);
 
 // delta.c
+extern GLfloat delta_move;
 void DeltaCompute(void);
+void DeltaInit(void);
 extern void (*DeltaFunc)(void); // Modules are supposed to associate this handler to their funtion
+void DeltaMove(void);
 
 // event.c
 #define MOD_NONE    0
