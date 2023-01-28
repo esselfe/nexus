@@ -10,6 +10,13 @@ static SDL_Event event;
 
 void (*EventFunc)(void);
 
+void EventInit(void) {
+	mouse_x_prev = mouse_x = (int)winW/2;
+	mouse_y_prev = mouse_y = (int)winH/2;
+	SDL_WarpMouseInWindow(window, mouse_x, mouse_y);
+	SDL_ShowCursor(0);
+}
+
 void EventCheck(void) {
 	if (SDL_PollEvent(&event)) {
 		if (event.type == SDL_QUIT)

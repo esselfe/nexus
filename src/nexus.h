@@ -35,6 +35,7 @@ struct Camera {
 };
 extern struct Camera cam;
 
+void CameraInit(void);
 void CameraMove(void);
 void CameraRotateStep(GLfloat angle);
 
@@ -57,6 +58,7 @@ extern unsigned int mouse_held;
 
 void EventCheck(void);
 extern void (*EventFunc)(void); // Modules are supposed to associate this handler to their funtion
+void EventInit(void);
 
 // flag.c
 struct Flag {
@@ -88,6 +90,7 @@ void Render(void);
 void RenderCursor(void);
 void RenderFloor(void);
 extern void (*RenderFunc)(void); // Modules are supposed to associate this handler to their funtion
+void RenderInit(void);
 
 // sky.c
 extern GLuint sky_texture_1, sky_texture_2, sky_texture_3, sky_texture_4;

@@ -1,9 +1,23 @@
+#include <stdio.h>
 #include <math.h>
 #include <GL/gl.h>
 
 #include "nexus.h"
 
 struct Camera cam;
+
+void CameraInit(void) {
+	cam.x = 0.0;
+	cam.y = 2.0;
+	cam.z = 10.0;
+	cam.rotation_angle = 180.0;
+	cam.lx = (GLfloat)sin(cam.rotation_angle*1.7453293f)+cam.x;
+	cam.ly = 2.0;
+	cam.lz = (GLfloat)-cos(cam.rotation_angle*1.7453293f)+cam.z;
+	cam.moving = MOVE_NONE;
+	cam.thr = 10.0;
+	sprintf(cam.thr_text, "%d%%", (int)cam.thr);
+}
 
 void CameraMove(void) {
 	GLfloat mx, mz;

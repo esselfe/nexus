@@ -26,8 +26,8 @@ void ElementRender(void) {
 		glPushMatrix();
 		glTranslatef(el->x, el->y, el->z);
 		glRotatef(delta, 0.0, 1.0, 0.0);
-		glColor3f(0.4, 0.5, 0.6);
 		glBegin(GL_POLYGON);
+		glColor3f(0.4, 0.5, 0.6);
 		glTexCoord2f(0.0, 0.0);
 		glVertex3f(-el->width/2, -el->height/2, 0.0);
 		glTexCoord2f(0.0, 1.0);
@@ -58,17 +58,23 @@ void ElementRender(void) {
 	char text[128];
 	sprintf(text, "%lu waste", total_waste);
 	FontRender2D(10, (int)winH-16-26, text);
+	
 	sprintf(text, "%lu iron", total_iron);
 	FontRender2D(10, (int)winH-16-42, text);
+	
 	sprintf(text, "%lu wood", total_wood);
 	FontRender2D(10, (int)winH-16-58, text);
+	
 	sprintf(text, "%lu magnet", total_magnet);
 	FontRender2D(10, (int)winH-16-74, text);
+	
 	sprintf(text, "%lu rock", total_rock);
 	FontRender2D(10, (int)winH-16-90, text);
 
 	if (terminal_visible)
 		TerminalRender();
+	if (!mouse_held)
+		RenderCursor();
 
 	SDL_GL_SwapWindow(window);
 }

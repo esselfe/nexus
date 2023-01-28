@@ -55,7 +55,7 @@ void ElementDelta(void) {
 	
 	DeltaMove();
 
-	delta += delta_move/10.0; //0.1;
+	delta += delta_move;
 	if (delta >= 360.0)
 		delta -= 360.0;
 }

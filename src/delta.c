@@ -10,6 +10,7 @@ GLfloat delta_move;
 struct timeval tv_prev_frame;
 
 void DeltaInit(void) {
+	DeltaFunc = DeltaCompute;
 	gettimeofday(&tv_prev_frame, NULL);
 }
 
@@ -34,7 +35,7 @@ void DeltaCompute(void) {
 	DeltaMove();
 
 	// Once every frame
-	delta += delta_move; //1.0;
+	delta += delta_move;
 	if (delta >= 360.0)
 		delta -= 360.0;
 

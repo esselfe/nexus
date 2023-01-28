@@ -6,6 +6,17 @@
 
 void (*RenderFunc)(void);
 
+void RenderInit(void) {
+	RenderFunc = Render;
+	
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	glEnable(GL_DEPTH_TEST);
+	glFrontFace(GL_CCW);
+	glClearColor(0.0, 0.0, 0.0, 0.0);
+	glViewport((GLint)0, (GLint)0, (GLsizei)winW, (GLsizei)winH);
+}
+
 void Render(void) {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
@@ -41,10 +52,10 @@ void Render(void) {
 }
 
 void RenderCursor(void) {
-	glColor3f(0.7, 0.8, 0.9);
 	glPushMatrix();
 	glTranslatef((GLfloat)mouse_x, winH - (GLfloat)mouse_y, 0.0);
 	glBegin(GL_LINES);
+	glColor3f(0.7, 0.8, 0.9);
 	glVertex2f(0.0, -10.0);
 	glVertex2f(0.0, 10.0);
 	glVertex2f(-10.0, 0.0);
@@ -54,16 +65,17 @@ void RenderCursor(void) {
 }
 
 void RenderFloor(void) {
-	glColor3f(0.1, 0.1, 0.1);
 	glBegin(GL_POLYGON);
+	glColor4f(0.1, 0.1, 0.1, 1.0);
 	glVertex3f(-50.0, 0.0, 50.0);
 	glVertex3f(50.0, 0.0, 50.0);
 	glVertex3f(50.0, 0.0, -50.0);
 	glVertex3f(-50.0, 0.0, -50.0);
 	glVertex3f(-50.0, 0.0, 50.0);
 	glEnd();
-	glColor3f(0.15, 0.15, 0.15);
+	
 	glBegin(GL_LINES);
+	glColor4f(0.15, 0.15, 0.15, 0.25);
 	GLfloat cnt;
 	for (cnt = -50.0; cnt <= 50.0; cnt += 1.0) {
 		glVertex3f(cnt, 0.02, 50.0);

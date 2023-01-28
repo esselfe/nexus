@@ -27,7 +27,6 @@ struct timeval tv0, tv_prev, tv_diff;
 char *fps_text;
 
 void NexusExit(void) {
-	ElementScoreSave();
 	printf("\nnexus exited\n");
 }
 
@@ -101,34 +100,14 @@ int main(int argc, char **argv) {
 		exit(1);
 	}
 
-	cam.x = 0.0;
-	cam.y = 2.0;
-	cam.z = 10.0;
-	cam.rotation_angle = 180.0;
-	cam.lx = (GLfloat)sin(cam.rotation_angle*1.7453293f)+cam.x;
-	cam.ly = 2.0;
-	cam.lz = (GLfloat)-cos(cam.rotation_angle*1.7453293f)+cam.z;
-	cam.moving = MOVE_NONE;
-	cam.thr = 10.0;
-	sprintf(cam.thr_text, "%d%%", (int)cam.thr);
-
-	mouse_x_prev = mouse_x = (int)winW/2;
-	mouse_y_prev = mouse_y = (int)winH/2;
-	SDL_WarpMouseInWindow(window, mouse_x, mouse_y);
-	SDL_ShowCursor(0);
-
-	glEnable(GL_DEPTH_TEST);
-	glFrontFace(GL_CCW);
-	glClearColor(0.0, 0.0, 0.0, 0.0);
-	glViewport((GLint)0, (GLint)0, (GLsizei)winW, (GLsizei)winH);
-
 	fps_text = malloc(128);
 	sprintf(fps_text, "0 fps");
 
-	DeltaFunc = DeltaCompute;
-	RenderFunc = Render;
-
 	StateSet(STATE_MAIN);
+	EventInit();
+	DeltaInit();
+	CameraInit();
+	RenderInit();
 	FontInit();
 	ElementInit();
 	FlagInit();
