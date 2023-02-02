@@ -79,6 +79,12 @@ void EventCheck(void) {
 			case SDLK_PAGEDOWN:
 				cam.moving |= MOVE_DOWN;
 				break;
+			case SDLK_KP_4:
+				cam.moving |= LOOK_LEFT;
+				break;
+			case SDLK_KP_6:
+				cam.moving |= LOOK_RIGHT;
+				break;
 			case SDLK_F1:
 				StateSet(STATE_MAIN);
 				break;
@@ -153,6 +159,12 @@ void EventCheck(void) {
 				break;
 			case SDLK_PAGEDOWN:
 				cam.moving ^= MOVE_DOWN;
+				break;
+			case SDLK_KP_4:
+				cam.moving ^= LOOK_LEFT;
+				break;
+			case SDLK_KP_6:
+				cam.moving ^= LOOK_RIGHT;
 				break;
 			default:
 				break;

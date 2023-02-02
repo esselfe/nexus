@@ -69,6 +69,10 @@ void CameraMove(void) {
 		cam.y -= 0.01f * (GLfloat)cam.thr * delta_move;
 		cam.ly -= 0.01f * (GLfloat)cam.thr * delta_move;
 	}
+	if (cam.moving & LOOK_LEFT)
+		CameraRotateStep(-0.01);
+	if (cam.moving & LOOK_RIGHT)
+		CameraRotateStep(0.01);
 }
 
 void CameraRotateStep(GLfloat angle) {
