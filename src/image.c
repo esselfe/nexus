@@ -6,7 +6,7 @@
 #include <sys/stat.h>
 #include <GL/gl.h>
 
-GLubyte *ImageFromFile_128(char *filename) {
+GLubyte *ImageFromRawFile_128(char *filename) {
 	struct stat st;
 	if (stat(filename, &st) < 0) {
 		printf("nexus:%s:%s error: Cannot open %s: %s\n", __FILE__, __FUNCTION__,
@@ -30,7 +30,7 @@ GLubyte *ImageFromFile_128(char *filename) {
 	return data;
 }
 
-GLubyte *ImageFromFile_884x16(char *filename) {
+GLubyte *ImageFromRawFile_884x16(char *filename) {
 	struct stat st;
 	if (stat(filename, &st) < 0) {
 		printf("nexus:%s:%s error: Cannot open %s: %s\n", __FILE__, __FUNCTION__,
@@ -54,7 +54,7 @@ GLubyte *ImageFromFile_884x16(char *filename) {
 	return data;
 }
 
-GLubyte *ImageFromFile_1024(char *filename) {
+GLubyte *ImageFromRawFile_1024(char *filename) {
 	struct stat st;
 	if (stat(filename, &st) < 0) {
 		printf("nexus:%s:%s error: Cannot open %s: %s\n", __FILE__, __FUNCTION__,

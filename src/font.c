@@ -32,7 +32,7 @@ static void FontMakeLetter(unsigned char letter) {
 }
 
 void FontInit(void) {
-	font_data = ImageFromFile_884x16("images/font-884x16.raw");
+	font_data = ImageFromRawFile_884x16("images/font-884x16.raw");
 	letter_data = malloc(3*8*16);
 
 	unsigned char c;

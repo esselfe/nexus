@@ -14,7 +14,7 @@ void SkyInit(void) {
 	// Generate texture IDs
 	////////////////////////////////
 
-	GLubyte *data = ImageFromFile_1024("images/sky01-1024.raw");
+	GLubyte *data = ImageFromRawFile_1024("images/sky01-1024.raw");
 	glGenTextures(1, &sky_texture_1);
 	glBindTexture(GL_TEXTURE_2D, sky_texture_1);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
@@ -25,7 +25,7 @@ void SkyInit(void) {
 	glBindTexture(GL_TEXTURE_2D, 0);
 	free(data);
 
-	data = ImageFromFile_1024("images/sky02-1024.raw");
+	data = ImageFromRawFile_1024("images/sky02-1024.raw");
 	glGenTextures(1, &sky_texture_2);
 	glBindTexture(GL_TEXTURE_2D, sky_texture_2);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
@@ -36,7 +36,7 @@ void SkyInit(void) {
 	glBindTexture(GL_TEXTURE_2D, 0);
 	free(data);
 
-	data = ImageFromFile_1024("images/sky03-1024.raw");
+	data = ImageFromRawFile_1024("images/sky03-1024.raw");
 	glGenTextures(1, &sky_texture_3);
 	glBindTexture(GL_TEXTURE_2D, sky_texture_3);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
@@ -47,7 +47,7 @@ void SkyInit(void) {
 	glBindTexture(GL_TEXTURE_2D, 0);
 	free(data);
 
-	data = ImageFromFile_1024("images/sky04-1024.raw");
+	data = ImageFromRawFile_1024("images/sky04-1024.raw");
 	glGenTextures(1, &sky_texture_4);
 	glBindTexture(GL_TEXTURE_2D, sky_texture_4);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
