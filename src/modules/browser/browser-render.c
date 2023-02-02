@@ -54,6 +54,8 @@ void BrowserRender(void) {
 
 	if (terminal_visible)
 		TerminalRender();
+	
+	RenderThrottle();
 
 	SDL_GL_SwapWindow(window);
 }

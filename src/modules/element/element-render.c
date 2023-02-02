@@ -78,6 +78,8 @@ void ElementRender(void) {
 	if (!mouse_held)
 		RenderCursor();
 
+	RenderThrottle();
+
 	SDL_GL_SwapWindow(window);
 }
 
