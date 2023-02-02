@@ -27,6 +27,8 @@ void tvdiff(struct timeval *tv_start, struct timeval *tv_end, struct timeval *tv
 #define MOVE_DOWN   (1<<5)
 #define LOOK_LEFT   (1<<6)
 #define LOOK_RIGHT  (1<<7)
+#define THR_UP      (1<<8)
+#define THR_DOWN    (1<<9)
 struct Camera {
 	GLfloat x, y, z,
 		lx, ly, lz;
@@ -94,6 +96,7 @@ void RenderCursor(void);
 void RenderFloor(void);
 extern void (*RenderFunc)(void); // Modules are supposed to associate this handler to their funtion
 void RenderInit(void);
+void RenderThrottle(void);
 
 // sky.c
 extern GLuint sky_texture_1, sky_texture_2, sky_texture_3, sky_texture_4;

@@ -47,6 +47,7 @@ void Render(void) {
 		TerminalRender();
 	if (!mouse_held)
 		RenderCursor();
+	RenderThrottle();
 
 	SDL_GL_SwapWindow(window);
 }
@@ -62,6 +63,28 @@ void RenderCursor(void) {
 	glVertex2f(10.0, 0.0);
 	glEnd();
 	glPopMatrix();
+}
+
+void RenderThrottle(void) {
+	glPushMatrix();
+	glTranslatef(winW-20.0, winH/2, 0.0);
+	glBegin(GL_QUADS);
+	glColor3f(0.6, 0.7, 0.8);
+	glVertex2f(0.0, 0.0);
+	glVertex2f(10.0, 0.0);
+	glVertex2f(10.0, cam.thr);
+	glVertex2f(0.0, cam.thr);
+	glEnd();
+	glBegin(GL_LINE_STRIP);
+	glColor3f(0.3, 0.4, 0.5);
+	glVertex2f(-1.0, -1.0);
+	glVertex2f(11.0, -1.0);
+	glVertex2f(11.0, 101.0);
+	glVertex2f(-1.0, 101.0);
+	glVertex2f(-1.0, -1.0);
+	glEnd();
+	glPopMatrix();
+	FontRender2D(winW-32, winH/2-20, cam.thr_text);
 }
 
 void RenderFloor(void) {

@@ -73,6 +73,18 @@ void CameraMove(void) {
 		CameraRotateStep(-0.01);
 	if (cam.moving & LOOK_RIGHT)
 		CameraRotateStep(0.01);
+	
+	if (cam.moving & THR_DOWN) {
+		if (cam.thr > 0.0)
+			cam.thr -= delta_move;
+			sprintf(cam.thr_text, "%d%%", (int)cam.thr);
+	}
+	if (cam.moving & THR_UP) {
+		if (cam.thr < 100.0) {
+			cam.thr += delta_move;
+			sprintf(cam.thr_text, "%d%%", (int)cam.thr);
+		}
+	}
 }
 
 void CameraRotateStep(GLfloat angle) {
