@@ -84,7 +84,7 @@ void RenderThrottle(void) {
 	glVertex2f(-1.0, -1.0);
 	glEnd();
 	glPopMatrix();
-	FontRender2D(winW-32, winH/2-20, cam.thr_text);
+	FontRender2D(winW-strlen(cam.thr_text)*8, winH/2-20, cam.thr_text);
 }
 
 void RenderFloor(void) {
