@@ -18,7 +18,7 @@ int mainloopend;
 SDL_DisplayMode display_mode;
 SDL_Window *window;
 SDL_GLContext context;
-GLfloat winX = 100.0, winY = 40.0, winW = 800.0, winH = 600.0;
+GLfloat winX = 100.0, winY = 40.0, winW = 1200.0, winH = 1000.0;
 char window_title[1024];
 GLfloat delta;
 unsigned int fps;
