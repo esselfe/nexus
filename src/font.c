@@ -33,6 +33,7 @@ static void FontMakeLetter(unsigned char letter) {
 
 void FontInit(void) {
 	font_data = ImageFromRawFile_884x16("images/font-884x16.raw");
+	//font_data = ImageFromPNGFile_884x16("images/font-884x16.png");
 	letter_data = malloc(3*8*16);
 
 	unsigned char c;
@@ -70,7 +71,7 @@ void FontRender(GLfloat x, GLfloat y, GLfloat z, char *text) {
 void FontRender2D(int x, int y, char *text) {
 	char *c = text;
 	unsigned int cnt;
-	glColor3f(0.7, 0.8, 0.9);
+	glColor4f(1.0, 1.0, 1.0, 1.0);
 	for (cnt = 0; cnt < strlen(text); cnt++,c++) {
 		glPushMatrix();
 		glBindTexture(GL_TEXTURE_2D, (*c)-31);

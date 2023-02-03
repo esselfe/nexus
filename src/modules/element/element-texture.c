@@ -10,14 +10,14 @@ GLuint texture_waste, texture_iron, texture_wood,
 void ElementTextureCreate(GLuint *id, char *filename) {
 	GLubyte *data;
 
-	if (strcmp(filename, "images/element-waste-128.raw") == 0) {
+	if (strcmp(filename, "images/element-waste-128.png") == 0) {
 		data = malloc(128*128*3);
 		int cnt;
 		for (cnt = 0; cnt < 128*128*3; cnt++)
 			data[cnt] = rand()%256;
 	}
 	else
-		data = ImageFromRawFile_128(filename);
+		data = ImageFromPNGFile_128(filename);
 
 	glGenTextures(1, id);
 	glBindTexture(GL_TEXTURE_2D, *id);
@@ -35,10 +35,10 @@ void ElementTextureInit(void) {
 	glEnable(GL_TEXTURE_2D);
 	glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
 
-	ElementTextureCreate(&texture_waste, "images/element-waste-128.raw");
-	ElementTextureCreate(&texture_iron, "images/element-iron-128.raw");
-	ElementTextureCreate(&texture_wood, "images/element-wood-128.raw");
-	ElementTextureCreate(&texture_magnet, "images/element-magnet-128.raw");
-	ElementTextureCreate(&texture_rock, "images/element-rock-128.raw");
+	ElementTextureCreate(&texture_waste, "images/element-waste-128.png");
+	ElementTextureCreate(&texture_iron, "images/element-iron-128.png");
+	ElementTextureCreate(&texture_wood, "images/element-wood-128.png");
+	ElementTextureCreate(&texture_magnet, "images/element-magnet-128.png");
+	ElementTextureCreate(&texture_rock, "images/element-rock-128.png");
 }
 

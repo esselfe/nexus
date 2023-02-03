@@ -48,6 +48,18 @@ void Render(void) {
 	if (!mouse_held)
 		RenderCursor();
 	RenderThrottle();
+	
+	/*char *c = malloc(2);
+	memset(c, 0, 2);
+	int i;
+	for (i = 32; i < 126; i++) {
+		*c = (char)i;
+		FontRender2D((i-32)*8, 40, c);
+	}
+	*c = (char)'!';
+	FontRender2D(10, 58, c);
+	*c = (char)' ';
+	FontRender2D(10, 74, c); */
 
 	SDL_GL_SwapWindow(window);
 }
