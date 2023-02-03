@@ -45,7 +45,7 @@ GLubyte *ImageFromPNGFile_128(char *filename) {
 		components = 3;
 		break;
 	case PNG_COLOR_TYPE_RGB_ALPHA:
-		printf("nexus error: PNG color type gray alpha is not supported yet\n");
+		printf("nexus error: PNG color type RGB alpha is not supported yet\n");
 		return NULL;
 		break;
 	case PNG_COLOR_TYPE_GRAY_ALPHA:
@@ -114,7 +114,7 @@ GLubyte *ImageFromPNGFile_884x16(char *filename) {
 		components = 3;
 		break;
 	case PNG_COLOR_TYPE_RGB_ALPHA:
-		printf("nexus error: PNG color type gray alpha is not supported yet\n");
+		printf("nexus error: PNG color type RGB alpha is not supported yet\n");
 		return NULL;
 		break;
 	case PNG_COLOR_TYPE_GRAY_ALPHA:
