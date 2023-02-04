@@ -15,39 +15,28 @@
 
 char *nexus_version_string = "0.1.2";
 int mainloopend;
+int init_done;
 SDL_DisplayMode display_mode;
 SDL_Window *window;
 SDL_GLContext context;
 GLfloat winX = 100.0, winY = 40.0, winW = 800.0, winH = 600.0;
 char window_title[1024];
-GLfloat delta;
 unsigned int fps;
 time_t t0, tprev;
 struct timeval tv0, tv_prev, tv_diff;
 char *fps_text;
 
 void NexusExit(void) {
-	ElementScoreSave();
+	// Prevent saving zeroes if exit() was called before
+	// the score was loaded.
+	if (init_done)
+		ElementScoreSave();
 	
 	printf("\nnexus exited\n");
 }
 
-void tvdiff2(struct timeval *tv_start, struct timeval *tv_end, struct timeval *tv_diff2) {
-	tv_diff2->tv_sec = tv_end->tv_sec - tv_start->tv_sec;
-
-	if (tv_end->tv_usec >= tv_start->tv_usec)
-		tv_diff2->tv_usec = tv_end->tv_usec - tv_start->tv_usec;
-	else
-		tv_diff2->tv_usec = tv_end->tv_usec + (1000000-tv_start->tv_usec);
-	
-	if (tv_diff2->tv_usec >= 1000000) {
-		++tv_diff2->tv_sec;
-		tv_diff2->tv_usec -= 1000000;
-	}
-}
-
 void tvdiff(struct timeval *tv_start, struct timeval *tv_end, struct timeval *tv_diff2) {
-	tv_diff2->tv_sec = 0;
+	tv_diff2->tv_sec = 0; // to fix
 	if (tv_start->tv_sec == tv_end->tv_sec) {
 		tv_diff2->tv_usec = tv_end->tv_usec - tv_start->tv_usec;
 	}
@@ -81,7 +70,6 @@ int main(int argc, char **argv) {
 	sprintf(window_title, "nexus %s", nexus_version_string);
 	window = SDL_CreateWindow(window_title, winX, winY + 30, winW, winH,
 		SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN);
-	SDL_WarpMouseInWindow(window, winW / 2, winH / 2);
 
 	context = SDL_GL_CreateContext(window);
 	if (context == NULL) {
@@ -102,7 +90,7 @@ int main(int argc, char **argv) {
 		exit(1);
 	}
 
-	fps_text = malloc(128);
+	fps_text = malloc(20);
 	sprintf(fps_text, "0 fps");
 
 	StateSet(STATE_MAIN);
@@ -115,6 +103,8 @@ int main(int argc, char **argv) {
 	FlagInit();
 	SkyInit();
 	BrowserListLoad(get_current_dir_name());
+	
+	init_done = 1;
 
 	tprev = time(NULL);
 	gettimeofday(&tv_prev, NULL);

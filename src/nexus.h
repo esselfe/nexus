@@ -9,7 +9,6 @@ extern char *nexus_version_string;
 extern int mainloopend;
 extern SDL_Window *window;
 extern GLfloat winX, winY, winW, winH;
-extern GLfloat delta;
 extern unsigned int fps;
 extern char *fps_text;
 
@@ -44,7 +43,7 @@ void CameraMove(void);
 void CameraRotateStep(GLfloat angle);
 
 // delta.c
-extern GLfloat delta_move;
+extern GLfloat delta, delta_move;
 void DeltaCompute(void);
 void DeltaInit(void);
 extern void (*DeltaFunc)(void); // Modules are supposed to associate this handler to their funtion

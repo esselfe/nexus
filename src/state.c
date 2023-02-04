@@ -24,13 +24,7 @@ void StateSet(unsigned int newstate) {
 		// EventFunc = BrowserEventCheck; // todo
 		RenderFunc = BrowserRender;
 		break;
-/*	case STATE_DRIVING:
-			state = STATE_DRIVING;
-			DeltaFunc = DrivingDelta;
-			EventFunc = DrivingEvent;
-			RenderFunc = DrivingRender;
-			break;
-*/	case STATE_EDITOR:
+	case STATE_EDITOR:
 		state = STATE_EDITOR;
 		DeltaFunc = DeltaCompute;
 		EventFunc = EventCheck;

@@ -6,7 +6,7 @@
 
 void (*DeltaFunc)(void);
 
-GLfloat delta_move;
+GLfloat delta, delta_move;
 struct timeval tv_prev_frame;
 
 void DeltaInit(void) {
@@ -15,8 +15,10 @@ void DeltaInit(void) {
 }
 
 void DeltaCompute(void) {
+	gettimeofday(&tv0, NULL);
+	
 	// Once every second
-	t0 = time(NULL);
+	t0 = (time_t)tv0.tv_sec;
 	if (t0 - tprev > 0) {
 		tprev = t0;
 		sprintf(fps_text, "%u fps", fps);
@@ -24,7 +26,6 @@ void DeltaCompute(void) {
 	}
 
 	// Once every half second
-	gettimeofday(&tv0, NULL);
 	tvdiff(&tv_prev, &tv0, &tv_diff);
 	if (tv_diff.tv_sec >= 1 || tv_diff.tv_usec >= 500000) {
 		tv_prev.tv_sec = tv0.tv_sec;

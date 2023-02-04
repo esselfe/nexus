@@ -23,9 +23,9 @@ void CameraMove(void) {
 	GLfloat mx, mz;
 	if (cam.moving & MOVE_FRONT) {
 		mx = (GLfloat)(sin(cam.rotation_angle*1.7453293f))
-			* (GLfloat)cam.thr/100.0f * delta_move;
+			* cam.thr/100.0f * delta_move;
 		mz = (GLfloat)(cos(cam.rotation_angle*1.7453293f))
-			* (GLfloat)cam.thr/100.0f * delta_move;
+			* cam.thr/100.0f * delta_move;
 		cam.x += mx;
 		cam.lx += mx;
 		cam.z -= mz;
@@ -33,9 +33,9 @@ void CameraMove(void) {
 	}
 	if (cam.moving & MOVE_BACK) {
 		mx = (GLfloat)(sin(cam.rotation_angle*1.7453293f))
-			* (GLfloat)cam.thr/100.0f * delta_move;
+			* cam.thr/100.0f * delta_move;
 		mz = (GLfloat)(cos(cam.rotation_angle*1.7453293f))
-			* (GLfloat)cam.thr/100.0f * delta_move;
+			* cam.thr/100.0f * delta_move;
 		cam.x -= mx;
 		cam.lx -= mx;
 		cam.z += mz;
@@ -43,9 +43,9 @@ void CameraMove(void) {
 	}
 	if (cam.moving & MOVE_LEFT) {
 		mx = (GLfloat)(cos(cam.rotation_angle*1.7453293f))
-			* (GLfloat)cam.thr/160.0f * delta_move;
+			* cam.thr/160.0f * delta_move;
 		mz = (GLfloat)(-sin(cam.rotation_angle*1.7453293f))
-			* (GLfloat)cam.thr/160.0f * delta_move;
+			* cam.thr/160.0f * delta_move;
 		cam.x -= mx;
 		cam.lx -= mx;
 		cam.z += mz;
@@ -53,21 +53,21 @@ void CameraMove(void) {
 	}
 	if (cam.moving & MOVE_RIGHT) {
 		mx = (GLfloat)(cos(cam.rotation_angle*1.7453293f))
-			* (GLfloat)cam.thr/160.0f * delta_move;
+			* cam.thr/160.0f * delta_move;
 		mz = (GLfloat)(-sin(cam.rotation_angle*1.7453293f))
-			* (GLfloat)cam.thr/160.0f * delta_move;
+			* cam.thr/160.0f * delta_move;
 		cam.x += mx;
 		cam.lx += mx;
 		cam.z -= mz;
 		cam.lz -= mz;
 	}
 	if (cam.moving & MOVE_UP) {
-		cam.y += 0.01f * (GLfloat)cam.thr * delta_move;
-		cam.ly += 0.01f * (GLfloat)cam.thr * delta_move;
+		cam.y += 0.01f * cam.thr * delta_move;
+		cam.ly += 0.01f * cam.thr * delta_move;
 	}
 	if (cam.moving & MOVE_DOWN) {
-		cam.y -= 0.01f * (GLfloat)cam.thr * delta_move;
-		cam.ly -= 0.01f * (GLfloat)cam.thr * delta_move;
+		cam.y -= 0.01f * cam.thr * delta_move;
+		cam.ly -= 0.01f * cam.thr * delta_move;
 	}
 	if (cam.moving & LOOK_LEFT)
 		CameraRotateStep(-0.01);
@@ -76,12 +76,12 @@ void CameraMove(void) {
 	
 	if (cam.moving & THR_DOWN) {
 		if (cam.thr > 0.0)
-			cam.thr -= delta_move;
+			cam.thr -= delta_move/2;
 			sprintf(cam.thr_text, "%d%%", (int)cam.thr);
 	}
 	if (cam.moving & THR_UP) {
 		if (cam.thr < 100.0) {
-			cam.thr += delta_move;
+			cam.thr += delta_move/2;
 			sprintf(cam.thr_text, "%d%%", (int)cam.thr);
 		}
 	}

@@ -127,8 +127,8 @@ void EventCheck(void) {
 					StateSet(state_prev);
 				break;
 			case SDLK_p:
-				printf("position: x: %f y: %f z: %f\n",
-					cam.x, cam.y, cam.z);
+				printf("position: x: %f y: %f z: %f lx: %f ly: %f lz: %f\n",
+					cam.x, cam.y, cam.z, cam.lx, cam.ly, cam.lz);
 				break;
 			default:
 				break;

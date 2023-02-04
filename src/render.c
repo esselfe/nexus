@@ -110,7 +110,7 @@ void RenderFloor(void) {
 	glEnd();
 	
 	glBegin(GL_LINES);
-	glColor4f(0.15, 0.15, 0.15, 0.25);
+	glColor4f(0.15, 0.15, 0.15, 0.4);
 	GLfloat cnt;
 	for (cnt = -50.0; cnt <= 50.0; cnt += 1.0) {
 		glVertex3f(cnt, 0.02, 50.0);
