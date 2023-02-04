@@ -8,6 +8,30 @@
 
 struct Flag flag01, flag02;
 
+void FlagSetup(struct Flag *flag, char *filename) {
+	flag->width = 128;
+	flag->height = 128;
+	flag->components = 3;
+	flag->value = (rand()%10000) + 1;
+	flag->texture_data_size = flag->width * flag->height * flag->components;
+	if (filename == NULL) {
+		flag->texture_data = malloc(flag->texture_data_size);
+		unsigned int cnt;
+		for (cnt = 0; cnt < flag->texture_data_size; cnt++)
+			flag->texture_data[cnt] = rand()%256;
+	}
+	else
+		flag.texture_data = ImageFromPNGFile_128(filename);
+	glGenTextures(1, &flag->texture_id);
+	glBindTexture(GL_TEXTURE_2D, flag->texture_id);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glTexImage2D (GL_TEXTURE_2D, 0, GL_RGB, 128, 128, 0, GL_RGB, GL_UNSIGNED_BYTE, flag->texture_data);
+	glBindTexture(GL_TEXTURE_2D, 0);
+}
+
 void FlagInit(void) {
 	glEnable(GL_TEXTURE_2D);
 	glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
@@ -15,41 +39,12 @@ void FlagInit(void) {
 	flag01.x = -5.0;
 	flag01.y = 0.5;
 	flag01.z = 0.0;
-	flag01.width = 128;
-	flag01.height = 128;
-	flag01.components = 3;
-	flag01.value = (rand()%10000) + 1;
-	flag01.texture_data_size = flag01.width * flag01.height * flag01.components;
-	flag01.texture_data = ImageFromPNGFile_128("images/flag01-128.png");
-	glGenTextures(1, &flag01.texture_id);
-	glBindTexture(GL_TEXTURE_2D, flag01.texture_id);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-	glTexImage2D (GL_TEXTURE_2D, 0, GL_RGB, 128, 128, 0, GL_RGB, GL_UNSIGNED_BYTE, flag01.texture_data);
-	glBindTexture(GL_TEXTURE_2D, 0);
+	FlagSetup(&flag01, "images/flag01-128.png");
 
 	flag02.x = 5.0;
 	flag02.y = 0.5;
 	flag02.z = 0.0;
-	flag02.width = 128;
-	flag02.height = 128;
-	flag02.components = 3;
-	flag02.value = (rand()%10000) + 1;
-	flag02.texture_data_size = flag02.width * flag02.height * flag02.components;
-	flag02.texture_data = malloc(flag02.texture_data_size);
-	unsigned int cnt;
-	for (cnt = 0; cnt < flag02.texture_data_size; cnt++)
-		flag02.texture_data[cnt] = rand()%256;
-	glGenTextures(1, &flag02.texture_id);
-	glBindTexture(GL_TEXTURE_2D, flag02.texture_id);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-	glTexImage2D (GL_TEXTURE_2D, 0, GL_RGB, 128, 128, 0, GL_RGB, GL_UNSIGNED_BYTE, flag02.texture_data);
-	glBindTexture(GL_TEXTURE_2D, 0);
+	FlagSetup(&flag02, NULL);
 }
 
 void FlagRender(void) {
