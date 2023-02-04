@@ -20,7 +20,7 @@ void FlagInit(void) {
 	flag01.components = 3;
 	flag01.value = (rand()%10000) + 1;
 	flag01.texture_data_size = flag01.width * flag01.height * flag01.components;
-	flag01.texture_data = ImageFromRawFile_128("images/flag01-128.raw");
+	flag01.texture_data = ImageFromPNGFile_128("images/flag01-128.png");
 	glGenTextures(1, &flag01.texture_id);
 	glBindTexture(GL_TEXTURE_2D, flag01.texture_id);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
