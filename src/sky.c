@@ -6,58 +6,29 @@
 GLuint sky_texture_1, sky_texture_2, sky_texture_3, sky_texture_4,
 	sky_list_1, sky_list_2, sky_list_3, sky_list_4;
 
+void SkySetup(GLuint *id, char *filename) {
+	GLubyte *data = ImageFromPNGFile_1024(filename);
+	glGenTextures(1, id);
+	glBindTexture(GL_TEXTURE_2D, *id);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glTexImage2D (GL_TEXTURE_2D, 0, GL_RGB, 1024, 1024, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+	glBindTexture(GL_TEXTURE_2D, 0);
+	free(data);
+}
+
 void SkyInit(void) {
 	glEnable(GL_TEXTURE_2D);
 	glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
 
-	////////////////////////////////
-	// Generate texture IDs
-	////////////////////////////////
+	SkySetup(&sky_texture_1, "images/sky01-1024.png");
+	SkySetup(&sky_texture_2, "images/sky02-1024.png");
+	SkySetup(&sky_texture_3, "images/sky03-1024.png");
+	SkySetup(&sky_texture_4, "images/sky04-1024.png");
 
-	GLubyte *data = ImageFromPNGFile_1024("images/sky01-1024.png");
-	glGenTextures(1, &sky_texture_1);
-	glBindTexture(GL_TEXTURE_2D, sky_texture_1);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-	glTexImage2D (GL_TEXTURE_2D, 0, GL_RGB, 1024, 1024, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
-	glBindTexture(GL_TEXTURE_2D, 0);
-	free(data);
-
-	data = ImageFromPNGFile_1024("images/sky02-1024.png");
-	glGenTextures(1, &sky_texture_2);
-	glBindTexture(GL_TEXTURE_2D, sky_texture_2);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-	glTexImage2D (GL_TEXTURE_2D, 0, GL_RGB, 1024, 1024, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
-	glBindTexture(GL_TEXTURE_2D, 0);
-	free(data);
-
-	data = ImageFromPNGFile_1024("images/sky03-1024.png");
-	glGenTextures(1, &sky_texture_3);
-	glBindTexture(GL_TEXTURE_2D, sky_texture_3);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-	glTexImage2D (GL_TEXTURE_2D, 0, GL_RGB, 1024, 1024, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
-	glBindTexture(GL_TEXTURE_2D, 0);
-	free(data);
-
-	data = ImageFromPNGFile_1024("images/sky04-1024.png");
-	glGenTextures(1, &sky_texture_4);
-	glBindTexture(GL_TEXTURE_2D, sky_texture_4);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-	glTexImage2D (GL_TEXTURE_2D, 0, GL_RGB, 1024, 1024, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
-	glBindTexture(GL_TEXTURE_2D, 0);
-	free(data);
-
+	
 	//////////////////////////////////
 	// Generate display lists
 	//////////////////////////////////
