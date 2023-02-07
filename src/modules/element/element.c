@@ -55,11 +55,13 @@ void ElementAdd(unsigned int count) {
 			break;
 		}
 		elem->value = (rand() % 1000) + 100;
-		elem->x = ((rand() % 50)*floor_factor);
+		elem->x = rand() % (50*floor_factor);
 		elem->x = (rand() % 2) ? -elem->x : elem->x;
+		elem->x += 100.0;
 		elem->y = 100.0;
-		elem->z = ((rand() % 50)*floor_factor);
+		elem->z = rand() % (50*floor_factor);
 		elem->z = (rand() % 2) ? -elem->z : elem->z;
+		elem->z += 100.0;
 		elem->width = elem->value / 1000.0;
 		elem->height = elem->value / 1000.0;
 		elem->angle_x = 0.0;

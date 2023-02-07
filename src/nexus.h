@@ -79,6 +79,7 @@ void FlagRender(void);
 void FlagUpdate(void);
 
 // floor.c
+extern unsigned int floor_factor;
 void FloorInit(void);
 void FloorRender(void);
 
