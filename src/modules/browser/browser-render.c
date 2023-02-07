@@ -18,7 +18,7 @@ void BrowserRender(void) {
 			0.0, 1.0, 0.0);
 
 	SkyRender();
-	RenderFloor();
+	FloorRender();
 
 	struct BrowserListEntry *entry = browser_list.first_entry;
 	if (entry == NULL)

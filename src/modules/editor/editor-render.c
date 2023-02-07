@@ -18,7 +18,7 @@ void EditorRender(void) {
 			0.0, 1.0, 0.0);
 
 	SkyRender();
-	RenderFloor();
+	FloorRender();
 
 	glPushMatrix();
 	glTranslatef(-1.5, 0.0, 0.0);

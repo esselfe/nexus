@@ -20,7 +20,7 @@ void ElementRender(void) {
 			0.0, 1.0, 0.0);
 
 	SkyRender();
-	RenderFloor();
+	FloorRender();
 
 	struct Element *el = element_root_list.first_element;
 	while (1) {

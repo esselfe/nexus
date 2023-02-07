@@ -78,6 +78,10 @@ void FlagInit(void);
 void FlagRender(void);
 void FlagUpdate(void);
 
+// floor.c
+void FloorInit(void);
+void FloorRender(void);
+
 // font.c
 void FontInit(void);
 void FontRender(GLfloat x, GLfloat y, GLfloat z, char *text);
@@ -95,7 +99,6 @@ GLubyte *ImageFromRawFile_1024(char *filename);
 extern int render;
 void Render(void);
 void RenderCursor(void);
-void RenderFloor(void);
 extern void (*RenderFunc)(void); // Modules are supposed to associate this handler to their funtion
 void RenderInit(void);
 void RenderThrottle(void);

@@ -23,7 +23,7 @@ void MemoryRender(void) {
 			0.0, 1.0, 0.0);
 
 	SkyRender();
-	RenderFloor();
+	FloorRender();
 
 	// Render memory meter
 	glPushMatrix();

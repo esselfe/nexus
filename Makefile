@@ -4,13 +4,13 @@ PROG := nexus
 
 PKG_CONFIG ?= pkg-config
 
-LIBS := gl sdl2 glew glu
+LIBS := gl sdl2 glew glu libpng
 CFLAGS += $(shell $(PKG_CONFIG) --cflags $(LIBS)) -std=c11 -MMD -MP -Isrc/
 CPPFLAGS += -D_GNU_SOURCE
 LDLIBS += $(shell $(PKG_CONFIG) --libs $(LIBS)) -lm -lpthread
 OBJDIR := obj
-OBJ := camera.o delta.o event.o flag.o font.o image.o nexus.o render.o sky.o \
-	state.o terminal.o
+OBJ := camera.o delta.o event.o flag.o floor.o font.o image.o nexus.o render.o \
+	sky.o state.o terminal.o
 include src/modules/browser/module.mk
 include src/modules/editor/module.mk
 include src/modules/element/module.mk

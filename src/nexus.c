@@ -98,7 +98,8 @@ int main(int argc, char **argv) {
 	DeltaInit();
 	CameraInit();
 	RenderInit();
-	FontInit();
+	FontInit(); // There must be no display list creation before this call
+	FloorInit();
 	ElementInit();
 	FlagInit();
 	SkyInit();
