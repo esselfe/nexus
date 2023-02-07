@@ -11,7 +11,7 @@ void ElementInit(void) {
 	gettimeofday(&tv_score_saved, NULL);
 	ElementScoreLoad();
 	ElementTextureInit();
-	ElementAdd(8);
+	ElementAdd(8*floor_factor*10);
 	ElementThreadStart();
 }
 
@@ -55,9 +55,11 @@ void ElementAdd(unsigned int count) {
 			break;
 		}
 		elem->value = (rand() % 1000) + 100;
-		elem->x = (rand() % 100) + 50;
+		elem->x = ((rand() % 50)*floor_factor);
+		elem->x = (rand() % 2) ? -elem->x : elem->x;
 		elem->y = 100.0;
-		elem->z = (rand() % 100) + 50;
+		elem->z = ((rand() % 50)*floor_factor);
+		elem->z = (rand() % 2) ? -elem->z : elem->z;
 		elem->width = elem->value / 1000.0;
 		elem->height = elem->value / 1000.0;
 		elem->angle_x = 0.0;
