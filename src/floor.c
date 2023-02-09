@@ -3,7 +3,8 @@
 unsigned int floor_factor;
 
 void FloorInit(void) {
-	floor_factor = 4;
+	if (floor_factor == 0)
+		floor_factor = 4;
 }
 
 void FloorRender(void) {

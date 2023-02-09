@@ -5,6 +5,7 @@
 #include <string.h>
 #include <time.h>
 #include <sys/time.h>
+#include <getopt.h>
 #include <GL/glew.h>
 #include <GL/gl.h>
 #include <GL/glu.h>
@@ -25,6 +26,18 @@ unsigned int fps;
 time_t t0, tprev;
 struct timeval tv0, tv_prev, tv_diff;
 char *fps_text;
+
+static const struct option long_options[] = {
+	{"help", no_argument, NULL, 'h'},
+	{"version", no_argument, NULL, 'V'},
+	{"floor-factor", required_argument, NULL, 'f'},
+	{"position-x", required_argument, NULL, 'X'},
+	{"position-y", required_argument, NULL, 'Y'},
+	{"width", required_argument, NULL, 'W'},
+	{"height", required_argument, NULL, 'H'},
+	{NULL, 0, NULL, 0}
+};
+static const char *short_options = "hVf:X:Y:W:H:";
 
 void NexusExit(void) {
 	// Prevent saving zeroes if exit() was called before
@@ -49,10 +62,59 @@ void tvdiff(struct timeval *tv_start, struct timeval *tv_end, struct timeval *tv
 	}
 }
 
+void ShowHelp(void) {
+	printf("Options: -H/--help | -V/--version | -f/--floor-factor NUM |\n"
+		"  -X/--position-x PIXELS | -Y/--position-y PIXELS |\n"
+		"  -W/--width PIXELS | -H/--height PIXELS\n");
+}
+
+void ShowVersion(void) {
+	printf("nexus %s\n", nexus_version_string);
+}
+
 int main(int argc, char **argv) {
 	printf("nexus %s started\n", nexus_version_string);
 
 	atexit(NexusExit);
+	
+	// Process program arguments
+	int c;
+	while (1) {
+		c = getopt_long(argc, argv, short_options, long_options, NULL);
+		if (c == -1)
+			break;
+		
+		switch (c) {
+		case 'h':
+			ShowHelp();
+			exit(0);
+			break;
+		case 'V':
+			ShowVersion();
+			exit(0);
+			break;
+		case 'f':
+			floor_factor = atoi(optarg);
+			if (floor_factor == 0)
+				floor_factor = 1;
+			break;
+		case 'X':
+			winX = atoi(optarg);
+			break;
+		case 'Y':
+			winY = atoi(optarg);
+			break;
+		case 'W':
+			winW = atoi(optarg);
+			break;
+		case 'H':
+			winH = atoi(optarg);
+			break;
+		default:
+			printf("nexus error: Unknown argument: %c (%d)\n", (char)c, c);
+			break;
+		}
+	}
 
 	if (SDL_Init(SDL_INIT_VIDEO) < 0) {
 		printf ("nexus: SDL_Init() failed.\n");
