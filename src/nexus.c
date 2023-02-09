@@ -13,7 +13,7 @@
 
 #include "nexus.h"
 
-char *nexus_version_string = "0.1.2";
+char *nexus_version_string = "0.1.3";
 int mainloopend;
 int init_done;
 SDL_DisplayMode display_mode;
