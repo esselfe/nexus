@@ -90,7 +90,7 @@ void FontRender2D(int x, int y, char *text);
 
 // image.c
 GLubyte *ImageFromPNGFile_128(char *filename);
-GLubyte *ImageFromPNGFile_884x16(char *filename);
+GLubyte *ImageFromPNGFile_760x16(char *filename);
 GLubyte *ImageFromPNGFile_1024(char *filename);
 GLubyte *ImageFromRawFile_128(char *filename);
 GLubyte *ImageFromRawFile_884x16(char *filename);

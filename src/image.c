@@ -77,7 +77,7 @@ GLubyte *ImageFromPNGFile_128(char *filename) {
 	return buf;
 }
 
-GLubyte *ImageFromPNGFile_884x16(char *filename) {
+GLubyte *ImageFromPNGFile_760x16(char *filename) {
 	FILE *fp = fopen(filename, "rb");
 	if (fp == NULL) {
 		printf("nexus error: Cannot open %s: %s\n", filename, strerror(errno));
@@ -127,13 +127,13 @@ GLubyte *ImageFromPNGFile_884x16(char *filename) {
 		break;
 	}
 	
-	GLubyte *buf = malloc(884*16*3);
+	GLubyte *buf = malloc(760*16*3);
 	png_bytepp rows = png_get_rows(png, info);
 	png_bytep row;
 	int x, y, cnt = 0;
 	for (y = 0; y < 16; y++) {
 		row = rows[y];
-		for (x=0; x < 884*3; x += 3, cnt += 3) {
+		for (x=0; x < 760*3; x += 3, cnt += 3) {
 			buf[cnt] = row[x];
 			buf[cnt+1] = row[x+1];
 			buf[cnt+2] = row[x+2];
