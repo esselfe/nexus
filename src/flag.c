@@ -21,7 +21,7 @@ void FlagSetup(struct Flag *flag, char *filename) {
 			flag->texture_data[cnt] = rand()%256;
 	}
 	else
-		flag->texture_data = ImageFromPNGFile_128(filename);
+		flag->texture_data = ImageFromPNGFile(128, 128, filename);
 	glGenTextures(1, &flag->texture_id);
 	glBindTexture(GL_TEXTURE_2D, flag->texture_id);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);

@@ -89,10 +89,7 @@ void FontRender(GLfloat x, GLfloat y, GLfloat z, char *text);
 void FontRender2D(int x, int y, char *text);
 
 // image.c
-GLubyte *ImageFromPNGFile_128(char *filename);
-GLubyte *ImageFromPNGFile_760x16(char *filename);
-GLubyte *ImageFromPNGFile_1024(char *filename);
-GLubyte *ImageFromPNGFile_2048(char *filename);
+GLubyte *ImageFromPNGFile(unsigned int width, unsigned int height, char *filename);
 
 // render.c
 extern int render;

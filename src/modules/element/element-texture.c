@@ -17,7 +17,7 @@ void ElementTextureCreate(GLuint *id, char *filename) {
 			data[cnt] = rand()%256;
 	}
 	else
-		data = ImageFromPNGFile_128(filename);
+		data = ImageFromPNGFile(128, 128, filename);
 
 	glGenTextures(1, id);
 	glBindTexture(GL_TEXTURE_2D, *id);
