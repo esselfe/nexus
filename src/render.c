@@ -17,10 +17,7 @@ void RenderInit(void) {
 	glViewport((GLint)0, (GLint)0, (GLsizei)winW, (GLsizei)winH);
 }
 
-void Render(void) {
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-	// Switch to 3D rendering (Scene)
+void RenderSet3DView(void) {
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
 	gluPerspective(60.0, winW/winH, 0.01, 1500.0);
@@ -29,18 +26,29 @@ void Render(void) {
 	gluLookAt(cam.x, cam.y, cam.z,
 			cam.lx, cam.ly, cam.lz,
 			0.0, 1.0, 0.0);
+}
 
-	SkyRender();
-	FloorRender();
-	FlagRender();
-
-	// Switch to 2D rendering (HUD)
+void RenderSet2DView(void) {
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
 	//glOrtho(0.0, winW, 0.0, winH, 0.0, 10.0);
 	gluOrtho2D(0.0, winW, 0.0, winH);
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
+}
+
+void Render(void) {
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+	// Switch to 3D rendering (Scene)
+	RenderSet3DView();
+
+	SkyRender();
+	FloorRender();
+	FlagRender();
+
+	// Switch to 2D rendering (HUD)
+	RenderSet2DView();
 
 	FontRender2D(10, (int)winH-16-10, fps_text);
 	if (terminal_visible)

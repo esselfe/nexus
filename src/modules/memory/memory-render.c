@@ -13,14 +13,7 @@ void MemoryRender(void) {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	// Switch to 3D rendering (Scene)
-	glMatrixMode(GL_PROJECTION);
-	glLoadIdentity();
-	gluPerspective(60.0, winW/winH, 0.01, 1500.0);
-	glMatrixMode(GL_MODELVIEW);
-	glLoadIdentity();
-	gluLookAt(cam.x, cam.y, cam.z,
-			cam.lx, cam.ly, cam.lz,
-			0.0, 1.0, 0.0);
+	RenderSet3DView();
 
 	SkyRender();
 	FloorRender();
@@ -72,11 +65,7 @@ void MemoryRender(void) {
 	FontRender(1.0, swap_value, 0.0, swap_value_text);
 
 	// Switch to 2D rendering (HUD)
-	glMatrixMode(GL_PROJECTION);
-	glLoadIdentity();
-	gluOrtho2D(0.0, winW, 0.0, winH);
-	glMatrixMode(GL_MODELVIEW);
-	glLoadIdentity();
+	RenderSet2DView();
 
 	FontRender2D(10, (int)winH-16-10, fps_text);
 

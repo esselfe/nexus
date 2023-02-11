@@ -97,6 +97,8 @@ void Render(void);
 void RenderCursor(void);
 extern void (*RenderFunc)(void); // Modules are supposed to associate this handler to their funtion
 void RenderInit(void);
+void RenderSet2DView(void);
+void RenderSet3DView(void);
 void RenderThrottle(void);
 
 // sky.c
