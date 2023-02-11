@@ -1,15 +1,16 @@
 #include <GL/gl.h>
 
 unsigned int floor_factor;
+GLfloat floor_size;
 
 void FloorInit(void) {
 	if (floor_factor == 0)
 		floor_factor = 4;
+	
+	floor_size = 50.0 * floor_factor;
 }
 
 void FloorRender(void) {
-	GLfloat floor_size = 50.0 * floor_factor;
-
 	glBegin(GL_POLYGON);
 	glColor4f(0.1, 0.1, 0.1, 1.0);
 	glVertex3f(-floor_size, 0.0, floor_size);
