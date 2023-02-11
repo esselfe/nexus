@@ -23,7 +23,7 @@ void Render(void) {
 	// Switch to 3D rendering (Scene)
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-	gluPerspective(60.0, winW/winH, 0.01, 1000.0);
+	gluPerspective(60.0, winW/winH, 0.01, 1500.0);
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 	gluLookAt(cam.x, cam.y, cam.z,
