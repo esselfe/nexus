@@ -93,9 +93,6 @@ GLubyte *ImageFromPNGFile_128(char *filename);
 GLubyte *ImageFromPNGFile_760x16(char *filename);
 GLubyte *ImageFromPNGFile_1024(char *filename);
 GLubyte *ImageFromPNGFile_2048(char *filename);
-GLubyte *ImageFromRawFile_128(char *filename);
-GLubyte *ImageFromRawFile_884x16(char *filename);
-GLubyte *ImageFromRawFile_1024(char *filename);
 
 // render.c
 extern int render;
