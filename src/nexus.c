@@ -130,7 +130,7 @@ int main(int argc, char **argv) {
 	printf("Using OpenGL %d.%d\n", major, minor);
 
 	sprintf(window_title, "nexus %s", nexus_version_string);
-	window = SDL_CreateWindow(window_title, winX, winY + 30, winW, winH,
+	window = SDL_CreateWindow(window_title, winX, winY, winW, winH,
 		SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN);
 
 	context = SDL_GL_CreateContext(window);
