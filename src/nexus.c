@@ -65,7 +65,7 @@ void tvdiff(struct timeval *tv_start, struct timeval *tv_end, struct timeval *tv
 }
 
 void ShowHelp(void) {
-	printf("Options: -H/--help | -V/--version | -f/--floor-factor NUM |\n"
+	printf("Options: -H/--help | -V/--version | -v/--verbose | -f/--floor-factor NUM |\n"
 		"  -X/--position-x PIXELS | -Y/--position-y PIXELS |\n"
 		"  -W/--width PIXELS | -H/--height PIXELS\n");
 }
