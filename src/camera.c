@@ -7,6 +7,7 @@
 struct Camera cam;
 
 void CameraInit(void) {
+	if (verbose) printf("Initializing camera\n");
 	cam.x = 0.0;
 	cam.y = 2.0;
 	cam.z = 10.0;

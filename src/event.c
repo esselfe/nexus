@@ -11,6 +11,7 @@ static SDL_Event event;
 void (*EventFunc)(void);
 
 void EventInit(void) {
+	if (verbose) printf("Initializing events\n");
 	mouse_x_prev = mouse_x = (int)winW/2;
 	mouse_y_prev = mouse_y = (int)winH/2;
 	SDL_WarpMouseInWindow(window, mouse_x, mouse_y);

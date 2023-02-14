@@ -7,6 +7,8 @@
 void (*RenderFunc)(void);
 
 void RenderInit(void) {
+	if (verbose) printf("Initializing rendering\n");
+	
 	RenderFunc = Render;
 	
 	glEnable(GL_BLEND);

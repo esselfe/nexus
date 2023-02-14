@@ -6,6 +6,7 @@
 
 // nexus.c
 extern char *nexus_version_string;
+extern int verbose;
 extern int mainloopend;
 extern SDL_Window *window;
 extern GLfloat winX, winY, winW, winH;

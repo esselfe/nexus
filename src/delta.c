@@ -10,6 +10,7 @@ GLfloat delta, delta_move;
 struct timeval tv_prev_frame;
 
 void DeltaInit(void) {
+	if (verbose) printf("Initializing delta\n");
 	DeltaFunc = DeltaCompute;
 	gettimeofday(&tv_prev_frame, NULL);
 }

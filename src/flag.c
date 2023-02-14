@@ -33,6 +33,7 @@ void FlagSetup(struct Flag *flag, char *filename) {
 }
 
 void FlagInit(void) {
+	if (verbose) printf("Initializing flags\n");
 	glEnable(GL_TEXTURE_2D);
 	glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
 

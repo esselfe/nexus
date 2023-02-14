@@ -15,6 +15,7 @@
 #include "nexus.h"
 
 char *nexus_version_string = "0.1.4";
+int verbose;
 int mainloopend;
 int init_done;
 SDL_DisplayMode display_mode;
@@ -30,6 +31,7 @@ char *fps_text;
 static const struct option long_options[] = {
 	{"help", no_argument, NULL, 'h'},
 	{"version", no_argument, NULL, 'V'},
+	{"verbose", no_argument, NULL, 'v'},
 	{"floor-factor", required_argument, NULL, 'f'},
 	{"position-x", required_argument, NULL, 'X'},
 	{"position-y", required_argument, NULL, 'Y'},
@@ -37,7 +39,7 @@ static const struct option long_options[] = {
 	{"height", required_argument, NULL, 'H'},
 	{NULL, 0, NULL, 0}
 };
-static const char *short_options = "hVf:X:Y:W:H:";
+static const char *short_options = "hVvf:X:Y:W:H:";
 
 void NexusExit(void) {
 	// Prevent saving zeroes if exit() was called before
@@ -45,7 +47,7 @@ void NexusExit(void) {
 	if (init_done)
 		ElementScoreSave();
 	
-	printf("\nnexus exited\n");
+	if (verbose) printf("\nnexus exited\n");
 }
 
 void tvdiff(struct timeval *tv_start, struct timeval *tv_end, struct timeval *tv_diff2) {
@@ -73,10 +75,6 @@ void ShowVersion(void) {
 }
 
 int main(int argc, char **argv) {
-	printf("nexus %s started\n", nexus_version_string);
-
-	atexit(NexusExit);
-	
 	// Process program arguments
 	int c;
 	while (1) {
@@ -92,6 +90,9 @@ int main(int argc, char **argv) {
 		case 'V':
 			ShowVersion();
 			exit(0);
+			break;
+		case 'v':
+			verbose = 1;
 			break;
 		case 'f':
 			if (optarg != NULL)
@@ -117,6 +118,11 @@ int main(int argc, char **argv) {
 			break;
 		}
 	}
+	
+	if (verbose)
+		printf("nexus %s started\n", nexus_version_string);
+	
+	atexit(NexusExit);
 
 	if (SDL_Init(SDL_INIT_VIDEO) < 0) {
 		printf ("nexus: SDL_Init() failed.\n");
@@ -129,7 +135,7 @@ int main(int argc, char **argv) {
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 1);
 	SDL_GL_GetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, &major);
 	SDL_GL_GetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, &minor);
-	printf("Using OpenGL %d.%d\n", major, minor);
+	if (verbose) printf("Using OpenGL %d.%d\n", major, minor);
 
 	sprintf(window_title, "nexus %s", nexus_version_string);
 	window = SDL_CreateWindow(window_title, winX, winY, winW, winH,
@@ -144,7 +150,7 @@ int main(int argc, char **argv) {
 	}
 
 	// needs a context
-	printf("OpenGL %s installed\n", glGetString(GL_VERSION));
+	if (verbose) printf("OpenGL %s installed\n", glGetString(GL_VERSION));
 
 	glewExperimental = GL_TRUE;
 	if (glewInit() != GLEW_OK) {
@@ -173,6 +179,7 @@ int main(int argc, char **argv) {
 
 	tprev = time(NULL);
 	gettimeofday(&tv_prev, NULL);
+	if (verbose) printf("Mainloop started\n");
 	while (!mainloopend) {
 		++fps;
 		EventFunc();

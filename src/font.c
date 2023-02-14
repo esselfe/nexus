@@ -36,6 +36,8 @@ static void FontMakeLetter(unsigned char letter) {
 }
 
 void FontInit(void) {
+	if (verbose) printf("Initializing text font\n");
+	
 	font_data = ImageFromPNGFile(760, 16, "images/font-760x16.png");
 	letter_data = malloc(3*8*16);
 

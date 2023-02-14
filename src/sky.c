@@ -7,6 +7,7 @@ GLuint sky_texture_1, sky_texture_2, sky_texture_3, sky_texture_4,
 	sky_list, daylight_list;
 
 void SkySetup(GLuint *id, char *filename) {
+	printf("  Loading sky texture from %s\n", filename);
 	GLubyte *data = ImageFromPNGFile(2048, 2048, filename);
 	glGenTextures(1, id);
 	glBindTexture(GL_TEXTURE_2D, *id);
@@ -24,6 +25,8 @@ void SkySetup(GLuint *id, char *filename) {
 void SkyInit(void) {
 	glEnable(GL_TEXTURE_2D);
 	glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
+	
+	if (verbose) printf("Generating sky textures\n");
 	
 	//SkySetup(&sky_texture_1, "images/sky10-2048.png");
 	SkySetup(&sky_texture_1, "images/sky05-2048.png");

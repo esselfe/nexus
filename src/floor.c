@@ -23,6 +23,8 @@ void FloorTextureSetup(GLuint *id, unsigned int width, unsigned int height,
 }
 
 void FloorInit(void) {
+	if (verbose) printf("Initializing floor\n");
+	
 	if (floor_factor <= 0)
 		floor_factor = 4;
 	
