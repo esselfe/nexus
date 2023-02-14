@@ -35,8 +35,10 @@ GLubyte *ImageFromPNGFile(unsigned int width, unsigned int height, char *filenam
 	unsigned int components = 0, color_type = png_get_color_type(png, info);
 	switch(color_type) {
 	case PNG_COLOR_TYPE_GRAY:
-		printf("nexus error: PNG color type gray is not supported yet\n");
-		return NULL;
+		components = 1;
+		//printf("nexus error: PNG color type gray is not supported yet\n");
+		//return NULL;
+		break;
 	case PNG_COLOR_TYPE_PALETTE:
 		printf("nexus error: PNG color type palette/indexed is not supported yet\n");
 		return NULL;
@@ -64,10 +66,19 @@ GLubyte *ImageFromPNGFile(unsigned int width, unsigned int height, char *filenam
 	int x, y, cnt = 0;
 	for (y = 0; y < height; y++) {
 		row = rows[y];
-		for (x=0; x < width*3; x += 3, cnt += 3) {
-			buf[cnt] = row[x];
-			buf[cnt+1] = row[x+1];
-			buf[cnt+2] = row[x+2];
+		if (components == 3) {
+			for (x=0; x < width*3; x += 3, cnt += 3) {
+				buf[cnt] = row[x];
+				buf[cnt+1] = row[x+1];
+				buf[cnt+2] = row[x+2];
+			}
+		}
+		else if (components == 1) {
+			for (x=0; x < width; x++, cnt += 3) {
+				buf[cnt] = row[x];
+				buf[cnt+1] = row[x];
+				buf[cnt+2] = row[x];
+			}
 		}
 	}
 	
