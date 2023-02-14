@@ -94,8 +94,10 @@ int main(int argc, char **argv) {
 			exit(0);
 			break;
 		case 'f':
-			floor_factor = atoi(optarg);
-			if (floor_factor == 0)
+			if (optarg != NULL)
+				floor_factor = atoi(optarg);
+			
+			if (floor_factor <= 0)
 				floor_factor = 1;
 			break;
 		case 'X':

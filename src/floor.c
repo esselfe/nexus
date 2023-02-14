@@ -3,7 +3,7 @@
 
 #include "nexus.h"
 
-unsigned int floor_factor;
+int floor_factor;
 GLfloat floor_size;
 GLuint floor_texture_id;
 
@@ -23,7 +23,7 @@ void FloorTextureSetup(GLuint *id, unsigned int width, unsigned int height,
 }
 
 void FloorInit(void) {
-	if (floor_factor == 0)
+	if (floor_factor <= 0)
 		floor_factor = 4;
 	
 	floor_size = 50.0 * floor_factor;
