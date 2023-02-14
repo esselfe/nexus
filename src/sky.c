@@ -97,50 +97,33 @@ void SkyInit(void) {
 	glNewList(daylight_list, GL_COMPILE_AND_EXECUTE);
 	
 	glBegin(GL_POLYGON);
-	glTexCoord2f(0.0, 1.0);
 	 glVertex3f(-975.0, -975.0, -975.0);
-	glTexCoord2f(1.0, 1.0);
 	 glVertex3f(-975.0, 975.0, -975.0);
-	glTexCoord2f(1.0, 0.0);
 	 glVertex3f(975.0, 975.0, -975.0);
-	glTexCoord2f(0.0, 0.0);
 	 glVertex3f(975.0, -975.0, -975.0);
 	glEnd();
 	
 	glBegin(GL_POLYGON);
-	glTexCoord2f(0.0, 1.0);
 	 glVertex3f(975.0, -975.0, -975.0);
-	glTexCoord2f(1.0, 1.0);
 	 glVertex3f(975.0, 975.0, -975.0);
-	glTexCoord2f(1.0, 0.0);
 	 glVertex3f(975.0, 975.0, 975.0);
-	glTexCoord2f(0.0, 0.0);
 	 glVertex3f(975.0, -975.0, 975.0);
 	glEnd();
 	
 	glBegin(GL_POLYGON);
-	glTexCoord2f(0.0, 1.0);
 	 glVertex3f(975.0, -975.0, 975.0);
-	glTexCoord2f(1.0, 1.0);
 	 glVertex3f(975.0, 975.0, 975.0);
-	glTexCoord2f(1.0, 0.0);
 	 glVertex3f(-975.0, 975.0, 975.0);
-	glTexCoord2f(0.0, 0.0);
 	 glVertex3f(-975.0, -975.0, 975.0);
 	glEnd();
 	
 	glBegin(GL_POLYGON);
-	glTexCoord2f(0.0, 1.0);
 	 glVertex3f(-975.0, -975.0, 975.0);
-	glTexCoord2f(1.0, 1.0);
 	 glVertex3f(-975.0, 975.0, 975.0);
-	glTexCoord2f(1.0, 0.0);
 	 glVertex3f(-975.0, 975.0, -975.0);
-	glTexCoord2f(0.0, 0.0);
 	 glVertex3f(-975.0, -975.0, -975.0);
 	glEnd();
 	
-	glBindTexture(GL_TEXTURE_2D, 0);
 	glEndList();
 }
 
