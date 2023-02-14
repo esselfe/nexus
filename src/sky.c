@@ -25,6 +25,8 @@ void SkySetup(GLuint *id, char *filename) {
 void SkyInit(void) {
 	glEnable(GL_TEXTURE_2D);
 	glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
+	glDisable(GL_LIGHT0);
+	glDisable(GL_LIGHTING);
 	
 	if (verbose) printf("Generating sky textures\n");
 	
@@ -133,6 +135,9 @@ void SkyInit(void) {
 GLfloat daylight_amount;
 int daylight_up = 1;
 void SkyRender(void) {
+	glDisable(GL_LIGHT0);
+	glDisable(GL_LIGHTING);
+	
 	glPushMatrix();
 	glTranslatef(cam.x, cam.y, cam.z);
 	glCallList(sky_list);
@@ -140,8 +145,20 @@ void SkyRender(void) {
 	glCallList(daylight_list);
 	glPopMatrix();
 	
-	if (daylight_up) daylight_amount += 0.0001 * delta_move;
-	else daylight_amount -= 0.0001 * delta_move;
+	if (daylight_up) {
+		daylight_amount += 0.0001 * delta_move;
+		light_ambient[0] = daylight_amount * 10.0;
+		light_ambient[1] = daylight_amount * 10.0;
+		light_ambient[2] = daylight_amount * 10.0;
+		glLightfv(GL_LIGHT0, GL_AMBIENT, light_ambient);
+	}
+	else {
+		daylight_amount -= 0.0001 * delta_move;
+		light_ambient[0] = daylight_amount * 10.0;
+		light_ambient[1] = daylight_amount * 10.0;
+		light_ambient[2] = daylight_amount * 10.0;
+		glLightfv(GL_LIGHT0, GL_AMBIENT, light_ambient);
+	}
 	
 	if (daylight_up && daylight_amount >= 1.0)
 		daylight_up = 0;

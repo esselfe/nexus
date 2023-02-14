@@ -74,6 +74,9 @@ void FontRender(GLfloat x, GLfloat y, GLfloat z, char *text) {
 }
 
 void FontRender2D(int x, int y, char *text) {
+	glDisable(GL_LIGHT0);
+	glDisable(GL_LIGHTING);
+	
 	char *c = text;
 	unsigned int cnt;
 	glColor4f(1.0, 1.0, 1.0, 1.0);

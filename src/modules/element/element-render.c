@@ -8,12 +8,16 @@ int render = 1;
 
 void ElementRender(void) {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	
 
 	// Switch to 3D rendering (Scene)
 	RenderSet3DView();
 
 	SkyRender();
 	FloorRender();
+	
+	glEnable(GL_LIGHTING);
+	glEnable(GL_LIGHT0);
 
 	struct Element *el = element_root_list.first_element;
 	while (1) {

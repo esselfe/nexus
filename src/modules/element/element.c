@@ -8,6 +8,8 @@ unsigned long long total_waste, total_iron, total_wood,
 struct ElementList element_root_list;
 
 void ElementInit(void) {
+	if (verbose) printf("Initializing element\n");
+
 	gettimeofday(&tv_score_saved, NULL);
 	ElementScoreLoad();
 	ElementTextureInit();
@@ -39,19 +41,19 @@ void ElementAdd(unsigned int count) {
 		elem->type = rand() % 5;
 		switch (elem->type) {
 		case ELEMENT_TYPE_WASTE:
-			elem->texture_id = texture_waste;
+			elem->texture_id = texture_id_waste;
 			break;
 		case ELEMENT_TYPE_IRON:
-			elem->texture_id = texture_iron;
+			elem->texture_id = texture_id_iron;
 			break;
 		case ELEMENT_TYPE_WOOD:
-			elem->texture_id = texture_wood;
+			elem->texture_id = texture_id_wood;
 			break;
 		case ELEMENT_TYPE_MAGNET:
-			elem->texture_id = texture_magnet;
+			elem->texture_id = texture_id_magnet;
 			break;
 		case ELEMENT_TYPE_ROCK:
-			elem->texture_id = texture_rock;
+			elem->texture_id = texture_id_rock;
 			break;
 		}
 		elem->value = (rand() % 1000) + 100;

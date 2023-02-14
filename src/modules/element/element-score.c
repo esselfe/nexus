@@ -8,6 +8,8 @@
 struct timeval tv_score_saved;
 
 void ElementScoreLoad(void) {
+	if (verbose) printf("Loading element score\n");
+
 	FILE *fp = fopen("element-score.dat", "rb");
 	if (fp == NULL) {
 		ElementScoreSave();
@@ -24,6 +26,8 @@ void ElementScoreLoad(void) {
 }
 
 void ElementScoreSave(void) {
+	if (verbose) printf("Saving element score\n");
+	
 	FILE *fp = fopen("element-score.dat", "wb+");
 	if (fp == NULL) {
 		printf("nexus error: ElementScoreSave(): Cannot open element-score.dat: %s\n",

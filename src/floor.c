@@ -37,6 +37,9 @@ void FloorInit(void) {
 }
 
 void FloorRender(void) {
+	glEnable(GL_LIGHTING);
+	glEnable(GL_LIGHT0);
+	
 	glBindTexture(GL_TEXTURE_2D, floor_texture_id);
 	glBegin(GL_POLYGON);
 	glColor4f(0.1, 0.1, 0.1, 1.0);
@@ -53,6 +56,8 @@ void FloorRender(void) {
 	glEnd();
 	glBindTexture(GL_TEXTURE_2D, 0);
 	
+	glDisable(GL_LIGHT0);
+	glDisable(GL_LIGHTING);
 	glBegin(GL_LINES);
 	glColor4f(0.15, 0.15, 0.15, 0.4);
 	GLfloat cnt;

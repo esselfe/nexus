@@ -4,8 +4,8 @@
 
 #include "nexus.h"
 
-GLuint texture_waste, texture_iron, texture_wood,
-	texture_magnet, texture_rock;
+GLuint texture_id_waste, texture_id_iron, texture_id_wood,
+	texture_id_magnet, texture_id_rock;
 
 void ElementTextureCreate(GLuint *id, char *filename) {
 	GLubyte *data;
@@ -35,10 +35,10 @@ void ElementTextureInit(void) {
 	glEnable(GL_TEXTURE_2D);
 	glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
 
-	ElementTextureCreate(&texture_waste, "images/element-waste-128.png");
-	ElementTextureCreate(&texture_iron, "images/element-iron-128.png");
-	ElementTextureCreate(&texture_wood, "images/element-wood-128.png");
-	ElementTextureCreate(&texture_magnet, "images/element-magnet-128.png");
-	ElementTextureCreate(&texture_rock, "images/element-rock-128.png");
+	ElementTextureCreate(&texture_id_waste, "images/element-waste-128.png");
+	ElementTextureCreate(&texture_id_iron, "images/element-iron-128.png");
+	ElementTextureCreate(&texture_id_wood, "images/element-wood-128.png");
+	ElementTextureCreate(&texture_id_magnet, "images/element-magnet-128.png");
+	ElementTextureCreate(&texture_id_rock, "images/element-rock-128.png");
 }
 

@@ -30,6 +30,8 @@ void BrowserListAddEntry(char *name) {
 }
 
 void BrowserListLoad(char *path) {
+	if (verbose) printf("Browser: loading %s\n", path);
+
 	DIR *dir = opendir(path);
 	if (dir == NULL) {
 		printf("nexus:%s:%s error: Cannot open %s: %s\n", __FILE__, __FUNCTION__,

@@ -49,6 +49,9 @@ void FlagInit(void) {
 }
 
 void FlagRender(void) {
+	glEnable(GL_LIGHTING);
+	glEnable(GL_LIGHT0);
+	
 	glBindTexture(GL_TEXTURE_2D, flag01.texture_id);
 	glPushMatrix();
 	glTranslatef(flag01.x, flag01.y, flag01.z);

@@ -6,6 +6,11 @@
 
 void (*RenderFunc)(void);
 
+GLfloat light_ambient[] = { 1.0, 1.0, 1.0, 1.0 };
+GLfloat light_diffuse[] = { 1.0, 1.0, 1.0, 1.0 };
+GLfloat light_specular[] = { 1.0, 1.0, 1.0, 1.0 };
+GLfloat light_position[] = { 1.0, 100.0, 1.0, 0.0 };
+
 void RenderInit(void) {
 	if (verbose) printf("Initializing rendering\n");
 	
@@ -17,6 +22,13 @@ void RenderInit(void) {
 	glFrontFace(GL_CCW);
 	glClearColor(0.0, 0.0, 0.0, 0.0);
 	glViewport((GLint)0, (GLint)0, (GLsizei)winW, (GLsizei)winH);
+	
+	glLightfv(GL_LIGHT0, GL_AMBIENT, light_ambient);
+	glLightfv(GL_LIGHT0, GL_DIFFUSE, light_diffuse);
+	glLightfv(GL_LIGHT0, GL_SPECULAR, light_specular);
+	glLightfv(GL_LIGHT0, GL_POSITION, light_position);
+	glEnable(GL_LIGHTING);
+	glEnable(GL_LIGHT0);
 }
 
 void RenderSet3DView(void) {

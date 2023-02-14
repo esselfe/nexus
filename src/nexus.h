@@ -93,6 +93,10 @@ void FontRender2D(int x, int y, char *text);
 GLubyte *ImageFromPNGFile(unsigned int width, unsigned int height, char *filename);
 
 // render.c
+extern GLfloat light_ambient[];
+extern GLfloat light_diffuse[];
+extern GLfloat light_specular[];
+extern GLfloat light_position[];
 extern int render;
 void Render(void);
 void RenderCursor(void);
@@ -175,8 +179,8 @@ struct ElementList {
 extern struct ElementList element_root_list;
 extern unsigned long long total_waste, total_iron, total_wood,
 	total_magnet, total_rock;
-extern GLuint texture_waste, texture_iron, texture_wood,
-	texture_magnet, texture_rock;
+extern GLuint texture_id_waste, texture_id_iron, texture_id_wood,
+	texture_id_magnet, texture_id_rock;
 extern struct timeval tv_score_saved;
 void ElementAdd(unsigned int count);
 void ElementDelta(void);
