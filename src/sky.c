@@ -4,7 +4,7 @@
 #include "nexus.h"
 
 GLuint sky_texture_1, sky_texture_2, sky_texture_3, sky_texture_4,
-	sky_list_1, sky_list_2, sky_list_3, sky_list_4;
+	sky_list;
 
 void SkySetup(GLuint *id, char *filename) {
 	GLubyte *data = ImageFromPNGFile(2048, 2048, filename);
@@ -35,8 +35,9 @@ void SkyInit(void) {
 	// Generate display lists
 	//////////////////////////////////
 
-	sky_list_1 = glGenLists(1);
-	glNewList(sky_list_1, GL_COMPILE_AND_EXECUTE);
+	sky_list = glGenLists(1);
+	glNewList(sky_list, GL_COMPILE_AND_EXECUTE);
+	
 	glBindTexture(GL_TEXTURE_2D, sky_texture_1);
 	glColor3f(1.0, 1.0, 1.0);
 	glBegin(GL_POLYGON);
@@ -49,11 +50,7 @@ void SkyInit(void) {
 	glTexCoord2f(0.0, 0.0);
 	 glVertex3f(1000.0, -1000.0, -1000.0);
 	glEnd();
-	glBindTexture(GL_TEXTURE_2D, 0);
-	glEndList();
-
-	sky_list_2 = glGenLists(1);
-	glNewList(sky_list_2, GL_COMPILE_AND_EXECUTE);
+	
 	glBindTexture(GL_TEXTURE_2D, sky_texture_2);
 	glColor3f(1.0, 1.0, 1.0);
 	glBegin(GL_POLYGON);
@@ -66,11 +63,7 @@ void SkyInit(void) {
 	glTexCoord2f(0.0, 0.0);
 	 glVertex3f(1000.0, -1000.0, 1000.0);
 	glEnd();
-	glBindTexture(GL_TEXTURE_2D, 0);
-	glEndList();
-
-	sky_list_3 = glGenLists(1);
-	glNewList(sky_list_3, GL_COMPILE_AND_EXECUTE);
+	
 	glBindTexture(GL_TEXTURE_2D, sky_texture_3);
 	glColor3f(1.0, 1.0, 1.0);
 	glBegin(GL_POLYGON);
@@ -83,11 +76,7 @@ void SkyInit(void) {
 	glTexCoord2f(0.0, 0.0);
 	 glVertex3f(-1000.0, -1000.0, 1000.0);
 	glEnd();
-	glBindTexture(GL_TEXTURE_2D, 0);
-	glEndList();
-
-	sky_list_4 = glGenLists(1);
-	glNewList(sky_list_4, GL_COMPILE_AND_EXECUTE);
+	
 	glBindTexture(GL_TEXTURE_2D, sky_texture_4);
 	glColor3f(1.0, 1.0, 1.0);
 	glBegin(GL_POLYGON);
@@ -100,6 +89,7 @@ void SkyInit(void) {
 	glTexCoord2f(0.0, 0.0);
 	 glVertex3f(-1000.0, -1000.0, -1000.0);
 	glEnd();
+	
 	glBindTexture(GL_TEXTURE_2D, 0);
 	glEndList();
 }
@@ -107,10 +97,7 @@ void SkyInit(void) {
 void SkyRender(void) {
 	glPushMatrix();
 	glTranslatef(cam.x, cam.y, cam.z);
-	glCallList(sky_list_1);
-	glCallList(sky_list_2);
-	glCallList(sky_list_3);
-	glCallList(sky_list_4);
+	glCallList(sky_list);
 	glPopMatrix();
 }
 
