@@ -31,6 +31,8 @@ void EditorRender(void) {
 
 	if (terminal_visible)
 		TerminalRender();
+	if (!mouse_held)
+		RenderCursor();
 	
 	RenderThrottle();
 

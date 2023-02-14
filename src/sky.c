@@ -24,7 +24,8 @@ void SkySetup(GLuint *id, char *filename) {
 void SkyInit(void) {
 	glEnable(GL_TEXTURE_2D);
 	glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
-
+	
+	//SkySetup(&sky_texture_1, "images/sky10-2048.png");
 	SkySetup(&sky_texture_1, "images/sky05-2048.png");
 	SkySetup(&sky_texture_2, "images/sky06-2048.png");
 	SkySetup(&sky_texture_3, "images/sky07-2048.png");
