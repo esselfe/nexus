@@ -26,6 +26,7 @@ void ElementRender(void) {
 	element_mat_amb_diff[3] = 1.0;
 	glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, 
             element_mat_amb_diff);
+	glDisable(GL_BLEND);
         
 	struct Element *el = element_root_list.first_element;
 	while (1) {
@@ -52,6 +53,7 @@ void ElementRender(void) {
 		else
 			break;
 	}
+	glEnable(GL_BLEND);
 
 	// Switch to 2D rendering (HUD)
 	RenderSet2DView();
