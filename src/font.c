@@ -51,6 +51,9 @@ void FontInit(void) {
 }
 
 void FontRender(GLfloat x, GLfloat y, GLfloat z, char *text) {
+	glDisable(GL_LIGHT0);
+	glDisable(GL_LIGHTING);
+	
 	char *c = text;
 	unsigned int cnt;
 	glColor3f(0.7, 0.8, 0.9);

@@ -108,7 +108,8 @@ void RenderThrottle(void);
 
 // sky.c
 extern GLuint sky_texture_1, sky_texture_2, sky_texture_3, sky_texture_4;
-
+extern GLfloat daylight_amount;
+extern int daylight_up;
 void SkyInit(void);
 void SkyRender(void);
 

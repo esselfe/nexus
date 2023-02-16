@@ -6,6 +6,7 @@
 int floor_factor;
 GLfloat floor_size;
 GLuint floor_texture_id;
+GLfloat floor_mat_amb_diff[4];
 
 void FloorTextureSetup(GLuint *id, unsigned int width, unsigned int height,
 	  char *filename) {
@@ -40,6 +41,14 @@ void FloorRender(void) {
 	glEnable(GL_LIGHTING);
 	glEnable(GL_LIGHT0);
 	
+	glEnable(GL_COLOR_MATERIAL);
+	floor_mat_amb_diff[0] = daylight_amount;
+	floor_mat_amb_diff[1] = daylight_amount;
+	floor_mat_amb_diff[2] = daylight_amount;
+	floor_mat_amb_diff[3] = 1.0;
+	glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE, 
+            floor_mat_amb_diff);
+	
 	glBindTexture(GL_TEXTURE_2D, floor_texture_id);
 	glBegin(GL_POLYGON);
 	glColor4f(0.1, 0.1, 0.1, 1.0);
@@ -70,5 +79,13 @@ void FloorRender(void) {
 		glVertex3f(floor_size, 0.02, cnt);
 	}
 	glEnd();
+	
+	floor_mat_amb_diff[0] = 0.8;
+	floor_mat_amb_diff[1] = 0.8;
+	floor_mat_amb_diff[2] = 0.8;
+	floor_mat_amb_diff[3] = 1.0;
+	glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE, 
+            floor_mat_amb_diff);
+	glDisable(GL_COLOR_MATERIAL);
 }
 

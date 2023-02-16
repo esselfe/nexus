@@ -5,6 +5,7 @@
 #include "nexus.h"
 
 int render = 1;
+GLfloat element_mat_amb_diff[4];
 
 void ElementRender(void) {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -18,7 +19,14 @@ void ElementRender(void) {
 	
 	glEnable(GL_LIGHTING);
 	glEnable(GL_LIGHT0);
-
+	
+	element_mat_amb_diff[0] = 0.8;
+	element_mat_amb_diff[1] = 0.8;
+	element_mat_amb_diff[2] = 0.8;
+	element_mat_amb_diff[3] = 1.0;
+	glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, 
+            element_mat_amb_diff);
+        
 	struct Element *el = element_root_list.first_element;
 	while (1) {
 		glBindTexture(GL_TEXTURE_2D, el->texture_id);
@@ -26,7 +34,7 @@ void ElementRender(void) {
 		glTranslatef(el->x, el->y, el->z);
 		glRotatef(delta, 0.0, 1.0, 0.0);
 		glBegin(GL_POLYGON);
-		glColor3f(0.4, 0.5, 0.6);
+		glColor4f(0.4, 0.5, 0.6, 1.0);
 		glTexCoord2f(0.0, 0.0);
 		glVertex3f(-el->width/2, -el->height/2, 0.0);
 		glTexCoord2f(0.0, 1.0);

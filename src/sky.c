@@ -5,6 +5,8 @@
 
 GLuint sky_texture_1, sky_texture_2, sky_texture_3, sky_texture_4,
 	sky_list, daylight_list;
+GLfloat daylight_amount;
+int daylight_up = 1;
 
 void SkySetup(GLuint *id, char *filename) {
 	printf("  Loading sky texture from %s\n", filename);
@@ -132,8 +134,6 @@ void SkyInit(void) {
 	glEndList();
 }
 
-GLfloat daylight_amount;
-int daylight_up = 1;
 void SkyRender(void) {
 	glDisable(GL_LIGHT0);
 	glDisable(GL_LIGHTING);
@@ -144,6 +144,9 @@ void SkyRender(void) {
 	glColor4f(0.6, 0.6, 0.8, daylight_amount);
 	glCallList(daylight_list);
 	glPopMatrix();
+	
+	glEnable(GL_LIGHTING);
+	glEnable(GL_LIGHT0);
 	
 	if (daylight_up) {
 		daylight_amount += 0.0001 * delta_move;
