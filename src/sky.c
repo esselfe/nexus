@@ -153,14 +153,14 @@ void SkyRender(void) {
 	glEnable(GL_LIGHT0);
 	
 	if (daylight_up && daylight_amount < 1.0) {
-		daylight_amount += 0.001 * delta_move;
+		daylight_amount += 0.0001 * delta_move;
 		light_ambient[0] = daylight_amount;
 		light_ambient[1] = daylight_amount;
 		light_ambient[2] = daylight_amount;
 		glLightfv(GL_LIGHT0, GL_AMBIENT, light_ambient);
 	}
 	else if (!daylight_up && daylight_amount > 0.2) {
-		daylight_amount -= 0.001 * delta_move;
+		daylight_amount -= 0.0001 * delta_move;
 		light_ambient[0] = daylight_amount;
 		light_ambient[1] = daylight_amount;
 		light_ambient[2] = daylight_amount;
