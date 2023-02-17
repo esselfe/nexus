@@ -47,8 +47,7 @@ GLubyte *ImageFromPNGFile(unsigned int width, unsigned int height, char *filenam
 		components = 3;
 		break;
 	case PNG_COLOR_TYPE_RGB_ALPHA:
-		printf("nexus error: PNG color type RGB alpha is not supported yet\n");
-		return NULL;
+		components = 4;
 		break;
 	case PNG_COLOR_TYPE_GRAY_ALPHA:
 		printf("nexus error: PNG color type gray alpha is not supported yet\n");
@@ -60,24 +59,36 @@ GLubyte *ImageFromPNGFile(unsigned int width, unsigned int height, char *filenam
 		break;
 	}
 	
-	GLubyte *buf = malloc(width*height*3);
+	GLubyte *buf;
+	if (components == 1 || components == 3)
+		buf = malloc(width*height*3);
+	else
+		buf = malloc(width*height*4);
 	png_bytepp rows = png_get_rows(png, info);
 	png_bytep row;
 	int x, y, cnt = 0;
 	for (y = 0; y < height; y++) {
 		row = rows[y];
-		if (components == 3) {
+		if (components == 1) {
+			for (x=0; x < width; x++, cnt += 3) {
+				buf[cnt] = row[x];
+				buf[cnt+1] = row[x];
+				buf[cnt+2] = row[x];
+			}
+		}
+		else if (components == 3) {
 			for (x=0; x < width*3; x += 3, cnt += 3) {
 				buf[cnt] = row[x];
 				buf[cnt+1] = row[x+1];
 				buf[cnt+2] = row[x+2];
 			}
 		}
-		else if (components == 1) {
-			for (x=0; x < width; x++, cnt += 3) {
+		else if (components == 4) {
+			for (x=0; x < width*4; x += 4, cnt += 4) {
 				buf[cnt] = row[x];
-				buf[cnt+1] = row[x];
-				buf[cnt+2] = row[x];
+				buf[cnt+1] = row[x+1];
+				buf[cnt+2] = row[x+2];
+				buf[cnt+3] = row[x+3];
 			}
 		}
 	}

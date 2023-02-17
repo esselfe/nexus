@@ -4,7 +4,7 @@
 #include "nexus.h"
 
 GLuint sky_texture_1, sky_texture_2, sky_texture_3, sky_texture_4,
-	sky_list, daylight_list;
+	moon_texture_id, sky_list, daylight_list;
 GLfloat daylight_amount;
 int daylight_up = 1;
 
@@ -33,6 +33,17 @@ void SkyInit(void) {
 	daylight_amount = 0.1;
 	
 	if (verbose) printf("Generating sky textures\n");
+	
+	GLubyte *data = ImageFromPNGFile(128, 128, "images/moon01-128a.png");
+	glGenTextures(1, &moon_texture_id);
+	glBindTexture(GL_TEXTURE_2D, moon_texture_id);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glTexImage2D (GL_TEXTURE_2D, 0, GL_RGBA, 128, 128, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
+	glBindTexture(GL_TEXTURE_2D, 0);
+	free(data);
 	
 	//SkySetup(&sky_texture_1, "images/sky10-2048.png");
 	SkySetup(&sky_texture_1, "images/sky05-2048.png");
@@ -137,6 +148,7 @@ void SkyInit(void) {
 }
 
 GLfloat dlcnt;
+GLfloat moon_angle = 285;
 void SkyRender(void) {
 	glDisable(GL_LIGHT0);
 	glDisable(GL_LIGHTING);
@@ -147,6 +159,25 @@ void SkyRender(void) {
 	glEnable(GL_BLEND);
 	glColor4f(0.6*daylight_amount, 0.6*daylight_amount, 0.8, daylight_amount);
 	glCallList(daylight_list);
+	glPopMatrix();
+	
+	glEnable(GL_BLEND);
+	glPushMatrix();
+	glRotatef(moon_angle, 0.0, -1.0, 0.0);
+	glTranslatef(0.0, 120.0, -900.0);
+	glBindTexture(GL_TEXTURE_2D, moon_texture_id);
+	glColor3f(1.0, 1.0, 1.0);
+	glBegin(GL_POLYGON);
+	glTexCoord2f(0.0, 1.0);
+	 glVertex3f(-10.0, -10.0, 0.0);
+	glTexCoord2f(1.0, 1.0);
+	 glVertex3f(-10.0, 10.0, 0.0);
+	glTexCoord2f(1.0, 0.0);
+	 glVertex3f(10.0, 10.0, 0.0);
+	glTexCoord2f(0.0, 0.0);
+	 glVertex3f(10.0, -10.0, 0.0);
+	glEnd();
+	glBindTexture(GL_TEXTURE_2D, 0);
 	glPopMatrix();
 	
 	glEnable(GL_LIGHTING);
@@ -176,5 +207,9 @@ void SkyRender(void) {
 		daylight_up = 0;
 	else if (!daylight_up && daylight_amount <= 0.2 && dlcnt <= 0)
 		daylight_up = 1;
+	
+	moon_angle += 0.01 * delta_move;
+	if (moon_angle >= 360.0)
+		moon_angle -= 360.0;
 }
 
