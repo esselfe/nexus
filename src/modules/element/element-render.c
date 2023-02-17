@@ -20,13 +20,15 @@ void ElementRender(void) {
 	glEnable(GL_LIGHTING);
 	glEnable(GL_LIGHT0);
 	
-	element_mat_amb_diff[0] = 0.8;
-	element_mat_amb_diff[1] = 0.8;
-	element_mat_amb_diff[2] = 0.8;
+	element_mat_amb_diff[0] = daylight_amount;
+	element_mat_amb_diff[1] = daylight_amount;
+	element_mat_amb_diff[2] = daylight_amount;
 	element_mat_amb_diff[3] = 1.0;
-	glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, 
+	glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE, 
             element_mat_amb_diff);
 	glDisable(GL_BLEND);
+	glEnable(GL_COLOR_MATERIAL);
+	glColorMaterial(GL_FRONT, GL_DIFFUSE);
         
 	struct Element *el = element_root_list.first_element;
 	while (1) {
@@ -35,7 +37,7 @@ void ElementRender(void) {
 		glTranslatef(el->x, el->y, el->z);
 		glRotatef(delta, 0.0, 1.0, 0.0);
 		glBegin(GL_POLYGON);
-		glColor4f(0.4, 0.5, 0.6, 1.0);
+		glColor4f(0.5, 0.5, 0.5, 1.0);
 		glTexCoord2f(0.0, 0.0);
 		glVertex3f(-el->width/2, -el->height/2, 0.0);
 		glTexCoord2f(0.0, 1.0);
@@ -54,6 +56,7 @@ void ElementRender(void) {
 			break;
 	}
 	glEnable(GL_BLEND);
+	glDisable(GL_COLOR_MATERIAL);
 
 	// Switch to 2D rendering (HUD)
 	RenderSet2DView();

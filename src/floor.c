@@ -42,6 +42,7 @@ void FloorRender(void) {
 	glEnable(GL_LIGHT0);
 	
 	glEnable(GL_COLOR_MATERIAL);
+	glColorMaterial(GL_FRONT, GL_DIFFUSE);
 	floor_mat_amb_diff[0] = daylight_amount;
 	floor_mat_amb_diff[1] = daylight_amount;
 	floor_mat_amb_diff[2] = daylight_amount;
@@ -65,9 +66,9 @@ void FloorRender(void) {
 	glEnd();
 	glBindTexture(GL_TEXTURE_2D, 0);
 	
-	glDisable(GL_LIGHT0);
-	glDisable(GL_LIGHTING);
-	glBegin(GL_LINES);
+	//glDisable(GL_LIGHT0);
+	//glDisable(GL_LIGHTING);
+	/*glBegin(GL_LINES);
 	glColor4f(0.15, 0.15, 0.15, 0.4);
 	GLfloat cnt;
 	for (cnt = -floor_size; cnt <= floor_size; cnt += 1.0) {
@@ -78,7 +79,7 @@ void FloorRender(void) {
 		glVertex3f(-floor_size, 0.02, cnt);
 		glVertex3f(floor_size, 0.02, cnt);
 	}
-	glEnd();
+	glEnd();*/
 	
 	floor_mat_amb_diff[0] = 0.8;
 	floor_mat_amb_diff[1] = 0.8;

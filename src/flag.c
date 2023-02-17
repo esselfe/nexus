@@ -7,6 +7,7 @@
 #include "nexus.h"
 
 struct Flag flag01, flag02;
+GLfloat flag_mat_amb_diff[4];
 
 void FlagSetup(struct Flag *flag, char *filename) {
 	flag->width = 128;
@@ -51,11 +52,20 @@ void FlagInit(void) {
 void FlagRender(void) {
 	glEnable(GL_LIGHTING);
 	glEnable(GL_LIGHT0);
+	glDisable(GL_BLEND);
+	//glEnable(GL_COLOR_MATERIAL);
+	//glColorMaterial(GL_FRONT, GL_DIFFUSE);
+	flag_mat_amb_diff[0] = daylight_amount;
+	flag_mat_amb_diff[1] = daylight_amount;
+	flag_mat_amb_diff[2] = daylight_amount;
+	flag_mat_amb_diff[3] = 1.0;
+	glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE, 
+            flag_mat_amb_diff);
 	
 	glBindTexture(GL_TEXTURE_2D, flag01.texture_id);
 	glPushMatrix();
 	glTranslatef(flag01.x, flag01.y, flag01.z);
-	glColor3f(0.6, 0.7, 0.8);
+	//glColor3f(0.2, 0.2, 0.2);
 	glBegin(GL_POLYGON);
 	glTexCoord2f(0.0, 1.0);
 	glVertex3f(-0.5, -0.5, 0.0);
@@ -72,7 +82,7 @@ void FlagRender(void) {
 	glPushMatrix();
 	glTranslatef(flag02.x, flag02.y, flag02.z);
 	glRotatef(delta, 0.0, 1.0, 0.0);
-	glColor3f(0.6, 0.7, 0.8);
+	//glColor3f(0.2, 0.2, 0.2);
 	glBegin(GL_POLYGON);
 	glTexCoord2f(0.0, 1.0);
 	glVertex3f(-0.5, -0.5, 0.0);
@@ -86,6 +96,7 @@ void FlagRender(void) {
 	glPopMatrix();
 
 	glBindTexture(GL_TEXTURE_2D, 0);
+	//glDisable(GL_COLOR_MATERIAL);
 }
 
 void FlagUpdate(void) {

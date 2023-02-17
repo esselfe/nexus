@@ -30,6 +30,8 @@ void SkyInit(void) {
 	glDisable(GL_LIGHT0);
 	glDisable(GL_LIGHTING);
 	
+	daylight_amount = 0.1;
+	
 	if (verbose) printf("Generating sky textures\n");
 	
 	//SkySetup(&sky_texture_1, "images/sky10-2048.png");
@@ -141,6 +143,7 @@ void SkyRender(void) {
 	glPushMatrix();
 	glTranslatef(cam.x, cam.y, cam.z);
 	glCallList(sky_list);
+	glEnable(GL_BLEND);
 	glColor4f(0.6, 0.6, 0.8, daylight_amount);
 	glCallList(daylight_list);
 	glPopMatrix();
@@ -165,7 +168,7 @@ void SkyRender(void) {
 	
 	if (daylight_up && daylight_amount >= 1.0)
 		daylight_up = 0;
-	else if (!daylight_up && daylight_amount <= 0.0)
+	else if (!daylight_up && daylight_amount <= 0.1)
 		daylight_up = 1;
 }
 
