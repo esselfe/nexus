@@ -136,6 +136,7 @@ void SkyInit(void) {
 	glEndList();
 }
 
+GLfloat dlcnt;
 void SkyRender(void) {
 	glDisable(GL_LIGHT0);
 	glDisable(GL_LIGHTING);
@@ -144,22 +145,22 @@ void SkyRender(void) {
 	glTranslatef(cam.x, cam.y, cam.z);
 	glCallList(sky_list);
 	glEnable(GL_BLEND);
-	glColor4f(0.6, 0.6, 0.8, daylight_amount);
+	glColor4f(0.6*daylight_amount, 0.6*daylight_amount, 0.8, daylight_amount);
 	glCallList(daylight_list);
 	glPopMatrix();
 	
 	glEnable(GL_LIGHTING);
 	glEnable(GL_LIGHT0);
 	
-	if (daylight_up) {
-		daylight_amount += 0.0001 * delta_move;
+	if (daylight_up && daylight_amount < 1.0) {
+		daylight_amount += 0.001 * delta_move;
 		light_ambient[0] = daylight_amount;
 		light_ambient[1] = daylight_amount;
 		light_ambient[2] = daylight_amount;
 		glLightfv(GL_LIGHT0, GL_AMBIENT, light_ambient);
 	}
-	else {
-		daylight_amount -= 0.0001 * delta_move;
+	else if (!daylight_up && daylight_amount > 0.2) {
+		daylight_amount -= 0.001 * delta_move;
 		light_ambient[0] = daylight_amount;
 		light_ambient[1] = daylight_amount;
 		light_ambient[2] = daylight_amount;
@@ -167,8 +168,13 @@ void SkyRender(void) {
 	}
 	
 	if (daylight_up && daylight_amount >= 1.0)
+		dlcnt += delta_move;
+	else if (!daylight_up && daylight_amount <= 0.2)
+		dlcnt -= delta_move;
+	
+	if (daylight_up && daylight_amount >= 1.0 && dlcnt >= 1000)
 		daylight_up = 0;
-	else if (!daylight_up && daylight_amount <= 0.1)
+	else if (!daylight_up && daylight_amount <= 0.2 && dlcnt <= 0)
 		daylight_up = 1;
 }
 
