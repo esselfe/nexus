@@ -109,5 +109,6 @@ void RenderThrottle(void) {
 	glPopMatrix();
 	FontRender2D(winW-strlen(cam.thr_text)*8, winH/2-20, cam.thr_text);
 	FontRender2D(winW-strlen(cam.speed_text)*8, winH/2-40, cam.speed_text);
+	FontRender2D(winW-strlen(cam.side_speed_text)*8, winH/2-60, cam.side_speed_text);
 }
 

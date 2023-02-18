@@ -31,13 +31,15 @@ void tvdiff(struct timeval *tv_start, struct timeval *tv_end, struct timeval *tv
 #define THR_DOWN    (1<<9)
 #define MOVE_ACCEL  (1<<10)
 #define MOVE_DECEL  (1<<11)
+#define MOVE_SIDE_ACCEL (1<<12)
+#define MOVE_SIDE_DECEL (1<<13)
 struct Camera {
 	GLfloat x, y, z,
 		lx, ly, lz;
 	GLfloat rotation_angle;
 	unsigned int moving;
-	GLfloat thr, speed;
-	char thr_text[5], speed_text[5];
+	GLfloat thr, speed, side_speed;
+	char thr_text[5], speed_text[5], side_speed_text[5];
 };
 extern struct Camera cam;
 

@@ -75,15 +75,15 @@ void EventCheck(void) {
 				cam.moving |= MOVE_BACK;
 				break;
 			case SDLK_LEFT:
-				if (cam.moving & MOVE_DECEL)
-					cam.moving ^= MOVE_DECEL;
-				cam.moving |= MOVE_ACCEL;
+				if (cam.moving & MOVE_SIDE_DECEL)
+					cam.moving ^= MOVE_SIDE_DECEL;
+				cam.moving |= MOVE_SIDE_ACCEL;
 				cam.moving |= MOVE_LEFT;
 				break;
 			case SDLK_RIGHT:
-				if (cam.moving & MOVE_DECEL)
-					cam.moving ^= MOVE_DECEL;
-				cam.moving |= MOVE_ACCEL;
+				if (cam.moving & MOVE_SIDE_DECEL)
+					cam.moving ^= MOVE_SIDE_DECEL;
+				cam.moving |= MOVE_SIDE_ACCEL;
 				cam.moving |= MOVE_RIGHT;
 				break;
 			case SDLK_PAGEUP:
@@ -169,13 +169,17 @@ void EventCheck(void) {
 				break;
 			case SDLK_UP:
 			case SDLK_DOWN:
-			case SDLK_LEFT:
-			case SDLK_RIGHT:
 			case SDLK_PAGEUP:
 			case SDLK_PAGEDOWN:
 			  	cam.moving |= MOVE_DECEL;
 	  			if (cam.moving & MOVE_ACCEL)
 				  	cam.moving ^= MOVE_ACCEL;
+				break;
+			case SDLK_LEFT:
+			case SDLK_RIGHT:
+				cam.moving |= MOVE_SIDE_DECEL;
+				if (cam.moving & MOVE_SIDE_ACCEL)
+					cam.moving ^= MOVE_SIDE_ACCEL;
 				break;
 			case SDLK_KP_4:
 				cam.moving ^= LOOK_LEFT;
