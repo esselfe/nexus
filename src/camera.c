@@ -11,7 +11,7 @@ void CameraInit(void) {
 	cam.x = 0.0;
 	cam.y = 2.0;
 	cam.z = 10.0;
-	cam.rotation_angle = 180.0;
+	cam.rotation_angle = 0.0;
 	cam.lx = (GLfloat)sin(cam.rotation_angle*1.7453293f)+cam.x;
 	cam.ly = 2.0;
 	cam.lz = (GLfloat)-cos(cam.rotation_angle*1.7453293f)+cam.z;
@@ -145,10 +145,8 @@ void CameraMove(void) {
 void CameraRotateStep(GLfloat angle) {
 	cam.rotation_angle += angle;
 
-	if (angle > 0.0)
-		if (cam.rotation_angle >= 3.6) cam.rotation_angle -= 3.6;
-	else if (angle < 0.0)
-		if (cam.rotation_angle < 0.0) cam.rotation_angle += 3.6;
+	if (cam.rotation_angle >= 3.6) cam.rotation_angle -= 3.6;
+	if (cam.rotation_angle < 0.0) cam.rotation_angle += 3.6;
 	
 	cam.lx = (GLfloat)sin(cam.rotation_angle*1.7453293f) + cam.x;
 	cam.lz = (GLfloat)-cos(cam.rotation_angle*1.7453293f) + cam.z;
