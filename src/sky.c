@@ -45,11 +45,10 @@ void SkyInit(void) {
 	glBindTexture(GL_TEXTURE_2D, 0);
 	free(data);
 	
-	//SkySetup(&sky_texture_1, "images/sky10-2048.png");
-	SkySetup(&sky_texture_1, "images/sky05-2048.png");
-	SkySetup(&sky_texture_2, "images/sky06-2048.png");
-	SkySetup(&sky_texture_3, "images/sky07-2048.png");
-	SkySetup(&sky_texture_4, "images/sky08-2048.png");
+	SkySetup(&sky_texture_1, "images/sky01-2048.png");
+	SkySetup(&sky_texture_2, "images/sky02-2048.png");
+	SkySetup(&sky_texture_3, "images/sky03-2048.png");
+	SkySetup(&sky_texture_4, "images/sky04-2048.png");
 
 	//////////////////////////////////
 	// Generate display lists

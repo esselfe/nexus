@@ -63,26 +63,38 @@ void EventCheck(void) {
 				terminal_visible = !terminal_visible;
 				break;
 			case SDLK_UP:
+				if (cam.moving & MOVE_DECEL)
+					cam.moving ^= MOVE_DECEL;
 				cam.moving |= MOVE_ACCEL;
 				cam.moving |= MOVE_FRONT;
 				break;
 			case SDLK_DOWN:
+				if (cam.moving & MOVE_DECEL)
+					cam.moving ^= MOVE_DECEL;
 				cam.moving |= MOVE_ACCEL;
 				cam.moving |= MOVE_BACK;
 				break;
 			case SDLK_LEFT:
+				if (cam.moving & MOVE_DECEL)
+					cam.moving ^= MOVE_DECEL;
 				cam.moving |= MOVE_ACCEL;
 				cam.moving |= MOVE_LEFT;
 				break;
 			case SDLK_RIGHT:
+				if (cam.moving & MOVE_DECEL)
+					cam.moving ^= MOVE_DECEL;
 				cam.moving |= MOVE_ACCEL;
 				cam.moving |= MOVE_RIGHT;
 				break;
 			case SDLK_PAGEUP:
+				if (cam.moving & MOVE_DECEL)
+					cam.moving ^= MOVE_DECEL;
 				cam.moving |= MOVE_ACCEL;
 				cam.moving |= MOVE_UP;
 				break;
 			case SDLK_PAGEDOWN:
+				if (cam.moving & MOVE_DECEL)
+					cam.moving ^= MOVE_DECEL;
 				cam.moving |= MOVE_ACCEL;
 				cam.moving |= MOVE_DOWN;
 				break;

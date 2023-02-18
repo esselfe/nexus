@@ -23,13 +23,6 @@ void CameraInit(void) {
 }
 
 void CameraMove(void) {
-	//if (cam.speed > 0.0 && (cam.moving & MOVE_ACCEL) && 
-	//  ((cam.moving & MOVE_FRONT) == 0 && (cam.moving & MOVE_BACK) == 0 &&
-	//  (cam.moving & MOVE_LEFT) == 0 && (cam.moving & MOVE_RIGHT) == 0 &&
-	//  (cam.moving & MOVE_UP) == 0 && (cam.moving & MOVE_DOWN) == 0)) {
-	  	
-	//}
-
 	if (cam.moving & MOVE_ACCEL) {
 		if (cam.speed < cam.thr)
 			cam.speed += cam.thr/100.0;
