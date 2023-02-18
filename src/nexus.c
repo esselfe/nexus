@@ -167,8 +167,8 @@ int main(int argc, char **argv) {
 	EventInit();
 	DeltaInit();
 	CameraInit();
-	RenderInit();
 	FontInit(); // There must be no display list creation before this call
+	RenderInit();
 	FloorInit();
 	ElementInit();
 	FlagInit();

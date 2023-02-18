@@ -99,6 +99,7 @@ void MemoryRender(void) {
 		RenderCursor();
 
 	RenderThrottle();
+	RenderCompass();
 
 	SDL_GL_SwapWindow(window);
 }

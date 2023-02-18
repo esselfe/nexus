@@ -103,6 +103,7 @@ extern GLfloat light_specular[];
 extern GLfloat light_position[];
 extern int render;
 void Render(void);
+void RenderCompass(void);
 void RenderCursor(void);
 extern void (*RenderFunc)(void); // Modules are supposed to associate this handler to their funtion
 void RenderInit(void);

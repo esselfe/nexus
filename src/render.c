@@ -10,6 +10,7 @@ GLfloat light_ambient[] = { 1.0, 1.0, 1.0, 1.0 };
 GLfloat light_diffuse[] = { 1.0, 1.0, 1.0, 1.0 };
 GLfloat light_specular[] = { 1.0, 1.0, 1.0, 1.0 };
 GLfloat light_position[] = { 1.0, 100.0, 1.0, 0.0 };
+GLuint compass_texture_id;
 
 void RenderInit(void) {
 	if (verbose) printf("Initializing rendering\n");
@@ -30,6 +31,20 @@ void RenderInit(void) {
 	glLightfv(GL_LIGHT0, GL_POSITION, light_position);
 	glEnable(GL_LIGHTING);
 	glEnable(GL_LIGHT0);
+	
+	GLubyte *data = ImageFromPNGFile(256, 256, "images/compass-256a.png");	
+	glEnable(GL_TEXTURE_2D);
+	glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
+	glGenTextures(1, &compass_texture_id);
+	glBindTexture(GL_TEXTURE_2D, compass_texture_id);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, 256, 256, 0, GL_RGBA,
+		GL_UNSIGNED_BYTE, data);
+	glBindTexture(GL_TEXTURE_2D, 0);
+	free(data);
 }
 
 void RenderSet3DView(void) {
@@ -71,8 +86,45 @@ void Render(void) {
 	if (!mouse_held)
 		RenderCursor();
 	RenderThrottle();
+	RenderCompass();
 
 	SDL_GL_SwapWindow(window);
+}
+
+void RenderCompass(void) {
+	glPushMatrix();
+	glTranslatef(winW-100.0, winH-100.0, 0.0);
+	glBindTexture(GL_TEXTURE_2D, compass_texture_id);
+	glBegin(GL_POLYGON);
+	glColor3f(0.2, 0.3, 0.4);
+	glTexCoord2f(0.0, 1.0);
+	 glVertex2f(-100.0, -100.0);
+	glTexCoord2f(0.0, 0.0);
+	 glVertex2f(-100.0, 100.0);
+	glTexCoord2f(1.0, 0.0);
+	 glVertex2f(100.0, 100.0);
+	glTexCoord2f(1.0, 1.0);
+	 glVertex2f(100.0, -100.0);
+	glEnd();
+	glBindTexture(GL_TEXTURE_2D, 0);
+	
+	glPushMatrix();
+	glTranslatef(0.0, 0.0, 1.0);
+	glRotatef(cam.rotation_angle*100.0, 0.0, 0.0, -1.0);
+	glBegin(GL_POLYGON);
+	 glColor3f(0.4, 0.1, 0.1);
+	 glVertex2f(-5.0, 0.0);
+	 glVertex2f(0.0, 50.0);
+	 glVertex2f(5.0, 0.0);
+	glEnd();
+	glBegin(GL_POLYGON);
+	 glColor3f(0.1, 0.1, 0.1);
+	 glVertex2f(5.0, 0.0);
+	 glVertex2f(0.0, -50.0);
+	 glVertex2f(-5.0, 0.0);
+	glEnd();
+	glPopMatrix();
+	glPopMatrix();
 }
 
 void RenderCursor(void) {
