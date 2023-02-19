@@ -13,7 +13,7 @@ void ElementInit(void) {
 	gettimeofday(&tv_score_saved, NULL);
 	ElementScoreLoad();
 	ElementTextureInit();
-	ElementAdd(8*floor_factor*10);
+	ElementAdd(floor_factor*75);
 	ElementThreadStart();
 }
 
@@ -97,32 +97,4 @@ void ElementRemove(struct Element *elem) {
 	
 	render = 1;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

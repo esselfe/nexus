@@ -6,7 +6,7 @@
 GLuint sky_texture_1, sky_texture_2, sky_texture_3, sky_texture_4,
 	moon_texture_id, sky_list, daylight_list;
 GLfloat daylight_amount;
-int daylight_up = 1;
+int daylight_up;
 
 void SkySetup(GLuint *id, char *filename) {
 	printf("  Loading sky texture from %s\n", filename);
@@ -30,7 +30,8 @@ void SkyInit(void) {
 	glDisable(GL_LIGHT0);
 	glDisable(GL_LIGHTING);
 	
-	daylight_amount = 0.1;
+	daylight_up = 1;
+	daylight_amount = 0.4;
 	
 	if (verbose) printf("Generating sky textures\n");
 	

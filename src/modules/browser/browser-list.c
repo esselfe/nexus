@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <unistd.h>
 #include <string.h>
 #include <errno.h>
 #include <dirent.h>
@@ -8,6 +9,11 @@
 #include "nexus.h"
 
 struct BrowserList browser_list;
+
+void BrowserInit(void) {
+	if (verbose) printf("Initializing browser\n");
+	BrowserListLoad(get_current_dir_name());
+}
 
 void BrowserListAddEntry(char *name) {
 	struct BrowserListEntry *entry = malloc(sizeof(struct BrowserListEntry));
@@ -30,7 +36,7 @@ void BrowserListAddEntry(char *name) {
 }
 
 void BrowserListLoad(char *path) {
-	if (verbose) printf("Browser: loading %s\n", path);
+	if (verbose) printf("  Loading %s\n", path);
 
 	DIR *dir = opendir(path);
 	if (dir == NULL) {

@@ -190,12 +190,12 @@ void CameraMove(void) {
 	
 	if (cam.moving & THR_DOWN) {
 		if (cam.thr > 0.0)
-			cam.thr -= delta_move/2;
+			cam.thr -= delta_move/2.0;
 			sprintf(cam.thr_text, "%d%%", (int)cam.thr);
 	}
 	if (cam.moving & THR_UP) {
 		if (cam.thr < 100.0) {
-			cam.thr += delta_move/2;
+			cam.thr += delta_move/2.0;
 			sprintf(cam.thr_text, "%d%%", (int)cam.thr);
 		}
 	}

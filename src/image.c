@@ -36,8 +36,6 @@ GLubyte *ImageFromPNGFile(unsigned int width, unsigned int height, char *filenam
 	switch(color_type) {
 	case PNG_COLOR_TYPE_GRAY:
 		components = 1;
-		//printf("nexus error: PNG color type gray is not supported yet\n");
-		//return NULL;
 		break;
 	case PNG_COLOR_TYPE_PALETTE:
 		printf("nexus error: PNG color type palette/indexed is not supported yet\n");

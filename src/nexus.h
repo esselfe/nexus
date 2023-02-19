@@ -4,7 +4,12 @@
 #include <GL/gl.h>
 #include <SDL2/SDL.h>
 
+////////////////////////////////////////////////////////////////
+// Core
+////////////////////////////////////////////////////////////////
+
 // nexus.c
+////////////////////////////////
 extern char *nexus_version_string;
 extern int verbose;
 extern int mainloopend;
@@ -18,6 +23,7 @@ extern struct timeval tv0, tv_prev, tv_diff;
 void tvdiff(struct timeval *tv_start, struct timeval *tv_end, struct timeval *tv_diff2);
 
 // camera.c
+////////////////////////////////
 #define MOVE_NONE         0
 #define MOVE_LEFT         1
 #define MOVE_RIGHT        (1<<1)
@@ -50,6 +56,7 @@ void CameraMove(void);
 void CameraRotateStep(GLfloat angle);
 
 // delta.c
+////////////////////////////////
 extern GLfloat delta, delta_move;
 void DeltaCompute(void);
 void DeltaInit(void);
@@ -57,6 +64,7 @@ extern void (*DeltaFunc)(void); // Modules are supposed to associate this handle
 void DeltaMove(void);
 
 // event.c
+////////////////////////////////
 #define MOD_NONE    0
 #define MOD_CTRL    1
 #define MOD_ALT     (1<<1)
@@ -71,6 +79,7 @@ extern void (*EventFunc)(void); // Modules are supposed to associate this handle
 void EventInit(void);
 
 // flag.c
+////////////////////////////////
 struct Flag {
 	GLfloat x, y, z;
 	unsigned int width, height, components;
@@ -86,11 +95,13 @@ void FlagRender(void);
 void FlagUpdate(void);
 
 // floor.c
+////////////////////////////////
 extern int floor_factor;
 void FloorInit(void);
 void FloorRender(void);
 
 // font.c
+////////////////////////////////
 #define BG_NONE    0
 #define BG_BLACK   1
 #define BG_GREY    2
@@ -99,9 +110,11 @@ void FontRender(int bgcolor, GLfloat x, GLfloat y, GLfloat z, char *text);
 void FontRender2D(int bgcolor, int x, int y, char *text);
 
 // image.c
+////////////////////////////////
 GLubyte *ImageFromPNGFile(unsigned int width, unsigned int height, char *filename);
 
 // render.c
+////////////////////////////////
 extern GLfloat light_ambient[];
 extern GLfloat light_diffuse[];
 extern GLfloat light_specular[];
@@ -117,6 +130,7 @@ void RenderSet3DView(void);
 void RenderThrottle(void);
 
 // sky.c
+////////////////////////////////
 extern GLuint sky_texture_1, sky_texture_2, sky_texture_3, sky_texture_4;
 extern GLfloat daylight_amount;
 extern int daylight_up;
@@ -124,6 +138,7 @@ void SkyInit(void);
 void SkyRender(void);
 
 // state.c
+////////////////////////////////
 #define STATE_MAIN      0
 #define STATE_BROWSER   1
 #define STATE_DRIVING   2
@@ -136,6 +151,7 @@ unsigned int StateGet(void);
 void StateSet(unsigned int newstate);
 
 // terminal.c
+////////////////////////////////
 #define TERMINAL_BUFFER_SIZE 4096
 extern unsigned int terminal_visible;
 extern char terminal_buffer[TERMINAL_BUFFER_SIZE];
@@ -144,10 +160,12 @@ extern unsigned int terminal_cursor_pos, terminal_cursor_blink;
 void TerminalParse(void);
 void TerminalRender(void);
 
-////////////////////////////////
+////////////////////////////////////////////////////////////////
 // Modules
-////////////////////////////////
+////////////////////////////////////////////////////////////////
 
+// Browser
+////////////////////////////////
 struct BrowserListEntry {
 	struct BrowserListEntry *prev, *next;
 	unsigned int rank;
@@ -158,17 +176,24 @@ struct BrowserList {
 	unsigned long entry_total;
 };
 extern struct BrowserList browser_list;
+void BrowserInit(void);
 void BrowserListAddEntry(char *name);
 void BrowserListLoad(char *path);
 void BrowserListDestroy(void);
 void BrowserRender(void);
 
+// Driving
+////////////////////////////////
 void DrivingDelta(void);
 void DrivingEvent(void);
 void DrivingRender(void);
 
+// Editor
+////////////////////////////////
 void EditorRender(void);
 
+// Element
+////////////////////////////////
 #define ELEMENT_TYPE_WASTE  0
 #define ELEMENT_TYPE_IRON   1
 #define ELEMENT_TYPE_WOOD   2
@@ -204,6 +229,8 @@ void ElementScoreSave(void);
 void ElementTextureInit(void);
 void ElementThreadStart(void);
 
+// Memory
+////////////////////////////////
 extern GLfloat memory_max, memory_value;
 extern char memory_max_text[128], memory_value_text[128];
 extern GLfloat swap_max, swap_value;

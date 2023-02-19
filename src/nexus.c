@@ -149,7 +149,7 @@ int main(int argc, char **argv) {
 		exit(1);
 	}
 
-	// needs a context
+	// Needs a context
 	if (verbose) printf("OpenGL %s installed\n", glGetString(GL_VERSION));
 
 	glewExperimental = GL_TRUE;
@@ -173,7 +173,7 @@ int main(int argc, char **argv) {
 	ElementInit();
 	FlagInit();
 	SkyInit();
-	BrowserListLoad(get_current_dir_name());
+	BrowserInit();
 	
 	init_done = 1;
 
