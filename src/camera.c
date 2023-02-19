@@ -224,7 +224,12 @@ void CameraMove(void) {
 	if (cam.y < 0.01) {
 		cam.y = 0.01;
 		cam.ly = 0.01;
-		cam.moving |= MOVE_HEIGHT_DECEL;
+		cam.height_speed = 0.0;
+		sprintf(cam.height_speed_text, "0");
+		if (cam.moving & MOVE_DOWN)
+			cam.moving ^= MOVE_DOWN;
+		if (cam.moving & MOVE_HEIGHT_DECEL)
+			cam.moving ^= MOVE_HEIGHT_DECEL;
 		if (cam.moving & MOVE_HEIGHT_ACCEL)
 			cam.moving ^= MOVE_HEIGHT_ACCEL;
 	}
