@@ -18,21 +18,23 @@ extern struct timeval tv0, tv_prev, tv_diff;
 void tvdiff(struct timeval *tv_start, struct timeval *tv_end, struct timeval *tv_diff2);
 
 // camera.c
-#define MOVE_NONE   0
-#define MOVE_LEFT   1
-#define MOVE_RIGHT  (1<<1)
-#define MOVE_FRONT  (1<<2)
-#define MOVE_BACK   (1<<3)
-#define MOVE_UP     (1<<4)
-#define MOVE_DOWN   (1<<5)
-#define LOOK_LEFT   (1<<6)
-#define LOOK_RIGHT  (1<<7)
-#define THR_UP      (1<<8)
-#define THR_DOWN    (1<<9)
-#define MOVE_ACCEL  (1<<10)
-#define MOVE_DECEL  (1<<11)
-#define MOVE_SIDE_ACCEL (1<<12)
-#define MOVE_SIDE_DECEL (1<<13)
+#define MOVE_NONE         0
+#define MOVE_LEFT         1
+#define MOVE_RIGHT        (1<<1)
+#define MOVE_FRONT        (1<<2)
+#define MOVE_BACK         (1<<3)
+#define MOVE_UP           (1<<4)
+#define MOVE_DOWN         (1<<5)
+#define LOOK_LEFT         (1<<6)
+#define LOOK_RIGHT        (1<<7)
+#define THR_UP            (1<<8)
+#define THR_DOWN          (1<<9)
+#define MOVE_ACCEL        (1<<10)
+#define MOVE_DECEL        (1<<11)
+#define MOVE_SIDE_ACCEL   (1<<12)
+#define MOVE_SIDE_DECEL   (1<<13)
+#define MOVE_REVERSE      (1<<14)
+#define MOVE_SIDE_REVERSE (1<<15)
 struct Camera {
 	GLfloat x, y, z,
 		lx, ly, lz;

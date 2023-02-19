@@ -22,7 +22,7 @@ void EventCheck(void) {
 	if (SDL_PollEvent(&event)) {
 		if (event.type == SDL_QUIT)
 			mainloopend = 1;
-		else if (event.type == SDL_KEYDOWN) {
+		else if (event.type == SDL_KEYDOWN && event.key.repeat == 0) {
 			if (show_keys)
 				printf("key: %s\n", SDL_GetKeyName(event.key.keysym.sym));
 
@@ -65,26 +65,44 @@ void EventCheck(void) {
 			case SDLK_UP:
 				if (cam.moving & MOVE_DECEL)
 					cam.moving ^= MOVE_DECEL;
+				
 				cam.moving |= MOVE_ACCEL;
 				cam.moving |= MOVE_FRONT;
+				if (cam.moving & MOVE_BACK) {
+					cam.moving ^= MOVE_BACK;
+					cam.moving |= MOVE_REVERSE;
+				}
 				break;
 			case SDLK_DOWN:
 				if (cam.moving & MOVE_DECEL)
 					cam.moving ^= MOVE_DECEL;
+				
 				cam.moving |= MOVE_ACCEL;
 				cam.moving |= MOVE_BACK;
+				if (cam.moving & MOVE_FRONT) {
+					cam.moving ^= MOVE_FRONT;
+					cam.moving |= MOVE_REVERSE;
+				}
 				break;
 			case SDLK_LEFT:
 				if (cam.moving & MOVE_SIDE_DECEL)
 					cam.moving ^= MOVE_SIDE_DECEL;
 				cam.moving |= MOVE_SIDE_ACCEL;
 				cam.moving |= MOVE_LEFT;
+				if (cam.moving & MOVE_RIGHT) {
+					cam.moving ^= MOVE_RIGHT;
+					cam.moving |= MOVE_REVERSE;
+				}
 				break;
 			case SDLK_RIGHT:
 				if (cam.moving & MOVE_SIDE_DECEL)
 					cam.moving ^= MOVE_SIDE_DECEL;
 				cam.moving |= MOVE_SIDE_ACCEL;
 				cam.moving |= MOVE_RIGHT;
+				if (cam.moving & MOVE_LEFT) {
+					cam.moving ^= MOVE_LEFT;
+					cam.moving |= MOVE_SIDE_REVERSE;
+				}
 				break;
 			case SDLK_PAGEUP:
 				if (cam.moving & MOVE_DECEL)

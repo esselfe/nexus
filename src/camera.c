@@ -20,57 +20,116 @@ void CameraInit(void) {
 	sprintf(cam.thr_text, "%d%%", (int)cam.thr);
 	cam.speed = 0.0;
 	sprintf(cam.speed_text, "0");
+	sprintf(cam.side_speed_text, "0");
 }
 
 void CameraMove(void) {
 	if (cam.moving & MOVE_ACCEL) {
-		if (cam.speed < cam.thr)
-			cam.speed += cam.thr/100.0;
-		else if (cam.speed >= cam.thr) {
-			cam.speed = cam.thr;
-			cam.moving ^= MOVE_ACCEL;
+		if (cam.moving & MOVE_FRONT) {
+			if (cam.speed < cam.thr)
+				cam.speed += cam.thr/100.0;
+			if (cam.speed >= cam.thr) {
+				cam.speed = cam.thr;
+				cam.moving ^= MOVE_ACCEL;
+			}
+			if ((cam.moving & MOVE_REVERSE) && cam.speed >= 0.0)
+				cam.moving ^= MOVE_REVERSE;
+		}
+		if (cam.moving & MOVE_BACK) {
+			if (cam.speed > -cam.thr)
+				cam.speed -= cam.thr/100.0;
+			if (cam.speed <= -cam.thr) {
+				cam.speed = -cam.thr;
+				cam.moving ^= MOVE_ACCEL;
+			}
+			if ((cam.moving & MOVE_REVERSE) && cam.speed <= 0.0)
+				cam.moving ^= MOVE_REVERSE;
 		}
 		sprintf(cam.speed_text, "%d", (int)cam.speed);
 	}
-	else if (cam.moving & MOVE_DECEL) {
-		if (cam.speed > 0.0)
-			cam.speed -= 0.01*cam.thr;
-		
-		if (cam.speed <= 0.0) {
-			cam.speed = 0.0;
-			cam.moving ^= MOVE_DECEL;
-			if (cam.moving & MOVE_FRONT)
-				cam.moving ^= MOVE_FRONT;
-			if (cam.moving & MOVE_BACK)
-				cam.moving ^= MOVE_BACK;
-			if (cam.moving & MOVE_UP)
-				cam.moving ^= MOVE_UP;
-			if (cam.moving & MOVE_DOWN)
-				cam.moving ^= MOVE_DOWN;
+	if (cam.moving & MOVE_DECEL) {
+		if (cam.moving & MOVE_FRONT) {
+			if (cam.speed > 0.0)
+				cam.speed -= 0.01*cam.thr;
+			if (cam.speed <= 0.0) {
+				cam.speed = 0.0;
+				cam.moving ^= MOVE_DECEL;
+				if (cam.moving & MOVE_FRONT)
+					cam.moving ^= MOVE_FRONT;
+				if (cam.moving & MOVE_BACK)
+					cam.moving ^= MOVE_BACK;
+				if (cam.moving & MOVE_UP)
+					cam.moving ^= MOVE_UP;
+				if (cam.moving & MOVE_DOWN)
+					cam.moving ^= MOVE_DOWN;
+			}
+		}
+		if (cam.moving & MOVE_BACK) {
+			if (cam.speed < 0.0)
+				cam.speed += 0.01*cam.thr;
+			if (cam.speed >= 0.0) {
+				cam.speed = 0.0;
+				cam.moving ^= MOVE_DECEL;
+				if (cam.moving & MOVE_FRONT)
+					cam.moving ^= MOVE_FRONT;
+				if (cam.moving & MOVE_BACK)
+					cam.moving ^= MOVE_BACK;
+				if (cam.moving & MOVE_UP)
+					cam.moving ^= MOVE_UP;
+				if (cam.moving & MOVE_DOWN)
+					cam.moving ^= MOVE_DOWN;
+			}
 		}
 		sprintf(cam.speed_text, "%d", (int)cam.speed);
 	}
 	
 	if (cam.moving & MOVE_SIDE_ACCEL) {
-		if (cam.side_speed < cam.thr)
-			cam.side_speed += cam.thr/100.0;
-		else if (cam.side_speed >= cam.thr) {
-			cam.side_speed = cam.thr;
-			cam.moving ^= MOVE_SIDE_ACCEL;
+		if (cam.moving & MOVE_RIGHT) {
+			if (cam.side_speed < cam.thr)
+				cam.side_speed += cam.thr/100.0;
+			if (cam.side_speed >= cam.thr) {
+				cam.side_speed = cam.thr;
+				cam.moving ^= MOVE_SIDE_ACCEL;
+			}
+			if ((cam.moving & MOVE_SIDE_REVERSE) && cam.side_speed >= 0.0)
+				cam.moving ^= MOVE_SIDE_REVERSE;
+		}
+		if (cam.moving & MOVE_LEFT) {
+			if (cam.side_speed > -cam.thr)
+				cam.side_speed -= cam.thr/100.0;
+			if (cam.side_speed <= -cam.thr) {
+				cam.side_speed = -cam.thr;
+				cam.moving ^= MOVE_SIDE_ACCEL;
+			}
+			if ((cam.moving & MOVE_SIDE_REVERSE) && cam.side_speed <= 0.0)
+				cam.moving ^= MOVE_SIDE_REVERSE;
 		}
 		sprintf(cam.side_speed_text, "%d", (int)cam.side_speed);
 	}
 	else if (cam.moving & MOVE_SIDE_DECEL) {
-		if (cam.side_speed > 0.0)
-			cam.side_speed -= 0.01*cam.thr;
-		
-		if (cam.side_speed <= 0.0) {
-			cam.side_speed = 0.0;
-			cam.moving ^= MOVE_SIDE_DECEL;
-			if (cam.moving & MOVE_LEFT)
-				cam.moving ^= MOVE_LEFT;
-			if (cam.moving & MOVE_RIGHT)
-				cam.moving ^= MOVE_RIGHT;
+		if (cam.moving & MOVE_RIGHT) {
+			if (cam.side_speed > 0.0)
+				cam.side_speed -= 0.01*cam.thr;
+			if (cam.side_speed <= 0.0) {
+				cam.side_speed = 0.0;
+				cam.moving ^= MOVE_SIDE_DECEL;
+				if (cam.moving & MOVE_LEFT)
+					cam.moving ^= MOVE_LEFT;
+				if (cam.moving & MOVE_RIGHT)
+					cam.moving ^= MOVE_RIGHT;
+			}
+		}
+		if (cam.moving & MOVE_LEFT) {
+			if (cam.side_speed < 0.0)
+				cam.side_speed += 0.01*cam.thr;
+			if (cam.side_speed >= 0.0) {
+				cam.side_speed = 0.0;
+				cam.moving ^= MOVE_SIDE_DECEL;
+				if (cam.moving & MOVE_LEFT)
+					cam.moving ^= MOVE_LEFT;
+				if (cam.moving & MOVE_RIGHT)
+					cam.moving ^= MOVE_RIGHT;
+			}
 		}
 		sprintf(cam.side_speed_text, "%d", (int)cam.side_speed);
 	}
@@ -91,20 +150,20 @@ void CameraMove(void) {
 			* cam.speed/100.0f * delta_move;
 		mz = (GLfloat)(cos(cam.rotation_angle*1.7453293f))
 			* cam.speed/100.0f * delta_move;
-		cam.x -= mx;
-		cam.lx -= mx;
-		cam.z += mz;
-		cam.lz += mz;
+		cam.x += mx;
+		cam.lx += mx;
+		cam.z -= mz;
+		cam.lz -= mz;
 	}
 	if (cam.moving & MOVE_LEFT) {
 		mx = (GLfloat)(cos(cam.rotation_angle*1.7453293f))
 			* cam.side_speed/160.0f * delta_move;
 		mz = (GLfloat)(-sin(cam.rotation_angle*1.7453293f))
 			* cam.side_speed/160.0f * delta_move;
-		cam.x -= mx;
-		cam.lx -= mx;
-		cam.z += mz;
-		cam.lz += mz;
+		cam.x += mx;
+		cam.lx += mx;
+		cam.z -= mz;
+		cam.lz -= mz;
 	}
 	if (cam.moving & MOVE_RIGHT) {
 		mx = (GLfloat)(cos(cam.rotation_angle*1.7453293f))

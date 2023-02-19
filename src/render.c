@@ -151,7 +151,10 @@ void RenderThrottle(void) {
 	glVertex2f(0.0, cam.thr);
 	glEnd();
 	glBegin(GL_LINE_STRIP);
-	glColor3f(0.3, 0.4, 0.5);
+	if (daylight_amount < 0.6)
+		glColor3f(0.3, 0.4, 0.5);
+	else
+		glColor3f(0.1, 0.2, 0.3);
 	glVertex2f(-1.0, -1.0);
 	glVertex2f(11.0, -1.0);
 	glVertex2f(11.0, 101.0);
@@ -160,7 +163,7 @@ void RenderThrottle(void) {
 	glEnd();
 	glPopMatrix();
 	FontRender2D(BG_BLACK, winW-strlen(cam.thr_text)*8, winH/2-20, cam.thr_text);
-	FontRender2D(BG_NONE, winW-strlen(cam.speed_text)*8, winH/2-40, cam.speed_text);
-	FontRender2D(BG_NONE, winW-strlen(cam.side_speed_text)*8, winH/2-60, cam.side_speed_text);
+	FontRender2D(BG_BLACK, winW-strlen(cam.speed_text)*8, winH/2-40, cam.speed_text);
+	FontRender2D(BG_BLACK, winW-strlen(cam.side_speed_text)*8, winH/2-60, cam.side_speed_text);
 }
 
