@@ -9,7 +9,7 @@ GLfloat daylight_amount;
 int daylight_up;
 
 void SkySetup(GLuint *id, char *filename) {
-	printf("  Loading sky texture from %s\n", filename);
+	if (verbose) printf("  Loading sky texture from %s\n", filename);
 	GLubyte *data = ImageFromPNGFile(2048, 2048, filename);
 	glGenTextures(1, id);
 	glBindTexture(GL_TEXTURE_2D, *id);
