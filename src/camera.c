@@ -20,7 +20,10 @@ void CameraInit(void) {
 	sprintf(cam.thr_text, "%d%%", (int)cam.thr);
 	cam.speed = 0.0;
 	sprintf(cam.speed_text, "0");
+	cam.side_speed = 0.0;
 	sprintf(cam.side_speed_text, "0");
+	cam.height_speed = 0.0;
+	sprintf(cam.height_speed_text, "0");
 }
 
 void CameraMove(void) {
@@ -137,7 +140,7 @@ void CameraMove(void) {
 		}
 		if (cam.moving & MOVE_DOWN) {
 			if (cam.height_speed > -cam.thr)
-				cam.height_speed -= cam.thr/100.0;
+				if (cam.y > 0.01) cam.height_speed -= cam.thr/100.0;
 			if (cam.height_speed <= -cam.thr) {
 				cam.height_speed = -cam.thr;
 				cam.moving ^= MOVE_HEIGHT_ACCEL;
@@ -152,11 +155,7 @@ void CameraMove(void) {
 			if (cam.height_speed <= 0.0) {
 				cam.height_speed = 0.0;
 				cam.moving ^= MOVE_HEIGHT_DECEL;
-/*				if (cam.moving & MOVE_UP)
-					cam.moving ^= MOVE_UP;
-				if (cam.moving & MOVE_DOWN)
-					cam.moving ^= MOVE_DOWN;
-*/			}
+			}
 		}
 		if (cam.moving & MOVE_DOWN) {
 			if (cam.height_speed < 0.0)
@@ -164,11 +163,7 @@ void CameraMove(void) {
 			if (cam.height_speed >= 0.0) {
 				cam.height_speed = 0.0;
 				cam.moving ^= MOVE_HEIGHT_DECEL;
-/*				if (cam.moving & MOVE_UP)
-					cam.moving ^= MOVE_UP;
-				if (cam.moving & MOVE_DOWN)
-					cam.moving ^= MOVE_DOWN;
-*/			}
+			}
 		}
 		sprintf(cam.height_speed_text, "%d", (int)cam.height_speed);
 	}
@@ -194,6 +189,7 @@ void CameraMove(void) {
 		cam.z -= mz;
 		cam.lz -= mz;
 	}
+	
 	if (cam.moving & MOVE_LEFT) {
 		mx = (GLfloat)(cos(cam.rotation_angle*1.7453293f))
 			* cam.side_speed/160.0f * delta_move;
@@ -214,6 +210,7 @@ void CameraMove(void) {
 		cam.z -= mz;
 		cam.lz -= mz;
 	}
+	
 	if (cam.moving & MOVE_UP) {
 		cam.y += 0.01 * cam.height_speed * delta_move;
 		cam.ly += 0.01 * cam.height_speed * delta_move;
@@ -227,7 +224,11 @@ void CameraMove(void) {
 	if (cam.y < 0.01) {
 		cam.y = 0.01;
 		cam.ly = 0.01;
+		cam.moving |= MOVE_HEIGHT_DECEL;
+		if (cam.moving & MOVE_HEIGHT_ACCEL)
+			cam.moving ^= MOVE_HEIGHT_ACCEL;
 	}
+	
 	if (cam.moving & LOOK_LEFT)
 		CameraRotateStep(-0.01);
 	if (cam.moving & LOOK_RIGHT)
