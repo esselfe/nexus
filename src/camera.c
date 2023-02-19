@@ -125,6 +125,53 @@ void CameraMove(void) {
 		}
 		sprintf(cam.side_speed_text, "%d", (int)cam.side_speed);
 	}
+	
+	if (cam.moving & MOVE_HEIGHT_ACCEL) {
+		if (cam.moving & MOVE_UP) {
+			if (cam.height_speed < cam.thr)
+				cam.height_speed += cam.thr/100.0;
+			if (cam.height_speed >= cam.thr) {
+				cam.height_speed = cam.thr;
+				cam.moving ^= MOVE_HEIGHT_ACCEL;
+			}
+		}
+		if (cam.moving & MOVE_DOWN) {
+			if (cam.height_speed > -cam.thr)
+				cam.height_speed -= cam.thr/100.0;
+			if (cam.height_speed <= -cam.thr) {
+				cam.height_speed = -cam.thr;
+				cam.moving ^= MOVE_HEIGHT_ACCEL;
+			}
+		}
+		sprintf(cam.height_speed_text, "%d", (int)cam.height_speed);
+	}
+	else if (cam.moving & MOVE_HEIGHT_DECEL) {
+		if (cam.moving & MOVE_UP) {
+			if (cam.height_speed > 0.0)
+				cam.height_speed -= 0.01*cam.thr;
+			if (cam.height_speed <= 0.0) {
+				cam.height_speed = 0.0;
+				cam.moving ^= MOVE_HEIGHT_DECEL;
+/*				if (cam.moving & MOVE_UP)
+					cam.moving ^= MOVE_UP;
+				if (cam.moving & MOVE_DOWN)
+					cam.moving ^= MOVE_DOWN;
+*/			}
+		}
+		if (cam.moving & MOVE_DOWN) {
+			if (cam.height_speed < 0.0)
+				cam.height_speed += 0.01*cam.thr;
+			if (cam.height_speed >= 0.0) {
+				cam.height_speed = 0.0;
+				cam.moving ^= MOVE_HEIGHT_DECEL;
+/*				if (cam.moving & MOVE_UP)
+					cam.moving ^= MOVE_UP;
+				if (cam.moving & MOVE_DOWN)
+					cam.moving ^= MOVE_DOWN;
+*/			}
+		}
+		sprintf(cam.height_speed_text, "%d", (int)cam.height_speed);
+	}
 
 	GLfloat mx, mz;
 	if (cam.moving & MOVE_FRONT) {
@@ -168,12 +215,18 @@ void CameraMove(void) {
 		cam.lz -= mz;
 	}
 	if (cam.moving & MOVE_UP) {
-		cam.y += 0.01f * cam.speed * delta_move;
-		cam.ly += 0.01f * cam.speed * delta_move;
+		cam.y += 0.01 * cam.height_speed * delta_move;
+		cam.ly += 0.01 * cam.height_speed * delta_move;
 	}
 	if (cam.moving & MOVE_DOWN) {
-		cam.y -= 0.01f * cam.speed * delta_move;
-		cam.ly -= 0.01f * cam.speed * delta_move;
+		if (cam.y > 0.01) {
+			cam.y += 0.01 * cam.height_speed * delta_move;
+			cam.ly += 0.01 * cam.height_speed * delta_move;
+		}
+	}
+	if (cam.y < 0.01) {
+		cam.y = 0.01;
+		cam.ly = 0.01;
 	}
 	if (cam.moving & LOOK_LEFT)
 		CameraRotateStep(-0.01);

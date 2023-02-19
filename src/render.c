@@ -165,5 +165,6 @@ void RenderThrottle(void) {
 	FontRender2D(BG_BLACK, winW-strlen(cam.thr_text)*8, winH/2-20, cam.thr_text);
 	FontRender2D(BG_BLACK, winW-strlen(cam.speed_text)*8, winH/2-40, cam.speed_text);
 	FontRender2D(BG_BLACK, winW-strlen(cam.side_speed_text)*8, winH/2-60, cam.side_speed_text);
+	FontRender2D(BG_BLACK, winW-strlen(cam.height_speed_text)*8, winH/2-80, cam.height_speed_text);
 }
 
