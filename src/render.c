@@ -92,19 +92,20 @@ void Render(void) {
 }
 
 void RenderCompass(void) {
+	GLfloat half = winH/20.0;
 	glPushMatrix();
-	glTranslatef(winW-100.0, winH-100.0, 0.0);
+	glTranslatef(winW-half, winH-half, 0.0);
 	glBindTexture(GL_TEXTURE_2D, compass_texture_id);
 	glBegin(GL_POLYGON);
 	glColor3f(0.2, 0.3, 0.4);
 	glTexCoord2f(0.0, 1.0);
-	 glVertex2f(-100.0, -100.0);
+	 glVertex2f(-half, -half);
 	glTexCoord2f(0.0, 0.0);
-	 glVertex2f(-100.0, 100.0);
+	 glVertex2f(-half, half);
 	glTexCoord2f(1.0, 0.0);
-	 glVertex2f(100.0, 100.0);
+	 glVertex2f(half, half);
 	glTexCoord2f(1.0, 1.0);
-	 glVertex2f(100.0, -100.0);
+	 glVertex2f(half, -half);
 	glEnd();
 	glBindTexture(GL_TEXTURE_2D, 0);
 	
@@ -114,13 +115,13 @@ void RenderCompass(void) {
 	glBegin(GL_POLYGON);
 	 glColor3f(0.4, 0.1, 0.1);
 	 glVertex2f(-5.0, 0.0);
-	 glVertex2f(0.0, 50.0);
+	 glVertex2f(0.0, half/2.0);
 	 glVertex2f(5.0, 0.0);
 	glEnd();
 	glBegin(GL_POLYGON);
 	 glColor3f(0.1, 0.1, 0.1);
 	 glVertex2f(5.0, 0.0);
-	 glVertex2f(0.0, -50.0);
+	 glVertex2f(0.0, -half/2.0);
 	 glVertex2f(-5.0, 0.0);
 	glEnd();
 	glPopMatrix();
