@@ -27,7 +27,7 @@ void EditorRender(void) {
 	// Switch to 2D rendering (HUD)
 	RenderSet2DView();
 
-	FontRender2D(10, (int)winH-16-10, fps_text);
+	FontRender2D(BG_BLACK, 10, (int)winH-16-10, fps_text);
 
 	if (terminal_visible)
 		TerminalRender();

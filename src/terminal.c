@@ -118,6 +118,6 @@ void TerminalRender(void) {
 	}
 
 	if (strlen(terminal_buffer))
-		FontRender2D(12, 14, terminal_buffer);
+		FontRender2D(BG_BLACK, 12, 14, terminal_buffer);
 }
 

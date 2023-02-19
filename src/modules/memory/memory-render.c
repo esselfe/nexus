@@ -50,9 +50,9 @@ void MemoryRender(void) {
 	glVertex3f(1.0, 0.0, 0.0);
 	glEnd();
 	glPopMatrix();
-	FontRender(-1.0, 3.32, 0.0, "RAM");
-	FontRender(-1.0, 3.16, 0.0, memory_max_text);
-	FontRender(-1.0, memory_value, 0.0, memory_value_text);
+	FontRender(BG_BLACK, -1.0, 3.32, 0.0, "RAM");
+	FontRender(BG_BLACK, -1.0, 3.16, 0.0, memory_max_text);
+	FontRender(BG_BLACK, -1.0, memory_value, 0.0, memory_value_text);
 	
 	glEnable(GL_LIGHTING);
 	glEnable(GL_LIGHT0);
@@ -76,9 +76,9 @@ void MemoryRender(void) {
 	glVertex3f(1.0, 0.0, 0.0);
 	glEnd();
 	glPopMatrix();
-	FontRender(1.0, 3.32, 0.0, "Swap");
-	FontRender(1.0, 3.16, 0.0, swap_max_text);
-	FontRender(1.0, swap_value, 0.0, swap_value_text);
+	FontRender(BG_BLACK, 1.0, 3.32, 0.0, "Swap");
+	FontRender(BG_BLACK, 1.0, 3.16, 0.0, swap_max_text);
+	FontRender(BG_BLACK, 1.0, swap_value, 0.0, swap_value_text);
 	
 	mat_amb_diff[0] = 0.8;
 	mat_amb_diff[1] = 0.8;
@@ -91,7 +91,7 @@ void MemoryRender(void) {
 	// Switch to 2D rendering (HUD)
 	RenderSet2DView();
 
-	FontRender2D(10, (int)winH-16-10, fps_text);
+	FontRender2D(BG_BLACK, 10, (int)winH-16-10, fps_text);
 
 	if (terminal_visible)
 		TerminalRender();

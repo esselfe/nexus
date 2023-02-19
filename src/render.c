@@ -80,7 +80,7 @@ void Render(void) {
 	// Switch to 2D rendering (HUD)
 	RenderSet2DView();
 
-	FontRender2D(10, (int)winH-16-10, fps_text);
+	FontRender2D(BG_BLACK, 10, (int)winH-16-10, fps_text);
 	if (terminal_visible)
 		TerminalRender();
 	if (!mouse_held)
@@ -159,8 +159,8 @@ void RenderThrottle(void) {
 	glVertex2f(-1.0, -1.0);
 	glEnd();
 	glPopMatrix();
-	FontRender2D(winW-strlen(cam.thr_text)*8, winH/2-20, cam.thr_text);
-	FontRender2D(winW-strlen(cam.speed_text)*8, winH/2-40, cam.speed_text);
-	FontRender2D(winW-strlen(cam.side_speed_text)*8, winH/2-60, cam.side_speed_text);
+	FontRender2D(BG_BLACK, winW-strlen(cam.thr_text)*8, winH/2-20, cam.thr_text);
+	FontRender2D(BG_NONE, winW-strlen(cam.speed_text)*8, winH/2-40, cam.speed_text);
+	FontRender2D(BG_NONE, winW-strlen(cam.side_speed_text)*8, winH/2-60, cam.side_speed_text);
 }
 

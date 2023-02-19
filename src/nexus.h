@@ -89,9 +89,12 @@ void FloorInit(void);
 void FloorRender(void);
 
 // font.c
+#define BG_NONE    0
+#define BG_BLACK   1
+#define BG_GREY    2
 void FontInit(void);
-void FontRender(GLfloat x, GLfloat y, GLfloat z, char *text);
-void FontRender2D(int x, int y, char *text);
+void FontRender(int bgcolor, GLfloat x, GLfloat y, GLfloat z, char *text);
+void FontRender2D(int bgcolor, int x, int y, char *text);
 
 // image.c
 GLubyte *ImageFromPNGFile(unsigned int width, unsigned int height, char *filename);

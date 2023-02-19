@@ -61,23 +61,23 @@ void ElementRender(void) {
 	// Switch to 2D rendering (HUD)
 	RenderSet2DView();
 
-	FontRender2D(10, (int)winH-16-10, fps_text);
+	FontRender2D(BG_BLACK, 10, (int)winH-16-10, fps_text);
 
 	char text[128];
 	sprintf(text, "%lu waste", total_waste);
-	FontRender2D(10, (int)winH-16-26, text);
+	FontRender2D(BG_GREY, 10, (int)winH-16-26, text);
 	
 	sprintf(text, "%lu iron", total_iron);
-	FontRender2D(10, (int)winH-16-42, text);
+	FontRender2D(BG_GREY, 10, (int)winH-16-42, text);
 	
 	sprintf(text, "%lu wood", total_wood);
-	FontRender2D(10, (int)winH-16-58, text);
+	FontRender2D(BG_GREY, 10, (int)winH-16-58, text);
 	
 	sprintf(text, "%lu magnet", total_magnet);
-	FontRender2D(10, (int)winH-16-74, text);
+	FontRender2D(BG_GREY, 10, (int)winH-16-74, text);
 	
 	sprintf(text, "%lu rock", total_rock);
-	FontRender2D(10, (int)winH-16-90, text);
+	FontRender2D(BG_GREY, 10, (int)winH-16-90, text);
 
 	if (terminal_visible)
 		TerminalRender();
