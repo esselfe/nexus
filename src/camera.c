@@ -32,8 +32,6 @@ void CameraMove(void) {
 				cam.speed = cam.thr;
 				cam.moving ^= MOVE_ACCEL;
 			}
-			if ((cam.moving & MOVE_REVERSE) && cam.speed >= 0.0)
-				cam.moving ^= MOVE_REVERSE;
 		}
 		if (cam.moving & MOVE_BACK) {
 			if (cam.speed > -cam.thr)
@@ -42,8 +40,6 @@ void CameraMove(void) {
 				cam.speed = -cam.thr;
 				cam.moving ^= MOVE_ACCEL;
 			}
-			if ((cam.moving & MOVE_REVERSE) && cam.speed <= 0.0)
-				cam.moving ^= MOVE_REVERSE;
 		}
 		sprintf(cam.speed_text, "%d", (int)cam.speed);
 	}
@@ -91,8 +87,6 @@ void CameraMove(void) {
 				cam.side_speed = cam.thr;
 				cam.moving ^= MOVE_SIDE_ACCEL;
 			}
-			if ((cam.moving & MOVE_SIDE_REVERSE) && cam.side_speed >= 0.0)
-				cam.moving ^= MOVE_SIDE_REVERSE;
 		}
 		if (cam.moving & MOVE_LEFT) {
 			if (cam.side_speed > -cam.thr)
@@ -101,8 +95,6 @@ void CameraMove(void) {
 				cam.side_speed = -cam.thr;
 				cam.moving ^= MOVE_SIDE_ACCEL;
 			}
-			if ((cam.moving & MOVE_SIDE_REVERSE) && cam.side_speed <= 0.0)
-				cam.moving ^= MOVE_SIDE_REVERSE;
 		}
 		sprintf(cam.side_speed_text, "%d", (int)cam.side_speed);
 	}
