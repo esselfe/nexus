@@ -63,6 +63,7 @@ extern GLfloat goto_angle;
 extern GLfloat goto_x, goto_z;
 void CameraGoto(GLfloat x, GLfloat z);
 void CameraGotoMove(void);
+void CameraJump(GLfloat x, GLfloat z);
 
 // delta.c
 ////////////////////////////////
