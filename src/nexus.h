@@ -56,6 +56,14 @@ void CameraInit(void);
 void CameraMove(void);
 void CameraRotateStep(GLfloat angle);
 
+// camera-goto.c
+////////////////////////////////
+extern int goto_enabled;
+extern GLfloat goto_angle;
+extern GLfloat goto_x, goto_z;
+void CameraGoto(GLfloat x, GLfloat z);
+void CameraGotoMove(void);
+
 // delta.c
 ////////////////////////////////
 extern GLfloat delta, delta_move;

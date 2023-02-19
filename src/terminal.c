@@ -90,6 +90,8 @@ void TerminalParse(void) {
 			if (strcmp(w2, "add") == 0)
 				ElementAdd(atoi(w3));
 		}
+		else if (strcmp(w1, "goto") == 0 && strlen(w2) && strlen(w3))
+			CameraGoto(atof(w2), atof(w3));
 		else if (strcmp(w1, "main") == 0)
 			StateSet(STATE_MAIN);
 		else if (strcmp(w1, "memory") == 0)

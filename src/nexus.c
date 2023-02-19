@@ -185,6 +185,7 @@ int main(int argc, char **argv) {
 		EventFunc();
 		DeltaFunc();
 		CameraMove();
+		if (goto_enabled) CameraGotoMove();
 		if (render) RenderFunc();
 	}
 
