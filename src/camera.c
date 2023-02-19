@@ -10,8 +10,7 @@ void CameraInit(void) {
 	if (verbose) printf("Initializing camera\n");
 	cam.x = 0.0;
 	cam.y = 2.0;
-	//cam.z = 10.0;
-	cam.z = 0.0;
+	cam.z = 10.0;
 	cam.rotation_angle = 0.0;
 	cam.lx = (GLfloat)sin(cam.rotation_angle*1.7453293f)+cam.x;
 	cam.ly = 2.0;
