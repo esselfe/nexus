@@ -46,8 +46,8 @@ void CameraGotoMove(void) {
 	}
 	
 	if (cam.moving & MOVE_FRONT) {
-		if ((cam.x < goto_x + cam.thr/4 && cam.x > goto_x - cam.thr/4) &&
-		  (cam.z < goto_z + cam.thr/4 && cam.z > goto_z - cam.thr/4)) {
+		if ((cam.x < goto_x + cam.thr*(cam.speed/100.0) && cam.x > goto_x - cam.thr*(cam.speed/100.0)) &&
+		  (cam.z < goto_z + cam.thr*(cam.speed/100.0) && cam.z > goto_z - cam.thr*(cam.speed/100.0))) {
 			goto_enabled = 0;
 			cam.moving |= MOVE_DECEL;
 			if (cam.moving & MOVE_ACCEL)
