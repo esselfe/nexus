@@ -48,8 +48,7 @@ GLubyte *ImageFromPNGFile(unsigned int width, unsigned int height, char *filenam
 		components = 4;
 		break;
 	case PNG_COLOR_TYPE_GRAY_ALPHA:
-		printf("nexus error: PNG color type gray alpha is not supported yet\n");
-		return NULL;
+		components = 2;
 		break;
 	default:
 		printf("nexus error: Unknown png color type: %u\n", color_type);
@@ -72,6 +71,14 @@ GLubyte *ImageFromPNGFile(unsigned int width, unsigned int height, char *filenam
 				buf[cnt] = row[x];
 				buf[cnt+1] = row[x];
 				buf[cnt+2] = row[x];
+			}
+		}
+		else if (components == 2) {
+			for (x=0; x < width*2; x += 2, cnt += 4) {
+				buf[cnt] = row[x];
+				buf[cnt+1] = row[x];
+				buf[cnt+2] = row[x];
+				buf[cnt+3] = row[x+1];
 			}
 		}
 		else if (components == 3) {

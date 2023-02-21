@@ -41,6 +41,7 @@ void FloorInit(void) {
 void FloorRender(void) {
 	glEnable(GL_LIGHTING);
 	glEnable(GL_LIGHT0);
+	glDisable(GL_BLEND);
 	floor_mat_amb_diff[0] = daylight_amount;
 	floor_mat_amb_diff[1] = daylight_amount;
 	floor_mat_amb_diff[2] = daylight_amount;

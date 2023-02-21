@@ -9,7 +9,7 @@ void (*RenderFunc)(void);
 GLfloat light_ambient[] = { 1.0, 1.0, 1.0, 1.0 };
 GLfloat light_diffuse[] = { 1.0, 1.0, 1.0, 1.0 };
 GLfloat light_specular[] = { 1.0, 1.0, 1.0, 1.0 };
-GLfloat light_position[] = { 1.0, 100.0, 1.0, 0.0 };
+GLfloat light_position[] = { 1.0, 20.0, 1.0, 0.0 };
 GLuint compass_texture_id;
 
 void RenderInit(void) {

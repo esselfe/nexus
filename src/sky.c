@@ -9,6 +9,7 @@ GLfloat daylight_amount;
 int daylight_up;
 GLfloat dlcnt; // Used to "pause" on day or night state for a little while
 GLfloat moon_angle = 285;
+GLfloat sky_amb_diff[4];
 
 void SkySetup(GLuint *id, char *filename) {
 	if (verbose) printf("  Loading sky texture from %s\n", filename);
@@ -37,7 +38,7 @@ void SkyInit(void) {
 	
 	if (verbose) printf("Generating sky textures\n");
 	
-	GLubyte *data = ImageFromPNGFile(128, 128, "images/moon01-128a.png");
+	GLubyte *data = ImageFromPNGFile(128, 128, "images/moon01-128ga.png");
 	glGenTextures(1, &moon_texture_id);
 	glBindTexture(GL_TEXTURE_2D, moon_texture_id);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
@@ -150,8 +151,9 @@ void SkyInit(void) {
 }
 
 void SkyRender(void) {
-	glDisable(GL_LIGHT0);
 	glDisable(GL_LIGHTING);
+	glDisable(GL_LIGHT0);
+	glDisable(GL_BLEND);
 	
 	glPushMatrix();
 	glTranslatef(cam.x, cam.y, cam.z);
@@ -161,7 +163,6 @@ void SkyRender(void) {
 	glCallList(daylight_list);
 	glPopMatrix();
 	
-	glEnable(GL_BLEND);
 	glPushMatrix();
 	glTranslatef(cam.x, 0.0, cam.z);
 	glRotatef(moon_angle, 0.0, -1.0, 0.0);

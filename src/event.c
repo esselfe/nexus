@@ -118,6 +118,14 @@ void EventCheck(void) {
 			case SDLK_KP_6:
 				cam.moving |= LOOK_RIGHT;
 				break;
+			case SDLK_KP_7:
+				light_position[0] -= 10.0;
+				glLightfv(GL_LIGHT0, GL_POSITION, light_position);
+				break;
+			case SDLK_KP_9:
+				light_position[0] += 10.0;
+				glLightfv(GL_LIGHT0, GL_POSITION, light_position);
+				break;
 			case SDLK_KP_MINUS:
 				cam.moving |= THR_DOWN;
 				break;
