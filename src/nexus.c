@@ -173,6 +173,7 @@ int main(int argc, char **argv) {
 	ElementInit();
 	FlagInit();
 	SkyInit();
+	MoonInit();
 	BrowserInit();
 	
 	init_done = 1;

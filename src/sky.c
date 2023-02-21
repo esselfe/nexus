@@ -4,11 +4,10 @@
 #include "nexus.h"
 
 GLuint sky_texture_1, sky_texture_2, sky_texture_3, sky_texture_4,
-	moon_texture_id, sky_list, daylight_list;
+	sky_list, daylight_list;
 GLfloat daylight_amount;
 int daylight_up;
 GLfloat dlcnt; // Used to "pause" on day or night state for a little while
-GLfloat moon_angle = 285;
 GLfloat sky_amb_diff[4];
 
 void SkySetup(GLuint *id, char *filename) {
@@ -37,17 +36,6 @@ void SkyInit(void) {
 	daylight_amount = 0.4;
 	
 	if (verbose) printf("Generating sky textures\n");
-	
-	GLubyte *data = ImageFromPNGFile(128, 128, "images/moon01-128ga.png");
-	glGenTextures(1, &moon_texture_id);
-	glBindTexture(GL_TEXTURE_2D, moon_texture_id);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-	glTexImage2D (GL_TEXTURE_2D, 0, GL_RGBA, 128, 128, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
-	glBindTexture(GL_TEXTURE_2D, 0);
-	free(data);
 	
 	SkySetup(&sky_texture_1, "images/sky01-2048.png");
 	SkySetup(&sky_texture_2, "images/sky02-2048.png");
@@ -163,24 +151,7 @@ void SkyRender(void) {
 	glCallList(daylight_list);
 	glPopMatrix();
 	
-	glPushMatrix();
-	glTranslatef(cam.x, 0.0, cam.z);
-	glRotatef(moon_angle, 0.0, -1.0, 0.0);
-	glTranslatef(0.0, 120.0, -900.0);
-	glBindTexture(GL_TEXTURE_2D, moon_texture_id);
-	glColor3f(1.0, 1.0, 1.0);
-	glBegin(GL_POLYGON);
-	glTexCoord2f(0.0, 1.0);
-	 glVertex3f(-10.0, -10.0, 0.0);
-	glTexCoord2f(1.0, 1.0);
-	 glVertex3f(-10.0, 10.0, 0.0);
-	glTexCoord2f(1.0, 0.0);
-	 glVertex3f(10.0, 10.0, 0.0);
-	glTexCoord2f(0.0, 0.0);
-	 glVertex3f(10.0, -10.0, 0.0);
-	glEnd();
-	glBindTexture(GL_TEXTURE_2D, 0);
-	glPopMatrix();
+	MoonRender();
 	
 	glEnable(GL_LIGHTING);
 	glEnable(GL_LIGHT0);
@@ -209,9 +180,5 @@ void SkyRender(void) {
 		daylight_up = 0;
 	else if (!daylight_up && daylight_amount <= 0.2 && dlcnt <= 0)
 		daylight_up = 1;
-	
-	moon_angle += 0.01 * delta_move;
-	if (moon_angle >= 360.0)
-		moon_angle -= 360.0;
 }
 

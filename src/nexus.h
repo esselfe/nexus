@@ -126,6 +126,12 @@ void FontRender2D(int bgcolor, int x, int y, char *text);
 ////////////////////////////////
 GLubyte *ImageFromPNGFile(unsigned int width, unsigned int height, char *filename);
 
+// moon.c
+////////////////////////////////
+void MoonInit(void);
+void MoonMove(void);
+void MoonRender(void);
+
 // render.c
 ////////////////////////////////
 extern GLfloat light_ambient[];
