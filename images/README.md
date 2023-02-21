@@ -8,7 +8,7 @@
 ![floor 01](floor01-640.png)  
 Credits: NASA https://images-assets.nasa.gov/image/PIA14533/PIA14533~thumb.jpg  
 ![font](font-760x16a.png)  
-![moon 1](moon01-128a.png)  
+![moon 1](moon01-128ga.png)  
 Credits: NASA https://www.jpl.nasa.gov/images/pia00405-earths-moon  
 ![sky 1](sky01-2048.png)  
 Credits: NASA/JPL-Caltech https://images-assets.nasa.gov/image/PIA15415/PIA15415~orig.jpg  
