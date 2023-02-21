@@ -111,7 +111,7 @@ void RenderCompass(void) {
 	
 	glPushMatrix();
 	glTranslatef(0.0, 0.0, 1.0);
-	glRotatef(cam.rotation_angle*100.0, 0.0, 0.0, -1.0);
+	glRotatef(cam.rotation_angle*100.0, 0.0, 0.0, 1.0);
 	glBegin(GL_POLYGON);
 	 glColor3f(0.4, 0.1, 0.1);
 	 glVertex2f(-5.0, 0.0);
