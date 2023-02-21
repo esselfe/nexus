@@ -10,6 +10,7 @@
 static GLubyte *font_data;
 static GLubyte *letter_data;
 static unsigned int bytes_per_line = 4*760;
+GLfloat font_mat_amb_diff[4];
 
 static void FontMakeLetter(unsigned char letter) {
 	unsigned int cnt, iter, offset;
@@ -51,9 +52,17 @@ void FontInit(void) {
 }
 
 void FontRender(int bgcolor, GLfloat x, GLfloat y, GLfloat z, char *text) {
-	glDisable(GL_LIGHT0);
 	glDisable(GL_LIGHTING);
+	glDisable(GL_LIGHT0);
 	glEnable(GL_BLEND);
+	/*glEnable(GL_LIGHTING);
+	glEnable(GL_LIGHT0);
+	font_mat_amb_diff[0] = daylight_amount;
+	font_mat_amb_diff[1] = daylight_amount;
+	font_mat_amb_diff[2] = daylight_amount;
+	font_mat_amb_diff[3] = 1.0;
+	glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE, 
+            font_mat_amb_diff); */
 	
 	if (bgcolor) {
 		glPushMatrix();

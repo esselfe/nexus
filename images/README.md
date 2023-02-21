@@ -7,7 +7,7 @@
 ![flag 01](flag01-128.png)  
 ![floor 01](floor01-640.png)  
 Credits: NASA https://images-assets.nasa.gov/image/PIA14533/PIA14533~thumb.jpg  
-![font](font-760x16.png)  
+![font](font-760x16a.png)  
 ![moon 1](moon01-128a.png)  
 Credits: NASA https://www.jpl.nasa.gov/images/pia00405-earths-moon  
 ![sky 1](sky01-2048.png)  

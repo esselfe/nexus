@@ -98,6 +98,12 @@ void TerminalParse(void) {
 			StateSet(STATE_MAIN);
 		else if (strcmp(w1, "memory") == 0)
 			StateSet(STATE_MEMORY);
+		else if (strcmp(w1, "stop") == 0)
+			CameraStop();
+		else if (strcmp(w1, "turn") == 0 && strlen(w2)) {
+			cam.rotation_angle = atof(w2)/100.0;
+			CameraRotateStep(0.0);
+		}
 	}
 
 	terminal_cursor_pos = 0;
@@ -116,8 +122,8 @@ void TerminalRender(void) {
 	if (terminal_cursor_blink) {
 		glColor3f(0.1, 0.1, 0.1);
 		glBegin(GL_LINES);
-		glVertex3i(terminal_cursor_pos * 8 + 12, 12, 1);
-		glVertex3i(terminal_cursor_pos * 8 + 12, 32, 1);
+		glVertex3i(terminal_cursor_pos * 8 + 14, 12, 1);
+		glVertex3i(terminal_cursor_pos * 8 + 14, 32, 1);
 		glEnd();
 	}
 

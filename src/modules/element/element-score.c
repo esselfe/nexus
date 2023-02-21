@@ -6,6 +6,8 @@
 #include "nexus.h"
 
 struct timeval tv_score_saved;
+unsigned long long total_waste, total_iron, total_wood,
+	total_magnet, total_rock;
 
 void ElementScoreLoad(void) {
 	if (verbose) printf("Loading element score\n");

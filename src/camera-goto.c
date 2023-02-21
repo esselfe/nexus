@@ -39,7 +39,7 @@ void CameraGotoMove(void) {
 		CameraRotateStep(0.01);
 	}
 	
-	if (goto_angle_left <= 0.01 && goto_angle_left > 0.0) {
+	if (goto_angle_left <= 0.01) {
 	  	goto_angle_left = 0.0;
 		cam.moving |= MOVE_FRONT;
 		cam.moving |= MOVE_ACCEL;

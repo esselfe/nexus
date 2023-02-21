@@ -78,7 +78,10 @@ void ElementRender(void) {
 	
 	sprintf(text, "%lu rock", total_rock);
 	FontRender2D(BG_GREY, 10, (int)winH-16-90, text);
-
+	
+	sprintf(text, "%lu elements", element_root_list.total_elements);
+	FontRender2D(BG_GREY, 10, (int)winH-16-106, text);
+	
 	if (terminal_visible)
 		TerminalRender();
 	if (!mouse_held)

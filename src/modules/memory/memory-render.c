@@ -22,9 +22,9 @@ void MemoryRender(void) {
 	glEnable(GL_LIGHTING);
 	glEnable(GL_LIGHT0);
 	
-	mat_amb_diff[0] = 0.4;
-	mat_amb_diff[1] = 0.6;
-	mat_amb_diff[2] = 0.8;
+	mat_amb_diff[0] = daylight_amount - 0.2;
+	mat_amb_diff[1] = daylight_amount - 0.1;
+	mat_amb_diff[2] = daylight_amount;
 	mat_amb_diff[3] = 1.0;
 	glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, 
             mat_amb_diff);
@@ -32,8 +32,6 @@ void MemoryRender(void) {
 	// Render memory meter
 	glPushMatrix();
 	glTranslatef(-1.0, 0.0, 0.0);
-	glEnable(GL_COLOR_MATERIAL);
-	glColorMaterial(GL_FRONT, GL_DIFFUSE);
 	glColor3f(0.2, 0.3, 0.4);
 	glBegin(GL_LINE_STRIP);
 	glVertex3f(0.0, 0.0, 0.0);
@@ -56,6 +54,7 @@ void MemoryRender(void) {
 	
 	glEnable(GL_LIGHTING);
 	glEnable(GL_LIGHT0);
+	glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, mat_amb_diff);
 
 	// Render swap meter
 	glPushMatrix();
@@ -80,13 +79,12 @@ void MemoryRender(void) {
 	FontRender(BG_BLACK, 1.0, 3.16, 0.0, swap_max_text);
 	FontRender(BG_BLACK, 1.0, swap_value, 0.0, swap_value_text);
 	
-	mat_amb_diff[0] = 0.8;
+/*	mat_amb_diff[0] = 0.8;
 	mat_amb_diff[1] = 0.8;
 	mat_amb_diff[2] = 0.8;
 	mat_amb_diff[3] = 1.0;
 	glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE, 
-            mat_amb_diff);
-	glDisable(GL_COLOR_MATERIAL);
+            mat_amb_diff);*/
 	
 	// Switch to 2D rendering (HUD)
 	RenderSet2DView();

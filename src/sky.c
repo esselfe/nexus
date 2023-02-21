@@ -7,6 +7,8 @@ GLuint sky_texture_1, sky_texture_2, sky_texture_3, sky_texture_4,
 	moon_texture_id, sky_list, daylight_list;
 GLfloat daylight_amount;
 int daylight_up;
+GLfloat dlcnt; // Used to "pause" on day or night state for a little while
+GLfloat moon_angle = 285;
 
 void SkySetup(GLuint *id, char *filename) {
 	if (verbose) printf("  Loading sky texture from %s\n", filename);
@@ -147,8 +149,6 @@ void SkyInit(void) {
 	glEndList();
 }
 
-GLfloat dlcnt;
-GLfloat moon_angle = 285;
 void SkyRender(void) {
 	glDisable(GL_LIGHT0);
 	glDisable(GL_LIGHTING);
@@ -163,6 +163,7 @@ void SkyRender(void) {
 	
 	glEnable(GL_BLEND);
 	glPushMatrix();
+	glTranslatef(cam.x, 0.0, cam.z);
 	glRotatef(moon_angle, 0.0, -1.0, 0.0);
 	glTranslatef(0.0, 120.0, -900.0);
 	glBindTexture(GL_TEXTURE_2D, moon_texture_id);

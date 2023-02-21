@@ -3,8 +3,6 @@
 
 #include "nexus.h"
 
-unsigned long long total_waste, total_iron, total_wood,
-	total_magnet, total_rock;
 struct ElementList element_root_list;
 
 void ElementInit(void) {

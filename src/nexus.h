@@ -45,7 +45,7 @@ struct Camera {
 	GLfloat x, y, z,
 		lx, ly, lz;
 	GLfloat rotation_angle;
-	unsigned int moving;
+	unsigned long moving;
 	GLfloat thr, speed, side_speed, height_speed;
 	char thr_text[5], speed_text[5], side_speed_text[5],
 		height_speed_text[5];
@@ -55,14 +55,16 @@ extern struct Camera cam;
 void CameraInit(void);
 void CameraMove(void);
 void CameraRotateStep(GLfloat angle);
+void CameraStop(void);
 
 // camera-goto.c
 ////////////////////////////////
 extern int goto_enabled;
-extern GLfloat goto_angle;
-extern GLfloat goto_x, goto_z;
 void CameraGoto(GLfloat x, GLfloat z);
 void CameraGotoMove(void);
+
+// camera-jump.c
+////////////////////////////////
 void CameraJump(GLfloat x, GLfloat z);
 
 // delta.c
@@ -114,6 +116,7 @@ void FloorRender(void);
 ////////////////////////////////
 #define BG_NONE    0
 #define BG_BLACK   1
+#define BG_GRAY    2
 #define BG_GREY    2
 void FontInit(void);
 void FontRender(int bgcolor, GLfloat x, GLfloat y, GLfloat z, char *text);
