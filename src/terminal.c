@@ -82,6 +82,12 @@ void TerminalParse(void) {
 			mainloopend = 1;
 		else if (strcmp(w1, "browser") == 0)
 			StateSet(STATE_BROWSER);
+		else if (strcmp(w1, "daylight") == 0) {
+			if (strcmp(w2, "off") == 0 || strcmp(w2, "0") == 0)
+				daylight_enabled = 0;
+			else if (strcmp(w2, "on") == 0 || strcmp(w2, "1") == 0)
+				daylight_enabled = 1;
+		}
 		else if (strcmp(w1, "editor") == 0)
 			StateSet(STATE_EDITOR);
 		else if (strcmp(w1, "element") == 0 && !strlen(w2))
@@ -111,7 +117,7 @@ void TerminalParse(void) {
 }
 
 void TerminalRender(void) {
-	glColor3f(0.4, 0.4, 0.4);
+	glColor4f(0.0, 0.0, 0.0, 1.0);
 	glBegin(GL_QUADS);
 	glVertex3i(10, 10, 0);
 	glVertex3i(10, 34, 0);
@@ -120,7 +126,7 @@ void TerminalRender(void) {
 	glEnd();
 
 	if (terminal_cursor_blink) {
-		glColor3f(0.1, 0.1, 0.1);
+		glColor3f(0.3, 0.4, 0.5);
 		glBegin(GL_LINES);
 		glVertex3i(terminal_cursor_pos * 8 + 14, 12, 1);
 		glVertex3i(terminal_cursor_pos * 8 + 14, 32, 1);
@@ -128,6 +134,6 @@ void TerminalRender(void) {
 	}
 
 	if (strlen(terminal_buffer))
-		FontRender2D(BG_BLACK, 12, 14, terminal_buffer);
+		FontRender2D(BG_NONE, 12, 14, terminal_buffer);
 }
 

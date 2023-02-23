@@ -10,26 +10,25 @@ struct Flag flag01, flag02;
 static GLfloat flag_mat_amb_diff[4];
 
 void FlagSetup(struct Flag *flag, char *filename) {
-	flag->width = 128;
-	flag->height = 128;
-	flag->components = 3;
+	GLubyte *data;
+	flag->width = 1.0;
+	flag->height = 1.0;
 	flag->value = (rand()%10000) + 1;
-	flag->texture_data_size = flag->width * flag->height * flag->components;
 	if (filename == NULL) {
-		flag->texture_data = malloc(flag->texture_data_size);
+		data = malloc(128*128*3);
 		unsigned int cnt;
-		for (cnt = 0; cnt < flag->texture_data_size; cnt++)
-			flag->texture_data[cnt] = rand()%256;
+		for (cnt = 0; cnt < 128*128* 3; cnt++)
+			data[cnt] = rand()%256;
 	}
 	else
-		flag->texture_data = ImageFromPNGFile(128, 128, filename);
+		data = ImageFromPNGFile(128, 128, filename);
 	glGenTextures(1, &flag->texture_id);
 	glBindTexture(GL_TEXTURE_2D, flag->texture_id);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-	glTexImage2D (GL_TEXTURE_2D, 0, GL_RGB, 128, 128, 0, GL_RGB, GL_UNSIGNED_BYTE, flag->texture_data);
+	glTexImage2D (GL_TEXTURE_2D, 0, GL_RGB, 128, 128, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
 	glBindTexture(GL_TEXTURE_2D, 0);
 }
 

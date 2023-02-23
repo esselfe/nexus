@@ -52,15 +52,15 @@ void FloorRender(void) {
 	glBindTexture(GL_TEXTURE_2D, floor_texture_id);
 	glBegin(GL_POLYGON);
 	glTexCoord2f(0.0, 0.0);
-	glVertex3f(-floor_size, 0.0, floor_size);
+	 glVertex3f(-floor_size, 0.0, floor_size);
 	glTexCoord2f(0.0, 10.0*floor_factor);
-	glVertex3f(floor_size, 0.0, floor_size);
+	 glVertex3f(floor_size, 0.0, floor_size);
 	glTexCoord2f(10.0*floor_factor, 10.0*floor_factor);
-	glVertex3f(floor_size, 0.0, -floor_size);
+	 glVertex3f(floor_size, 0.0, -floor_size);
 	glTexCoord2f(10.0*floor_factor, 0.0);
-	glVertex3f(-floor_size, 0.0, -floor_size);
+	 glVertex3f(-floor_size, 0.0, -floor_size);
 	glTexCoord2f(0.0, 0.0);
-	glVertex3f(-floor_size, 0.0, floor_size);
+	 glVertex3f(-floor_size, 0.0, floor_size);
 	glEnd();
 	glBindTexture(GL_TEXTURE_2D, 0);
 }

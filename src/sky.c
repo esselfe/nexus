@@ -6,6 +6,8 @@
 GLuint sky_texture_1, sky_texture_2, sky_texture_3, sky_texture_4,
 	sky_list, daylight_list;
 GLfloat daylight_amount;
+char daylight_amount_text[10];
+int daylight_enabled = 1;
 int daylight_up;
 GLfloat dlcnt; // Used to "pause" on day or night state for a little while
 GLfloat sky_amb_diff[4];
@@ -34,6 +36,7 @@ void SkyInit(void) {
 	
 	daylight_up = 1;
 	daylight_amount = 0.4;
+	sprintf(daylight_amount_text, "%.1f", daylight_amount);
 	
 	if (verbose) printf("Generating sky textures\n");
 	
@@ -47,10 +50,10 @@ void SkyInit(void) {
 	//////////////////////////////////
 
 	sky_list = glGenLists(1);
-	glNewList(sky_list, GL_COMPILE_AND_EXECUTE);
+	glNewList(sky_list, GL_COMPILE);
 	
 	glBindTexture(GL_TEXTURE_2D, sky_texture_1);
-	glColor3f(1.0, 1.0, 1.0);
+	//glColor3f(1.0, 1.0, 1.0);
 	glBegin(GL_POLYGON);
 	glTexCoord2f(0.0, 1.0);
 	 glVertex3f(-1000.0, -1000.0, -1000.0);
@@ -63,7 +66,7 @@ void SkyInit(void) {
 	glEnd();
 	
 	glBindTexture(GL_TEXTURE_2D, sky_texture_2);
-	glColor3f(1.0, 1.0, 1.0);
+	//glColor3f(1.0, 1.0, 1.0);
 	glBegin(GL_POLYGON);
 	glTexCoord2f(0.0, 1.0);
 	 glVertex3f(1000.0, -1000.0, -1000.0);
@@ -76,7 +79,7 @@ void SkyInit(void) {
 	glEnd();
 	
 	glBindTexture(GL_TEXTURE_2D, sky_texture_3);
-	glColor3f(1.0, 1.0, 1.0);
+	//glColor3f(1.0, 1.0, 1.0);
 	glBegin(GL_POLYGON);
 	glTexCoord2f(0.0, 1.0);
 	 glVertex3f(1000.0, -1000.0, 1000.0);
@@ -89,7 +92,7 @@ void SkyInit(void) {
 	glEnd();
 	
 	glBindTexture(GL_TEXTURE_2D, sky_texture_4);
-	glColor3f(1.0, 1.0, 1.0);
+	//glColor3f(1.0, 1.0, 1.0);
 	glBegin(GL_POLYGON);
 	glTexCoord2f(0.0, 1.0);
 	 glVertex3f(-1000.0, -1000.0, 1000.0);
@@ -105,7 +108,7 @@ void SkyInit(void) {
 	glEndList();
 	
 	daylight_list = glGenLists(1);
-	glNewList(daylight_list, GL_COMPILE_AND_EXECUTE);
+	glNewList(daylight_list, GL_COMPILE);
 	
 	glBegin(GL_POLYGON);
 	 glVertex3f(-975.0, -975.0, -975.0);
@@ -144,11 +147,20 @@ void SkyRender(void) {
 	glDisable(GL_BLEND);
 	
 	glPushMatrix();
+	
 	glTranslatef(cam.x, cam.y, cam.z);
+	if (daylight_enabled)
+		glColor3f(1.4-daylight_amount, 1.4-daylight_amount, 1.4-daylight_amount);
+	else
+		glColor3f(1.0, 1.0, 1.0);
 	glCallList(sky_list);
-	glEnable(GL_BLEND);
-	glColor4f(0.6*daylight_amount, 0.6*daylight_amount, 0.8, daylight_amount);
-	glCallList(daylight_list);
+	
+	if (daylight_enabled) {
+		glEnable(GL_BLEND);
+		glColor4f(0.6*daylight_amount, 0.6*daylight_amount, 0.8, daylight_amount);
+		glCallList(daylight_list);
+	}
+	
 	glPopMatrix();
 	
 	MoonRender();
@@ -156,29 +168,33 @@ void SkyRender(void) {
 	glEnable(GL_LIGHTING);
 	glEnable(GL_LIGHT0);
 	
-	if (daylight_up && daylight_amount < 1.0) {
-		daylight_amount += 0.0001 * delta_move;
-		light_ambient[0] = daylight_amount;
-		light_ambient[1] = daylight_amount;
-		light_ambient[2] = daylight_amount;
-		glLightfv(GL_LIGHT0, GL_AMBIENT, light_ambient);
+	if (daylight_enabled) {
+		if (daylight_up && daylight_amount < 1.0) {
+			daylight_amount += 0.0001 * delta_move;
+			sprintf(daylight_amount_text, "%.3f", daylight_amount);
+			light_ambient[0] = daylight_amount;
+			light_ambient[1] = daylight_amount;
+			light_ambient[2] = daylight_amount;
+			glLightfv(GL_LIGHT0, GL_AMBIENT, light_ambient);
+		}
+		else if (!daylight_up && daylight_amount > 0.4) {
+			daylight_amount -= 0.0001 * delta_move;
+			sprintf(daylight_amount_text, "%.3f", daylight_amount);
+			light_ambient[0] = daylight_amount;
+			light_ambient[1] = daylight_amount;
+			light_ambient[2] = daylight_amount;
+			glLightfv(GL_LIGHT0, GL_AMBIENT, light_ambient);
+		}
+		
+		if (daylight_up && daylight_amount >= 1.0)
+			dlcnt += delta_move;
+		else if (!daylight_up && daylight_amount <= 0.4)
+			dlcnt -= delta_move;
+		
+		if (daylight_up && daylight_amount >= 1.0 && dlcnt >= 1000)
+			daylight_up = 0;
+		else if (!daylight_up && daylight_amount <= 0.4 && dlcnt <= 0)
+			daylight_up = 1;
 	}
-	else if (!daylight_up && daylight_amount > 0.2) {
-		daylight_amount -= 0.0001 * delta_move;
-		light_ambient[0] = daylight_amount;
-		light_ambient[1] = daylight_amount;
-		light_ambient[2] = daylight_amount;
-		glLightfv(GL_LIGHT0, GL_AMBIENT, light_ambient);
-	}
-	
-	if (daylight_up && daylight_amount >= 1.0)
-		dlcnt += delta_move;
-	else if (!daylight_up && daylight_amount <= 0.2)
-		dlcnt -= delta_move;
-	
-	if (daylight_up && daylight_amount >= 1.0 && dlcnt >= 1000)
-		daylight_up = 0;
-	else if (!daylight_up && daylight_amount <= 0.2 && dlcnt <= 0)
-		daylight_up = 1;
 }
 

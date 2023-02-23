@@ -3,7 +3,7 @@
 
 #include "nexus.h"
 
-static GLfloat moon_angle = 285;
+static GLfloat moon_angle = 285.0;
 static GLuint moon_texture_id;
 
 void MoonInit(void) {

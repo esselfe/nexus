@@ -94,11 +94,9 @@ void EventInit(void);
 ////////////////////////////////
 struct Flag {
 	GLfloat x, y, z;
-	unsigned int width, height, components;
+	unsigned int width, height;
 	unsigned long value;
 	GLuint texture_id;
-	unsigned int texture_data_size;
-	GLubyte *texture_data;
 };
 extern struct Flag flag01, flag02;
 
@@ -152,6 +150,8 @@ void RenderThrottle(void);
 ////////////////////////////////
 extern GLuint sky_texture_1, sky_texture_2, sky_texture_3, sky_texture_4;
 extern GLfloat daylight_amount;
+extern char daylight_amount_text[10];
+extern int daylight_enabled;
 extern int daylight_up;
 void SkyInit(void);
 void SkyRender(void);
