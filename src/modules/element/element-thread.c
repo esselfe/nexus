@@ -6,7 +6,7 @@
 void *ElementThreadFunc(void *argp) {
 	while (1) {
 		if (element_root_list.total_elements < 100*floor_factor &&
-		  StateGet() == STATE_ELEMENT)
+		  ModeGet() == MODE_ELEMENT)
 			ElementAdd(1);
 	
 		sleep(5);

@@ -133,39 +133,39 @@ void EventCheck(void) {
 				cam.moving |= THR_UP;
 				break;
 			case SDLK_F1:
-				StateSet(STATE_MAIN);
+				ModeSet(MODE_MAIN);
 				break;
 			case SDLK_b:
-				if (state != STATE_BROWSER)
-					StateSet(STATE_BROWSER);
+				if (ModeGet() != MODE_BROWSER)
+					ModeSet(MODE_BROWSER);
 				else
-					StateSet(state_prev);
+					ModeSet(mode_prev);
 				break;
 			case SDLK_d:
-				StateSet(STATE_DRIVING);
+				ModeSet(MODE_DRIVING);
 				break;
 			case SDLK_e:
 				if (mods & MOD_SHIFT) {
-					if (state != STATE_ELEMENT)
-						StateSet(STATE_ELEMENT);
+					if (ModeGet() != MODE_ELEMENT)
+						ModeSet(MODE_ELEMENT);
 					else
-						StateSet(state_prev);
+						ModeSet(mode_prev);
 				}
 				else {
-					if (state != STATE_EDITOR)
-						StateSet(STATE_EDITOR);
+					if (ModeGet() != MODE_EDITOR)
+						ModeSet(MODE_EDITOR);
 					else
-						StateSet(state_prev);
+						ModeSet(mode_prev);
 				}
 				break;
 			case SDLK_k:
 				show_keys = !show_keys;
 				break;
 			case SDLK_m:
-				if (state != STATE_MEMORY)
-					StateSet(STATE_MEMORY);
+				if (ModeGet() != MODE_MEMORY)
+					ModeSet(MODE_MEMORY);
 				else
-					StateSet(state_prev);
+					ModeSet(mode_prev);
 				break;
 			case SDLK_p:
 				printf("position: x: %f y: %f z: %f lx: %f ly: %f lz: %f angle: %f\n",

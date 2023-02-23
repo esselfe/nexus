@@ -81,7 +81,7 @@ void TerminalParse(void) {
 			strcmp(w1, "qw") == 0)
 			mainloopend = 1;
 		else if (strcmp(w1, "browser") == 0)
-			StateSet(STATE_BROWSER);
+			ModeSet(MODE_BROWSER);
 		else if (strcmp(w1, "daylight") == 0) {
 			if (strcmp(w2, "off") == 0 || strcmp(w2, "0") == 0)
 				daylight_enabled = 0;
@@ -89,9 +89,9 @@ void TerminalParse(void) {
 				daylight_enabled = 1;
 		}
 		else if (strcmp(w1, "editor") == 0)
-			StateSet(STATE_EDITOR);
+			ModeSet(MODE_EDITOR);
 		else if (strcmp(w1, "element") == 0 && !strlen(w2))
-			StateSet(STATE_ELEMENT);
+			ModeSet(MODE_ELEMENT);
 		else if (strcmp(w1, "element") == 0 && strlen(w2)) {
 			if (strcmp(w2, "add") == 0)
 				ElementAdd(atoi(w3));
@@ -101,9 +101,9 @@ void TerminalParse(void) {
 		else if (strcmp(w1, "jump") == 0 && strlen(w2) && strlen(w3))
 			CameraJump(atof(w2), atof(w3));
 		else if (strcmp(w1, "main") == 0)
-			StateSet(STATE_MAIN);
+			ModeSet(MODE_MAIN);
 		else if (strcmp(w1, "memory") == 0)
-			StateSet(STATE_MEMORY);
+			ModeSet(MODE_MEMORY);
 		else if (strcmp(w1, "stop") == 0)
 			CameraStop();
 		else if (strcmp(w1, "turn") == 0 && strlen(w2)) {

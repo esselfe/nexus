@@ -163,7 +163,7 @@ int main(int argc, char **argv) {
 	fps_text = malloc(20);
 	sprintf(fps_text, "0 fps");
 
-	StateSet(STATE_MAIN);
+	ModeSet(MODE_MAIN);
 	EventInit();
 	DeltaInit();
 	CameraInit();

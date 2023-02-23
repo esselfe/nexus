@@ -124,6 +124,18 @@ void FontRender2D(int bgcolor, int x, int y, char *text);
 ////////////////////////////////
 GLubyte *ImageFromPNGFile(unsigned int width, unsigned int height, char *filename);
 
+// mode.c
+////////////////////////////////
+#define MODE_MAIN      0
+#define MODE_BROWSER   1
+#define MODE_DRIVING   2
+#define MODE_EDITOR    3
+#define MODE_ELEMENT   4
+#define MODE_MEMORY    5
+extern unsigned int mode, mode_prev;
+unsigned int ModeGet(void);
+void ModeSet(unsigned int newmode);
+
 // moon.c
 ////////////////////////////////
 void MoonInit(void);
@@ -155,19 +167,6 @@ extern int daylight_enabled;
 extern int daylight_up;
 void SkyInit(void);
 void SkyRender(void);
-
-// state.c
-////////////////////////////////
-#define STATE_MAIN      0
-#define STATE_BROWSER   1
-#define STATE_DRIVING   2
-#define STATE_EDITOR    3
-#define STATE_ELEMENT   4
-#define STATE_MEMORY    5
-extern unsigned int state, state_prev;
-
-unsigned int StateGet(void);
-void StateSet(unsigned int newstate);
 
 // terminal.c
 ////////////////////////////////
