@@ -36,16 +36,23 @@ void FloorInit(void) {
 	floor_size = 50.0 * floor_factor;
 	
 	FloorTextureSetup(&floor_texture_id, 640, 640, "images/floor01-640.png");
+	
+	floor_mat_amb_diff[0] = 0.4;
+	floor_mat_amb_diff[1] = 0.4;
+	floor_mat_amb_diff[2] = 0.4;
+	floor_mat_amb_diff[3] = 1.0;
 }
 
 void FloorRender(void) {
 	glEnable(GL_LIGHTING);
 	glEnable(GL_LIGHT0);
 	glDisable(GL_BLEND);
-	floor_mat_amb_diff[0] = daylight_amount;
-	floor_mat_amb_diff[1] = daylight_amount;
-	floor_mat_amb_diff[2] = daylight_amount;
-	floor_mat_amb_diff[3] = 1.0;
+	if (daylight_amount > 0.4) {
+		floor_mat_amb_diff[0] = daylight_amount;
+		floor_mat_amb_diff[1] = daylight_amount;
+		floor_mat_amb_diff[2] = daylight_amount;
+		floor_mat_amb_diff[3] = 1.0;
+	}
 	glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE, 
             floor_mat_amb_diff);
 	

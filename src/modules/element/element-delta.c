@@ -8,8 +8,13 @@ void ElementCheckCollision(void) {
 	if (element_root_list.first_element == NULL)
 		return;
 
-	struct Element *el = element_root_list.first_element;
+	struct Element *elnext, *el = element_root_list.first_element;
 	while (1) {
+		if (el->next)
+			elnext = el->next;
+		else
+			elnext = NULL;
+		
 		if (cam.x > el->x - 1.5 &&
 			cam.x < el->x + 1.5) {
 			if (cam.z > el->z - 1.5 &&
@@ -26,14 +31,15 @@ void ElementCheckCollision(void) {
 					total_rock += el->value;
 
 				ElementRemove(el);
-				el = element_root_list.first_element;
-				continue;
+				if (elnext) {
+					el = elnext;
+					continue;
+				}
+				else
+					break;
 			}
 		}
-
-		if (el == NULL)
-			break;
-
+		
 		if (el->next == NULL)
 			break;
 		else

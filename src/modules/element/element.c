@@ -11,8 +11,13 @@ void ElementInit(void) {
 	gettimeofday(&tv_score_saved, NULL);
 	ElementScoreLoad();
 	ElementTextureInit();
-	ElementAdd(floor_factor*75);
+	ElementAdd(floor_factor*60);
 	ElementThreadStart();
+	
+	element_mat_amb_diff[0] = 0.4;
+	element_mat_amb_diff[1] = 0.4;
+	element_mat_amb_diff[2] = 0.4;
+	element_mat_amb_diff[3] = 1.0;
 }
 
 void ElementAdd(unsigned int count) {

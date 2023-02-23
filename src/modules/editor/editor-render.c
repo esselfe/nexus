@@ -36,6 +36,8 @@ void EditorRender(void) {
 	
 	RenderThrottle();
 	RenderCompass();
+	FontRender2D(BG_BLACK, winW-strlen(daylight_amount_text)*8, 16,
+		daylight_amount_text);
 
 	SDL_GL_SwapWindow(window);
 }

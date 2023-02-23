@@ -32,7 +32,7 @@ void CameraGoto(GLfloat x, GLfloat z) {
 }
 
 void CameraGotoMove(void) {
-	if (goto_angle_left > 0.01) {
+	if (goto_angle_left >= 0.01) {
 		goto_angle_left -= 0.01;
 		CameraRotateStep(0.01);
 	}

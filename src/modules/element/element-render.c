@@ -20,10 +20,12 @@ void ElementRender(void) {
 	glEnable(GL_LIGHTING);
 	glEnable(GL_LIGHT0);
 	
-	element_mat_amb_diff[0] = daylight_amount;
-	element_mat_amb_diff[1] = daylight_amount;
-	element_mat_amb_diff[2] = daylight_amount;
-	element_mat_amb_diff[3] = 1.0;
+	if (daylight_amount > 0.4) {
+		element_mat_amb_diff[0] = daylight_amount;
+		element_mat_amb_diff[1] = daylight_amount;
+		element_mat_amb_diff[2] = daylight_amount;
+		element_mat_amb_diff[3] = 1.0;
+	}
 	glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE, 
             element_mat_amb_diff);
 	glDisable(GL_BLEND);
@@ -89,6 +91,8 @@ void ElementRender(void) {
 
 	RenderThrottle();
 	RenderCompass();
+	FontRender2D(BG_BLACK, winW-strlen(daylight_amount_text)*8, 16,
+		daylight_amount_text);
 
 	SDL_GL_SwapWindow(window);
 }

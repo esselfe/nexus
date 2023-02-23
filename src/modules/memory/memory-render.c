@@ -8,7 +8,7 @@ GLfloat memory_max, memory_value;
 char memory_max_text[128] = "0", memory_value_text[128] = "0";
 GLfloat swap_max, swap_value;
 char swap_max_text[128] = "0", swap_value_text[128] = "0";
-GLfloat mat_amb_diff[4];
+GLfloat memory_mat_amb_diff[4];
 
 void MemoryRender(void) {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -22,12 +22,14 @@ void MemoryRender(void) {
 	glEnable(GL_LIGHTING);
 	glEnable(GL_LIGHT0);
 	
-	mat_amb_diff[0] = daylight_amount - 0.2;
-	mat_amb_diff[1] = daylight_amount - 0.1;
-	mat_amb_diff[2] = daylight_amount;
-	mat_amb_diff[3] = 1.0;
+	if (daylight_amount > 0.4) {
+		memory_mat_amb_diff[0] = daylight_amount - 0.2;
+		memory_mat_amb_diff[1] = daylight_amount - 0.1;
+		memory_mat_amb_diff[2] = daylight_amount;
+		memory_mat_amb_diff[3] = 1.0;
+	}
 	glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, 
-            mat_amb_diff);
+            memory_mat_amb_diff);
             
 	// Render memory meter
 	glPushMatrix();
@@ -54,7 +56,7 @@ void MemoryRender(void) {
 	
 	glEnable(GL_LIGHTING);
 	glEnable(GL_LIGHT0);
-	glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, mat_amb_diff);
+	glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, memory_mat_amb_diff);
 
 	// Render swap meter
 	glPushMatrix();
@@ -79,13 +81,6 @@ void MemoryRender(void) {
 	FontRender(BG_BLACK, 1.0, 3.16, 0.0, swap_max_text);
 	FontRender(BG_BLACK, 1.0, swap_value, 0.0, swap_value_text);
 	
-/*	mat_amb_diff[0] = 0.8;
-	mat_amb_diff[1] = 0.8;
-	mat_amb_diff[2] = 0.8;
-	mat_amb_diff[3] = 1.0;
-	glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE, 
-            mat_amb_diff);*/
-	
 	// Switch to 2D rendering (HUD)
 	RenderSet2DView();
 
@@ -98,6 +93,8 @@ void MemoryRender(void) {
 
 	RenderThrottle();
 	RenderCompass();
+	FontRender2D(BG_BLACK, winW-strlen(daylight_amount_text)*8, 16,
+		daylight_amount_text);
 
 	SDL_GL_SwapWindow(window);
 }

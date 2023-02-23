@@ -46,16 +46,24 @@ void FlagInit(void) {
 	flag02.y = 0.5;
 	flag02.z = 0.0;
 	FlagSetup(&flag02, NULL);
+	
+	flag_mat_amb_diff[0] = 0.4;
+	flag_mat_amb_diff[1] = 0.4;
+	flag_mat_amb_diff[2] = 0.4;
+	flag_mat_amb_diff[3] = 1.0;
 }
 
 void FlagRender(void) {
 	glEnable(GL_LIGHTING);
 	glEnable(GL_LIGHT0);
 	glDisable(GL_BLEND);
-	flag_mat_amb_diff[0] = daylight_amount;
-	flag_mat_amb_diff[1] = daylight_amount;
-	flag_mat_amb_diff[2] = daylight_amount;
-	flag_mat_amb_diff[3] = 1.0;
+	
+	if (daylight_amount > 0.4) {
+		flag_mat_amb_diff[0] = daylight_amount;
+		flag_mat_amb_diff[1] = daylight_amount;
+		flag_mat_amb_diff[2] = daylight_amount;
+		flag_mat_amb_diff[3] = 1.0;
+	}
 	glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE, 
             flag_mat_amb_diff);
 	

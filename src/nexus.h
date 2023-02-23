@@ -236,6 +236,7 @@ extern unsigned long long total_waste, total_iron, total_wood,
 	total_magnet, total_rock;
 extern GLuint texture_id_waste, texture_id_iron, texture_id_wood,
 	texture_id_magnet, texture_id_rock;
+extern GLfloat element_mat_amb_diff[4];
 extern struct timeval tv_score_saved;
 void ElementAdd(unsigned int count);
 void ElementDelta(void);
@@ -254,7 +255,9 @@ extern GLfloat memory_max, memory_value;
 extern char memory_max_text[128], memory_value_text[128];
 extern GLfloat swap_max, swap_value;
 extern char swap_max_text[128], swap_value_text[128];
+extern GLfloat memory_mat_amb_diff[4];
 void MemoryDeltaCompute(void);
+void MemoryInit(void);
 void MemoryRender(void);
 
 #endif /* NEXUS_H */

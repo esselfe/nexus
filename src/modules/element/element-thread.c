@@ -7,7 +7,7 @@ void *ElementThreadFunc(void *argp) {
 	while (1) {
 		if (element_root_list.total_elements < 100*floor_factor &&
 		  StateGet() == STATE_ELEMENT)
-			ElementAdd(2);
+			ElementAdd(1);
 	
 		sleep(5);
 	}

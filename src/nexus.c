@@ -175,6 +175,7 @@ int main(int argc, char **argv) {
 	SkyInit();
 	MoonInit();
 	BrowserInit();
+	MemoryInit();
 	
 	init_done = 1;
 
