@@ -61,6 +61,11 @@ void CameraMove(void) {
 					cam.moving ^= MOVE_UP;
 				if (cam.moving & MOVE_DOWN)
 					cam.moving ^= MOVE_DOWN;
+				
+				if (goto_stopping) {
+					goto_stopping = 0;
+					CameraJump(goto_x, goto_z);
+				}
 			}
 		}
 		if (cam.moving & MOVE_BACK) {

@@ -3,7 +3,7 @@
 
 #include "nexus.h"
 
-int goto_enabled;
+int goto_enabled, goto_stopping;
 GLfloat goto_x, goto_z, goto_angle, goto_angle_left;
 
 void CameraGoto(GLfloat x, GLfloat z) {
@@ -47,6 +47,7 @@ void CameraGotoMove(void) {
 		if ((cam.x < goto_x + cam.speed/3.4 && cam.x > goto_x - cam.speed/3.4) &&
 		  (cam.z < goto_z + cam.speed/3.4 && cam.z > goto_z - cam.speed/3.4)) {
 			goto_enabled = 0;
+			goto_stopping = 1;
 			cam.moving |= MOVE_DECEL;
 			if (cam.moving & MOVE_ACCEL)
 				cam.moving ^= MOVE_ACCEL;

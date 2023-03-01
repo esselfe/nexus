@@ -59,7 +59,8 @@ void CameraStop(void);
 
 // camera-goto.c
 ////////////////////////////////
-extern int goto_enabled;
+extern int goto_enabled, goto_stopping;
+extern GLfloat goto_x, goto_z;
 void CameraGoto(GLfloat x, GLfloat z);
 void CameraGotoMove(void);
 

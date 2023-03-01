@@ -72,6 +72,8 @@ void EventCheck(void) {
 					cam.moving ^= MOVE_BACK;
 				if (goto_enabled)
 					goto_enabled = 0;
+				if (goto_stopping)
+					goto_stopping = 0;
 				break;
 			case SDLK_DOWN:
 				if (cam.moving & MOVE_DECEL)
@@ -83,6 +85,8 @@ void EventCheck(void) {
 					cam.moving ^= MOVE_FRONT;
 				if (goto_enabled)
 					goto_enabled = 0;
+				if (goto_stopping)
+					goto_stopping = 0;
 				break;
 			case SDLK_LEFT:
 				if (cam.moving & MOVE_SIDE_DECEL)
@@ -93,6 +97,8 @@ void EventCheck(void) {
 					cam.moving ^= MOVE_RIGHT;
 				if (goto_enabled)
 					goto_enabled = 0;
+				if (goto_stopping)
+					goto_stopping = 0;
 				break;
 			case SDLK_RIGHT:
 				if (cam.moving & MOVE_SIDE_DECEL)
@@ -103,6 +109,8 @@ void EventCheck(void) {
 					cam.moving ^= MOVE_LEFT;
 				if (goto_enabled)
 					goto_enabled = 0;
+				if (goto_stopping)
+					goto_stopping = 0;
 				break;
 			case SDLK_PAGEUP:
 				if (cam.moving & MOVE_HEIGHT_DECEL)
@@ -122,9 +130,17 @@ void EventCheck(void) {
 				break;
 			case SDLK_KP_4:
 				cam.moving |= LOOK_LEFT;
+				if (goto_enabled)
+					goto_enabled = 0;
+				if (goto_stopping)
+					goto_stopping = 0;
 				break;
 			case SDLK_KP_6:
 				cam.moving |= LOOK_RIGHT;
+				if (goto_enabled)
+					goto_enabled = 0;
+				if (goto_stopping)
+					goto_stopping = 0;
 				break;
 			case SDLK_KP_7:
 				light_position[0] -= 10.0;
