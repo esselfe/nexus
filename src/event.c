@@ -18,6 +18,58 @@ void EventInit(void) {
 	SDL_ShowCursor(0);
 }
 
+char ShiftKey(SDL_Keycode key) {
+	switch (key) {
+	case SDLK_BACKQUOTE:
+		return '~';
+	case SDLK_1:
+		return '!';
+	case SDLK_2:
+		return '@';
+	case SDLK_3:
+		return '#';
+	case SDLK_4:
+		return '$';
+	case SDLK_5:
+		return '%';
+	case SDLK_6:
+		return '^';
+	case SDLK_7:
+		return '&';
+	case SDLK_8:
+		return '*';
+	case SDLK_9:
+		return '(';
+	case SDLK_0:
+		return ')';
+	case SDLK_MINUS:
+		return '_';
+	case SDLK_EQUALS:
+		return '+';
+	case SDLK_LEFTBRACKET:
+		return '{';
+	case SDLK_RIGHTBRACKET:
+		return '}';
+	case SDLK_BACKSLASH:
+		return '|';
+	case SDLK_SEMICOLON:
+		return ':';
+	case SDLK_QUOTE:
+		return '"';
+	case SDLK_COMMA:
+		return '<';
+	case SDLK_PERIOD:
+		return '>';
+	case SDLK_SLASH:
+		return '?';
+	}
+	
+	if (key >= 'a' && key <= 'z')
+		return (char)key-32;
+	
+	return 32;
+}
+
 void EventCheck(void) {
 	if (SDL_PollEvent(&event)) {
 		if (event.type == SDL_QUIT)
@@ -28,9 +80,12 @@ void EventCheck(void) {
 
 			if (terminal_visible && (event.key.keysym.sym >= SDLK_SPACE && 
 				event.key.keysym.sym <= SDLK_z)) {
-				if (terminal_cursor_pos < TERMINAL_BUFFER_SIZE)
-					terminal_buffer[terminal_cursor_pos++] = event.key.keysym.sym;
-					
+				if (terminal_cursor_pos < TERMINAL_BUFFER_SIZE) {
+					if (mods & MOD_SHIFT)
+						terminal_buffer[terminal_cursor_pos++] = ShiftKey(event.key.keysym.sym);
+					else
+						terminal_buffer[terminal_cursor_pos++] = event.key.keysym.sym;
+				}	
 				return;
 			}
 			else if (terminal_visible && event.key.keysym.sym == SDLK_BACKSPACE) {
