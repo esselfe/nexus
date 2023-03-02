@@ -33,7 +33,7 @@ void FloorInit(void) {
 	else if (floor_factor > 100)
 		floor_factor = 100;
 	
-	floor_size = 50.0 * floor_factor;
+	floor_size = 100.0 * floor_factor;
 	
 	FloorTextureSetup(&floor_texture_id, 640, 640, "images/floor01-640.png");
 	
@@ -59,15 +59,15 @@ void FloorRender(void) {
 	glBindTexture(GL_TEXTURE_2D, floor_texture_id);
 	glBegin(GL_POLYGON);
 	glTexCoord2f(0.0, 0.0);
-	 glVertex3f(-floor_size, 0.0, floor_size);
+	 glVertex3f(-floor_size/2.0, 0.0, floor_size/2.0);
 	glTexCoord2f(0.0, 10.0*floor_factor);
-	 glVertex3f(floor_size, 0.0, floor_size);
+	 glVertex3f(floor_size/2.0, 0.0, floor_size/2.0);
 	glTexCoord2f(10.0*floor_factor, 10.0*floor_factor);
-	 glVertex3f(floor_size, 0.0, -floor_size);
+	 glVertex3f(floor_size/2.0, 0.0, -floor_size/2.0);
 	glTexCoord2f(10.0*floor_factor, 0.0);
-	 glVertex3f(-floor_size, 0.0, -floor_size);
+	 glVertex3f(-floor_size/2.0, 0.0, -floor_size/2.0);
 	glTexCoord2f(0.0, 0.0);
-	 glVertex3f(-floor_size, 0.0, floor_size);
+	 glVertex3f(-floor_size/2.0, 0.0, floor_size/2.0);
 	glEnd();
 	glBindTexture(GL_TEXTURE_2D, 0);
 }
