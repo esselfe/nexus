@@ -7,6 +7,7 @@ int floor_factor;
 GLfloat floor_size;
 GLuint floor_texture_id;
 static GLfloat floor_mat_amb_diff[4];
+struct FloorList floor_root_list;
 
 void FloorTextureSetup(GLuint *id, unsigned int width, unsigned int height,
 	  char *filename) {
@@ -41,6 +42,108 @@ void FloorInit(void) {
 	floor_mat_amb_diff[1] = 0.4;
 	floor_mat_amb_diff[2] = 0.4;
 	floor_mat_amb_diff[3] = 1.0;
+	
+	struct Floor *fl = malloc(sizeof(struct Floor));
+	floor_root_list.first_floor = fl;
+	fl->prev = NULL;
+	fl->position = FLOOR_NORTHWEST;
+	fl->offset_x = -1;
+	fl->offset_z = -1;
+	fl->x = -floor_size;
+	fl->y = 0.0;
+	fl->z = -floor_size;
+	fl->texture_id = floor_texture_id;
+	fl->next = malloc(sizeof(struct Floor));
+	fl->next->prev = fl;
+	fl = fl->next;
+	
+	fl->position = FLOOR_NORTH;
+	fl->offset_x = 0;
+	fl->offset_z = -1;
+	fl->x = 0.0;
+	fl->y = 0.0;
+	fl->z = -floor_size;
+	fl->texture_id = floor_texture_id;
+	fl->next = malloc(sizeof(struct Floor));
+	fl->next->prev = fl;
+	fl = fl->next;
+	
+	fl->position = FLOOR_NORTHEAST;
+	fl->offset_x = 1;
+	fl->offset_z = -1;
+	fl->x = floor_size;
+	fl->y = 0.0;
+	fl->z = -floor_size;
+	fl->texture_id = floor_texture_id;
+	fl->next = malloc(sizeof(struct Floor));
+	fl->next->prev = fl;
+	fl = fl->next;
+	
+	fl->position = FLOOR_CENTERWEST;
+	fl->offset_x = -1;
+	fl->offset_z = 0;
+	fl->x = -floor_size;
+	fl->y = 0.0;
+	fl->z = 0.0;
+	fl->texture_id = floor_texture_id;
+	fl->next = malloc(sizeof(struct Floor));
+	fl->next->prev = fl;
+	fl = fl->next;
+	
+	fl->position = FLOOR_CENTER;
+	fl->offset_x = 0;
+	fl->offset_z = 0;
+	fl->x = 0.0;
+	fl->y = 0.0;
+	fl->z = 0.0;
+	fl->texture_id = floor_texture_id;
+	fl->next = malloc(sizeof(struct Floor));
+	fl->next->prev = fl;
+	fl = fl->next;
+	
+	fl->position = FLOOR_CENTEREAST;
+	fl->offset_x = 1;
+	fl->offset_z = 0;
+	fl->x = floor_size;
+	fl->y = 0.0;
+	fl->z = 0.0;
+	fl->texture_id = floor_texture_id;
+	fl->next = malloc(sizeof(struct Floor));
+	fl->next->prev = fl;
+	fl = fl->next;
+	
+	fl->position = FLOOR_SOUTHWEST;
+	fl->offset_x = -1;
+	fl->offset_z = 1;
+	fl->x = -floor_size;
+	fl->y = 0.0;
+	fl->z = floor_size;
+	fl->texture_id = floor_texture_id;
+	fl->next = malloc(sizeof(struct Floor));
+	fl->next->prev = fl;
+	fl = fl->next;
+	
+	fl->position = FLOOR_SOUTH;
+	fl->offset_x = 0;
+	fl->offset_z = 1;
+	fl->x = 0.0;
+	fl->y = 0.0;
+	fl->z = floor_size;
+	fl->texture_id = floor_texture_id;
+	fl->next = malloc(sizeof(struct Floor));
+	fl->next->prev = fl;
+	fl = fl->next;
+	
+	fl->position = FLOOR_SOUTHEAST;
+	fl->offset_x = 1;
+	fl->offset_z = 1;
+	fl->x = floor_size;
+	fl->y = 0.0;
+	fl->z = floor_size;
+	fl->texture_id = floor_texture_id;
+	fl->next = NULL;
+	
+	floor_root_list.last_floor = fl;
 }
 
 void FloorRender(void) {
@@ -56,19 +159,41 @@ void FloorRender(void) {
 	glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE, 
             floor_mat_amb_diff);
 	
-	glBindTexture(GL_TEXTURE_2D, floor_texture_id);
-	glBegin(GL_POLYGON);
-	glTexCoord2f(0.0, 0.0);
-	 glVertex3f(-floor_size/2.0, 0.0, floor_size/2.0);
-	glTexCoord2f(0.0, 10.0*floor_factor);
-	 glVertex3f(floor_size/2.0, 0.0, floor_size/2.0);
-	glTexCoord2f(10.0*floor_factor, 10.0*floor_factor);
-	 glVertex3f(floor_size/2.0, 0.0, -floor_size/2.0);
-	glTexCoord2f(10.0*floor_factor, 0.0);
-	 glVertex3f(-floor_size/2.0, 0.0, -floor_size/2.0);
-	glTexCoord2f(0.0, 0.0);
-	 glVertex3f(-floor_size/2.0, 0.0, floor_size/2.0);
-	glEnd();
-	glBindTexture(GL_TEXTURE_2D, 0);
+	struct Floor *fl = floor_root_list.first_floor;
+	while (1) {
+		glPushMatrix();
+		glTranslatef(fl->x, fl->y, fl->z);
+		glBindTexture(GL_TEXTURE_2D, fl->texture_id);
+		glBegin(GL_POLYGON);
+		glTexCoord2f(0.0, 0.0);
+		 glVertex3f(-floor_size/2.0, 0.0, floor_size/2.0);
+		glTexCoord2f(0.0, 10.0*floor_factor);
+		 glVertex3f(floor_size/2.0, 0.0, floor_size/2.0);
+		glTexCoord2f(10.0*floor_factor, 10.0*floor_factor);
+		 glVertex3f(floor_size/2.0, 0.0, -floor_size/2.0);
+		glTexCoord2f(10.0*floor_factor, 0.0);
+		 glVertex3f(-floor_size/2.0, 0.0, -floor_size/2.0);
+		glTexCoord2f(0.0, 0.0);
+		 glVertex3f(-floor_size/2.0, 0.0, floor_size/2.0);
+		glEnd();
+		glBindTexture(GL_TEXTURE_2D, 0);
+		glPopMatrix();
+		
+		if (fl->next != NULL)
+			fl = fl->next;
+		else
+			break;
+	}
 }
+
+void FloorAddNorthRow(void);
+void FloorAddCenterRow(void);
+void FloorAddSouthRow(void);
+void FloorAddWestRow(void);
+void FloorAddEastRow(void);
+void FloorRemoveNorthRow(void);
+void FloorRemoveCenterRow(void);
+void FloorRemoveSouthRow(void);
+void FloorRemoveWestRow(void);
+void FloorRemoveEastRow(void);
 
