@@ -241,6 +241,16 @@ void CameraMove(void) {
 			cam.moving |= MOVE_SIDE_ACCEL;
 		}
 	}
+	
+	if (cam.z < floor_center->z - floor_size/2.0)
+		FloorAddNorthRow();
+	else if (cam.z > floor_center->z + floor_size/2.0)
+		FloorAddSouthRow();
+	
+	if (cam.x < floor_center->x - floor_size/2.0)
+		FloorAddWestRow();
+	else if (cam.x > floor_center->x + floor_size/2.0)
+		FloorAddEastRow();
 }
 
 void CameraRotateStep(GLfloat angle) {

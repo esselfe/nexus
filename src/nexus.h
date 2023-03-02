@@ -107,18 +107,8 @@ void FlagUpdate(void);
 
 // floor.c
 ////////////////////////////////
-#define FLOOR_CENTER     5
-#define FLOOR_CENTERWEST 4
-#define FLOOR_CENTEREAST 6
-#define FLOOR_NORTH      2
-#define FLOOR_NORTHWEST  1
-#define FLOOR_NORTHEAST  3
-#define FLOOR_SOUTH      8
-#define FLOOR_SOUTHWEST  7
-#define FLOOR_SOUTHEAST  9
 struct Floor {
 	struct Floor *prev, *next;
-	int position;
 	int offset_x, offset_z;
 	GLfloat size, x, y, z;
 	GLuint texture_id;
@@ -127,20 +117,15 @@ struct FloorList {
 	struct Floor *first_floor, *last_floor;
 };
 extern struct FloorList floor_root_list;
+extern struct Floor *floor_center;
 extern int floor_factor;
 extern GLfloat floor_size;
 extern GLuint floor_texture_id;
 void FloorInit(void);
 void FloorAddNorthRow(void);
-void FloorAddCenterRow(void);
 void FloorAddSouthRow(void);
 void FloorAddWestRow(void);
 void FloorAddEastRow(void);
-void FloorRemoveNorthRow(void);
-void FloorRemoveCenterRow(void);
-void FloorRemoveSouthRow(void);
-void FloorRemoveWestRow(void);
-void FloorRemoveEastRow(void);
 void FloorRender(void);
 
 // font.c

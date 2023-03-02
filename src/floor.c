@@ -8,6 +8,7 @@ GLfloat floor_size;
 GLuint floor_texture_id;
 static GLfloat floor_mat_amb_diff[4];
 struct FloorList floor_root_list;
+struct Floor *floor_center;
 
 void FloorTextureSetup(GLuint *id, unsigned int width, unsigned int height,
 	  char *filename) {
@@ -43,10 +44,10 @@ void FloorInit(void) {
 	floor_mat_amb_diff[2] = 0.4;
 	floor_mat_amb_diff[3] = 1.0;
 	
+	// northwest
 	struct Floor *fl = malloc(sizeof(struct Floor));
 	floor_root_list.first_floor = fl;
 	fl->prev = NULL;
-	fl->position = FLOOR_NORTHWEST;
 	fl->offset_x = -1;
 	fl->offset_z = -1;
 	fl->x = -floor_size;
@@ -57,7 +58,7 @@ void FloorInit(void) {
 	fl->next->prev = fl;
 	fl = fl->next;
 	
-	fl->position = FLOOR_NORTH;
+	// north
 	fl->offset_x = 0;
 	fl->offset_z = -1;
 	fl->x = 0.0;
@@ -68,7 +69,7 @@ void FloorInit(void) {
 	fl->next->prev = fl;
 	fl = fl->next;
 	
-	fl->position = FLOOR_NORTHEAST;
+	// northeast
 	fl->offset_x = 1;
 	fl->offset_z = -1;
 	fl->x = floor_size;
@@ -79,7 +80,7 @@ void FloorInit(void) {
 	fl->next->prev = fl;
 	fl = fl->next;
 	
-	fl->position = FLOOR_CENTERWEST;
+	// centerwest
 	fl->offset_x = -1;
 	fl->offset_z = 0;
 	fl->x = -floor_size;
@@ -90,7 +91,8 @@ void FloorInit(void) {
 	fl->next->prev = fl;
 	fl = fl->next;
 	
-	fl->position = FLOOR_CENTER;
+	// center
+	floor_center = fl;
 	fl->offset_x = 0;
 	fl->offset_z = 0;
 	fl->x = 0.0;
@@ -101,7 +103,7 @@ void FloorInit(void) {
 	fl->next->prev = fl;
 	fl = fl->next;
 	
-	fl->position = FLOOR_CENTEREAST;
+	// centereast
 	fl->offset_x = 1;
 	fl->offset_z = 0;
 	fl->x = floor_size;
@@ -112,7 +114,7 @@ void FloorInit(void) {
 	fl->next->prev = fl;
 	fl = fl->next;
 	
-	fl->position = FLOOR_SOUTHWEST;
+	// southwest
 	fl->offset_x = -1;
 	fl->offset_z = 1;
 	fl->x = -floor_size;
@@ -123,7 +125,7 @@ void FloorInit(void) {
 	fl->next->prev = fl;
 	fl = fl->next;
 	
-	fl->position = FLOOR_SOUTH;
+	// south
 	fl->offset_x = 0;
 	fl->offset_z = 1;
 	fl->x = 0.0;
@@ -134,7 +136,7 @@ void FloorInit(void) {
 	fl->next->prev = fl;
 	fl = fl->next;
 	
-	fl->position = FLOOR_SOUTHEAST;
+	// southeast
 	fl->offset_x = 1;
 	fl->offset_z = 1;
 	fl->x = floor_size;
@@ -186,14 +188,19 @@ void FloorRender(void) {
 	}
 }
 
-void FloorAddNorthRow(void);
-void FloorAddCenterRow(void);
-void FloorAddSouthRow(void);
-void FloorAddWestRow(void);
-void FloorAddEastRow(void);
-void FloorRemoveNorthRow(void);
-void FloorRemoveCenterRow(void);
-void FloorRemoveSouthRow(void);
-void FloorRemoveWestRow(void);
-void FloorRemoveEastRow(void);
+void FloorAddNorthRow(void) {
+	return;
+}
+
+void FloorAddSouthRow(void) {
+	return;
+}
+
+void FloorAddWestRow(void) {
+	return;
+}
+
+void FloorAddEastRow(void) {
+	return;
+}
 
