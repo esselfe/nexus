@@ -241,6 +241,9 @@ void FloorAddNorthRow(void) {
 	free(fl3);
 	free(fl2);
 	free(fl1);
+	
+	if (ModeGet() == MODE_ELEMENT)
+		ElementCleanArea();
 }
 
 void FloorAddSouthRow(void) {
@@ -297,6 +300,9 @@ void FloorAddSouthRow(void) {
 	free(fl1);
 	free(fl2);
 	free(fl3);
+	
+	if (ModeGet() == MODE_ELEMENT)
+		ElementCleanArea();
 }
 
 void FloorAddWestRow(void) {
@@ -361,6 +367,9 @@ void FloorAddWestRow(void) {
 	free(fl1);
 	free(fl2);
 	free(fl3);
+	
+	if (ModeGet() == MODE_ELEMENT)
+		ElementCleanArea();
 }
 
 void FloorAddEastRow(void) {
@@ -424,5 +433,8 @@ void FloorAddEastRow(void) {
 	free(fl1);
 	free(fl2);
 	free(fl3);
+	
+	if (ModeGet() == MODE_ELEMENT)
+		ElementCleanArea();
 }
 

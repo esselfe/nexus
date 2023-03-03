@@ -256,9 +256,10 @@ extern GLuint texture_id_waste, texture_id_iron, texture_id_wood,
 extern GLfloat element_mat_amb_diff[4];
 extern struct timeval tv_score_saved;
 void ElementAdd(unsigned int count);
+void ElementCleanArea(void);
 void ElementDelta(void);
-void ElementListDestroy(void);
 void ElementInit(void);
+void ElementListDestroy(void);
 void ElementRemove(struct Element *elem);
 void ElementRender(void);
 void ElementScoreLoad(void);

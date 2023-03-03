@@ -62,11 +62,11 @@ void ElementAdd(unsigned int count) {
 		elem->value = (rand() % 1000) + 100;
 		elem->x = rand() % (50*floor_factor);
 		elem->x = (rand() % 2) ? -elem->x : elem->x;
-		elem->x += 100.0;
+		elem->x += 100.0 + cam.x;
 		elem->y = 100.0;
 		elem->z = rand() % (50*floor_factor);
 		elem->z = (rand() % 2) ? -elem->z : elem->z;
-		elem->z += 100.0;
+		elem->z += 100.0 + cam.z;
 		elem->width = elem->value / 1000.0;
 		elem->height = elem->value / 1000.0;
 		elem->angle_x = 0.0;
@@ -75,6 +75,31 @@ void ElementAdd(unsigned int count) {
 	}
 	
 	render = 1;
+}
+
+void ElementCleanArea(void) {
+	struct Element *el = element_root_list.first_element, *el2;
+	while (1) {
+		if ((el-> x < floor_root_list.first_floor->x - floor_size/2.0) ||
+		  (el->x > floor_center->next->x + floor_size/2.0) ||
+		  (el->z < floor_root_list.first_floor->z - floor_size/2.0) ||
+		  (el->z > floor_root_list.last_floor->z + floor_size/2.0)) {
+			if (el->next != NULL)
+				el2 = el->next;
+			else {
+				ElementRemove(el);
+				break;
+			}
+			ElementRemove(el);
+			el = el2;
+			continue;
+		}
+		
+		if (el->next != NULL)
+			el = el->next;
+		else
+			break;
+	}
 }
 
 void ElementListDestroy(void);
