@@ -54,6 +54,7 @@ extern struct Camera cam;
 
 void CameraInit(void);
 void CameraMove(void);
+void CameraReset(void);
 void CameraRotateStep(GLfloat angle);
 void CameraStop(void);
 

@@ -82,6 +82,10 @@ void TerminalParse(void) {
 			mainloopend = 1;
 		else if (strcmp(w1, "browser") == 0)
 			ModeSet(MODE_BROWSER);
+		else if (strcmp(w1, "cam") == 0 || strcmp(w1, "camera") == 0) {
+			if (strcmp(w2, "reset") == 0)
+				CameraReset();
+		}
 		else if (strcmp(w1, "daylight") == 0) {
 			if (strcmp(w2, "off") == 0 || strcmp(w2, "0") == 0)
 				daylight_enabled = 0;

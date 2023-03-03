@@ -253,6 +253,25 @@ void CameraMove(void) {
 		FloorAddEastRow();
 }
 
+void CameraReset(void) {
+	cam.x = 0.0;
+	cam.y = 2.0;
+	cam.z = 10.0;
+	cam.rotation_angle = 0.0;
+	cam.lx = cam.x + (GLfloat)sin(cam.rotation_angle*1.7453293f);
+	cam.ly = 2.0;
+	cam.lz = cam.z + (GLfloat)-cos(cam.rotation_angle*1.7453293f);
+	cam.moving = MOVE_NONE;
+	cam.thr = 10.0;
+	sprintf(cam.thr_text, "%d%%", (int)cam.thr);
+	cam.speed = 0.0;
+	sprintf(cam.speed_text, "0");
+	cam.side_speed = 0.0;
+	sprintf(cam.side_speed_text, "0");
+	cam.height_speed = 0.0;
+	sprintf(cam.height_speed_text, "0");
+}
+
 void CameraRotateStep(GLfloat angle) {
 	cam.rotation_angle += angle;
 
