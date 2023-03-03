@@ -189,6 +189,7 @@ void FloorRender(void) {
 }
 
 void FloorAddNorthRow(void) {
+	printf("FloorAddNorthRow()\n");
 	struct Floor *fl1 = malloc(sizeof(struct Floor)),
 		*fl2 = malloc(sizeof(struct Floor)),
 		*fl3 = malloc(sizeof(struct Floor));
@@ -301,10 +302,71 @@ void FloorAddSouthRow(void) {
 }
 
 void FloorAddWestRow(void) {
-	return;
+	printf("FloorAddWestRow()\n");
+	struct Floor *fl1 = malloc(sizeof(struct Floor)),
+		*fl2 = malloc(sizeof(struct Floor)),
+		*fl3 = malloc(sizeof(struct Floor));
+	
+	// Add west row
+	////////////////
+	
+	// northwest
+	fl1->prev = NULL;
+	fl1->next = floor_root_list.first_floor;
+	floor_root_list.first_floor->prev = fl1;
+	fl1->offset_x = floor_root_list.first_floor->offset_x - 1;
+	fl1->offset_z = floor_center->offset_z - 1;
+	fl1->x = floor_size * fl1->offset_x;
+	fl1->y = 0.0;
+	fl1->z = floor_size * fl1->offset_z;
+	fl1->texture_id = floor_texture_id;
+	
+	// centerwest
+	fl2->prev = fl1->next->next->next;
+	fl1->next->next->next->next = fl2;
+	fl2->next = floor_center->prev;
+	floor_center->prev->prev = fl2;
+	fl2->offset_x = fl1->offset_x;
+	fl2->offset_z = floor_center->offset_z;
+	fl2->x = floor_size * fl2->offset_x;
+	fl2->y = 0.0;
+	fl2->z = floor_size * fl2->offset_z;
+	fl2->texture_id = floor_texture_id;
+	
+	// southwest
+	fl3->prev = floor_center->next;
+	floor_center->next->next = fl3;
+	floor_root_list.last_floor->prev->prev->prev = fl3;
+	fl3->next = floor_root_list.last_floor->prev->prev;
+	floor_root_list.last_floor->prev->prev->prev = fl3;
+	fl3->offset_x = fl2->offset_x;
+	fl3->offset_z = floor_center->offset_z + 1;
+	fl3->x = floor_size * fl3->offset_x;
+	fl3->y = 0.0;
+	fl3->z = floor_size * fl3->offset_z;
+	fl3->texture_id = floor_texture_id;
+	
+	floor_center = floor_center->prev;
+	floor_root_list.first_floor = fl1;
+	
+	// Remove east row
+	///////////////////
+	
+	fl1 = floor_center->prev->prev;
+	fl1->prev->next = fl1->next;
+	fl1->next->prev = fl1->prev;
+	fl2 = floor_center->next->next;
+	fl2->prev->next = fl2->next;
+	fl2->next->prev = fl2->prev;
+	fl3 = floor_root_list.last_floor;
+	fl3->prev->next = NULL;
+	floor_root_list.last_floor = fl3->prev;
+	free(fl1);
+	free(fl2);
+	free(fl3);
 }
 
 void FloorAddEastRow(void) {
-	return;
+	printf("FloorAddEastRow()\n");
 }
 
