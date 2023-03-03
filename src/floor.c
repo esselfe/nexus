@@ -189,7 +189,6 @@ void FloorRender(void) {
 }
 
 void FloorAddNorthRow(void) {
-	printf("FloorAddNorthRow()\n");
 	struct Floor *fl1 = malloc(sizeof(struct Floor)),
 		*fl2 = malloc(sizeof(struct Floor)),
 		*fl3 = malloc(sizeof(struct Floor));
@@ -245,7 +244,6 @@ void FloorAddNorthRow(void) {
 }
 
 void FloorAddSouthRow(void) {
-	printf("FloorAddSouthRow()\n");
 	struct Floor *fl1 = malloc(sizeof(struct Floor)),
 		*fl2 = malloc(sizeof(struct Floor)),
 		*fl3 = malloc(sizeof(struct Floor));
@@ -302,7 +300,6 @@ void FloorAddSouthRow(void) {
 }
 
 void FloorAddWestRow(void) {
-	printf("FloorAddWestRow()\n");
 	struct Floor *fl1 = malloc(sizeof(struct Floor)),
 		*fl2 = malloc(sizeof(struct Floor)),
 		*fl3 = malloc(sizeof(struct Floor));
@@ -367,6 +364,65 @@ void FloorAddWestRow(void) {
 }
 
 void FloorAddEastRow(void) {
-	printf("FloorAddEastRow()\n");
+	struct Floor *fl1 = malloc(sizeof(struct Floor)),
+		*fl2 = malloc(sizeof(struct Floor)),
+		*fl3 = malloc(sizeof(struct Floor));
+	
+	// Add east row
+	////////////////
+	
+	// northeast
+	fl1->prev = floor_root_list.first_floor->next->next;
+	fl1->prev->next = fl1;
+	fl1->next = floor_center->prev;
+	fl1->next->prev = fl1;
+	fl1->offset_x = fl1->prev->offset_x + 1;
+	fl1->offset_z = fl1->prev->offset_z;
+	fl1->x = floor_size * fl1->offset_x;
+	fl1->y = 0.0;
+	fl1->z = floor_size * fl1->offset_z;
+	fl1->texture_id = floor_texture_id;
+	
+	// centereast
+	fl2->prev = floor_center->next;
+	fl2->next = floor_center->next->next;
+	floor_center->next->next->prev = fl2;
+	floor_center->next->next = fl2;
+	fl2->offset_x = fl1->offset_x;
+	fl2->offset_z = floor_center->offset_z;
+	fl2->x = floor_size * fl2->offset_x;
+	fl2->y = 0.0;
+	fl2->z = floor_size * fl2->offset_z;
+	fl2->texture_id = floor_texture_id;
+	
+	// southeast
+	fl3->prev = floor_root_list.last_floor;
+	floor_root_list.last_floor->next = fl3;
+	fl3->next = NULL;
+	fl3->offset_x = fl2->offset_x;
+	fl3->offset_z = floor_center->offset_z + 1;
+	fl3->x = floor_size * fl3->offset_x;
+	fl3->y = 0.0;
+	fl3->z = floor_size * fl3->offset_z;
+	fl3->texture_id = floor_texture_id;
+	
+	floor_center = floor_center->next;
+	floor_root_list.last_floor = fl3;
+	
+	// Remove west row
+	///////////////////
+	
+	fl1 = floor_root_list.first_floor;
+	floor_root_list.first_floor = fl1->next;
+	fl1->next->prev = NULL;
+	fl2 = floor_center->prev->prev;
+	fl2->prev->next = fl2->next;
+	fl2->next->prev = fl2->prev;
+	fl3 = floor_root_list.last_floor->prev->prev->prev;
+	fl3->prev->next = fl3->next;
+	fl3->next->prev = fl3->prev;
+	free(fl1);
+	free(fl2);
+	free(fl3);
 }
 
