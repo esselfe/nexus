@@ -119,6 +119,7 @@ struct FloorList {
 };
 extern struct FloorList floor_root_list;
 extern struct Floor *floor_center;
+extern int floor_freeze;
 extern int floor_factor;
 extern GLfloat floor_size;
 extern GLuint floor_texture_id;

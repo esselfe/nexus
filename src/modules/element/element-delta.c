@@ -1,8 +1,10 @@
+#include <time.h>
 #include <sys/time.h>
 
 #include "nexus.h"
 
 struct timeval tv_collision_prev;
+time_t time_cleanup_prev;
 
 void ElementCheckCollision(void) {
 	if (element_root_list.first_element == NULL)
@@ -76,6 +78,11 @@ void ElementMoveFlying(void) {
 void ElementDelta(void) {
 	gettimeofday(&tv0, NULL);
 	
+	if (tv0.tv_sec > time_cleanup_prev + 5) {
+		time_cleanup_prev = tv0.tv_sec;
+		ElementCleanArea();
+	}
+		
 	tvdiff(&tv_collision_prev, &tv0, &tv_diff);
 	if (tv_diff.tv_sec > 0 || tv_diff.tv_usec > 250000) {
 		tv_collision_prev.tv_sec = tv0.tv_sec;

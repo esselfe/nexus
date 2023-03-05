@@ -60,13 +60,13 @@ void ElementAdd(unsigned int count) {
 			break;
 		}
 		elem->value = (rand() % 1000) + 100;
-		elem->x = rand() % (50*floor_factor);
+		elem->x = rand() % ((int)floor_size + (int)(floor_size/2.0));
 		elem->x = (rand() % 2) ? -elem->x : elem->x;
-		elem->x += 100.0 + cam.x;
+		elem->x += 100.0 + floor_center->x;
 		elem->y = 100.0;
-		elem->z = rand() % (50*floor_factor);
+		elem->z = rand() % ((int)floor_size + (int)(floor_size/2.0));
 		elem->z = (rand() % 2) ? -elem->z : elem->z;
-		elem->z += 100.0 + cam.z;
+		elem->z += 100.0 + floor_center->z;
 		elem->width = elem->value / 1000.0;
 		elem->height = elem->value / 1000.0;
 		elem->angle_x = 0.0;
@@ -78,21 +78,26 @@ void ElementAdd(unsigned int count) {
 }
 
 void ElementCleanArea(void) {
+	if (element_root_list.first_element == NULL)
+		return;
+	
 	struct Element *el = element_root_list.first_element, *el2;
 	while (1) {
-		if ((el-> x < floor_root_list.first_floor->x - floor_size/2.0) ||
-		  (el->x > floor_center->next->x + floor_size/2.0) ||
+		if (el->y < 2.0 && 
+		  (el-> x < floor_root_list.first_floor->x - floor_size/2.0) ||
+		  (el->x > floor_root_list.last_floor->x + floor_size/2.0) ||
 		  (el->z < floor_root_list.first_floor->z - floor_size/2.0) ||
 		  (el->z > floor_root_list.last_floor->z + floor_size/2.0)) {
-			if (el->next != NULL)
+			if (el->next != NULL) {
 				el2 = el->next;
+				ElementRemove(el);
+				el = el2;
+				continue;
+			}
 			else {
 				ElementRemove(el);
 				break;
 			}
-			ElementRemove(el);
-			el = el2;
-			continue;
 		}
 		
 		if (el->next != NULL)
@@ -107,17 +112,21 @@ void ElementListDestroy(void);
 void ElementRemove(struct Element *elem) {
 	render = 0;
 
-	if (elem->next == NULL && elem->prev != NULL) {
+	if (elem->prev != NULL && elem->next == NULL) {
 		elem->prev->next = NULL;
 		element_root_list.last_element = elem->prev;
 	}
-	else if (elem->next != NULL && elem->prev == NULL) {
+	else if (elem->prev == NULL && elem->next != NULL) {
 		elem->next->prev = NULL;
 		element_root_list.first_element = elem->next;
 	}
 	else if (elem->prev != NULL && elem->next != NULL) {
 		elem->next->prev = elem->prev;
 		elem->prev->next = elem->next;
+	}
+	else if (elem->prev == NULL && elem->next == NULL) {
+		element_root_list.last_element = NULL;
+		element_root_list.first_element = NULL;
 	}
 	
 	free(elem);

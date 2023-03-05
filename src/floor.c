@@ -3,6 +3,7 @@
 
 #include "nexus.h"
 
+int floor_freeze;
 int floor_factor;
 GLfloat floor_size;
 GLuint floor_texture_id;
@@ -179,6 +180,17 @@ void FloorRender(void) {
 		 glVertex3f(-floor_size/2.0, 0.0, floor_size/2.0);
 		glEnd();
 		glBindTexture(GL_TEXTURE_2D, 0);
+		glBegin(GL_LINES);
+		 glColor3f(0.6, 0.7, 0.8);
+		 glVertex3f(-floor_size/2.0, 0.0, floor_size/2.0);
+		 glVertex3f(-floor_size/2.0, 1.0, floor_size/2.0);
+		 glVertex3f(-floor_size/2.0, 0.0, -floor_size/2.0);
+		 glVertex3f(-floor_size/2.0, 1.0, -floor_size/2.0);
+		 glVertex3f(floor_size/2.0, 0.0, -floor_size/2.0);
+		 glVertex3f(floor_size/2.0, 1.0, -floor_size/2.0);
+		 glVertex3f(floor_size/2.0, 0.0, floor_size/2.0);
+		 glVertex3f(floor_size/2.0, 1.0, floor_size/2.0);
+		glEnd();
 		glPopMatrix();
 		
 		if (fl->next != NULL)

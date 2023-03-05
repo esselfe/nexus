@@ -33,29 +33,31 @@ void ElementRender(void) {
 	glColorMaterial(GL_FRONT, GL_DIFFUSE);
         
 	struct Element *el = element_root_list.first_element;
-	while (1) {
-		glBindTexture(GL_TEXTURE_2D, el->texture_id);
-		glPushMatrix();
-		glTranslatef(el->x, el->y, el->z);
-		glRotatef(delta, 0.0, 1.0, 0.0);
-		glBegin(GL_POLYGON);
-		glColor4f(0.5, 0.5, 0.5, 1.0);
-		glTexCoord2f(0.0, 0.0);
-		glVertex3f(-el->width/2, -el->height/2, 0.0);
-		glTexCoord2f(0.0, 1.0);
-		glVertex3f(-el->width/2, el->height/2, 0.0);
-		glTexCoord2f(1.0, 1.0);
-		glVertex3f(el->width/2, el->height/2, 0.0);
-		glTexCoord2f(1.0, 0.0);
-		glVertex3f(el->width/2, -el->height/2, 0.0);
-		glEnd();
-		glPopMatrix();
-		glBindTexture(GL_TEXTURE_2D, 0);
+	if (el != NULL) {
+		while (1) {
+			glBindTexture(GL_TEXTURE_2D, el->texture_id);
+			glPushMatrix();
+			glTranslatef(el->x, el->y, el->z);
+			glRotatef(delta, 0.0, 1.0, 0.0);
+			glBegin(GL_POLYGON);
+			glColor4f(0.5, 0.5, 0.5, 1.0);
+			glTexCoord2f(0.0, 0.0);
+			glVertex3f(-el->width/2, -el->height/2, 0.0);
+			glTexCoord2f(0.0, 1.0);
+			glVertex3f(-el->width/2, el->height/2, 0.0);
+			glTexCoord2f(1.0, 1.0);
+			glVertex3f(el->width/2, el->height/2, 0.0);
+			glTexCoord2f(1.0, 0.0);
+			glVertex3f(el->width/2, -el->height/2, 0.0);
+			glEnd();
+			glPopMatrix();
+			glBindTexture(GL_TEXTURE_2D, 0);
 
-		if (el->next != NULL)
-			el = el->next;
-		else
-			break;
+			if (el->next != NULL)
+				el = el->next;
+			else
+				break;
+		}
 	}
 	glEnable(GL_BLEND);
 	glDisable(GL_COLOR_MATERIAL);

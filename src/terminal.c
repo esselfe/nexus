@@ -100,6 +100,12 @@ void TerminalParse(void) {
 			if (strcmp(w2, "add") == 0)
 				ElementAdd(atoi(w3));
 		}
+		else if (strcmp(w1, "floor") == 0 && strlen(w2)) {
+			if (strcmp(w2, "freeze") == 0) {
+				floor_freeze = !floor_freeze;
+				printf("floor_freeze: %d\n", floor_freeze);
+			}
+		}
 		else if (strcmp(w1, "goto") == 0 && strlen(w2) && strlen(w3))
 			CameraGoto(atof(w2), atof(w3));
 		else if (strcmp(w1, "jump") == 0 && strlen(w2) && strlen(w3))
