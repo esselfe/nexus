@@ -10,7 +10,6 @@ GLfloat element_mat_amb_diff[4];
 void ElementRender(void) {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	
-
 	// Switch to 3D rendering (Scene)
 	RenderSet3DView();
 

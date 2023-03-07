@@ -105,6 +105,16 @@ void TerminalParse(void) {
 				floor_freeze = !floor_freeze;
 				printf("floor_freeze: %d\n", floor_freeze);
 			}
+			else if (strcmp(w2, "factor") == 0 && strlen(w3)) {
+				floor_factor = atoi(w3);
+				if (floor_factor <= 0)
+					floor_factor = 1;
+				else if (floor_factor > 100)
+					floor_factor = 100;
+				floor_size = 100.0 * floor_factor;
+				CameraJump(floor_center->x, floor_center->z);
+				FloorResetSize();
+			}
 		}
 		else if (strcmp(w1, "goto") == 0 && strlen(w2) && strlen(w3))
 			CameraGoto(atof(w2), atof(w3));

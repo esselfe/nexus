@@ -129,6 +129,7 @@ void FloorAddSouthRow(void);
 void FloorAddWestRow(void);
 void FloorAddEastRow(void);
 void FloorRender(void);
+void FloorResetSize(void);
 
 // font.c
 ////////////////////////////////

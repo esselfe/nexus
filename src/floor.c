@@ -450,3 +450,54 @@ void FloorAddEastRow(void) {
 		ElementCleanArea();
 }
 
+void FloorResetSize(void) {
+	struct Floor *fl = floor_root_list.first_floor;
+	int cnt = 1;
+	while (1) {
+		if (cnt == 1) {
+			fl->x = floor_center->x - floor_size;
+			fl->z = floor_center->z - floor_size;
+		}
+		else if (cnt == 2) {
+			fl->x = floor_center->x;
+			fl->z = floor_center->z - floor_size;
+		}
+		else if (cnt == 3) {
+			fl->x = floor_center->x + floor_size;
+			fl->z = floor_center->z - floor_size;
+		}
+		else if (cnt == 4) {
+			fl->x = floor_center->x - floor_size;
+			fl->z = floor_center->z;
+		}
+		// center doesn't move
+		//else if (cnt == 5) {
+			//fl->x = floor_center->x;
+			//fl->z = floor_center->z;
+		//}
+		else if (cnt == 6) {
+			fl->x = floor_center->x + floor_size;
+			fl->z = floor_center->z;
+		}
+		else if (cnt == 7) {
+			fl->x = floor_center->x - floor_size;
+			fl->z = floor_center->z + floor_size;
+		}
+		else if (cnt == 8) {
+			fl->x = floor_center->x;
+			fl->z = floor_center->z + floor_size;
+		}
+		else if (cnt == 9) {
+			fl->x = floor_center->x + floor_size;
+			fl->z = floor_center->z + floor_size;
+		}
+		
+		++cnt;
+		
+		if (fl->next != NULL)
+			fl = fl->next;
+		else
+			break;
+	}
+}
+
