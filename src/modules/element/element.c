@@ -41,25 +41,41 @@ void ElementAdd(unsigned int count) {
 
 		gettimeofday(&tv0, NULL);
 		srand((unsigned int)tv0.tv_usec);
-		elem->type = rand() % 5;
+		elem->type = rand() % 8;
 		switch (elem->type) {
 		case ELEMENT_TYPE_WASTE:
 			elem->texture_id = texture_id_waste;
+			elem->value = (rand() % 1000) + 100;
+			break;
+		case ELEMENT_TYPE_COPPER:
+			elem->texture_id = texture_id_copper;
+			elem->value = (rand() % 100) + 100;
+			break;
+		case ELEMENT_TYPE_GOLD:
+			elem->texture_id = texture_id_gold;
+			elem->value = (rand() % 100) + 100;
 			break;
 		case ELEMENT_TYPE_IRON:
 			elem->texture_id = texture_id_iron;
-			break;
-		case ELEMENT_TYPE_WOOD:
-			elem->texture_id = texture_id_wood;
+			elem->value = (rand() % 1000) + 100;
 			break;
 		case ELEMENT_TYPE_MAGNET:
 			elem->texture_id = texture_id_magnet;
+			elem->value = (rand() % 100) + 100;
 			break;
 		case ELEMENT_TYPE_ROCK:
 			elem->texture_id = texture_id_rock;
+			elem->value = (rand() % 1000) + 100;
+			break;
+		case ELEMENT_TYPE_SILVER:
+			elem->texture_id = texture_id_silver;
+			elem->value = (rand() % 100) + 100;
+			break;
+		case ELEMENT_TYPE_WOOD:
+			elem->texture_id = texture_id_wood;
+			elem->value = (rand() % 1000) + 100;
 			break;
 		}
-		elem->value = (rand() % 1000) + 100;
 		elem->x = rand() % ((int)floor_size + (int)(floor_size/2.0));
 		elem->x = (rand() % 2) ? -elem->x : elem->x;
 		elem->x += 100.0 + floor_center->x;

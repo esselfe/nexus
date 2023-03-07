@@ -69,22 +69,31 @@ void ElementRender(void) {
 
 	char text[128];
 	sprintf(text, "%lu waste", total_waste);
-	FontRender2D(BG_GREY, 10, (int)winH-16-26, text);
+	FontRender2D(BG_GREY, 10, (int)winH-16-30, text);
+	
+	sprintf(text, "%lu copper", total_copper);
+	FontRender2D(BG_GREY, 10, (int)winH-16-50, text);
+	
+	sprintf(text, "%lu gold", total_gold);
+	FontRender2D(BG_GREY, 10, (int)winH-16-70, text);
 	
 	sprintf(text, "%lu iron", total_iron);
-	FontRender2D(BG_GREY, 10, (int)winH-16-42, text);
-	
-	sprintf(text, "%lu wood", total_wood);
-	FontRender2D(BG_GREY, 10, (int)winH-16-58, text);
-	
-	sprintf(text, "%lu magnet", total_magnet);
-	FontRender2D(BG_GREY, 10, (int)winH-16-74, text);
-	
-	sprintf(text, "%lu rock", total_rock);
 	FontRender2D(BG_GREY, 10, (int)winH-16-90, text);
 	
+	sprintf(text, "%lu magnet", total_magnet);
+	FontRender2D(BG_GREY, 10, (int)winH-16-110, text);
+	
+	sprintf(text, "%lu rock", total_rock);
+	FontRender2D(BG_GREY, 10, (int)winH-16-130, text);
+	
+	sprintf(text, "%lu silver", total_silver);
+	FontRender2D(BG_GREY, 10, (int)winH-16-150, text);
+	
+	sprintf(text, "%lu wood", total_wood);
+	FontRender2D(BG_GREY, 10, (int)winH-16-170, text);
+	
 	sprintf(text, "%lu elements", element_root_list.total_elements);
-	FontRender2D(BG_GREY, 10, (int)winH-16-106, text);
+	FontRender2D(BG_GREY, 10, (int)winH-16-190, text);
 	
 	if (terminal_visible)
 		TerminalRender();

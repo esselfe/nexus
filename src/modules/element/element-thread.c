@@ -4,8 +4,11 @@
 #include "nexus.h"
 
 void *ElementThreadFunc(void *argp) {
+	int element_max = 500 * floor_factor;
+	if (element_max > 5000)
+		element_max = 5000;
 	while (1) {
-		if (element_root_list.total_elements < 100*floor_factor &&
+		if (element_root_list.total_elements < element_max &&
 		  ModeGet() == MODE_ELEMENT)
 			ElementAdd(1);
 	
