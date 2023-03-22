@@ -44,8 +44,10 @@ static const char *short_options = "hVvf:X:Y:W:H:";
 void NexusExit(void) {
 	// Prevent saving zeroes if exit() was called before
 	// the score was loaded.
-	if (init_done)
+	if (init_done) {
+		if (verbose) printf("Saving element score\n");
 		ElementScoreSave();
+	}
 	
 	if (verbose) printf("\nnexus exited\n");
 }

@@ -31,7 +31,6 @@ void ElementScoreLoad(void) {
 }
 
 void ElementScoreSave(void) {
-	if (verbose) printf("Saving element score\n");
 	
 	FILE *fp = fopen("element-score.dat", "wb+");
 	if (fp == NULL) {
