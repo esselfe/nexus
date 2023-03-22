@@ -51,7 +51,8 @@ void NexusExit(void) {
 }
 
 void tvdiff(struct timeval *tv_start, struct timeval *tv_end, struct timeval *tv_diff2) {
-	tv_diff2->tv_sec = 0; // to fix
+	tv_diff2->tv_sec = tv_end->tv_sec - tv_start->tv_sec;
+	
 	if (tv_start->tv_sec == tv_end->tv_sec) {
 		tv_diff2->tv_usec = tv_end->tv_usec - tv_start->tv_usec;
 	}
@@ -61,6 +62,8 @@ void tvdiff(struct timeval *tv_start, struct timeval *tv_end, struct timeval *tv
 			++tv_diff2->tv_sec;
 			tv_diff2->tv_usec -= 1000000;
 		}
+		if (tv_diff2->tv_sec > 0)
+			--tv_diff2->tv_sec;
 	}
 }
 
