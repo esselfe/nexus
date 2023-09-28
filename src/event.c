@@ -354,6 +354,10 @@ void EventCheck(void) {
 		else if (event.type == SDL_MOUSEBUTTONDOWN) {
 			if (event.button.button == SDL_BUTTON_RIGHT)
 				mouse_held = !mouse_held;
+			else if (event.button.button == SDL_BUTTON_LEFT) {
+				if (mode == MODE_BROWSER)
+					BrowserPickingCheck();
+			}
 
 			if (mouse_held) {
 				mouse_x_prev = mouse_x = (int)winW/2;
