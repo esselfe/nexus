@@ -165,24 +165,44 @@ void EventCheck(void) {
 					goto_stopping = 0;
 				break;
 			case SDLK_LEFT:
-				if (cam.moving & MOVE_SIDE_DECEL)
+				if (cam.moving & MOVE_RIGHT) {
+					cam.moving |= MOVE_SIDE_BREAK;
+					cam.moving |= MOVE_SIDE_DECEL;
+				}
+				else if (cam.moving & MOVE_SIDE_DECEL)
 					cam.moving ^= MOVE_SIDE_DECEL;
-				cam.moving |= MOVE_SIDE_ACCEL;
-				cam.moving |= MOVE_LEFT;
-				if (cam.moving & MOVE_RIGHT)
-					cam.moving ^= MOVE_RIGHT;
+				
+				if (!(cam.moving & MOVE_SIDE_BREAK) && cam.side_speed > -cam.thr)
+					cam.moving |= MOVE_SIDE_ACCEL;
+	
+				if (!(cam.moving & MOVE_SIDE_BREAK) && !(cam.moving & MOVE_RIGHT))
+					cam.moving |= MOVE_LEFT;
+	
+//				if (cam.moving & MOVE_RIGHT)
+//					cam.moving ^= MOVE_RIGHT;
+	
 				if (goto_enabled)
 					goto_enabled = 0;
 				if (goto_stopping)
 					goto_stopping = 0;
 				break;
 			case SDLK_RIGHT:
-				if (cam.moving & MOVE_SIDE_DECEL)
+				if (cam.moving & MOVE_LEFT) {
+					cam.moving |= MOVE_SIDE_BREAK;
+					cam.moving |= MOVE_SIDE_DECEL;
+				}
+				else if (cam.moving & MOVE_SIDE_DECEL)
 					cam.moving ^= MOVE_SIDE_DECEL;
-				cam.moving |= MOVE_SIDE_ACCEL;
-				cam.moving |= MOVE_RIGHT;
-				if (cam.moving & MOVE_LEFT)
-					cam.moving ^= MOVE_LEFT;
+	
+				if (!(cam.moving & MOVE_SIDE_BREAK) && cam.side_speed < cam.thr)
+					cam.moving |= MOVE_SIDE_ACCEL;
+				
+				if (!(cam.moving & MOVE_SIDE_BREAK) && !(cam.moving & MOVE_LEFT))
+					cam.moving |= MOVE_RIGHT;
+	
+//				if (cam.moving & MOVE_LEFT)
+//					cam.moving ^= MOVE_LEFT;
+	
 				if (goto_enabled)
 					goto_enabled = 0;
 				if (goto_stopping)
