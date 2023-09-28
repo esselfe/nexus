@@ -206,10 +206,12 @@ void EventCheck(void) {
 				glLightfv(GL_LIGHT0, GL_POSITION, light_position);
 				break;
 			case SDLK_KP_MINUS:
-				cam.moving |= THR_DOWN;
+				if (!(cam.moving & THR_DOWN))
+					cam.moving ^= THR_DOWN;
 				break;
 			case SDLK_KP_PLUS:
-				cam.moving |= THR_UP;
+				if (!(cam.moving & THR_UP))
+					cam.moving ^= THR_UP;
 				break;
 			case SDLK_F1:
 				ModeSet(MODE_MAIN);
@@ -293,10 +295,12 @@ void EventCheck(void) {
 				cam.moving ^= LOOK_RIGHT;
 				break;
 			case SDLK_KP_MINUS:
-				cam.moving ^= THR_DOWN;
+				if (cam.moving & THR_DOWN)
+					cam.moving ^= THR_DOWN;
 				break;
 			case SDLK_KP_PLUS:
-				cam.moving ^= THR_UP;
+				if (cam.moving & THR_UP)
+					cam.moving ^= THR_UP;
 				break;
 			default:
 				break;

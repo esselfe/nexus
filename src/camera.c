@@ -31,7 +31,7 @@ void CameraMove(void) {
 		if (cam.moving & MOVE_FRONT) {
 			if (cam.speed < cam.thr)
 				cam.speed += cam.thr/100.0;
-			if (cam.speed >= cam.thr) {
+			else if (cam.speed >= cam.thr) {
 				cam.speed = cam.thr;
 				cam.moving ^= MOVE_ACCEL;
 			}
@@ -39,7 +39,7 @@ void CameraMove(void) {
 		if (cam.moving & MOVE_BACK) {
 			if (cam.speed > -cam.thr)
 				cam.speed -= cam.thr/100.0;
-			if (cam.speed <= -cam.thr) {
+			else if (cam.speed <= -cam.thr) {
 				cam.speed = -cam.thr;
 				cam.moving ^= MOVE_ACCEL;
 			}
@@ -228,17 +228,35 @@ void CameraMove(void) {
 	if (cam.moving & THR_DOWN) {
 		if (cam.thr > 0.0) {
 			cam.thr -= delta_move/2.0;
+			if (cam.thr < 0.0) {
+				cam.thr = 0.0;
+				cam.moving ^= THR_DOWN;
+			}
+			
 			sprintf(cam.thr_text, "%d%%", (int)cam.thr);
-			cam.moving |= MOVE_DECEL;
-			cam.moving |= MOVE_SIDE_DECEL;
+			if (!(cam.moving & MOVE_DECEL) &&
+				!(cam.moving & MOVE_ACCEL))
+				cam.moving |= MOVE_DECEL;
+			if (!(cam.moving & MOVE_SIDE_DECEL) &&
+				!(cam.moving & MOVE_SIDE_ACCEL))
+				cam.moving |= MOVE_SIDE_DECEL;
 		}
 	}
 	if (cam.moving & THR_UP) {
 		if (cam.thr < 100.0) {
 			cam.thr += delta_move/2.0;
+			if (cam.thr > 100.0) {
+				cam.thr = 100.0;
+				cam.moving ^= THR_UP;
+			}
+			
 			sprintf(cam.thr_text, "%d%%", (int)cam.thr);
-			cam.moving |= MOVE_ACCEL;
-			cam.moving |= MOVE_SIDE_ACCEL;
+			if (!(cam.moving & MOVE_ACCEL) &&
+				!(cam.moving & MOVE_DECEL))
+				cam.moving |= MOVE_ACCEL;
+			if (!(cam.moving & MOVE_SIDE_ACCEL) &&
+				!(cam.moving & MOVE_SIDE_DECEL))
+				cam.moving |= MOVE_SIDE_ACCEL;
 		}
 	}
 	
