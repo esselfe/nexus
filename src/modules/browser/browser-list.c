@@ -9,11 +9,7 @@
 #include "nexus.h"
 
 struct BrowserList browser_list;
-
-void BrowserInit(void) {
-	if (verbose) printf("Initializing browser\n");
-	BrowserListLoad(get_current_dir_name());
-}
+struct BrowserListEntry *browser_selected_entry;
 
 void BrowserListAddEntry(char *name) {
 	struct BrowserListEntry *entry = malloc(sizeof(struct BrowserListEntry));
@@ -81,6 +77,22 @@ void BrowserListDestroy(void) {
 			free(entry);
 			break;
 		}
+	}
+}
+
+struct BrowserListEntry *BrowserListEntryByRank(unsigned int rank) {
+	struct BrowserListEntry *entry = browser_list.first_entry;
+	if (entry == NULL)
+		return NULL;
+	
+	while (1) {
+		if (entry->rank == rank)
+			return entry;
+		
+		if (entry->next != NULL)
+			entry = entry->next;
+		else
+			break;
 	}
 }
 

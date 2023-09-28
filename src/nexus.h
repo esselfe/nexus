@@ -217,10 +217,14 @@ struct BrowserList {
 	unsigned long entry_total;
 };
 extern struct BrowserList browser_list;
+extern struct BrowserListEntry *browser_selected_entry;
+extern GLuint browser_select_buffer[100];
 void BrowserInit(void);
 void BrowserListAddEntry(char *name);
 void BrowserListLoad(char *path);
 void BrowserListDestroy(void);
+struct BrowserListEntry *BrowserListEntryByRank(unsigned int rank);
+void BrowserPickingCheck(void);
 void BrowserRender(void);
 
 // Driving
