@@ -80,7 +80,11 @@ void EventCheck(void) {
 
 			if (terminal_visible && (event.key.keysym.sym >= SDLK_SPACE && 
 				event.key.keysym.sym <= SDLK_z)) {
-				if (terminal_cursor_pos < TERMINAL_BUFFER_SIZE) {
+				if (mods & MOD_CTRL && event.key.keysym.sym == SDLK_c) {
+					terminal_cursor_pos = 0;
+					memset(terminal_buffer, 0, TERMINAL_BUFFER_SIZE);
+				}
+				else if (terminal_cursor_pos < TERMINAL_BUFFER_SIZE) {
 					if (mods & MOD_SHIFT)
 						terminal_buffer[terminal_cursor_pos++] = ShiftKey(event.key.keysym.sym);
 					else
