@@ -14,7 +14,7 @@
 
 #include "nexus.h"
 
-char *nexus_version_string = "0.1.7";
+char *nexus_version_string = "0.1.8";
 int verbose;
 int mainloopend;
 int init_done;
@@ -191,7 +191,7 @@ int main(int argc, char **argv) {
 		++fps;
 		EventFunc();
 		DeltaFunc();
-		CameraMove();
+		if (cam.moving) CameraMove();
 		if (goto_enabled) CameraGotoMove();
 		if (render) RenderFunc();
 	}
