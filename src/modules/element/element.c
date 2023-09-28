@@ -11,7 +11,7 @@ void ElementInit(void) {
 	gettimeofday(&tv_score_saved, NULL);
 	ElementScoreLoad();
 	ElementTextureInit();
-	ElementAdd(floor_factor*60);
+	ElementAdd(floor_factor*250);
 	ElementThreadStart();
 	
 	element_mat_amb_diff[0] = 0.4;

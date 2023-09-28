@@ -57,8 +57,20 @@ void BrowserRender(void) {
 			glEnd();
 		}
 		glPopMatrix();
-		if (render)
-			FontRender(BG_BLACK, 0.0, 0.2*(entry->rank-1), 0.1, entry->name);
+		if (render) {
+			if (entry->type == ENTRY_TYPE_DIRECTORY)
+				FontRender(BG_BLACK, FG_BLUE, 0.0, 0.2*(entry->rank-1),
+					0.1, entry->name);
+			else if (entry->type == ENTRY_TYPE_EXECUTABLE)
+				FontRender(BG_BLACK, FG_GREEN, 0.0, 0.2*(entry->rank-1),
+					0.1, entry->name);
+			else if (entry->type == ENTRY_TYPE_FILE)
+				FontRender(BG_BLACK, FG_NONE, 0.0, 0.2*(entry->rank-1),
+					0.1, entry->name);
+			else if (entry->type == ENTRY_TYPE_UNKNOWN)
+				FontRender(BG_BLACK, FG_NONE, 0.0, 0.2*(entry->rank-1),
+					0.1, entry->name);
+		}
 		else
 			glPopName();
 

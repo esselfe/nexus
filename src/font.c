@@ -10,7 +10,7 @@
 static GLubyte *font_data;
 static GLubyte *letter_data;
 static unsigned int bytes_per_line = 4*760;
-GLfloat font_mat_amb_diff[4];
+GLfloat font_mat_amb_diff[4], font_mat_amb_diff_blue[4];
 
 static void FontMakeLetter(unsigned char letter) {
 	unsigned int cnt, iter, offset;
@@ -49,20 +49,32 @@ void FontInit(void) {
 	
 	free(font_data);
 	free(letter_data);
+	
+	font_mat_amb_diff[0] = 0.8;
+	font_mat_amb_diff[1] = 0.8;
+	font_mat_amb_diff[2] = 0.8;
+	font_mat_amb_diff[3] = 1.0;
+	font_mat_amb_diff_blue[0] = 0.4;
+	font_mat_amb_diff_blue[1] = 0.5;
+	font_mat_amb_diff_blue[2] = 0.8;
+	font_mat_amb_diff_blue[3] = 1.0;
 }
 
-void FontRender(int bgcolor, GLfloat x, GLfloat y, GLfloat z, char *text) {
+void FontRender(int bgcolor, int fgcolor, GLfloat x, GLfloat y, GLfloat z, char *text) {
 	glDisable(GL_LIGHTING);
 	glDisable(GL_LIGHT0);
 	glEnable(GL_BLEND);
-	/*glEnable(GL_LIGHTING);
-	glEnable(GL_LIGHT0);
-	font_mat_amb_diff[0] = daylight_amount;
-	font_mat_amb_diff[1] = daylight_amount;
-	font_mat_amb_diff[2] = daylight_amount;
-	font_mat_amb_diff[3] = 1.0;
-	glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE, 
-            font_mat_amb_diff); */
+//	glEnable(GL_LIGHTING);
+//	glEnable(GL_LIGHT0);
+//	glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE, 
+//		font_mat_amb_diff);
+	
+	/*if (fgcolor == FG_NONE)
+		glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE, 
+        		font_mat_amb_diff);
+	else if (fgcolor == FG_BLUE)
+		glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE, 
+        		font_mat_amb_diff_blue);*/
 	
 	if (bgcolor) {
 		glPushMatrix();
@@ -81,8 +93,12 @@ void FontRender(int bgcolor, GLfloat x, GLfloat y, GLfloat z, char *text) {
 	}
 	
 	char *c = text;
-	unsigned int cnt;
-	glColor3f(0.7, 0.8, 0.9);
+	unsigned int cnt;if (fgcolor == FG_NONE)
+		glColor3f(1.0, 1.0, 1.0);
+	else if (fgcolor == FG_BLUE)
+		glColor3f(0.3, 0.4, 1.0);
+	else if (fgcolor == FG_GREEN)
+		glColor3f(0.3, 1.0, 0.4);
 	for (cnt = 0; cnt < strlen(text); cnt++,c++) {
 		glPushMatrix();
 		glTranslatef(x + cnt*0.08, y, z);
@@ -100,6 +116,8 @@ void FontRender(int bgcolor, GLfloat x, GLfloat y, GLfloat z, char *text) {
 		glBindTexture(GL_TEXTURE_2D, 0);
 		glPopMatrix();
 	}
+	glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE, 
+		font_mat_amb_diff);
 }
 
 void FontRender2D(int bgcolor, int x, int y, char *text) {

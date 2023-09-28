@@ -139,8 +139,11 @@ void FloorResetSize(void);
 #define BG_BLACK   1
 #define BG_GRAY    2
 #define BG_GREY    2
+#define FG_NONE    0
+#define FG_BLUE    1
+#define FG_GREEN   2
 void FontInit(void);
-void FontRender(int bgcolor, GLfloat x, GLfloat y, GLfloat z, char *text);
+void FontRender(int bgcolor, int fgcolor, GLfloat x, GLfloat y, GLfloat z, char *text);
 void FontRender2D(int bgcolor, int x, int y, char *text);
 
 // image.c
@@ -207,8 +210,13 @@ void TerminalRender(void);
 
 // Browser
 ////////////////////////////////
+#define ENTRY_TYPE_UNKNOWN    0
+#define ENTRY_TYPE_DIRECTORY  1
+#define ENTRY_TYPE_EXECUTABLE 2
+#define ENTRY_TYPE_FILE       3
 struct BrowserListEntry {
 	struct BrowserListEntry *prev, *next;
+	unsigned int type;
 	unsigned int rank;
 	char *name;
 };
@@ -220,7 +228,7 @@ extern struct BrowserList browser_list;
 extern struct BrowserListEntry *browser_selected_entry;
 extern GLuint browser_select_buffer[100];
 void BrowserInit(void);
-void BrowserListAddEntry(char *name);
+void BrowserListAddEntry(unsigned int type, char *name);
 void BrowserListLoad(char *path);
 void BrowserListDestroy(void);
 struct BrowserListEntry *BrowserListEntryByRank(unsigned int rank);
