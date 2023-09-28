@@ -41,6 +41,8 @@ void tvdiff(struct timeval *tv_start, struct timeval *tv_end, struct timeval *tv
 #define MOVE_SIDE_DECEL   (1<<13)
 #define MOVE_HEIGHT_ACCEL (1<<14)
 #define MOVE_HEIGHT_DECEL (1<<15)
+#define MOVE_BREAK        (1<<16)
+#define MOVE_SIDE_BREAK   (1<<17)
 struct Camera {
 	GLfloat x, y, z,
 		lx, ly, lz;

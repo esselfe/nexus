@@ -129,26 +129,36 @@ void EventCheck(void) {
 				terminal_visible = !terminal_visible;
 				break;
 			case SDLK_UP:
+				if (cam.moving & MOVE_BACK)
+					cam.moving |= MOVE_BREAK;
+			
 				if (cam.moving & MOVE_DECEL)
 					cam.moving ^= MOVE_DECEL;
 				
-				cam.moving |= MOVE_ACCEL;
-				cam.moving |= MOVE_FRONT;
-				if (cam.moving & MOVE_BACK)
-					cam.moving ^= MOVE_BACK;
+				if (cam.speed < cam.thr)
+					cam.moving |= MOVE_ACCEL;
+	
+				if (!(cam.moving & MOVE_BREAK) && !(cam.moving & MOVE_BACK))
+					cam.moving |= MOVE_FRONT;
+	
 				if (goto_enabled)
 					goto_enabled = 0;
 				if (goto_stopping)
 					goto_stopping = 0;
 				break;
 			case SDLK_DOWN:
+				if (cam.moving & MOVE_FRONT)
+					cam.moving |= MOVE_BREAK;
+			
 				if (cam.moving & MOVE_DECEL)
 					cam.moving ^= MOVE_DECEL;
 				
-				cam.moving |= MOVE_ACCEL;
-				cam.moving |= MOVE_BACK;
-				if (cam.moving & MOVE_FRONT)
-					cam.moving ^= MOVE_FRONT;
+				if (cam.speed > -cam.thr)
+					cam.moving |= MOVE_ACCEL;
+				
+				if (!(cam.moving & MOVE_BREAK) && !(cam.moving & MOVE_FRONT))
+					cam.moving |= MOVE_BACK;
+				
 				if (goto_enabled)
 					goto_enabled = 0;
 				if (goto_stopping)
@@ -283,9 +293,13 @@ void EventCheck(void) {
 				break;
 			case SDLK_UP:
 			case SDLK_DOWN:
+				if (cam.moving & MOVE_BREAK)
+					cam.moving ^= MOVE_BREAK;
+				
 			  	cam.moving |= MOVE_DECEL;
 	  			if (cam.moving & MOVE_ACCEL)
-				  	cam.moving ^= MOVE_ACCEL;
+					cam.moving ^= MOVE_ACCEL;
+				
 				break;
 			case SDLK_LEFT:
 			case SDLK_RIGHT:

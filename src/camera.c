@@ -16,7 +16,7 @@ void CameraInit(void) {
 	cam.ly = 2.0;
 	cam.lz = cam.z + (GLfloat)-cos(cam.rotation_angle*1.7453293f);
 	cam.moving = MOVE_NONE;
-	cam.thr = 10.0;
+	cam.thr = 25.0;
 	sprintf(cam.thr_text, "%d%%", (int)cam.thr);
 	cam.speed = 0.0;
 	sprintf(cam.speed_text, "0");
@@ -27,7 +27,36 @@ void CameraInit(void) {
 }
 
 void CameraMove(void) {
-	if (cam.moving & MOVE_ACCEL) {
+	if (cam.moving & MOVE_BREAK) {
+		if (cam.moving & MOVE_FRONT) {
+			if (cam.speed > 0.0)
+				cam.speed -= cam.thr/45.0;
+			else if (cam.speed <= 0.0) {
+				cam.moving ^= MOVE_BREAK;
+				if (cam.moving & MOVE_DECEL)
+					cam.moving ^= MOVE_DECEL;
+	
+				cam.moving |= MOVE_ACCEL;
+				cam.moving ^= MOVE_FRONT;
+				cam.moving |= MOVE_BACK;
+			}
+		}
+		if (cam.moving & MOVE_BACK) {
+			if (cam.speed < 0.0)
+				cam.speed += cam.thr/45.0;
+			else if (cam.speed >= 0.0) {
+				cam.moving ^= MOVE_BREAK;
+				if (cam.moving & MOVE_DECEL)
+					cam.moving ^= MOVE_DECEL;
+	
+				cam.moving |= MOVE_ACCEL;
+				cam.moving ^= MOVE_BACK;
+				cam.moving |= MOVE_FRONT;
+			}
+		}
+		sprintf(cam.speed_text, "%d", (int)cam.speed);
+	}
+	else if (!(cam.moving & MOVE_BREAK) && cam.moving & MOVE_ACCEL) {
 		if (cam.moving & MOVE_FRONT) {
 			if (cam.speed < cam.thr)
 				cam.speed += cam.thr/100.0;
