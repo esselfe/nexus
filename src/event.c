@@ -74,6 +74,13 @@ void EventCheck(void) {
 	if (SDL_PollEvent(&event)) {
 		if (event.type == SDL_QUIT)
 			mainloopend = 1;
+		else if (event.type == SDL_KEYDOWN && event.key.repeat == 1) {
+			if (terminal_visible && event.key.keysym.sym == SDLK_BACKSPACE) {
+				if (terminal_cursor_pos > 0)
+					terminal_buffer[--terminal_cursor_pos] = '\0';
+				return;
+			}
+		}
 		else if (event.type == SDL_KEYDOWN && event.key.repeat == 0) {
 			if (show_keys)
 				printf("key: %s\n", SDL_GetKeyName(event.key.keysym.sym));
