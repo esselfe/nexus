@@ -34,7 +34,7 @@ void SkyInit(void) {
 	glDisable(GL_LIGHTING);
 	
 	daylight_up = 1;
-	daylight_amount = 0.0;
+	daylight_amount = 0.5;
 	sprintf(daylight_amount_text, "%.1f", daylight_amount);
 	
 	if (verbose) printf("Generating sky textures\n");
