@@ -48,30 +48,25 @@ void BrowserListLoad(char *path) {
 	while (1) {
 		errno = 0;
 		dent = readdir(dir);
-		if (dent == NULL) {
-			if (errno)
-				printf("nexus:%s:%s error: Cannot readdir(): %s\n", __FILE__, __FUNCTION__,
-					strerror(errno));
-			else
-				break;
-		}
+		if (dent == NULL)
+			break;
+		
 		if (dent->d_name != NULL && strcmp(dent->d_name, ".") == 0)
 			continue;
-		else {
-			if (dent->d_type == DT_DIR)
-				BrowserListAddEntry(ENTRY_TYPE_DIRECTORY, dent->d_name);
-			else if (dent->d_type == DT_REG) {
-				struct stat st;
-				stat(dent->d_name, &st);
-				if (st.st_mode & S_IXUSR || st.st_mode & S_IXGRP ||
-					st.st_mode & S_IXOTH)
-					BrowserListAddEntry(ENTRY_TYPE_EXECUTABLE, dent->d_name);
-				else
-					BrowserListAddEntry(ENTRY_TYPE_FILE, dent->d_name);
-			}
+		
+		if (dent->d_type == DT_DIR)
+			BrowserListAddEntry(ENTRY_TYPE_DIRECTORY, dent->d_name);
+		else if (dent->d_type == DT_REG) {
+			struct stat st;
+			stat(dent->d_name, &st);
+			if (st.st_mode & S_IXUSR || st.st_mode & S_IXGRP ||
+				st.st_mode & S_IXOTH)
+				BrowserListAddEntry(ENTRY_TYPE_EXECUTABLE, dent->d_name);
 			else
-				BrowserListAddEntry(ENTRY_TYPE_UNKNOWN, dent->d_name);
+				BrowserListAddEntry(ENTRY_TYPE_FILE, dent->d_name);
 		}
+		else
+			BrowserListAddEntry(ENTRY_TYPE_UNKNOWN, dent->d_name);
 	}
 
 	closedir(dir);
