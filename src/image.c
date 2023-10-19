@@ -43,7 +43,6 @@ GLubyte *ImageFromPNGFile(unsigned int width, unsigned int height, char *filenam
 		printf("nexus error: PNG color type palette/indexed is not supported yet\n");
 		fclose(fp);
 		return NULL;
-		break;
 	case PNG_COLOR_TYPE_RGB:
 		components = 3;
 		break;
