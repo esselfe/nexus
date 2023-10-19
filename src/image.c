@@ -19,6 +19,7 @@ GLubyte *ImageFromPNGFile(unsigned int width, unsigned int height, char *filenam
 	fread(sig, 1, 8, fp);
 	if (!png_check_sig(sig, 8)) {
 		printf("nexus error: PNG signature check failed: %s\n", filename);
+		fclose(fp);
 		return NULL;
 	}
 	
@@ -26,6 +27,7 @@ GLubyte *ImageFromPNGFile(unsigned int width, unsigned int height, char *filenam
 	png_infop info = png_create_info_struct(png);
 	if (setjmp(png_jmpbuf(png))) {
 		png_destroy_read_struct(&png, &info, NULL);
+		fclose(fp);
 		return NULL;
 	}
 	png_set_sig_bytes(png, 8);
@@ -39,6 +41,7 @@ GLubyte *ImageFromPNGFile(unsigned int width, unsigned int height, char *filenam
 		break;
 	case PNG_COLOR_TYPE_PALETTE:
 		printf("nexus error: PNG color type palette/indexed is not supported yet\n");
+		fclose(fp);
 		return NULL;
 		break;
 	case PNG_COLOR_TYPE_RGB:
@@ -52,6 +55,7 @@ GLubyte *ImageFromPNGFile(unsigned int width, unsigned int height, char *filenam
 		break;
 	default:
 		printf("nexus error: Unknown png color type: %u\n", color_type);
+		fclose(fp);
 		return NULL;
 		break;
 	}
