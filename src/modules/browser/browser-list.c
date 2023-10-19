@@ -55,7 +55,7 @@ void BrowserListLoad(char *path) {
 			else
 				break;
 		}
-		if (strcmp(dent->d_name, ".") == 0)
+		if (dent->d_name != NULL && strcmp(dent->d_name, ".") == 0)
 			continue;
 		else {
 			if (dent->d_type == DT_DIR)
