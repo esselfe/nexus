@@ -57,7 +57,6 @@ GLubyte *ImageFromPNGFile(unsigned int width, unsigned int height, char *filenam
 		printf("nexus error: Unknown png color type: %u\n", color_type);
 		fclose(fp);
 		return NULL;
-		break;
 	}
 	
 	GLubyte *buf;
