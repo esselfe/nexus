@@ -63,7 +63,7 @@ char ShiftKey(SDL_Keycode key) {
 	case SDLK_SLASH:
 		return '?';
 	default:
-		return ' ';
+		break;
 	}
 	
 	if (key >= 'a' && key <= 'z')
