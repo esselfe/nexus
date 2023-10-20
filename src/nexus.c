@@ -105,16 +105,20 @@ int main(int argc, char **argv) {
 				floor_factor = 1;
 			break;
 		case 'X':
-			winX = atoi(optarg);
+			if (optarg != NULL)
+				winX = atoi(optarg);
 			break;
 		case 'Y':
-			winY = atoi(optarg);
+			if (optarg != NULL)
+				winY = atoi(optarg);
 			break;
 		case 'W':
-			winW = atoi(optarg);
+			if (optarg != NULL)
+				winW = atoi(optarg);
 			break;
 		case 'H':
-			winH = atoi(optarg);
+			if (optarg != NULL)
+				winH = atoi(optarg);
 			break;
 		default:
 			printf("nexus error: Unknown argument: %c (%d)\n", (char)c, c);
