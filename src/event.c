@@ -178,9 +178,6 @@ void EventCheck(void) {
 				if (!(cam.moving & MOVE_SIDE_BREAK) && !(cam.moving & MOVE_RIGHT))
 					cam.moving |= MOVE_LEFT;
 	
-//				if (cam.moving & MOVE_RIGHT)
-//					cam.moving ^= MOVE_RIGHT;
-	
 				if (goto_enabled)
 					goto_enabled = 0;
 				if (goto_stopping)
@@ -199,9 +196,6 @@ void EventCheck(void) {
 				
 				if (!(cam.moving & MOVE_SIDE_BREAK) && !(cam.moving & MOVE_LEFT))
 					cam.moving |= MOVE_RIGHT;
-	
-//				if (cam.moving & MOVE_LEFT)
-//					cam.moving ^= MOVE_LEFT;
 	
 				if (goto_enabled)
 					goto_enabled = 0;
