@@ -91,11 +91,9 @@ int main(int argc, char **argv) {
 		case 'h':
 			ShowHelp();
 			exit(0);
-			break;
 		case 'V':
 			ShowVersion();
 			exit(0);
-			break;
 		case 'v':
 			verbose = 1;
 			break;
