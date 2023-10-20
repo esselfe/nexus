@@ -1,5 +1,5 @@
 # Screenshots
 
-![Memory meter](screenshot-230126-132033.png)
-![File browser](screenshot-230126-132121.png)
-![Element](screenshot-230126-132203.png)
+![Memory meter](scr-231020-080851.png)
+![File browser](scr-231020-080936.png)
+![Element](scr-231020-081008.png)
