@@ -103,7 +103,7 @@ void ElementDelta(void) {
 		tv_score_saved.tv_usec = tv0.tv_usec;
 	}
 	
-	DeltaMove();
+	DeltaCompute();
 	
 	ElementMoveFlying();
 
