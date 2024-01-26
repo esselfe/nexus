@@ -44,15 +44,16 @@ void tvdiff(struct timeval *tv_start, struct timeval *tv_end, struct timeval *tv
 #define MOVE_BREAK        (1<<16)
 #define MOVE_SIDE_BREAK   (1<<17)
 struct Camera {
-	GLfloat x, y, z,
-		lx, ly, lz;
-	GLfloat rotation_angle;
-	unsigned long moving;
-	GLfloat thr, speed, side_speed, height_speed;
+	GLfloat x, y, z, // position
+		lx, ly, lz; // look_at point position
+	GLfloat rotation_angle; // Y axis rotation
+	unsigned long moving; // Each bit is a movement flag from above
+	GLfloat thr, // Throttle
+		speed, side_speed, height_speed;
 	char thr_text[5], speed_text[5], side_speed_text[5],
-		height_speed_text[5];
+		height_speed_text[5]; // 2D HUD text
 };
-extern struct Camera cam;
+extern struct Camera cam; // For now there's only one... a list would be nice.
 
 void CameraInit(void);
 void CameraMove(void);
@@ -62,13 +63,15 @@ void CameraStop(void);
 
 // camera-goto.c
 ////////////////////////////////
-extern int goto_enabled, goto_stopping;
+extern int goto_enabled, goto_stopping; // Automation flags
 extern GLfloat goto_x, goto_z;
+// Gradually changes camera position
 void CameraGoto(GLfloat x, GLfloat z);
 void CameraGotoMove(void);
 
 // camera-jump.c
 ////////////////////////////////
+// Immediately changes camera position
 void CameraJump(GLfloat x, GLfloat z);
 
 // delta.c
@@ -76,7 +79,7 @@ void CameraJump(GLfloat x, GLfloat z);
 extern GLfloat delta, delta_move;
 void DeltaCompute(void);
 void DeltaInit(void);
-extern void (*DeltaFunc)(void); // Modules are supposed to associate this handler to their funtion
+extern void (*DeltaFunc)(void); // Modules are supposed to associate this handler to their function
 void DeltaMove(void);
 
 // event.c
@@ -85,13 +88,13 @@ void DeltaMove(void);
 #define MOD_CTRL    1
 #define MOD_ALT     (1<<1)
 #define MOD_SHIFT   (1<<2)
-extern unsigned int mods;
-extern unsigned int show_keys;
+extern unsigned int mods; // Each bit can be set to one of the flags above
+extern unsigned int show_keys; // Show keys pressed on the standard output stream
 extern int mouse_x, mouse_y, mouse_x_prev, mouse_y_prev;
-extern unsigned int mouse_held;
+extern unsigned int mouse_held; // Mouse moves camera rotation or cursor
 
 void EventCheck(void);
-extern void (*EventFunc)(void); // Modules are supposed to associate this handler to their funtion
+extern void (*EventFunc)(void); // Modules are supposed to associate this handler to their function
 void EventInit(void);
 
 // flag.c
@@ -110,6 +113,7 @@ void FlagUpdate(void);
 
 // floor.c
 ////////////////////////////////
+// 9 floors total, popping and pushing floors when camera crosses center's borders
 struct Floor {
 	struct Floor *prev, *next;
 	int offset_x, offset_z;
@@ -120,11 +124,13 @@ struct FloorList {
 	struct Floor *first_floor, *last_floor;
 };
 extern struct FloorList floor_root_list;
-extern struct Floor *floor_center;
-extern int floor_freeze;
+extern struct Floor *floor_center; // Points to the 5th floor in the list
+extern int floor_freeze; // To stop generating/removing floors
+// A default floor size is multiplicated by this
+// It can be set with one of the program's options on the command line
 extern int floor_factor;
 extern GLfloat floor_size;
-extern GLuint floor_texture_id;
+extern GLuint floor_texture_id; // There's only one for now
 void FloorInit(void);
 void FloorAddNorthRow(void);
 void FloorAddSouthRow(void);
@@ -135,6 +141,7 @@ void FloorResetSize(void);
 
 // font.c
 ////////////////////////////////
+// Text background and foreground colors
 #define BG_NONE    0
 #define BG_BLACK   1
 #define BG_GRAY    2
@@ -143,11 +150,14 @@ void FloorResetSize(void);
 #define FG_BLUE    1
 #define FG_GREEN   2
 void FontInit(void);
+// 3D-positioned scene text
 void FontRender(int bgcolor, int fgcolor, GLfloat x, GLfloat y, GLfloat z, char *text);
+// HUD text
 void FontRender2D(int bgcolor, int x, int y, char *text);
 
 // image.c
 ////////////////////////////////
+// Used to create textures
 GLubyte *ImageFromPNGFile(unsigned int width, unsigned int height, char *filename);
 
 // mode.c
@@ -174,18 +184,19 @@ extern GLfloat light_ambient[];
 extern GLfloat light_diffuse[];
 extern GLfloat light_specular[];
 extern GLfloat light_position[];
-extern int render;
+extern int render; // Used for ignoring some calls when picking
 void Render(void);
 void RenderCompass(void);
 void RenderCursor(void);
-extern void (*RenderFunc)(void); // Modules are supposed to associate this handler to their funtion
+extern void (*RenderFunc)(void); // Modules are supposed to associate this handler to their function
 void RenderInit(void);
 void RenderSet2DView(void);
 void RenderSet3DView(void);
-void RenderThrottle(void);
+void RenderThrottle(void); // Draw the throttle meter on the HUD
 
 // sky.c
 ////////////////////////////////
+// The sky is a box without bottom or top, only 4 of 6 sides
 extern GLuint sky_texture_1, sky_texture_2, sky_texture_3, sky_texture_4;
 extern GLfloat daylight_amount;
 extern char daylight_amount_text[10];
@@ -197,10 +208,10 @@ void SkyRender(void);
 // terminal.c
 ////////////////////////////////
 #define TERMINAL_BUFFER_SIZE 4096
-extern unsigned int terminal_visible;
+extern unsigned int terminal_visible; // Enables or disables the terminal
 extern char terminal_buffer[TERMINAL_BUFFER_SIZE];
-extern unsigned int terminal_cursor_pos, terminal_cursor_blink;
-
+extern unsigned int terminal_cursor_pos,
+	terminal_cursor_blink; // Toggled once every half second
 void TerminalParse(void);
 void TerminalRender(void);
 
