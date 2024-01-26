@@ -14,7 +14,7 @@
 
 #include "nexus.h"
 
-char *nexus_version_string = "0.1.8";
+char *nexus_version_string = "0.1.9";
 int verbose;
 int mainloopend;
 int init_done;
