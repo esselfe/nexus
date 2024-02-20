@@ -9,15 +9,25 @@ void MemoryDeltaCompute(void) {
 	struct sysinfo si;
 	sysinfo(&si);
 	
+	// Calculate the total memory in bytes
 	memory_max = (GLfloat)(si.totalram * si.mem_unit);
-	 sprintf(memory_max_text, "%lu", (unsigned long)memory_max);
-	memory_value = (3.0/memory_max) * (memory_max - (si.freeram * si.mem_unit));
-	 sprintf(memory_value_text, "%lu", (unsigned long)(memory_value * 1000000000.0));
-	
+	// Display the maximum memory as a text
+	sprintf(memory_max_text, "%lu", (unsigned long)memory_max);
+
+	// Calculate the used memory in bytes (total memory - free memory)
+	GLfloat used_memory = si.totalram * si.mem_unit - si.freeram * si.mem_unit;
+	// Scale the used memory to fit in a 3.0 units high meter
+	memory_value = (3.0 / memory_max) * used_memory;
+	// Display the used memory as a text, in bytes
+	sprintf(memory_value_text, "%lu", (unsigned long)used_memory);
+
+	// Same thing for swap
 	swap_max = (GLfloat)(si.totalswap * si.mem_unit);
-	 sprintf(swap_max_text, "%lu", (unsigned long)swap_max);
-	swap_value = (3.0/swap_max) * (swap_max - (si.freeswap * si.mem_unit));
-	 sprintf(swap_value_text, "%lu", (unsigned long)(swap_value * 1000000000.0));
+	sprintf(swap_max_text, "%lu", (unsigned long)swap_max);
+	
+	GLfloat used_swap = swap_max - (GLfloat)(si.freeswap * si.mem_unit);
+	swap_value = (3.0/swap_max) * used_swap;
+	sprintf(swap_value_text, "%lu", (unsigned long)used_swap);
 	 
 
 	// Once every second
