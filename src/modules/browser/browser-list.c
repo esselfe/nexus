@@ -105,5 +105,7 @@ struct BrowserListEntry *BrowserListEntryByRank(unsigned int rank) {
 		else
 			break;
 	}
+	
+	return NULL;
 }
 
