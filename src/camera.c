@@ -237,8 +237,6 @@ void CameraMove(void) {
 			* cam.speed/100.0f * delta_move;
 		cam.x += mx;
 		cam.lx += mx;
-//		cam.z -= mz;
-//		cam.lz -= mz;
 		cam.z += mz;
 		cam.lz += mz;
 	}
@@ -249,8 +247,8 @@ void CameraMove(void) {
 			* cam.side_speed/160.0f * delta_move;
 		cam.x += mx;
 		cam.lx += mx;
-		cam.z -= mz;
-		cam.lz -= mz;
+		cam.z += mz;
+		cam.lz += mz;
 	}
 	
 	if (cam.moving & MOVE_UP) {
