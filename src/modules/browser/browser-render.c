@@ -15,6 +15,7 @@ void BrowserRender(void) {
 		glMatrixMode(GL_PROJECTION);
 		glLoadIdentity();
 		gluPickMatrix(mouse_x, mouse_y, 1.0, 1.0, viewport);
+		glScalef(-1.0, 1.0, 1.0);
 		gluPerspective(60.0, winW/winH, 0.01, 1500.0);
 		
 		glMatrixMode(GL_MODELVIEW);
