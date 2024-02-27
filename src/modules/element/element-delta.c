@@ -19,8 +19,8 @@ void ElementCheckCollision(void) {
 		
 		if (cam.x > el->x - 1.5 &&
 			cam.x < el->x + 1.5) {
-			if (cam.z > el->z - 1.5 &&
-				cam.z < el->z + 1.5) {
+			if (-cam.z > el->z - 1.5 &&
+				-cam.z < el->z + 1.5) {
 				if (el->type == ELEMENT_TYPE_WASTE)
 					total_waste += el->value;
 				else if (el->type == ELEMENT_TYPE_COPPER)
