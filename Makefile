@@ -5,7 +5,7 @@ PROG := nexus
 PKG_CONFIG ?= pkg-config
 
 LIBS := gl sdl2 glew glu libpng
-CFLAGS += $(shell $(PKG_CONFIG) --cflags $(LIBS)) -std=c11 -MMD -MP -Isrc/
+CFLAGS += $(shell $(PKG_CONFIG) --cflags $(LIBS)) -std=c17 -MMD -MP -Isrc/
 CPPFLAGS += -D_GNU_SOURCE
 LDLIBS += $(shell $(PKG_CONFIG) --libs $(LIBS)) -lm -lpthread
 OBJDIR := obj
