@@ -50,12 +50,14 @@ void RenderInit(void) {
 void RenderSet3DView(void) {
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
+	glScalef(-1.0, 1.0, 1.0);
 	gluPerspective(60.0, winW/winH, 0.01, 1500.0);
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 	gluLookAt(cam.x, cam.y, cam.z,
 			cam.lx, cam.ly, cam.lz,
 			0.0, 1.0, 0.0);
+	glScalef(1.0, 1.0, -1.0);
 }
 
 void RenderSet2DView(void) {
@@ -143,6 +145,7 @@ void RenderCursor(void) {
 	glPopMatrix();
 }
 
+// Draw the throttle meter on the HUD
 void RenderThrottle(void) {
 	glPushMatrix();
 	glTranslatef(winW-20.0, winH/2, 0.0);

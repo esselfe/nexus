@@ -10,11 +10,11 @@ void CameraInit(void) {
 	if (verbose) printf("Initializing camera\n");
 	cam.x = 0.0;
 	cam.y = 2.0;
-	cam.z = 10.0;
+	cam.z = -10.0;
 	cam.rotation_angle = 0.0;
 	cam.lx = cam.x + (GLfloat)sin(cam.rotation_angle*1.7453293f);
 	cam.ly = 2.0;
-	cam.lz = cam.z + (GLfloat)-cos(cam.rotation_angle*1.7453293f);
+	cam.lz = cam.z + (GLfloat)cos(cam.rotation_angle*1.7453293f);
 	cam.moving = MOVE_NONE;
 	cam.thr = 25.0;
 	sprintf(cam.thr_text, "%d%%", (int)cam.thr);
@@ -237,8 +237,10 @@ void CameraMove(void) {
 			* cam.speed/100.0f * delta_move;
 		cam.x += mx;
 		cam.lx += mx;
-		cam.z -= mz;
-		cam.lz -= mz;
+//		cam.z -= mz;
+//		cam.lz -= mz;
+		cam.z += mz;
+		cam.lz += mz;
 	}
 	if (cam.moving & MOVE_LEFT || cam.moving & MOVE_RIGHT) {
 		mx = (GLfloat)(cos(cam.rotation_angle*1.7453293f))
@@ -355,7 +357,12 @@ void CameraRotateStep(GLfloat angle) {
 	if (cam.rotation_angle < 0.0) cam.rotation_angle += 3.6;
 	
 	cam.lx = cam.x + (GLfloat)sin(cam.rotation_angle*1.7453293f);
-	cam.lz = cam.z + (GLfloat)-cos(cam.rotation_angle*1.7453293f);
+	cam.lz = cam.z + (GLfloat)cos(cam.rotation_angle*1.7453293f);
+}
+
+void CameraShowPosition(void) {
+	printf("position: x: %f y: %f z: %f lx: %f ly: %f lz: %f angle: %f\n",
+	cam.x, cam.y, cam.z, cam.lx, cam.ly, cam.lz, cam.rotation_angle);
 }
 
 void CameraStop(void) {

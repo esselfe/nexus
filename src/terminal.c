@@ -85,6 +85,8 @@ void TerminalParse(void) {
 		else if (strcmp(w1, "cam") == 0 || strcmp(w1, "camera") == 0) {
 			if (strcmp(w2, "reset") == 0)
 				CameraReset();
+			else if (strcmp(w2, "position") == 0)
+				CameraShowPosition();
 		}
 		else if (strcmp(w1, "daylight") == 0) {
 			if (strcmp(w2, "off") == 0 || strcmp(w2, "0") == 0)
@@ -92,8 +94,11 @@ void TerminalParse(void) {
 			else if (strcmp(w2, "on") == 0 || strcmp(w2, "1") == 0)
 				daylight_enabled = 1;
 		}
-		else if (strcmp(w1, "editor") == 0)
+		else if (strcmp(w1, "editor") == 0) {
 			ModeSet(MODE_EDITOR);
+			if (strcmp(w2, "load") == 0)
+				if (strlen(w3)) EditorLoadFile(w3);
+		}
 		else if (strcmp(w1, "element") == 0 && !strlen(w2))
 			ModeSet(MODE_ELEMENT);
 		else if (strcmp(w1, "element") == 0 && strlen(w2)) {

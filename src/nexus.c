@@ -182,6 +182,7 @@ int main(int argc, char **argv) {
 	SkyInit();
 	MoonInit();
 	BrowserInit();
+	EditorInit();
 	MemoryInit();
 	
 	init_done = 1;

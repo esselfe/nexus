@@ -12,9 +12,9 @@ void CameraGoto(GLfloat x, GLfloat z) {
 	goto_z = z;
 	GLfloat denom = x-cam.x;
 	if (denom == 0.0)
-		goto_angle = atan((z-cam.z)/0.0000001) * (180.0/M_PI) / 100.0;
+		goto_angle = -atan((z-cam.z)/0.0000001) * (180.0/M_PI) / 100.0;
 	else
-		goto_angle = atan((z-cam.z)/denom) * (180.0/M_PI) / 100.0;
+		goto_angle = -atan((z-cam.z)/denom) * (180.0/M_PI) / 100.0;
 	
 	if ((x-cam.x >= 0.0 && z-cam.z >= 0.0) || 
 	  (x-cam.x >= 0.0 && z-cam.z <= 0.0))
