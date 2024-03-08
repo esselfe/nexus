@@ -3,6 +3,7 @@
 
 #include "nexus.h"
 
+// Should be called from the terminal, immediately change the camera position
 void CameraJump(GLfloat x, GLfloat z) {
 	cam.x = x;
 	cam.lx = x + sin(cam.rotation_angle*1.7453293f);

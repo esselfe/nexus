@@ -16,18 +16,20 @@
 
 char *nexus_version_string = "0.2.0";
 int verbose;
-int mainloopend;
-int init_done;
+int mainloopend; // The program should exit if set to 1
+int init_done; // Internal use
 SDL_DisplayMode display_mode;
 SDL_Window *window;
 SDL_GLContext context;
+// Window position and dimensions
 GLfloat winX = 100.0, winY = 40.0, winW = 800.0, winH = 600.0;
 char window_title[1024];
-unsigned int fps;
-time_t t0, tprev;
-struct timeval tv0, tv_prev, tv_diff;
-char *fps_text;
+unsigned int fps; // For measuring frames per second
+char *fps_text; // Text rendered on the HUD
+time_t t0, tprev; // Mostly used in delta code
+struct timeval tv0, tv_prev, tv_diff; // Idem
 
+// Structure of getopt options for program options and arguments processing
 static const struct option long_options[] = {
 	{"help", no_argument, NULL, 'h'},
 	{"version", no_argument, NULL, 'V'},
@@ -41,6 +43,8 @@ static const struct option long_options[] = {
 };
 static const char *short_options = "hVvf:X:Y:W:H:";
 
+// This function will be called if exit(N); is called or at the end of main()
+// It's set with the atexit() function in the main() function
 void NexusExit(void) {
 	// Prevent saving zeroes if exit() was called before
 	// the score was loaded.
@@ -52,6 +56,7 @@ void NexusExit(void) {
 	if (verbose) printf("\nnexus exited\n");
 }
 
+// Calculate the difference between 2 timings like 0.223880 and 0.384859
 void tvdiff(struct timeval *tv_start, struct timeval *tv_end, struct timeval *tv_diff2) {
 	tv_diff2->tv_sec = tv_end->tv_sec - tv_start->tv_sec;
 	
@@ -79,6 +84,7 @@ void ShowVersion(void) {
 	printf("nexus %s\n", nexus_version_string);
 }
 
+// Program entry point
 int main(int argc, char **argv) {
 	// Process program arguments
 	int c;
@@ -88,35 +94,35 @@ int main(int argc, char **argv) {
 			break;
 		
 		switch (c) {
-		case 'h':
+		case 'h': // --help
 			ShowHelp();
 			exit(0);
-		case 'V':
+		case 'V': // --version
 			ShowVersion();
 			exit(0);
-		case 'v':
+		case 'v': // --verbose
 			verbose = 1;
 			break;
-		case 'f':
+		case 'f': // --floor-factor
 			if (optarg != NULL)
 				floor_factor = atoi(optarg);
 			
 			if (floor_factor <= 0)
 				floor_factor = 1;
 			break;
-		case 'X':
+		case 'X': // --position-x
 			if (optarg != NULL)
 				winX = atoi(optarg);
 			break;
-		case 'Y':
+		case 'Y': // --position-y
 			if (optarg != NULL)
 				winY = atoi(optarg);
 			break;
-		case 'W':
+		case 'W': // --width
 			if (optarg != NULL)
 				winW = atoi(optarg);
 			break;
-		case 'H':
+		case 'H': // --height
 			if (optarg != NULL)
 				winH = atoi(optarg);
 			break;
@@ -136,13 +142,14 @@ int main(int argc, char **argv) {
 		exit(1);
 	}
 
-	int major, minor;
+	// Set OpenGL API version to 1.1 and show what we got
+	int gl_major, gl_minor;
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 1);
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 1);
-	SDL_GL_GetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, &major);
-	SDL_GL_GetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, &minor);
-	if (verbose) printf("Using OpenGL %d.%d\n", major, minor);
+	SDL_GL_GetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, &gl_major);
+	SDL_GL_GetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, &gl_minor);
+	if (verbose) printf("Using OpenGL %d.%d\n", gl_major, gl_minor);
 
 	sprintf(window_title, "nexus %s", nexus_version_string);
 	window = SDL_CreateWindow(window_title, winX, winY, winW, winH,

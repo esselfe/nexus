@@ -3,14 +3,17 @@
 
 #include "nexus.h"
 
+// Automation flags and variables
 int goto_enabled, goto_stopping;
 GLfloat goto_x, goto_z, goto_angle, goto_angle_left;
 
+// This should be called from the terminal
 void CameraGoto(GLfloat x, GLfloat z) {
 	goto_enabled = 1;
 	goto_x = x;
 	goto_z = z;
 	GLfloat denom = x-cam.x;
+	// Prevent division by zero errors
 	if (denom == 0.0)
 		goto_angle = -atan((z-cam.z)/0.0000001) * (180.0/M_PI) / 100.0;
 	else

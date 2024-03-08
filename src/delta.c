@@ -49,6 +49,6 @@ void DeltaMove(void) {
 	tv_prev_frame.tv_sec = tv0.tv_sec;
 	tv_prev_frame.tv_usec = tv0.tv_usec;
 	delta_move = ((GLfloat)tv_diff.tv_sec +
-		(GLfloat)tv_diff.tv_usec/1000000) * 50.0;
+		(GLfloat)tv_diff.tv_usec/1000000) * 60.0;
 }
 

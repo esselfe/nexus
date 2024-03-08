@@ -231,6 +231,7 @@ void CameraMove(void) {
 
 	GLfloat mx, mz;
 	if (cam.moving & MOVE_FRONT || cam.moving & MOVE_BACK) {
+		// 1.7453293 is PI/180*100, it's used to convert degrees to radians
 		mx = (GLfloat)(sin(cam.rotation_angle*1.7453293f))
 			* cam.speed/100.0f * delta_move;
 		mz = (GLfloat)(cos(cam.rotation_angle*1.7453293f))
@@ -317,6 +318,7 @@ void CameraMove(void) {
 	}
 	
 	if (!floor_freeze) {
+		// Check to see if the camera crossed the center bounds
 		if (cam.z < floor_center->z - floor_size/2.0)
 			FloorAddNorthRow();
 		else if (cam.z > floor_center->z + floor_size/2.0)
@@ -334,6 +336,7 @@ void CameraReset(void) {
 	cam.y = 2.0;
 	cam.z = -10.0;
 	cam.rotation_angle = 0.0;
+	// 1.7453293 is PI/180*100, it's used to convert degrees to radians
 	cam.lx = cam.x + (GLfloat)sin(cam.rotation_angle*1.7453293f);
 	cam.ly = 2.0;
 	cam.lz = cam.z + (GLfloat)cos(cam.rotation_angle*1.7453293f);
@@ -348,12 +351,14 @@ void CameraReset(void) {
 	sprintf(cam.height_speed_text, "0");
 }
 
+// Turns the camera left (negative angle) or right (positive angle)
 void CameraRotateStep(GLfloat angle) {
 	cam.rotation_angle += angle;
 
 	if (cam.rotation_angle >= 3.6) cam.rotation_angle -= 3.6;
 	if (cam.rotation_angle < 0.0) cam.rotation_angle += 3.6;
 	
+	// 1.7453293 is PI/180*100, it's used to convert degrees to radians
 	cam.lx = cam.x + (GLfloat)sin(cam.rotation_angle*1.7453293f);
 	cam.lz = cam.z + (GLfloat)cos(cam.rotation_angle*1.7453293f);
 }
@@ -364,6 +369,7 @@ void CameraShowPosition(void) {
 }
 
 void CameraStop(void) {
+	// Remove all moving flags
 	if (cam.moving & MOVE_FRONT)
 		cam.moving ^= MOVE_FRONT;
 	if (cam.moving & MOVE_BACK)
@@ -388,12 +394,16 @@ void CameraStop(void) {
 		cam.moving ^= MOVE_HEIGHT_ACCEL;
 	if (cam.moving & MOVE_HEIGHT_DECEL)
 		cam.moving ^= MOVE_HEIGHT_DECEL;
+	
+	// No gradual stopping, from anything to zero
 	cam.speed = 0.0;
 	sprintf(cam.speed_text, "0");
 	cam.side_speed = 0.0;
 	sprintf(cam.side_speed_text, "0");
 	cam.height_speed = 0.0;
 	sprintf(cam.height_speed_text, "0");
+	
+	// Stop automation
 	goto_enabled = 0;
 }
 
