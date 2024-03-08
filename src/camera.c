@@ -319,9 +319,9 @@ void CameraMove(void) {
 	
 	if (!floor_freeze) {
 		// Check to see if the camera crossed the center bounds
-		if (cam.z < floor_center->z - floor_size/2.0)
+		if (cam.z > floor_center->z + floor_size/2.0)
 			FloorAddNorthRow();
-		else if (cam.z > floor_center->z + floor_size/2.0)
+		else if (cam.z < floor_center->z - floor_size/2.0)
 			FloorAddSouthRow();
 		
 		if (cam.x < floor_center->x - floor_size/2.0)

@@ -142,7 +142,7 @@ void SkyRender(void) {
 	glDisable(GL_BLEND);
 	
 	glPushMatrix();
-	glTranslatef(cam.x, cam.y, cam.z);
+	glTranslatef(cam.x, cam.y, -cam.z);
 	if (daylight_enabled)
 		glColor3f(1.4-daylight_amount, 1.4-daylight_amount, 1.4-daylight_amount);
 	else

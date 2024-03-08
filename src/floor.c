@@ -50,10 +50,10 @@ void FloorInit(void) {
 	floor_root_list.first_floor = fl;
 	fl->prev = NULL;
 	fl->offset_x = -1;
-	fl->offset_z = -1;
+	fl->offset_z = 1;
 	fl->x = -floor_size;
 	fl->y = 0.0;
-	fl->z = -floor_size;
+	fl->z = floor_size;
 	fl->texture_id = floor_texture_id;
 	fl->next = malloc(sizeof(struct Floor));
 	fl->next->prev = fl;
@@ -61,10 +61,10 @@ void FloorInit(void) {
 	
 	// north
 	fl->offset_x = 0;
-	fl->offset_z = -1;
+	fl->offset_z = 1;
 	fl->x = 0.0;
 	fl->y = 0.0;
-	fl->z = -floor_size;
+	fl->z = floor_size;
 	fl->texture_id = floor_texture_id;
 	fl->next = malloc(sizeof(struct Floor));
 	fl->next->prev = fl;
@@ -72,10 +72,10 @@ void FloorInit(void) {
 	
 	// northeast
 	fl->offset_x = 1;
-	fl->offset_z = -1;
+	fl->offset_z = 1;
 	fl->x = floor_size;
 	fl->y = 0.0;
-	fl->z = -floor_size;
+	fl->z = floor_size;
 	fl->texture_id = floor_texture_id;
 	fl->next = malloc(sizeof(struct Floor));
 	fl->next->prev = fl;
@@ -117,10 +117,10 @@ void FloorInit(void) {
 	
 	// southwest
 	fl->offset_x = -1;
-	fl->offset_z = 1;
+	fl->offset_z = -1;
 	fl->x = -floor_size;
 	fl->y = 0.0;
-	fl->z = floor_size;
+	fl->z = -floor_size;
 	fl->texture_id = floor_texture_id;
 	fl->next = malloc(sizeof(struct Floor));
 	fl->next->prev = fl;
@@ -128,10 +128,10 @@ void FloorInit(void) {
 	
 	// south
 	fl->offset_x = 0;
-	fl->offset_z = 1;
+	fl->offset_z = -1;
 	fl->x = 0.0;
 	fl->y = 0.0;
-	fl->z = floor_size;
+	fl->z = -floor_size;
 	fl->texture_id = floor_texture_id;
 	fl->next = malloc(sizeof(struct Floor));
 	fl->next->prev = fl;
@@ -139,10 +139,10 @@ void FloorInit(void) {
 	
 	// southeast
 	fl->offset_x = 1;
-	fl->offset_z = 1;
+	fl->offset_z = -1;
 	fl->x = floor_size;
 	fl->y = 0.0;
-	fl->z = floor_size;
+	fl->z = -floor_size;
 	fl->texture_id = floor_texture_id;
 	fl->next = NULL;
 	
@@ -165,7 +165,7 @@ void FloorRender(void) {
 	struct Floor *fl = floor_root_list.first_floor;
 	while (1) {
 		glPushMatrix();
-		glTranslatef(fl->x, fl->y, fl->z);
+		glTranslatef(fl->x, fl->y, -fl->z);
 		glBindTexture(GL_TEXTURE_2D, fl->texture_id);
 		glBegin(GL_POLYGON);
 		glTexCoord2f(0.0, 0.0);
@@ -212,7 +212,7 @@ void FloorAddNorthRow(void) {
 	fl1->prev = NULL;
 	fl1->next = fl2;
 	fl1->offset_x = floor_root_list.first_floor->offset_x;
-	fl1->offset_z = floor_root_list.first_floor->offset_z - 1;
+	fl1->offset_z = floor_root_list.first_floor->offset_z + 1;
 	fl1->x = floor_size * fl1->offset_x;
 	fl1->y = 0.0;
 	fl1->z = floor_size * fl1->offset_z;
@@ -222,7 +222,7 @@ void FloorAddNorthRow(void) {
 	fl2->prev = fl1;
 	fl2->next = fl3;
 	fl2->offset_x = floor_root_list.first_floor->next->offset_x;
-	fl2->offset_z = floor_root_list.first_floor->next->offset_z - 1;
+	fl2->offset_z = floor_root_list.first_floor->next->offset_z + 1;
 	fl2->x = floor_size * fl2->offset_x;
 	fl2->y = 0.0;
 	fl2->z = floor_size * fl2->offset_z;
@@ -233,7 +233,7 @@ void FloorAddNorthRow(void) {
 	fl3->next = floor_root_list.first_floor;
 	floor_root_list.first_floor->prev = fl3;
 	fl3->offset_x = floor_root_list.first_floor->next->next->offset_x;
-	fl3->offset_z = floor_root_list.first_floor->next->next->offset_z - 1;
+	fl3->offset_z = floor_root_list.first_floor->next->next->offset_z + 1;
 	fl3->x = floor_size * fl3->offset_x;
 	fl3->y = 0.0;
 	fl3->z = floor_size * fl3->offset_z;
@@ -270,7 +270,7 @@ void FloorAddSouthRow(void) {
 	fl1->prev = floor_root_list.last_floor;
 	fl1->next = fl2;
 	fl1->offset_x = floor_root_list.last_floor->prev->prev->offset_x;
-	fl1->offset_z = floor_root_list.last_floor->prev->prev->offset_z + 1;
+	fl1->offset_z = floor_root_list.last_floor->prev->prev->offset_z - 1;
 	fl1->x = floor_size * fl1->offset_x;
 	fl1->y = 0.0;
 	fl1->z = floor_size * fl1->offset_z;
@@ -280,7 +280,7 @@ void FloorAddSouthRow(void) {
 	fl2->prev = fl1;
 	fl2->next = fl3;
 	fl2->offset_x = floor_root_list.last_floor->prev->offset_x;
-	fl2->offset_z = floor_root_list.last_floor->prev->offset_z + 1;
+	fl2->offset_z = floor_root_list.last_floor->prev->offset_z - 1;
 	fl2->x = floor_size * fl2->offset_x;
 	fl2->y = 0.0;
 	fl2->z = floor_size * fl2->offset_z;
@@ -291,7 +291,7 @@ void FloorAddSouthRow(void) {
 	fl3->next = NULL;
 	floor_root_list.last_floor->next = fl1;
 	fl3->offset_x = floor_root_list.last_floor->offset_x;
-	fl3->offset_z = floor_root_list.last_floor->offset_z + 1;
+	fl3->offset_z = floor_root_list.last_floor->offset_z - 1;
 	fl3->x = floor_size * fl3->offset_x;
 	fl3->y = 0.0;
 	fl3->z = floor_size * fl3->offset_z;
@@ -330,7 +330,7 @@ void FloorAddWestRow(void) {
 	fl1->next = floor_root_list.first_floor;
 	floor_root_list.first_floor->prev = fl1;
 	fl1->offset_x = floor_root_list.first_floor->offset_x - 1;
-	fl1->offset_z = floor_center->offset_z - 1;
+	fl1->offset_z = floor_center->offset_z + 1;
 	fl1->x = floor_size * fl1->offset_x;
 	fl1->y = 0.0;
 	fl1->z = floor_size * fl1->offset_z;
@@ -355,7 +355,7 @@ void FloorAddWestRow(void) {
 	fl3->next = floor_root_list.last_floor->prev->prev;
 	floor_root_list.last_floor->prev->prev->prev = fl3;
 	fl3->offset_x = fl2->offset_x;
-	fl3->offset_z = floor_center->offset_z + 1;
+	fl3->offset_z = floor_center->offset_z - 1;
 	fl3->x = floor_size * fl3->offset_x;
 	fl3->y = 0.0;
 	fl3->z = floor_size * fl3->offset_z;
@@ -421,7 +421,7 @@ void FloorAddEastRow(void) {
 	floor_root_list.last_floor->next = fl3;
 	fl3->next = NULL;
 	fl3->offset_x = fl2->offset_x;
-	fl3->offset_z = floor_center->offset_z + 1;
+	fl3->offset_z = floor_center->offset_z - 1;
 	fl3->x = floor_size * fl3->offset_x;
 	fl3->y = 0.0;
 	fl3->z = floor_size * fl3->offset_z;
@@ -456,15 +456,15 @@ void FloorResetSize(void) {
 	while (1) {
 		if (cnt == 1) {
 			fl->x = floor_center->x - floor_size;
-			fl->z = floor_center->z - floor_size;
+			fl->z = floor_center->z + floor_size;
 		}
 		else if (cnt == 2) {
 			fl->x = floor_center->x;
-			fl->z = floor_center->z - floor_size;
+			fl->z = floor_center->z + floor_size;
 		}
 		else if (cnt == 3) {
 			fl->x = floor_center->x + floor_size;
-			fl->z = floor_center->z - floor_size;
+			fl->z = floor_center->z + floor_size;
 		}
 		else if (cnt == 4) {
 			fl->x = floor_center->x - floor_size;
@@ -481,15 +481,15 @@ void FloorResetSize(void) {
 		}
 		else if (cnt == 7) {
 			fl->x = floor_center->x - floor_size;
-			fl->z = floor_center->z + floor_size;
+			fl->z = floor_center->z - floor_size;
 		}
 		else if (cnt == 8) {
 			fl->x = floor_center->x;
-			fl->z = floor_center->z + floor_size;
+			fl->z = floor_center->z - floor_size;
 		}
 		else if (cnt == 9) {
 			fl->x = floor_center->x + floor_size;
-			fl->z = floor_center->z + floor_size;
+			fl->z = floor_center->z - floor_size;
 		}
 		
 		++cnt;
