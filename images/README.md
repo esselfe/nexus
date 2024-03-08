@@ -1,5 +1,8 @@
 # Images
 
+Note: All NASA images have been slightly modified to fit correct rendering.
+The other textures have been created using the Gimp image editor.
+
 ![element-iron](element-iron-128.png)
 ![element-magnet](element-magnet-128.png)
 ![element-rock](element-rock-128.png)
