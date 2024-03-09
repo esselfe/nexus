@@ -13,9 +13,6 @@ void ElementRender(void) {
 	// Switch to 3D rendering (Scene)
 	RenderSet3DView();
 
-	SkyRender();
-	FloorRender();
-	
 	glEnable(GL_LIGHTING);
 	glEnable(GL_LIGHT0);
 	
@@ -27,6 +24,10 @@ void ElementRender(void) {
 	}
 	glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE, 
             element_mat_amb_diff);
+
+	SkyRender();
+	FloorRender();
+	
 	glDisable(GL_BLEND);
 	glEnable(GL_COLOR_MATERIAL);
 	glColorMaterial(GL_FRONT, GL_DIFFUSE);

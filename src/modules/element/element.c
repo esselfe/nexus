@@ -100,10 +100,10 @@ void ElementCleanArea(void) {
 	struct Element *el = element_root_list.first_element, *el2;
 	while (1) {
 		if (el->y < 2.0 && 
-		  (el-> x < floor_root_list.first_floor->x - floor_size/2.0) ||
+		  (el->x < floor_root_list.first_floor->x - floor_size/2.0) ||
 		  (el->x > floor_root_list.last_floor->x + floor_size/2.0) ||
-		  (el->z < floor_root_list.first_floor->z - floor_size/2.0) ||
-		  (el->z > floor_root_list.last_floor->z + floor_size/2.0)) {
+		  (el->z < floor_root_list.last_floor->z - floor_size/2.0) ||
+		  (el->z > floor_root_list.first_floor->z + floor_size/2.0)) {
 			if (el->next != NULL) {
 				el2 = el->next;
 				ElementRemove(el);
