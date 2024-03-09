@@ -11,7 +11,7 @@ LDLIBS += $(shell $(PKG_CONFIG) --libs $(LIBS)) -lm -lpthread
 OBJDIR := obj
 OBJ := camera.o camera-goto.o camera-jump.o delta.o event.o flag.o floor.o \
 	font.o image.o mode.o moon.o nexus.o render.o sky.o terminal.o
-include src/modules/browser/module.mk
+include src/modules/file-browser/module.mk
 include src/modules/editor/module.mk
 include src/modules/element/module.mk
 include src/modules/memory/module.mk
