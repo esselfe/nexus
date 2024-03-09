@@ -7,6 +7,11 @@ The other textures have been created using the Gimp image editor.
 
 ---
 
+![Nexus logo](nexus-logo.png)  
+*nexus-logo.png*  
+
+---
+
 ![element-iron](element-iron-128.png)  
 *element-iron-128.png*  
 
