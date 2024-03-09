@@ -59,20 +59,21 @@ GLubyte *ImageFromPNGFile(unsigned int width, unsigned int height, char *filenam
 	}
 	
 	GLubyte *buf;
-	if (components == 1 || components == 3)
-		buf = malloc(width*height*3);
-	else
-		buf = malloc(width*height*4);
+	//if (components == 1 || components == 3)
+	//	buf = malloc(width*height*3);
+	//else
+	buf = malloc(width*height*4);
 	png_bytepp rows = png_get_rows(png, info);
 	png_bytep row;
 	int x, y, cnt = 0;
 	for (y = 0; y < height; y++) {
 		row = rows[y];
 		if (components == 1) {
-			for (x=0; x < width; x++, cnt += 3) {
+			for (x=0; x < width; x++, cnt += 4) {
 				buf[cnt] = row[x];
 				buf[cnt+1] = row[x];
 				buf[cnt+2] = row[x];
+				buf[cnt+3] = 0xff;
 			}
 		}
 		else if (components == 2) {
@@ -84,10 +85,11 @@ GLubyte *ImageFromPNGFile(unsigned int width, unsigned int height, char *filenam
 			}
 		}
 		else if (components == 3) {
-			for (x=0; x < width*3; x += 3, cnt += 3) {
+			for (x=0; x < width*3; x += 3, cnt += 4) {
 				buf[cnt] = row[x];
 				buf[cnt+1] = row[x+1];
 				buf[cnt+2] = row[x+2];
+				buf[cnt+3] = 0xff;
 			}
 		}
 		else if (components == 4) {

@@ -16,9 +16,6 @@ void MemoryRender(void) {
 	// Switch to 3D rendering (Scene)
 	RenderSet3DView();
 
-	SkyRender();
-	FloorRender();
-	
 	glEnable(GL_LIGHTING);
 	glEnable(GL_LIGHT0);
 	
@@ -30,6 +27,9 @@ void MemoryRender(void) {
 	}
 	glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, 
             memory_mat_amb_diff);
+
+	SkyRender();
+	FloorRender();
             
 	// Render memory meter
 	glPushMatrix();

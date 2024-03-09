@@ -6,8 +6,8 @@
 #include "nexus.h"
 
 struct timeval tv_score_saved;
-unsigned long long total_waste, total_copper, total_gold, total_iron,
-	total_magnet, total_rock, total_silver, total_wood;
+unsigned long long total_waste, total_battery, total_copper, total_gold,
+	total_iron, total_magnet, total_rock, total_silver, total_wood;
 
 void ElementScoreLoad(void) {
 	if (verbose) printf("Loading element score\n");
@@ -19,6 +19,7 @@ void ElementScoreLoad(void) {
 	}
 
 	fread(&total_waste, 8, 1, fp);
+	fread(&total_battery, 8, 1, fp);
 	fread(&total_copper, 8, 1, fp);
 	fread(&total_gold, 8, 1, fp);
 	fread(&total_iron, 8, 1, fp);
@@ -40,6 +41,7 @@ void ElementScoreSave(void) {
 	}
 
 	fwrite(&total_waste, 8, 1, fp);
+	fwrite(&total_battery, 8, 1, fp);
 	fwrite(&total_copper, 8, 1, fp);
 	fwrite(&total_gold, 8, 1, fp);
 	fwrite(&total_iron, 8, 1, fp);

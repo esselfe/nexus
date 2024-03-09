@@ -28,7 +28,7 @@ void ElementRender(void) {
 	SkyRender();
 	FloorRender();
 	
-	glDisable(GL_BLEND);
+	glEnable(GL_BLEND);
 	glEnable(GL_COLOR_MATERIAL);
 	glColorMaterial(GL_FRONT, GL_DIFFUSE);
         
@@ -38,6 +38,7 @@ void ElementRender(void) {
 			glBindTexture(GL_TEXTURE_2D, el->texture_id);
 			glPushMatrix();
 			glTranslatef(el->x, el->y, el->z);
+			glScalef(1.0, -1.0, 1.0);
 			glRotatef(delta, 0.0, 1.0, 0.0);
 			glBegin(GL_POLYGON);
 			glColor4f(0.5, 0.5, 0.5, 1.0);
@@ -71,29 +72,32 @@ void ElementRender(void) {
 	sprintf(text, "%lu waste", total_waste);
 	FontRender2D(BG_GREY, 10, (int)winH-16-30, text);
 	
-	sprintf(text, "%lu copper", total_copper);
+	sprintf(text, "%lu battery", total_battery);
 	FontRender2D(BG_GREY, 10, (int)winH-16-50, text);
-	
-	sprintf(text, "%lu gold", total_gold);
+
+	sprintf(text, "%lu copper", total_copper);
 	FontRender2D(BG_GREY, 10, (int)winH-16-70, text);
 	
-	sprintf(text, "%lu iron", total_iron);
+	sprintf(text, "%lu gold", total_gold);
 	FontRender2D(BG_GREY, 10, (int)winH-16-90, text);
 	
-	sprintf(text, "%lu magnet", total_magnet);
+	sprintf(text, "%lu iron", total_iron);
 	FontRender2D(BG_GREY, 10, (int)winH-16-110, text);
 	
-	sprintf(text, "%lu rock", total_rock);
+	sprintf(text, "%lu magnet", total_magnet);
 	FontRender2D(BG_GREY, 10, (int)winH-16-130, text);
 	
-	sprintf(text, "%lu silver", total_silver);
+	sprintf(text, "%lu rock", total_rock);
 	FontRender2D(BG_GREY, 10, (int)winH-16-150, text);
 	
-	sprintf(text, "%lu wood", total_wood);
+	sprintf(text, "%lu silver", total_silver);
 	FontRender2D(BG_GREY, 10, (int)winH-16-170, text);
 	
-	sprintf(text, "%lu elements", element_root_list.total_elements);
+	sprintf(text, "%lu wood", total_wood);
 	FontRender2D(BG_GREY, 10, (int)winH-16-190, text);
+	
+	sprintf(text, "%lu elements", element_root_list.total_elements);
+	FontRender2D(BG_GREY, 10, (int)winH-16-210, text);
 	
 	if (terminal_visible)
 		TerminalRender();

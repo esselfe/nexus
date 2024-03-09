@@ -220,7 +220,7 @@ void TerminalRender(void);
 // Modules
 ////////////////////////////////////////////////////////////////
 
-// Browser
+// File browser
 ////////////////////////////////
 #define ENTRY_TYPE_UNKNOWN    0
 #define ENTRY_TYPE_DIRECTORY  1
@@ -275,14 +275,15 @@ void EditorRender(void);
 
 // Element
 ////////////////////////////////
-#define ELEMENT_TYPE_WASTE  0
-#define ELEMENT_TYPE_COPPER 1
-#define ELEMENT_TYPE_GOLD   2
-#define ELEMENT_TYPE_IRON   3
-#define ELEMENT_TYPE_MAGNET 4
-#define ELEMENT_TYPE_ROCK   5
-#define ELEMENT_TYPE_SILVER 6
-#define ELEMENT_TYPE_WOOD   7
+#define ELEMENT_TYPE_WASTE   0
+#define ELEMENT_TYPE_BATTERY 1
+#define ELEMENT_TYPE_COPPER  2
+#define ELEMENT_TYPE_GOLD    3
+#define ELEMENT_TYPE_IRON    4
+#define ELEMENT_TYPE_MAGNET  5
+#define ELEMENT_TYPE_ROCK    6
+#define ELEMENT_TYPE_SILVER  7
+#define ELEMENT_TYPE_WOOD    8
 struct Element {
 	struct Element *prev, *next;
 	unsigned int type;
@@ -297,10 +298,10 @@ struct ElementList {
 	unsigned int total_elements;
 };
 extern struct ElementList element_root_list;
-extern unsigned long long total_waste, total_copper, total_gold, total_iron,
-	total_magnet, total_rock, total_silver, total_wood;
-extern GLuint texture_id_waste, texture_id_copper, texture_id_gold,
-	texture_id_iron, texture_id_magnet, texture_id_rock,
+extern unsigned long long total_waste, total_battery, total_copper, total_gold,
+	total_iron, total_magnet, total_rock, total_silver, total_wood;
+extern GLuint texture_id_waste, texture_id_battery, texture_id_copper,
+	texture_id_gold, texture_id_iron, texture_id_magnet, texture_id_rock,
 	texture_id_silver, texture_id_wood;
 extern GLfloat element_mat_amb_diff[4];
 extern struct timeval tv_score_saved;

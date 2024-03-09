@@ -4,7 +4,7 @@
 
 #include "nexus.h"
 
-GLuint texture_id_waste, texture_id_copper, texture_id_gold,
+GLuint texture_id_waste, texture_id_battery, texture_id_copper, texture_id_gold,
 	texture_id_iron, texture_id_magnet, texture_id_rock,
 	texture_id_silver, texture_id_wood;
 
@@ -12,9 +12,9 @@ void ElementTextureCreate(GLuint *id, char *filename) {
 	GLubyte *data;
 
 	if (strcmp(filename, "images/element-waste-128.png") == 0) {
-		data = malloc(128*128*3);
+		data = malloc(128*128*4);
 		int cnt;
-		for (cnt = 0; cnt < 128*128*3; cnt++)
+		for (cnt = 0; cnt < 128*128*4; cnt++)
 			data[cnt] = rand()%256;
 	}
 	else
@@ -26,7 +26,7 @@ void ElementTextureCreate(GLuint *id, char *filename) {
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, 128, 128, 0, GL_RGB,
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, 128, 128, 0, GL_RGBA,
 		GL_UNSIGNED_BYTE, data);
 	glBindTexture(GL_TEXTURE_2D, 0);
 	free(data);
@@ -37,6 +37,7 @@ void ElementTextureInit(void) {
 	glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
 
 	ElementTextureCreate(&texture_id_waste, "images/element-waste-128.png");
+	ElementTextureCreate(&texture_id_battery, "images/element-battery-128a.png");
 	ElementTextureCreate(&texture_id_copper, "images/element-copper-128.png");
 	ElementTextureCreate(&texture_id_gold, "images/element-gold-128.png");
 	ElementTextureCreate(&texture_id_iron, "images/element-iron-128.png");

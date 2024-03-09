@@ -47,6 +47,10 @@ void ElementAdd(unsigned int count) {
 			elem->texture_id = texture_id_waste;
 			elem->value = (rand() % 1000) + 100;
 			break;
+		case ELEMENT_TYPE_BATTERY:
+			elem->texture_id = texture_id_battery;
+			elem->value = 1;
+			break;
 		case ELEMENT_TYPE_COPPER:
 			elem->texture_id = texture_id_copper;
 			elem->value = (rand() % 100) + 100;
@@ -83,8 +87,8 @@ void ElementAdd(unsigned int count) {
 		elem->z = rand() % ((int)floor_size + (int)(floor_size/2.0));
 		elem->z = (rand() % 2) ? -elem->z : elem->z;
 		elem->z += 100.0 + floor_center->z;
-		elem->width = elem->value / 1000.0;
-		elem->height = elem->value / 1000.0;
+		elem->width = 1.0;
+		elem->height = 1.0;
 		elem->angle_x = 0.0;
 		elem->angle_y = 0.0;
 		elem->angle_z = 0.0;
@@ -102,8 +106,8 @@ void ElementCleanArea(void) {
 		if (el->y < 2.0 && 
 		  (el->x < floor_root_list.first_floor->x - floor_size/2.0) ||
 		  (el->x > floor_root_list.last_floor->x + floor_size/2.0) ||
-		  (el->z < floor_root_list.last_floor->z - floor_size/2.0) ||
-		  (el->z > floor_root_list.first_floor->z + floor_size/2.0)) {
+		  (-el->z < floor_root_list.last_floor->z - floor_size/2.0) ||
+		  (-el->z > floor_root_list.first_floor->z + floor_size/2.0)) {
 			if (el->next != NULL) {
 				el2 = el->next;
 				ElementRemove(el);
