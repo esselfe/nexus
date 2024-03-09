@@ -1,4 +1,4 @@
-# Nexus
+![Nexus logo](images/nexus-logo.png)  
 
 Nexus is a 3D Linux program written in C using OpenGL/Mesa, GLU, GLEW and SDL2.  
 The program renders a scene with multidirectional camera movement.  
