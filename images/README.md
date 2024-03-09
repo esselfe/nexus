@@ -12,6 +12,11 @@ The other textures have been created using the Gimp image editor.
 
 ---
 
+![element-battery](element-battery-128a.png)  
+*element-battery-128a.png*  
+
+---
+
 ![element-iron](element-iron-128.png)  
 *element-iron-128.png*  
 
