@@ -51,6 +51,7 @@ void SkyInit(void) {
 	sky_list = glGenLists(1);
 	glNewList(sky_list, GL_COMPILE);
 	
+	// North side
 	glBindTexture(GL_TEXTURE_2D, sky_texture_1);
 	glBegin(GL_POLYGON);
 	glTexCoord2f(0.0, 1.0);
@@ -63,6 +64,7 @@ void SkyInit(void) {
 	 glVertex3f(1000.0, -1000.0, -1000.0);
 	glEnd();
 	
+	// East side
 	glBindTexture(GL_TEXTURE_2D, sky_texture_2);
 	glBegin(GL_POLYGON);
 	glTexCoord2f(0.0, 1.0);
@@ -75,6 +77,7 @@ void SkyInit(void) {
 	 glVertex3f(1000.0, -1000.0, 1000.0);
 	glEnd();
 	
+	// South side
 	glBindTexture(GL_TEXTURE_2D, sky_texture_3);
 	glBegin(GL_POLYGON);
 	glTexCoord2f(0.0, 1.0);
@@ -87,6 +90,7 @@ void SkyInit(void) {
 	 glVertex3f(-1000.0, -1000.0, 1000.0);
 	glEnd();
 	
+	// West side
 	glBindTexture(GL_TEXTURE_2D, sky_texture_4);
 	glBegin(GL_POLYGON);
 	glTexCoord2f(0.0, 1.0);
