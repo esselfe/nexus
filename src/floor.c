@@ -450,6 +450,7 @@ void FloorAddEastRow(void) {
 		ElementCleanArea();
 }
 
+// Used when changing floor factor via the terminal
 void FloorResetSize(void) {
 	struct Floor *fl = floor_root_list.first_floor;
 	int cnt = 1;
