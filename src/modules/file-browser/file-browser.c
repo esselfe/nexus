@@ -4,14 +4,11 @@
 
 #include "nexus.h"
 
-void BrowserInit(void) {
-	if (verbose) printf("Initializing browser\n");
+void FileBrowserInit(void) {
+	if (verbose) printf("Initializing file browser\n");
 	
-	glInitNames();
-	glPushName(0);
+	glSelectBuffer(100, file_browser_select_buffer);
 	
-	glSelectBuffer(100, browser_select_buffer);
-	
-	BrowserListLoad(get_current_dir_name());
+	FileBrowserListLoad(get_current_dir_name());
 }
 

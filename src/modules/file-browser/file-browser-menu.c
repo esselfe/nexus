@@ -3,17 +3,17 @@
 
 #include "nexus.h"
 
-unsigned int browser_menu_visible;
+unsigned int file_browser_menu_visible;
 
-void BrowserMenuInit(void) {
+void FileBrowserMenuInit(void) {
 	return;
 }
 
-void BrowserMenuEntryAdd(char *text) {
+void FileBrowserMenuEntryAdd(char *text) {
 	return;
 }
 
-void BrowserMenuRender(void) {
+void FileBrowserMenuRender(void) {
 	return;
 }
 

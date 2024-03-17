@@ -165,12 +165,12 @@ GLubyte *ImageFromPNGFile(unsigned int width, unsigned int height, char *filenam
 
 // mode.c
 ////////////////////////////////
-#define MODE_MAIN      0
-#define MODE_BROWSER   1
-#define MODE_DRIVING   2
-#define MODE_EDITOR    3
-#define MODE_ELEMENT   4
-#define MODE_MEMORY    5
+#define MODE_MAIN         0
+#define MODE_FILE_BROWSER 1
+#define MODE_DRIVING      2
+#define MODE_EDITOR       3
+#define MODE_ELEMENT      4
+#define MODE_MEMORY       5
 extern unsigned int mode, mode_prev;
 unsigned int ModeGet(void);
 void ModeSet(unsigned int newmode);
@@ -228,28 +228,28 @@ void TerminalRender(void);
 #define ENTRY_TYPE_DIRECTORY  1
 #define ENTRY_TYPE_EXECUTABLE 2
 #define ENTRY_TYPE_FILE       3
-struct BrowserListEntry {
-	struct BrowserListEntry *prev, *next;
+struct FileBrowserListEntry {
+	struct FileBrowserListEntry *prev, *next;
 	unsigned int type;
 	unsigned int rank;
 	struct SelectID *selectid;
 	char *name;
 };
-struct BrowserList {
-	struct BrowserListEntry *first_entry, *last_entry;
+struct FileBrowserList {
+	struct FileBrowserListEntry *first_entry, *last_entry;
 	unsigned long entry_total;
 };
-extern struct BrowserList browser_list;
-extern struct BrowserListEntry *browser_selected_entry;
-extern GLuint browser_select_buffer[100];
-void BrowserInit(void);
-void BrowserListAddEntry(unsigned int type, char *name);
-void BrowserListLoad(char *path);
-void BrowserListDestroy(void);
-struct BrowserListEntry *BrowserListEntryByRank(unsigned int rank);
-struct BrowserListEntry *BrowserListEntryBySelectID(GLuint id);
-void BrowserPickingCheck(void);
-void BrowserRender(void);
+extern struct FileBrowserList file_browser_list;
+extern struct FileBrowserListEntry *file_browser_selected_entry;
+extern GLuint file_browser_select_buffer[100];
+void FileBrowserInit(void);
+void FileBrowserListAddEntry(unsigned int type, char *name);
+void FileBrowserListLoad(char *path);
+void FileBrowserListDestroy(void);
+struct FileBrowserListEntry *FileBrowserListEntryByRank(unsigned int rank);
+struct FileBrowserListEntry *FileBrowserListEntryBySelectID(GLuint id);
+void FileBrowserPickingCheck(void);
+void FileBrowserRender(void);
 
 // Driving
 ////////////////////////////////

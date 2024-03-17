@@ -4,7 +4,7 @@
 
 #include "nexus.h"
 
-void BrowserRender(void) {
+void FileBrowserRender(void) {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	// Switch to 3D rendering (Scene)
@@ -30,7 +30,7 @@ void BrowserRender(void) {
 		FloorRender();
 	}
 
-	struct BrowserListEntry *entry = browser_list.first_entry;
+	struct FileBrowserListEntry *entry = file_browser_list.first_entry;
 	if (entry == NULL)
 		return;
 
@@ -47,7 +47,7 @@ void BrowserRender(void) {
 		glVertex2f(1.0, 0.0);
 		glEnd();
 		
-		if (entry == browser_selected_entry) {
+		if (entry == file_browser_selected_entry) {
 			glColor3f(0.8, 0.5, 0.3);
 			glBegin(GL_LINE_STRIP);
 			glVertex3f(0.0, 0.0, 0.1);

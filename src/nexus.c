@@ -190,7 +190,7 @@ int main(int argc, char **argv) {
 	FlagInit();
 	SkyInit();
 	MoonInit();
-	BrowserInit();
+	FileBrowserInit();
 	EditorInit();
 	MemoryInit();
 	

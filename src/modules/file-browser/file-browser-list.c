@@ -10,20 +10,20 @@
 
 #include "nexus.h"
 
-struct BrowserList browser_list;
-struct BrowserListEntry *browser_selected_entry;
+struct FileBrowserList file_browser_list;
+struct FileBrowserListEntry *file_browser_selected_entry;
 
-void BrowserListAddEntry(unsigned int type, char *name) {
-	struct BrowserListEntry *entry = malloc(sizeof(struct BrowserListEntry));
-	if (browser_list.entry_total == 0) {
+void FileBrowserListAddEntry(unsigned int type, char *name) {
+	struct FileBrowserListEntry *entry = malloc(sizeof(struct FileBrowserListEntry));
+	if (file_browser_list.entry_total == 0) {
 		entry->prev = NULL;
 		entry->rank = 1;
-		browser_list.first_entry = entry;
+		file_browser_list.first_entry = entry;
 	}
 	else {
-		entry->prev = browser_list.last_entry;
+		entry->prev = file_browser_list.last_entry;
 		entry->rank = entry->prev->rank + 1;
-		browser_list.last_entry->next = entry;
+		file_browser_list.last_entry->next = entry;
 	}
 	entry->type = type;
 	entry->next = NULL;
@@ -31,11 +31,11 @@ void BrowserListAddEntry(unsigned int type, char *name) {
 	sprintf(entry->name, "%s", name);
 	entry->selectid = SelectIDNew();
 
-	++browser_list.entry_total;
-	browser_list.last_entry = entry;
+	++file_browser_list.entry_total;
+	file_browser_list.last_entry = entry;
 }
 
-void BrowserListLoad(char *path) {
+void FileBrowserListLoad(char *path) {
 	if (verbose) printf("  Loading %s\n", path);
 
 	DIR *dir = opendir(path);
@@ -56,25 +56,25 @@ void BrowserListLoad(char *path) {
 			continue;
 		
 		if (dent->d_type == DT_DIR)
-			BrowserListAddEntry(ENTRY_TYPE_DIRECTORY, dent->d_name);
+			FileBrowserListAddEntry(ENTRY_TYPE_DIRECTORY, dent->d_name);
 		else if (dent->d_type == DT_REG) {
 			struct stat st;
 			stat(dent->d_name, &st);
 			if (st.st_mode & S_IXUSR || st.st_mode & S_IXGRP ||
 				st.st_mode & S_IXOTH)
-				BrowserListAddEntry(ENTRY_TYPE_EXECUTABLE, dent->d_name);
+				FileBrowserListAddEntry(ENTRY_TYPE_EXECUTABLE, dent->d_name);
 			else
-				BrowserListAddEntry(ENTRY_TYPE_FILE, dent->d_name);
+				FileBrowserListAddEntry(ENTRY_TYPE_FILE, dent->d_name);
 		}
 		else
-			BrowserListAddEntry(ENTRY_TYPE_UNKNOWN, dent->d_name);
+			FileBrowserListAddEntry(ENTRY_TYPE_UNKNOWN, dent->d_name);
 	}
 
 	closedir(dir);
 }
 
-void BrowserListDestroy(void) {
-	struct BrowserListEntry *entry = browser_list.last_entry;
+void FileBrowserListDestroy(void) {
+	struct FileBrowserListEntry *entry = file_browser_list.last_entry;
 	if (entry == NULL)
 		return;
 	
@@ -92,8 +92,8 @@ void BrowserListDestroy(void) {
 	}
 }
 
-struct BrowserListEntry *BrowserListEntryByRank(unsigned int rank) {
-	struct BrowserListEntry *entry = browser_list.first_entry;
+struct FileBrowserListEntry *FileBrowserListEntryByRank(unsigned int rank) {
+	struct FileBrowserListEntry *entry = file_browser_list.first_entry;
 	if (entry == NULL)
 		return NULL;
 	
@@ -110,8 +110,8 @@ struct BrowserListEntry *BrowserListEntryByRank(unsigned int rank) {
 	return NULL;
 }
 
-struct BrowserListEntry *BrowserListEntryBySelectID(GLuint id) {
-	struct BrowserListEntry *entry = browser_list.first_entry;
+struct FileBrowserListEntry *FileBrowserListEntryBySelectID(GLuint id) {
+	struct FileBrowserListEntry *entry = file_browser_list.first_entry;
 	if (entry == NULL)
 		return NULL;
 	
