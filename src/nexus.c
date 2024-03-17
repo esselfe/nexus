@@ -15,7 +15,7 @@
 #include "nexus.h"
 #include "selectID.h"
 
-char *nexus_version_string = "0.2.1";
+char *nexus_version_string = "0.2.1-git";
 int verbose;
 int mainloopend; // The program should exit if set to 1
 int init_done; // Internal use
