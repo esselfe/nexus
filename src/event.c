@@ -73,7 +73,7 @@ char ShiftKey(SDL_Keycode key) {
 }
 
 void EventCheck(void) {
-	if (SDL_PollEvent(&event)) {
+	while (SDL_PollEvent(&event)) {
 		if (event.type == SDL_QUIT)
 			mainloopend = 1;
 		else if (event.type == SDL_KEYDOWN && event.key.repeat == 1) {
@@ -364,24 +364,18 @@ void EventCheck(void) {
 			SDL_GetMouseState(&mouse_x, &mouse_y);
 
 			if (mouse_held) {
-				if (mouse_x - mouse_x_prev > 0)
-					CameraRotateStep(0.0005 * (mouse_x - mouse_x_prev) * delta_move);
-				else if (mouse_x - mouse_x_prev < 0)
-					CameraRotateStep(-0.0005 * (mouse_x_prev - mouse_x) * delta_move);
-
-				mouse_x_prev = mouse_x;
-				mouse_y_prev = mouse_y;
 				if (mouse_x < 50 || mouse_x > winW-50 ||
 					mouse_y < 50 || mouse_y > winH-50) {
-					mouse_x_prev = mouse_x = (int)winW/2;
-					mouse_y_prev = mouse_y = (int)winH/2;
+					mouse_x = (int)winW/2;
+					mouse_y = (int)winH/2;
 					SDL_WarpMouseInWindow(window, mouse_x, mouse_y);
 				}
+				else if (mouse_x - mouse_x_prev != 0)
+					CameraRotateStep(0.0005 * (mouse_x - mouse_x_prev) * delta_move);
 			}
-			else {
-				mouse_x_prev = mouse_x;
-				mouse_y_prev = mouse_y;
-			}
+
+			mouse_x_prev = mouse_x;
+			mouse_y_prev = mouse_y;
 		}
 	}
 }
