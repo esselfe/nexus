@@ -5,6 +5,7 @@
 #include <GL/gl.h>
 
 #include "nexus.h"
+#include "camera.h"
 
 unsigned int terminal_visible;
 char terminal_buffer[TERMINAL_BUFFER_SIZE];

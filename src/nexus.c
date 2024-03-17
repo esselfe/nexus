@@ -13,6 +13,7 @@
 #include <SDL2/SDL_opengl.h>
 
 #include "nexus.h"
+#include "camera.h"
 #include "selectID.h"
 
 char *nexus_version_string = "0.2.1-git";

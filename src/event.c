@@ -1,6 +1,7 @@
 #include <SDL2/SDL.h>
 
 #include "nexus.h"
+#include "camera.h"
 
 unsigned int mods;
 unsigned int show_keys;

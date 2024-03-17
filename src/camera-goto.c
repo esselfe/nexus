@@ -2,6 +2,7 @@
 #include <GL/gl.h>
 
 #include "nexus.h"
+#include "camera.h"
 
 // Automation flags and variables
 int goto_enabled, goto_stopping;

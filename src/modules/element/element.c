@@ -5,6 +5,11 @@
 
 struct ElementList element_root_list;
 
+char total_waste_text[128], total_battery_text[128],
+	total_copper_text[128], total_gold_text[128], total_iron_text[128],
+	total_magnet_text[128], total_rock_text[128], total_silver_text[128],
+	total_wood_text[128];
+
 void ElementInit(void) {
 	if (verbose) printf("Initializing element\n");
 

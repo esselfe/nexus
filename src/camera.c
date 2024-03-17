@@ -3,6 +3,7 @@
 #include <GL/gl.h>
 
 #include "nexus.h"
+#include "camera.h"
 
 struct Camera cam;
 

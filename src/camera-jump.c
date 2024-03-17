@@ -2,6 +2,7 @@
 #include <GL/gl.h>
 
 #include "nexus.h"
+#include "camera.h"
 
 // Should be called from the terminal, immediately change the camera position
 void CameraJump(GLfloat x, GLfloat z) {
