@@ -2,8 +2,10 @@
 
 ---
 
-Note: All NASA images have been slightly modified to fit correct rendering.
-The other textures have been created using the Gimp image editor.
+Note: All NASA images have been slightly modified to fit correct rendering.  
+The battery element texture was generated using OpenAI's DALL-E 3 model.  
+The font image as been crafted by esselfe.  
+The other textures have been created using the Gimp image editor.  
 
 ---
 
