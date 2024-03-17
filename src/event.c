@@ -254,8 +254,8 @@ void EventCheck(void) {
 				ModeSet(MODE_MAIN);
 				break;
 			case SDLK_b:
-				if (ModeGet() != MODE_BROWSER)
-					ModeSet(MODE_BROWSER);
+				if (ModeGet() != MODE_FILE_BROWSER)
+					ModeSet(MODE_FILE_BROWSER);
 				else
 					ModeSet(mode_prev);
 				break;
@@ -350,8 +350,8 @@ void EventCheck(void) {
 			if (event.button.button == SDL_BUTTON_RIGHT)
 				mouse_held = !mouse_held;
 			else if (event.button.button == SDL_BUTTON_LEFT) {
-				if (mode == MODE_BROWSER)
-					BrowserPickingCheck();
+				if (mode == MODE_FILE_BROWSER)
+					FileBrowserPickingCheck();
 			}
 
 			if (mouse_held) {

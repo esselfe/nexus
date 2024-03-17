@@ -17,12 +17,12 @@ void ModeSet(unsigned int newmode) {
 		EventFunc = EventCheck;
 		RenderFunc = Render;
 		break;
-	case MODE_BROWSER:
-		mode = MODE_BROWSER;
+	case MODE_FILE_BROWSER:
+		mode = MODE_FILE_BROWSER;
 		DeltaFunc = DeltaCompute;
 		EventFunc = EventCheck;
-		// EventFunc = BrowserEventCheck; // todo
-		RenderFunc = BrowserRender;
+		// EventFunc = FileBrowserEventCheck; // todo
+		RenderFunc = FileBrowserRender;
 		break;
 	case MODE_EDITOR:
 		mode = MODE_EDITOR;

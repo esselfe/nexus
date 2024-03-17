@@ -80,8 +80,8 @@ void TerminalParse(void) {
 		if (strcmp(w1, "exit") == 0 || strcmp(w1, "quit") == 0 ||
 			strcmp(w1, "qw") == 0)
 			mainloopend = 1;
-		else if (strcmp(w1, "browser") == 0)
-			ModeSet(MODE_BROWSER);
+		else if (strcmp(w1, "file") == 0)
+			ModeSet(MODE_FILE_BROWSER);
 		else if (strcmp(w1, "cam") == 0 || strcmp(w1, "camera") == 0) {
 			if (strcmp(w2, "reset") == 0)
 				CameraReset();

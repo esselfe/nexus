@@ -18,6 +18,9 @@ struct SelectIDList root_selectid_list;
 void SelectIDInit(void) {
     root_selectid_list.first_id = NULL;
     root_selectid_list.last_id = NULL;
+
+    glInitNames();
+	glPushName(0);
 }
 
 struct SelectID *SelectIDNew(void) {

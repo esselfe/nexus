@@ -24,7 +24,7 @@ void RenderInit(void) {
 	glFrontFace(GL_CCW);
 	glClearColor(0.0, 0.0, 0.0, 0.0);
 	glViewport((GLint)0, (GLint)0, (GLsizei)winW, (GLsizei)winH);
-	
+
 	glLightfv(GL_LIGHT0, GL_AMBIENT, light_ambient);
 	glLightfv(GL_LIGHT0, GL_DIFFUSE, light_diffuse);
 	glLightfv(GL_LIGHT0, GL_SPECULAR, light_specular);
