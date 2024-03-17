@@ -13,6 +13,7 @@
 #include <SDL2/SDL_opengl.h>
 
 #include "nexus.h"
+#include "selectID.h"
 
 char *nexus_version_string = "0.2.0";
 int verbose;
@@ -182,6 +183,7 @@ int main(int argc, char **argv) {
 	DeltaInit();
 	CameraInit();
 	FontInit(); // There must be no display list creation before this call
+	SelectIDInit();
 	RenderInit();
 	FloorInit();
 	ElementInit();

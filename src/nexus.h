@@ -4,6 +4,8 @@
 #include <GL/gl.h>
 #include <SDL2/SDL.h>
 
+#include "selectID.h"
+
 ////////////////////////////////////////////////////////////////
 // Core
 ////////////////////////////////////////////////////////////////
@@ -230,6 +232,7 @@ struct BrowserListEntry {
 	struct BrowserListEntry *prev, *next;
 	unsigned int type;
 	unsigned int rank;
+	struct SelectID *selectid;
 	char *name;
 };
 struct BrowserList {
@@ -244,6 +247,7 @@ void BrowserListAddEntry(unsigned int type, char *name);
 void BrowserListLoad(char *path);
 void BrowserListDestroy(void);
 struct BrowserListEntry *BrowserListEntryByRank(unsigned int rank);
+struct BrowserListEntry *BrowserListEntryBySelectID(GLuint id);
 void BrowserPickingCheck(void);
 void BrowserRender(void);
 
@@ -287,11 +291,11 @@ void EditorRender(void);
 struct Element {
 	struct Element *prev, *next;
 	unsigned int type;
-	unsigned int value;
 	float x, y, z;
 	float width, height;
 	float angle_x, angle_y, angle_z;
 	GLuint texture_id;
+	unsigned int value;
 };
 struct ElementList {
 	struct Element *first_element, *last_element;
@@ -300,6 +304,10 @@ struct ElementList {
 extern struct ElementList element_root_list;
 extern unsigned long long total_waste, total_battery, total_copper, total_gold,
 	total_iron, total_magnet, total_rock, total_silver, total_wood;
+extern char total_waste_text[128], total_battery_text[128],
+	total_copper_text[128], total_gold_text[128], total_iron_text[128],
+	total_magnet_text[128], total_rock_text[128], total_silver_text[128],
+	total_wood_text[128];
 extern GLuint texture_id_waste, texture_id_battery, texture_id_copper,
 	texture_id_gold, texture_id_iron, texture_id_magnet, texture_id_rock,
 	texture_id_silver, texture_id_wood;

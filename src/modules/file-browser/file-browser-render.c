@@ -39,7 +39,7 @@ void BrowserRender(void) {
 		glTranslatef(0.0, 0.2*(entry->rank-1), 0.0);
 		glColor3f(0.2, 0.2, 0.2);
 		if (!render)
-			glPushName(entry->rank);
+			glPushName(entry->selectid->id);
 		glBegin(GL_QUADS);
 		glVertex2f(0.0, 0.0);
 		glVertex2f(0.0, 0.2);

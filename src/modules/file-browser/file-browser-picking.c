@@ -13,7 +13,7 @@ void BrowserPickingCheck(void) {
 	int hits = glRenderMode(GL_RENDER);
 	
 	if (hits)
-		browser_selected_entry = BrowserListEntryByRank(browser_select_buffer[3]);
+		browser_selected_entry = BrowserListEntryBySelectID(browser_select_buffer[3]);
 	else
 		browser_selected_entry = NULL;
 }

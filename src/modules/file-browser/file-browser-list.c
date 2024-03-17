@@ -29,6 +29,7 @@ void BrowserListAddEntry(unsigned int type, char *name) {
 	entry->next = NULL;
 	entry->name = malloc(strlen(name)+1);
 	sprintf(entry->name, "%s", name);
+	entry->selectid = SelectIDNew();
 
 	++browser_list.entry_total;
 	browser_list.last_entry = entry;
@@ -109,3 +110,20 @@ struct BrowserListEntry *BrowserListEntryByRank(unsigned int rank) {
 	return NULL;
 }
 
+struct BrowserListEntry *BrowserListEntryBySelectID(GLuint id) {
+	struct BrowserListEntry *entry = browser_list.first_entry;
+	if (entry == NULL)
+		return NULL;
+	
+	while (1) {
+		if (entry->selectid->id == id)
+			return entry;
+		
+		if (entry->next != NULL)
+			entry = entry->next;
+		else
+			break;
+	}
+	
+	return NULL;
+}
