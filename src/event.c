@@ -5,6 +5,7 @@
 #include "delta.h"
 #include "event.h"
 #include "mode.h"
+#include "render.h"
 
 unsigned int mods;
 unsigned int show_keys;

@@ -21,7 +21,9 @@
 #include "font.h"
 #include "mode.h"
 #include "moon.h"
+#include "render.h"
 #include "selectID.h"
+#include "sky.h"
 
 char *nexus_version_string = "0.2.1-git";
 int verbose;

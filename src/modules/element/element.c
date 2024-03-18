@@ -3,6 +3,7 @@
 
 #include "nexus.h"
 #include "floor.h"
+#include "render.h"
 
 struct ElementList element_root_list;
 

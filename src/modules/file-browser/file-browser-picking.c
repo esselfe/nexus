@@ -1,6 +1,7 @@
 #include <GL/gl.h>
 
 #include "nexus.h"
+#include "render.h"
 
 GLuint file_browser_select_buffer[100];
 

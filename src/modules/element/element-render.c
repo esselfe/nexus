@@ -7,6 +7,8 @@
 #include "event.h"
 #include "floor.h"
 #include "font.h"
+#include "render.h"
+#include "sky.h"
 
 int render = 1;
 GLfloat element_mat_amb_diff[4];

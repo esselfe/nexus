@@ -4,6 +4,7 @@
 #include "delta.h"
 #include "event.h"
 #include "mode.h"
+#include "render.h"
 
 unsigned int mode, mode_prev;
 

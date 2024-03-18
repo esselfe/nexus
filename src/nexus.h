@@ -24,33 +24,6 @@ extern time_t t0, tprev;
 extern struct timeval tv0, tv_prev, tv_diff;
 void tvdiff(struct timeval *tv_start, struct timeval *tv_end, struct timeval *tv_diff2);
 
-// render.c
-////////////////////////////////
-extern GLfloat light_ambient[];
-extern GLfloat light_diffuse[];
-extern GLfloat light_specular[];
-extern GLfloat light_position[];
-extern int render; // Used for ignoring some calls when picking
-void Render(void);
-void RenderCompass(void);
-void RenderCursor(void);
-extern void (*RenderFunc)(void); // Modules are supposed to associate this handler to their function
-void RenderInit(void);
-void RenderSet2DView(void);
-void RenderSet3DView(void);
-void RenderThrottle(void); // Draw the throttle meter on the HUD
-
-// sky.c
-////////////////////////////////
-// The sky is a box without bottom or top, only 4 of 6 sides
-extern GLuint sky_texture_1, sky_texture_2, sky_texture_3, sky_texture_4;
-extern GLfloat daylight_amount;
-extern char daylight_amount_text[10];
-extern int daylight_enabled;
-extern int daylight_up;
-void SkyInit(void);
-void SkyRender(void);
-
 // terminal.c
 ////////////////////////////////
 #define TERMINAL_BUFFER_SIZE 4096

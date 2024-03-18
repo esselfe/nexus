@@ -9,6 +9,8 @@
 #include "floor.h"
 #include "font.h"
 #include "image.h"
+#include "render.h"
+#include "sky.h"
 
 void (*RenderFunc)(void);
 

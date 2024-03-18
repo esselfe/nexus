@@ -6,6 +6,8 @@
 #include "event.h"
 #include "floor.h"
 #include "font.h"
+#include "render.h"
+#include "sky.h"
 
 GLfloat memory_max, memory_value;
 char memory_max_text[128] = "0", memory_value_text[128] = "0";

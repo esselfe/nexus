@@ -6,6 +6,8 @@
 #include "delta.h"
 #include "image.h"
 #include "moon.h"
+#include "render.h"
+#include "sky.h"
 
 GLuint sky_texture_1, sky_texture_2, sky_texture_3, sky_texture_4,
 	sky_list, daylight_list;
