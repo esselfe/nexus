@@ -4,8 +4,6 @@
 #include <GL/gl.h>
 #include <SDL2/SDL.h>
 
-#include "selectID.h"
-
 extern char *nexus_version_string;
 extern int verbose;
 extern int mainloopend;
