@@ -7,6 +7,7 @@
 
 #include "nexus.h"
 #include "font.h"
+#include "image.h"
 
 static GLubyte *font_data;
 static GLubyte *letter_data;

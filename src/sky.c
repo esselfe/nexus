@@ -4,6 +4,7 @@
 #include "nexus.h"
 #include "camera.h"
 #include "delta.h"
+#include "image.h"
 
 GLuint sky_texture_1, sky_texture_2, sky_texture_3, sky_texture_4,
 	sky_list, daylight_list;

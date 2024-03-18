@@ -24,11 +24,6 @@ extern time_t t0, tprev;
 extern struct timeval tv0, tv_prev, tv_diff;
 void tvdiff(struct timeval *tv_start, struct timeval *tv_end, struct timeval *tv_diff2);
 
-// image.c
-////////////////////////////////
-// Used to create textures
-GLubyte *ImageFromPNGFile(unsigned int width, unsigned int height, char *filename);
-
 // mode.c
 ////////////////////////////////
 #define MODE_MAIN         0

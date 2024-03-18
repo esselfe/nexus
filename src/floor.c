@@ -3,6 +3,7 @@
 
 #include "nexus.h"
 #include "floor.h"
+#include "image.h"
 
 int floor_freeze;
 int floor_factor;

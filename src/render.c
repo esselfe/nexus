@@ -8,6 +8,7 @@
 #include "flag.h"
 #include "floor.h"
 #include "font.h"
+#include "image.h"
 
 void (*RenderFunc)(void);
 

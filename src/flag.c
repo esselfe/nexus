@@ -8,6 +8,7 @@
 #include "delta.h"
 #include "flag.h"
 #include "floor.h"
+#include "image.h"
 
 struct Flag flag01, flag02;
 static GLfloat flag_mat_amb_diff[4];

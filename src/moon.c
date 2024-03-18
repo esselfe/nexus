@@ -4,6 +4,7 @@
 #include "nexus.h"
 #include "camera.h"
 #include "delta.h"
+#include "image.h"
 
 static GLfloat moon_angle = 285.0;
 static GLuint moon_texture_id;
