@@ -2,6 +2,7 @@
 #include <string.h>
 
 #include "nexus.h"
+#include "file-browser.h"
 
 unsigned int file_browser_menu_visible;
 

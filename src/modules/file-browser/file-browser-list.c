@@ -9,6 +9,7 @@
 #include <GL/gl.h>
 
 #include "nexus.h"
+#include "file-browser.h"
 
 struct FileBrowserList file_browser_list;
 struct FileBrowserListEntry *file_browser_selected_entry;

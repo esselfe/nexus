@@ -7,6 +7,7 @@
 #include "mode.h"
 #include "render.h"
 #include "terminal.h"
+#include "modules/file-browser/file-browser.h"
 
 unsigned int mods;
 unsigned int show_keys;

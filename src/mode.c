@@ -5,6 +5,7 @@
 #include "event.h"
 #include "mode.h"
 #include "render.h"
+#include "modules/file-browser/file-browser.h"
 
 unsigned int mode, mode_prev;
 

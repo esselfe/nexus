@@ -3,6 +3,7 @@
 #include <GL/gl.h>
 
 #include "nexus.h"
+#include "file-browser.h"
 
 void FileBrowserInit(void) {
 	if (verbose) printf("Initializing file browser\n");

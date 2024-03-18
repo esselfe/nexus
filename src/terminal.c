@@ -11,6 +11,7 @@
 #include "mode.h"
 #include "sky.h"
 #include "terminal.h"
+#include "modules/file-browser/file-browser.h"
 
 unsigned int terminal_visible;
 char terminal_buffer[TERMINAL_BUFFER_SIZE];
