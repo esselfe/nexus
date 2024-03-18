@@ -15,6 +15,7 @@
 #include "nexus.h"
 #include "camera.h"
 #include "delta.h"
+#include "event.h"
 #include "selectID.h"
 
 char *nexus_version_string = "0.2.1-git";

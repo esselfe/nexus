@@ -24,21 +24,6 @@ extern time_t t0, tprev;
 extern struct timeval tv0, tv_prev, tv_diff;
 void tvdiff(struct timeval *tv_start, struct timeval *tv_end, struct timeval *tv_diff2);
 
-// event.c
-////////////////////////////////
-#define MOD_NONE    0
-#define MOD_CTRL    1
-#define MOD_ALT     (1<<1)
-#define MOD_SHIFT   (1<<2)
-extern unsigned int mods; // Each bit can be set to one of the flags above
-extern unsigned int show_keys; // Show keys pressed on the standard output stream
-extern int mouse_x, mouse_y, mouse_x_prev, mouse_y_prev;
-extern unsigned int mouse_held; // Mouse moves camera rotation or cursor
-
-void EventCheck(void);
-extern void (*EventFunc)(void); // Modules are supposed to associate this handler to their function
-void EventInit(void);
-
 // flag.c
 ////////////////////////////////
 struct Flag {

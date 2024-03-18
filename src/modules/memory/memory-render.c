@@ -3,6 +3,7 @@
 #include <SDL.h>
 
 #include "nexus.h"
+#include "event.h"
 
 GLfloat memory_max, memory_value;
 char memory_max_text[128] = "0", memory_value_text[128] = "0";
