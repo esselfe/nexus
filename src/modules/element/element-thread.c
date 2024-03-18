@@ -3,6 +3,7 @@
 
 #include "nexus.h"
 #include "floor.h"
+#include "mode.h"
 
 void *ElementThreadFunc(void *argp) {
 	int element_max = 500 * floor_factor;

@@ -4,6 +4,7 @@
 #include "camera.h"
 #include "delta.h"
 #include "event.h"
+#include "mode.h"
 
 unsigned int mods;
 unsigned int show_keys;

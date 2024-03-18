@@ -3,6 +3,7 @@
 #include "nexus.h"
 #include "delta.h"
 #include "event.h"
+#include "mode.h"
 
 unsigned int mode, mode_prev;
 

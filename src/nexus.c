@@ -19,6 +19,7 @@
 #include "flag.h"
 #include "floor.h"
 #include "font.h"
+#include "mode.h"
 #include "selectID.h"
 
 char *nexus_version_string = "0.2.1-git";

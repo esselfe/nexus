@@ -4,6 +4,7 @@
 #include "nexus.h"
 #include "floor.h"
 #include "image.h"
+#include "mode.h"
 
 int floor_freeze;
 int floor_factor;

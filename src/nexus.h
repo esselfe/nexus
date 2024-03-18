@@ -24,18 +24,6 @@ extern time_t t0, tprev;
 extern struct timeval tv0, tv_prev, tv_diff;
 void tvdiff(struct timeval *tv_start, struct timeval *tv_end, struct timeval *tv_diff2);
 
-// mode.c
-////////////////////////////////
-#define MODE_MAIN         0
-#define MODE_FILE_BROWSER 1
-#define MODE_DRIVING      2
-#define MODE_EDITOR       3
-#define MODE_ELEMENT      4
-#define MODE_MEMORY       5
-extern unsigned int mode, mode_prev;
-unsigned int ModeGet(void);
-void ModeSet(unsigned int newmode);
-
 // moon.c
 ////////////////////////////////
 void MoonInit(void);
