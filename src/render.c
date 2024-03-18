@@ -5,6 +5,7 @@
 #include "nexus.h"
 #include "camera.h"
 #include "event.h"
+#include "flag.h"
 
 void (*RenderFunc)(void);
 

@@ -24,20 +24,6 @@ extern time_t t0, tprev;
 extern struct timeval tv0, tv_prev, tv_diff;
 void tvdiff(struct timeval *tv_start, struct timeval *tv_end, struct timeval *tv_diff2);
 
-// flag.c
-////////////////////////////////
-struct Flag {
-	GLfloat x, y, z;
-	unsigned int width, height;
-	unsigned long value;
-	GLuint texture_id;
-};
-extern struct Flag flag01, flag02;
-
-void FlagInit(void);
-void FlagRender(void);
-void FlagUpdate(void);
-
 // floor.c
 ////////////////////////////////
 // 9 floors total, popping and pushing floors when camera crosses center's borders

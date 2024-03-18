@@ -4,6 +4,7 @@
 
 #include "nexus.h"
 #include "delta.h"
+#include "flag.h"
 
 // Modules have to assiociate this function pointer to their handler
 void (*DeltaFunc)(void);
