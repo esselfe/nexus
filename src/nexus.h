@@ -24,12 +24,6 @@ extern time_t t0, tprev;
 extern struct timeval tv0, tv_prev, tv_diff;
 void tvdiff(struct timeval *tv_start, struct timeval *tv_end, struct timeval *tv_diff2);
 
-// moon.c
-////////////////////////////////
-void MoonInit(void);
-void MoonMove(void);
-void MoonRender(void);
-
 // render.c
 ////////////////////////////////
 extern GLfloat light_ambient[];
