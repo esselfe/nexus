@@ -24,16 +24,6 @@ extern time_t t0, tprev;
 extern struct timeval tv0, tv_prev, tv_diff;
 void tvdiff(struct timeval *tv_start, struct timeval *tv_end, struct timeval *tv_diff2);
 
-// terminal.c
-////////////////////////////////
-#define TERMINAL_BUFFER_SIZE 4096
-extern unsigned int terminal_visible; // Enables or disables the terminal
-extern char terminal_buffer[TERMINAL_BUFFER_SIZE];
-extern unsigned int terminal_cursor_pos,
-	terminal_cursor_blink; // Toggled once every half second
-void TerminalParse(void);
-void TerminalRender(void);
-
 ////////////////////////////////////////////////////////////////
 // Modules
 ////////////////////////////////////////////////////////////////

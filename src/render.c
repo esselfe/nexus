@@ -11,6 +11,7 @@
 #include "image.h"
 #include "render.h"
 #include "sky.h"
+#include "terminal.h"
 
 void (*RenderFunc)(void);
 

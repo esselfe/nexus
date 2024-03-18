@@ -9,6 +9,7 @@
 #include "font.h"
 #include "render.h"
 #include "sky.h"
+#include "terminal.h"
 
 int render = 1;
 GLfloat element_mat_amb_diff[4];

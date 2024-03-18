@@ -6,6 +6,7 @@
 #include "event.h"
 #include "mode.h"
 #include "render.h"
+#include "terminal.h"
 
 unsigned int mods;
 unsigned int show_keys;

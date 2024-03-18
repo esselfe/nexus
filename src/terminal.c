@@ -10,6 +10,7 @@
 #include "font.h"
 #include "mode.h"
 #include "sky.h"
+#include "terminal.h"
 
 unsigned int terminal_visible;
 char terminal_buffer[TERMINAL_BUFFER_SIZE];

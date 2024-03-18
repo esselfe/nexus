@@ -4,6 +4,7 @@
 #include <sys/sysinfo.h>
 
 #include "nexus.h"
+#include "terminal.h"
 
 void MemoryDeltaCompute(void) {
 	struct sysinfo si;
