@@ -6,6 +6,7 @@
 #include "camera.h"
 #include "event.h"
 #include "flag.h"
+#include "floor.h"
 
 void (*RenderFunc)(void);
 

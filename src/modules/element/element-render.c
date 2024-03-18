@@ -5,6 +5,7 @@
 #include "nexus.h"
 #include "delta.h"
 #include "event.h"
+#include "floor.h"
 
 int render = 1;
 GLfloat element_mat_amb_diff[4];

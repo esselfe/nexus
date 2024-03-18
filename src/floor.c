@@ -2,6 +2,7 @@
 #include <GL/gl.h>
 
 #include "nexus.h"
+#include "floor.h"
 
 int floor_freeze;
 int floor_factor;

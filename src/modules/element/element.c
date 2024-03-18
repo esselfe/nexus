@@ -2,6 +2,7 @@
 #include <sys/time.h>
 
 #include "nexus.h"
+#include "floor.h"
 
 struct ElementList element_root_list;
 
