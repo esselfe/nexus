@@ -25,7 +25,7 @@
 #include "selectID.h"
 #include "sky.h"
 
-char *nexus_version_string = "0.2.1-git";
+char *nexus_version_string = "0.2.2-git";
 int verbose;
 int mainloopend; // The program should exit if set to 1
 int init_done; // Internal use
