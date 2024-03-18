@@ -27,6 +27,7 @@
 #include "modules/editor/editor.h"
 #include "modules/element/element.h"
 #include "modules/file-browser/file-browser.h"
+#include "modules/memory/memory.h"
 
 char *nexus_version_string = "0.2.2-git";
 int verbose;

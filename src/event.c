@@ -8,6 +8,7 @@
 #include "render.h"
 #include "terminal.h"
 #include "modules/file-browser/file-browser.h"
+#include "modules/memory/memory.h"
 
 unsigned int mods;
 unsigned int show_keys;

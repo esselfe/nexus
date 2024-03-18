@@ -14,6 +14,7 @@
 #include "modules/editor/editor.h"
 #include "modules/element/element.h"
 #include "modules/file-browser/file-browser.h"
+#include "modules/memory/memory.h"
 
 unsigned int terminal_visible;
 char terminal_buffer[TERMINAL_BUFFER_SIZE];

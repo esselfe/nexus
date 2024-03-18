@@ -8,6 +8,7 @@
 #include "modules/editor/editor.h"
 #include "modules/element/element.h"
 #include "modules/file-browser/file-browser.h"
+#include "modules/memory/memory.h"
 
 unsigned int mode, mode_prev;
 

@@ -34,15 +34,4 @@ void DrivingDelta(void);
 void DrivingEvent(void);
 void DrivingRender(void);
 
-// Memory
-////////////////////////////////
-extern GLfloat memory_max, memory_value;
-extern char memory_max_text[128], memory_value_text[128];
-extern GLfloat swap_max, swap_value;
-extern char swap_max_text[128], swap_value_text[128];
-extern GLfloat memory_mat_amb_diff[4];
-void MemoryDeltaCompute(void);
-void MemoryInit(void);
-void MemoryRender(void);
-
 #endif /* NEXUS_H */

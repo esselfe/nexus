@@ -1,4 +1,5 @@
 #include "nexus.h"
+#include "memory.h"
 
 void MemoryInit(void) {
 	memory_mat_amb_diff[0] = 0.2;

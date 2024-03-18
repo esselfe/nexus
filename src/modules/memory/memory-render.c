@@ -9,6 +9,7 @@
 #include "render.h"
 #include "sky.h"
 #include "terminal.h"
+#include "memory.h"
 
 GLfloat memory_max, memory_value;
 char memory_max_text[128] = "0", memory_value_text[128] = "0";
