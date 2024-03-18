@@ -1,6 +1,7 @@
 #include <stdio.h>
 
 #include "nexus.h"
+#include "delta.h"
 
 unsigned int mode, mode_prev;
 

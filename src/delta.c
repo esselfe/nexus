@@ -3,7 +3,9 @@
 #include <sys/time.h>
 
 #include "nexus.h"
+#include "delta.h"
 
+// Modules have to assiociate this function pointer to their handler
 void (*DeltaFunc)(void);
 
 GLfloat delta, delta_move;

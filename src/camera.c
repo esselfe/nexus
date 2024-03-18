@@ -4,6 +4,7 @@
 
 #include "nexus.h"
 #include "camera.h"
+#include "delta.h"
 
 struct Camera cam;
 

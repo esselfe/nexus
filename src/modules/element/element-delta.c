@@ -3,6 +3,7 @@
 
 #include "nexus.h"
 #include "camera.h"
+#include "delta.h"
 
 struct timeval tv_collision_prev;
 time_t time_cleanup_prev;

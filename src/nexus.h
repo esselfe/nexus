@@ -24,14 +24,6 @@ extern time_t t0, tprev;
 extern struct timeval tv0, tv_prev, tv_diff;
 void tvdiff(struct timeval *tv_start, struct timeval *tv_end, struct timeval *tv_diff2);
 
-// delta.c
-////////////////////////////////
-extern GLfloat delta, delta_move;
-void DeltaCompute(void);
-void DeltaInit(void);
-extern void (*DeltaFunc)(void); // Modules are supposed to associate this handler to their function
-void DeltaMove(void);
-
 // event.c
 ////////////////////////////////
 #define MOD_NONE    0

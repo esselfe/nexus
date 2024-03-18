@@ -2,6 +2,7 @@
 
 #include "nexus.h"
 #include "camera.h"
+#include "delta.h"
 
 unsigned int mods;
 unsigned int show_keys;
