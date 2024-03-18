@@ -6,6 +6,7 @@
 #include "delta.h"
 #include "event.h"
 #include "floor.h"
+#include "font.h"
 
 int render = 1;
 GLfloat element_mat_amb_diff[4];

@@ -5,6 +5,7 @@
 #include "nexus.h"
 #include "event.h"
 #include "floor.h"
+#include "font.h"
 
 void EditorRender(void) {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);

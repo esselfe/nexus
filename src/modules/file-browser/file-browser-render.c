@@ -6,6 +6,7 @@
 #include "camera.h"
 #include "event.h"
 #include "floor.h"
+#include "font.h"
 
 void FileBrowserRender(void) {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);

@@ -7,6 +7,7 @@
 #include "event.h"
 #include "flag.h"
 #include "floor.h"
+#include "font.h"
 
 void (*RenderFunc)(void);
 

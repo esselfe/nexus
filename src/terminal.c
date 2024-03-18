@@ -7,6 +7,7 @@
 #include "nexus.h"
 #include "camera.h"
 #include "floor.h"
+#include "font.h"
 
 unsigned int terminal_visible;
 char terminal_buffer[TERMINAL_BUFFER_SIZE];

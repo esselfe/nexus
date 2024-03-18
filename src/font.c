@@ -6,6 +6,7 @@
 #include <GL/gl.h>
 
 #include "nexus.h"
+#include "font.h"
 
 static GLubyte *font_data;
 static GLubyte *letter_data;

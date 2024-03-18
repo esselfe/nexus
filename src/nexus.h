@@ -24,22 +24,6 @@ extern time_t t0, tprev;
 extern struct timeval tv0, tv_prev, tv_diff;
 void tvdiff(struct timeval *tv_start, struct timeval *tv_end, struct timeval *tv_diff2);
 
-// font.c
-////////////////////////////////
-// Text background and foreground colors
-#define BG_NONE    0
-#define BG_BLACK   1
-#define BG_GRAY    2
-#define BG_GREY    2
-#define FG_NONE    0
-#define FG_BLUE    1
-#define FG_GREEN   2
-void FontInit(void);
-// 3D-positioned scene text
-void FontRender(int bgcolor, int fgcolor, GLfloat x, GLfloat y, GLfloat z, char *text);
-// HUD text
-void FontRender2D(int bgcolor, int x, int y, char *text);
-
 // image.c
 ////////////////////////////////
 // Used to create textures
