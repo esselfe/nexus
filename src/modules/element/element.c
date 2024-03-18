@@ -4,6 +4,7 @@
 #include "nexus.h"
 #include "floor.h"
 #include "render.h"
+#include "element.h"
 
 struct ElementList element_root_list;
 

@@ -24,6 +24,8 @@
 #include "render.h"
 #include "selectID.h"
 #include "sky.h"
+#include "modules/editor/editor.h"
+#include "modules/element/element.h"
 #include "modules/file-browser/file-browser.h"
 
 char *nexus_version_string = "0.2.2-git";

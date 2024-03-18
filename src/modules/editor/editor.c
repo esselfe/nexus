@@ -4,6 +4,7 @@
 #include <string.h>
 
 #include "nexus.h"
+#include "editor.h"
 
 struct LineList line_root_list;
 

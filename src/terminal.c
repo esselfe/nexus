@@ -11,6 +11,8 @@
 #include "mode.h"
 #include "sky.h"
 #include "terminal.h"
+#include "modules/editor/editor.h"
+#include "modules/element/element.h"
 #include "modules/file-browser/file-browser.h"
 
 unsigned int terminal_visible;

@@ -4,6 +4,7 @@
 
 #include "nexus.h"
 #include "image.h"
+#include "element.h"
 
 GLuint texture_id_waste, texture_id_battery, texture_id_copper, texture_id_gold,
 	texture_id_iron, texture_id_magnet, texture_id_rock,

@@ -6,6 +6,7 @@
 #include "image.h"
 #include "mode.h"
 #include "sky.h"
+#include "modules/element/element.h"
 
 int floor_freeze;
 int floor_factor;

@@ -4,6 +4,7 @@
 #include <sys/time.h>
 
 #include "nexus.h"
+#include "element.h"
 
 struct timeval tv_score_saved;
 unsigned long long total_waste, total_battery, total_copper, total_gold,
