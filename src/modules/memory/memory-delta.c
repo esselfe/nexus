@@ -41,6 +41,7 @@ void MemoryDeltaCompute(void) {
 		sprintf(fps_text, "%u fps", fps);
 		fps = 0;
 	}
+	else ++fps;
 
 	// Once every half second
 	gettimeofday(&tv0, NULL);

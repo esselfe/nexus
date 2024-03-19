@@ -53,6 +53,7 @@ void DeltaCompute(void) {
 		sprintf(fps_text, "%u fps", fps);
 		fps = 0;
 	}
+	else ++fps;
 
 	// Once every half second
 	tvdiff(&tv_prev, &tv0, &tv_diff);

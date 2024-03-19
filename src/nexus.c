@@ -129,7 +129,6 @@ int main(int argc, char **argv) {
 
 	if (verbose) printf("Mainloop started\n");
 	while (!mainloopend) {
-		++fps;
 		EventFunc();
 		DeltaFunc();
 		if (cam.moving) CameraMove();
