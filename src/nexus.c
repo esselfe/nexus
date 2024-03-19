@@ -39,8 +39,6 @@ SDL_GLContext context;
 // Window position and dimensions
 GLfloat winX = 100.0, winY = 40.0, winW = 800.0, winH = 600.0;
 char window_title[1024];
-unsigned int fps; // For measuring frames per second
-char *fps_text; // Text rendered on the HUD
 
 // This function will be called if exit(N); is called or at the end of main()
 // It's set with the atexit() function in the main() function
@@ -110,9 +108,6 @@ int main(int argc, char **argv) {
 		SDL_Quit();
 		exit(1);
 	}
-
-	fps_text = malloc(20);
-	sprintf(fps_text, "0 fps");
 
 	ModeSet(MODE_MAIN);
 	EventInit();

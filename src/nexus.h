@@ -11,8 +11,6 @@ extern int verbose;
 extern int mainloopend;
 extern SDL_Window *window;
 extern GLfloat winX, winY, winW, winH;
-extern unsigned int fps;
-extern char *fps_text;
 
 void ShowHelp(void);
 void ShowVersion(void);

@@ -5,6 +5,7 @@
 #include "nexus.h"
 #include "delta.h"
 #include "flag.h"
+#include "render.h"
 #include "terminal.h"
 
 // Modules have to assiociate this function pointer to their handler

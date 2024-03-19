@@ -5,6 +5,7 @@
 
 #include "nexus.h"
 #include "delta.h"
+#include "render.h"
 #include "terminal.h"
 #include "memory.h"
 

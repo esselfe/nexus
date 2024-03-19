@@ -15,6 +15,8 @@
 
 void (*RenderFunc)(void);
 
+unsigned int fps; // For measuring frames per second
+char *fps_text; // Text rendered on the HUD
 GLfloat light_ambient[] = { 1.0, 1.0, 1.0, 1.0 };
 GLfloat light_diffuse[] = { 1.0, 1.0, 1.0, 1.0 };
 GLfloat light_specular[] = { 1.0, 1.0, 1.0, 1.0 };
@@ -23,6 +25,9 @@ GLuint compass_texture_id;
 
 void RenderInit(void) {
 	if (verbose) printf("Initializing rendering\n");
+	
+	fps_text = malloc(20);
+	sprintf(fps_text, "0 fps");
 	
 	RenderFunc = Render;
 	

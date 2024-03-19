@@ -3,6 +3,8 @@
 
 #include <GL/gl.h>
 
+extern unsigned int fps;
+extern char *fps_text;
 extern GLfloat light_ambient[];
 extern GLfloat light_diffuse[];
 extern GLfloat light_specular[];
