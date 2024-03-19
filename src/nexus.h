@@ -14,4 +14,7 @@ extern GLfloat winX, winY, winW, winH;
 extern unsigned int fps;
 extern char *fps_text;
 
+void ShowHelp(void);
+void ShowVersion(void);
+
 #endif /* NEXUS_H */
