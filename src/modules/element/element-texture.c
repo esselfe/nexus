@@ -7,7 +7,7 @@
 #include "element.h"
 
 GLuint texture_id_waste, texture_id_battery, texture_id_copper, texture_id_gold,
-	texture_id_iron, texture_id_magnet, texture_id_rock,
+	texture_id_iron, texture_id_magnet, texture_id_rock, texture_id_rubber,
 	texture_id_silver, texture_id_wood;
 
 void ElementTextureCreate(GLuint *id, char *filename) {
@@ -45,6 +45,7 @@ void ElementTextureInit(void) {
 	ElementTextureCreate(&texture_id_iron, "images/element-iron-128.png");
 	ElementTextureCreate(&texture_id_magnet, "images/element-magnet-128.png");
 	ElementTextureCreate(&texture_id_rock, "images/element-rock-128.png");
+	ElementTextureCreate(&texture_id_rubber, "images/element-rubber-128.png");
 	ElementTextureCreate(&texture_id_silver, "images/element-silver-128.png");
 	ElementTextureCreate(&texture_id_wood, "images/element-wood-128.png");
 }

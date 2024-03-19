@@ -38,6 +38,8 @@ void ElementCheckCollision(void) {
 					total_magnet += el->value;
 				else if (el->type == ELEMENT_TYPE_ROCK)
 					total_rock += el->value;
+				else if (el->type == ELEMENT_TYPE_RUBBER)
+					total_rubber += el->value;
 				else if (el->type == ELEMENT_TYPE_SILVER)
 					total_silver += el->value;
 				else if (el->type == ELEMENT_TYPE_WOOD)

@@ -6,11 +6,11 @@
 #include "nexus.h"
 #include "element.h"
 
-static unsigned long long element_score_version = 2;
+static unsigned long long element_score_version = 3;
 static unsigned long long element_score_version_found;
 struct timeval tv_score_saved;
 unsigned long long total_waste, total_battery, total_copper, total_gold,
-	total_iron, total_magnet, total_rock, total_silver, total_wood;
+	total_iron, total_magnet, total_rock, total_rubber, total_silver, total_wood;
 
 void ElementScoreLoad(void) {
 	if (verbose) printf("Loading element score\n");
@@ -33,6 +33,7 @@ void ElementScoreLoad(void) {
 		fread(&total_iron, 8, 1, fp);
 		fread(&total_magnet, 8, 1, fp);
 		fread(&total_rock, 8, 1, fp);
+		total_rubber = 0;
 		fread(&total_silver, 8, 1, fp);
 		fread(&total_wood, 8, 1, fp);
 	}
@@ -46,6 +47,19 @@ void ElementScoreLoad(void) {
 			fread(&total_iron, 8, 1, fp);
 			fread(&total_magnet, 8, 1, fp);
 			fread(&total_rock, 8, 1, fp);
+			total_rubber = 0;
+			fread(&total_silver, 8, 1, fp);
+			fread(&total_wood, 8, 1, fp);
+		}
+		else if (element_score_version_found == 3) {
+			fread(&total_waste, 8, 1, fp);
+			fread(&total_battery, 8, 1, fp);
+			fread(&total_copper, 8, 1, fp);
+			fread(&total_gold, 8, 1, fp);
+			fread(&total_iron, 8, 1, fp);
+			fread(&total_magnet, 8, 1, fp);
+			fread(&total_rock, 8, 1, fp);
+			fread(&total_rubber, 8, 1, fp);
 			fread(&total_silver, 8, 1, fp);
 			fread(&total_wood, 8, 1, fp);
 		}
@@ -71,6 +85,7 @@ void ElementScoreSave(void) {
 	fwrite(&total_iron, 8, 1, fp);
 	fwrite(&total_magnet, 8, 1, fp);
 	fwrite(&total_rock, 8, 1, fp);
+	fwrite(&total_rubber, 8, 1, fp);
 	fwrite(&total_silver, 8, 1, fp);
 	fwrite(&total_wood, 8, 1, fp);
 

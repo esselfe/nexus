@@ -11,8 +11,8 @@ struct ElementList element_root_list;
 
 char total_waste_text[128], total_battery_text[128],
 	total_copper_text[128], total_gold_text[128], total_iron_text[128],
-	total_magnet_text[128], total_rock_text[128], total_silver_text[128],
-	total_wood_text[128];
+	total_magnet_text[128], total_rock_text[128], total_rubber_text[128],
+	total_silver_text[128], total_wood_text[128];
 
 void ElementInit(void) {
 	if (verbose) printf("Initializing element\n");
@@ -50,7 +50,7 @@ void ElementAdd(unsigned int count) {
 
 		gettimeofday(&tv0, NULL);
 		srand((unsigned int)tv0.tv_usec);
-		elem->type = rand() % 8;
+		elem->type = rand() % 10;
 		switch (elem->type) {
 		case ELEMENT_TYPE_WASTE:
 			elem->texture_id = texture_id_waste;
@@ -78,6 +78,10 @@ void ElementAdd(unsigned int count) {
 			break;
 		case ELEMENT_TYPE_ROCK:
 			elem->texture_id = texture_id_rock;
+			elem->value = (rand() % 1000) + 100;
+			break;
+		case ELEMENT_TYPE_RUBBER:
+			elem->texture_id = texture_id_rubber;
 			elem->value = (rand() % 1000) + 100;
 			break;
 		case ELEMENT_TYPE_SILVER:
@@ -111,6 +115,8 @@ void ElementCleanArea(void) {
 		return;
 	
 	struct Element *el = element_root_list.first_element, *el2;
+	if (el == NULL) return;
+	
 	while (1) {
 		if (el->y < 2.0 && 
 		  (el->x < floor_root_list.first_floor->x - floor_size/2.0) ||

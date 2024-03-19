@@ -98,14 +98,17 @@ void ElementRender(void) {
 	sprintf(text, "%lu rock", total_rock);
 	FontRender2D(BG_GREY, 10, (int)winH-16-150, text);
 	
-	sprintf(text, "%lu silver", total_silver);
+	sprintf(text, "%lu rubber", total_rubber);
 	FontRender2D(BG_GREY, 10, (int)winH-16-170, text);
 	
-	sprintf(text, "%lu wood", total_wood);
+	sprintf(text, "%lu silver", total_silver);
 	FontRender2D(BG_GREY, 10, (int)winH-16-190, text);
 	
-	sprintf(text, "%lu elements", element_root_list.total_elements);
+	sprintf(text, "%lu wood", total_wood);
 	FontRender2D(BG_GREY, 10, (int)winH-16-210, text);
+	
+	sprintf(text, "%lu elements", element_root_list.total_elements);
+	FontRender2D(BG_GREY, 10, (int)winH-16-230, text);
 	
 	if (terminal_visible)
 		TerminalRender();
