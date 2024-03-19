@@ -46,6 +46,8 @@ void DeltaInit(void) {
 void DeltaCompute(void) {
 	gettimeofday(&tv0, NULL);
 	
+	++fps;
+	
 	// Once every second
 	t0 = (time_t)tv0.tv_sec;
 	if (t0 - tprev > 0) {
@@ -53,7 +55,6 @@ void DeltaCompute(void) {
 		sprintf(fps_text, "%u fps", fps);
 		fps = 0;
 	}
-	else ++fps;
 
 	// Once every half second
 	tvdiff(&tv_prev, &tv0, &tv_diff);

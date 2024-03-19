@@ -33,6 +33,7 @@ void MemoryDeltaCompute(void) {
 	swap_value = (3.0/swap_max) * used_swap;
 	sprintf(swap_value_text, "%lu", (unsigned long)used_swap);
 	 
+	++fps;
 
 	// Once every second
 	t0 = time(NULL);
@@ -41,8 +42,7 @@ void MemoryDeltaCompute(void) {
 		sprintf(fps_text, "%u fps", fps);
 		fps = 0;
 	}
-	else ++fps;
-
+	
 	// Once every half second
 	gettimeofday(&tv0, NULL);
 	tvdiff(&tv_prev, &tv0, &tv_diff);
