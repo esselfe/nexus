@@ -11,12 +11,35 @@
 void (*DeltaFunc)(void);
 
 GLfloat delta, delta_move;
+time_t t0, tprev;
+struct timeval tv0, tv_prev, tv_diff;
 struct timeval tv_prev_frame;
+
+// Calculate the difference between 2 timings like 0.223880 and 0.384859
+void tvdiff(struct timeval *tv_start, struct timeval *tv_end, struct timeval *tv_diff2) {
+	tv_diff2->tv_sec = tv_end->tv_sec - tv_start->tv_sec;
+	
+	if (tv_start->tv_sec == tv_end->tv_sec) {
+		tv_diff2->tv_usec = tv_end->tv_usec - tv_start->tv_usec;
+	}
+	else {
+		tv_diff2->tv_usec = tv_end->tv_usec + (1000000-tv_start->tv_usec);
+		if (tv_diff2->tv_usec >= 1000000) {
+			++tv_diff2->tv_sec;
+			tv_diff2->tv_usec -= 1000000;
+		}
+		if (tv_diff2->tv_sec > 0)
+			--tv_diff2->tv_sec;
+	}
+}
 
 void DeltaInit(void) {
 	if (verbose) printf("Initializing delta\n");
 	DeltaFunc = DeltaCompute;
-	gettimeofday(&tv_prev_frame, NULL);
+	tprev = time(NULL);
+	gettimeofday(&tv_prev, NULL);
+	tv_prev_frame.tv_sec = tv_prev.tv_sec;
+	tv_prev_frame.tv_usec = tv_prev.tv_usec;
 }
 
 void DeltaCompute(void) {

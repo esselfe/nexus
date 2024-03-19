@@ -41,8 +41,6 @@ GLfloat winX = 100.0, winY = 40.0, winW = 800.0, winH = 600.0;
 char window_title[1024];
 unsigned int fps; // For measuring frames per second
 char *fps_text; // Text rendered on the HUD
-time_t t0, tprev; // Mostly used in delta code
-struct timeval tv0, tv_prev, tv_diff; // Idem
 
 // Structure of getopt options for program options and arguments processing
 static const struct option long_options[] = {
@@ -69,24 +67,6 @@ void NexusExit(void) {
 	}
 	
 	if (verbose) printf("\nnexus exited\n");
-}
-
-// Calculate the difference between 2 timings like 0.223880 and 0.384859
-void tvdiff(struct timeval *tv_start, struct timeval *tv_end, struct timeval *tv_diff2) {
-	tv_diff2->tv_sec = tv_end->tv_sec - tv_start->tv_sec;
-	
-	if (tv_start->tv_sec == tv_end->tv_sec) {
-		tv_diff2->tv_usec = tv_end->tv_usec - tv_start->tv_usec;
-	}
-	else {
-		tv_diff2->tv_usec = tv_end->tv_usec + (1000000-tv_start->tv_usec);
-		if (tv_diff2->tv_usec >= 1000000) {
-			++tv_diff2->tv_sec;
-			tv_diff2->tv_usec -= 1000000;
-		}
-		if (tv_diff2->tv_sec > 0)
-			--tv_diff2->tv_sec;
-	}
 }
 
 void ShowHelp(void) {
@@ -210,8 +190,6 @@ int main(int argc, char **argv) {
 	
 	init_done = 1;
 
-	tprev = time(NULL);
-	gettimeofday(&tv_prev, NULL);
 	if (verbose) printf("Mainloop started\n");
 	while (!mainloopend) {
 		++fps;

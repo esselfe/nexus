@@ -4,6 +4,7 @@
 #include <sys/sysinfo.h>
 
 #include "nexus.h"
+#include "delta.h"
 #include "terminal.h"
 #include "memory.h"
 

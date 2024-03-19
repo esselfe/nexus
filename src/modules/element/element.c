@@ -2,6 +2,7 @@
 #include <sys/time.h>
 
 #include "nexus.h"
+#include "delta.h"
 #include "floor.h"
 #include "render.h"
 #include "element.h"
