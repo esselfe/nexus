@@ -23,6 +23,7 @@ void ElementInit(void) {
 	ElementTextureInit();
 	ElementAdd(floor_factor*250);
 	ElementThreadStart();
+	ElementShopInit();
 	
 	element_mat_amb_diff[0] = 0.4;
 	element_mat_amb_diff[1] = 0.4;

@@ -53,8 +53,10 @@ void ElementRemove(struct Element *elem);
 void ElementRender(void);
 void ElementScoreLoad(void);
 void ElementScoreSave(void);
+void ElementShopInit(void);
 void ElementShopRender(void);
 void ElementTextureInit(void);
+void ElementTextureCreate(GLuint *id, char *filename);
 void ElementThreadStart(void);
 
 #endif /* ELEMENT_H */
