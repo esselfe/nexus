@@ -1,7 +1,9 @@
+#include <stdio.h>
 #include <GL/gl.h>
 
-#include "element.h"
+#include "camera.h"
 #include "image.h"
+#include "element.h"
 
 GLfloat shop_x = -50.0, shop_y = 0.0, shop_z = 50.0;
 GLfloat shop_width = 20.0, shop_height = 4.0, shop_depth = 10.0;
@@ -110,6 +112,15 @@ void ElementShopInit(void) {
     glBindTexture(GL_TEXTURE_2D, 0);
 
     glEndList();
+}
+
+void ElementShopCheckCollision(void) {
+    if (cam.x > shop_x - shop_width/2.0 - 1.5 &&
+			cam.x < shop_x + shop_width/2.0 + 1.5 &&
+			cam.z > shop_z - shop_depth/2.0 - 1.5 &&
+			cam.z < shop_z + shop_depth/2.0 + 1.5) {
+        CameraStop();
+    }
 }
 
 void ElementShopRender(void) {

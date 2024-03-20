@@ -101,6 +101,7 @@ void ElementDelta(void) {
 		tv_collision_prev.tv_sec = tv0.tv_sec;
 		tv_collision_prev.tv_usec = tv0.tv_usec;
 		ElementCheckCollision();
+		ElementShopCheckCollision();
 	}
 
 	tvdiff(&tv_score_saved, &tv0, &tv_diff);
