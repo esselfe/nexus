@@ -110,6 +110,9 @@ void ElementRender(void) {
 	sprintf(text, "%lu elements", element_root_list.total_elements);
 	FontRender2D(BG_GREY, 10, (int)winH-16-230, text);
 	
+	sprintf(text, "%lu credits", element_credits);
+	FontRender2D(BG_GREY, 10, (int)winH-16-250, text);
+
 	if (terminal_visible)
 		TerminalRender();
 	if (!mouse_held)

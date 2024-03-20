@@ -40,9 +40,12 @@ extern GLuint texture_id_waste, texture_id_battery, texture_id_copper,
 	texture_id_rubber, texture_id_silver, texture_id_wood;
 extern GLfloat element_mat_amb_diff[4];
 extern struct timeval tv_score_saved;
+extern unsigned long long element_credits;
 
 void ElementAdd(unsigned int count);
 void ElementCleanArea(void);
+void ElementCreditLoad(void);
+void ElementCreditSave(void);
 void ElementDelta(void);
 void ElementInit(void);
 void ElementListDestroy(void);

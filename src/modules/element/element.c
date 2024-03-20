@@ -18,6 +18,7 @@ void ElementInit(void) {
 	if (verbose) printf("Initializing element\n");
 
 	gettimeofday(&tv_score_saved, NULL);
+	ElementCreditLoad();
 	ElementScoreLoad();
 	ElementTextureInit();
 	ElementAdd(floor_factor*250);

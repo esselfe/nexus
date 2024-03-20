@@ -105,6 +105,7 @@ void ElementDelta(void) {
 
 	tvdiff(&tv_score_saved, &tv0, &tv_diff);
 	if (tv_diff.tv_sec > 30) {
+		ElementCreditSave();
 		ElementScoreSave();
 		tv_score_saved.tv_sec = tv0.tv_sec;
 		tv_score_saved.tv_usec = tv0.tv_usec;

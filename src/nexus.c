@@ -46,7 +46,8 @@ static void NexusExit(void) {
 	// Prevent saving zeroes if exit() was called before
 	// the score was loaded.
 	if (init_done) {
-		if (verbose) printf("Saving element score\n");
+		if (verbose) printf("Saving element credits and score\n");
+		ElementCreditSave();
 		ElementScoreSave();
 	}
 	
