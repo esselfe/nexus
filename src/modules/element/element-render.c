@@ -35,6 +35,7 @@ void ElementRender(void) {
 
 	SkyRender();
 	FloorRender();
+	ElementShopRender();
 	
 	glEnable(GL_BLEND);
 	glEnable(GL_COLOR_MATERIAL);

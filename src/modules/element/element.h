@@ -53,6 +53,7 @@ void ElementRemove(struct Element *elem);
 void ElementRender(void);
 void ElementScoreLoad(void);
 void ElementScoreSave(void);
+void ElementShopRender(void);
 void ElementTextureInit(void);
 void ElementThreadStart(void);
 
