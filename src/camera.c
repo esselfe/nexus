@@ -354,6 +354,30 @@ void CameraReset(void) {
 	sprintf(cam.height_speed_text, "0");
 }
 
+void CameraReverse(void) {
+	if (cam.moving & MOVE_FRONT) {
+		cam.moving ^= MOVE_FRONT;
+		cam.moving |= MOVE_BACK;
+		cam.speed = 0.0;
+	}
+	else if (cam.moving & MOVE_BACK) {
+		cam.moving ^= MOVE_BACK;
+		cam.moving |= MOVE_FRONT;
+		cam.speed = 0.0;
+	}
+
+	if (cam.moving & MOVE_LEFT) {
+		cam.moving ^= MOVE_LEFT;
+		cam.moving |= MOVE_RIGHT;
+		cam.side_speed = 0.0;
+	}
+	else if (cam.moving & MOVE_RIGHT) {
+		cam.moving ^= MOVE_RIGHT;
+		cam.moving |= MOVE_LEFT;
+		cam.side_speed = 0.0;
+	}
+}
+
 // Turns the camera left (negative angle) or right (positive angle)
 void CameraRotateStep(GLfloat angle) {
 	cam.rotation_angle += angle;

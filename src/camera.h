@@ -40,6 +40,7 @@ extern struct Camera cam; // For now there's only one... a list would be nice.
 void CameraInit(void);
 void CameraMove(void);
 void CameraReset(void);
+void CameraReverse(void);
 void CameraRotateStep(GLfloat angle);
 void CameraShowPosition(void);
 void CameraStop(void);

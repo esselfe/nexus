@@ -114,13 +114,23 @@ void ElementShopInit(void) {
     glEndList();
 }
 
+unsigned int cooldown_time = 120, cooldown_cnt;
 void ElementShopCheckCollision(void) {
     if (cam.x > shop_x - shop_width/2.0 - 1.5 &&
 			cam.x < shop_x + shop_width/2.0 + 1.5 &&
 			cam.z > shop_z - shop_depth/2.0 - 1.5 &&
 			cam.z < shop_z + shop_depth/2.0 + 1.5) {
-        CameraStop();
+        if (!cooldown_cnt) {
+            ++cooldown_cnt;
+            CameraReverse();
+        }
+        else {
+            ++cooldown_cnt;
+            if (cooldown_cnt >= cooldown_time)
+                cooldown_cnt = 0;
+        }
     }
+    else if (cooldown_cnt) cooldown_cnt = 0;
 }
 
 void ElementShopRender(void) {
