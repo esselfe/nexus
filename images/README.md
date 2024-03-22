@@ -66,6 +66,18 @@ Credits: NASA https://www.jpl.nasa.gov/images/pia00405-earths-moon
 
 ---
 
+![planks 001](planks-001-128.png)  
+*planks-001-128.png*  
+![planks 002](planks-002-128.png)  
+*planks-002-128.png*  
+![planks 003](planks-003-128.png)  
+*planks-003-128.png*  
+![planks 004](planks-004-128.png)  
+*planks-004-128.png*  
+Credits: https://cc0-textures.com/t/cc0t-planks-018  
+
+---
+
 ![sky 1](sky01-2048.png)  
 *sky01-2048.png*  
 Credits: NASA/JPL-Caltech https://images-assets.nasa.gov/image/PIA15415/PIA15415~orig.jpg  
