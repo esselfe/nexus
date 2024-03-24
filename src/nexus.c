@@ -29,7 +29,7 @@
 #include "modules/file-browser/file-browser.h"
 #include "modules/memory/memory.h"
 
-char *nexus_version_string = "0.2.3-git";
+char *nexus_version_string = "0.2.4-git";
 int verbose;
 int mainloopend; // The program should exit if set to 1
 int init_done; // Internal use
