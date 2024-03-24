@@ -16,32 +16,32 @@ void CameraGoto(GLfloat x, GLfloat z) {
 	GLfloat denom = x-cam.x;
 	// Prevent division by zero errors
 	if (denom == 0.0)
-		goto_angle = -atan((z-cam.z)/0.0000001) * (180.0/M_PI) / 100.0;
+		goto_angle = -atan((z-cam.z)/0.0000001) * (180.0/M_PI);
 	else
-		goto_angle = -atan((z-cam.z)/denom) * (180.0/M_PI) / 100.0;
+		goto_angle = -atan((z-cam.z)/denom) * (180.0/M_PI);
 	
 	if ((x-cam.x >= 0.0 && z-cam.z >= 0.0) || 
 	  (x-cam.x >= 0.0 && z-cam.z <= 0.0))
-		goto_angle += 0.9;
+		goto_angle += 90.0;
 	else if ((x-cam.x <= 0.0 && z-cam.z <= 0.0) ||
 	  (x-cam.x <= 0.0 && z-cam.z >= 0.0))
-		goto_angle -= 0.9;
+		goto_angle -= 90.0;
 	
 	if (goto_angle < 0.0)
-		goto_angle += 3.6;
+		goto_angle += 360.0;
 	
 	goto_angle_left = goto_angle - cam.rotation_angle;
 	if (goto_angle_left < 0.0)
-		goto_angle_left += 3.6;
+		goto_angle_left += 360.0;
 }
 
 void CameraGotoMove(void) {
-	if (goto_angle_left >= 0.01) {
-		goto_angle_left -= 0.01;
-		CameraRotateStep(0.01);
+	if (goto_angle_left >= 1.0) {
+		goto_angle_left -= 1.0;
+		CameraRotateStep(1.0);
 	}
 	
-	if (goto_angle_left <= 0.01) {
+	if (goto_angle_left <= 1.0) {
 	  	goto_angle_left = 0.0;
 		cam.moving |= MOVE_FRONT;
 		cam.moving |= MOVE_ACCEL;

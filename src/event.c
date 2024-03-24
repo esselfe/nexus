@@ -379,7 +379,7 @@ void EventCheck(void) {
 					SDL_WarpMouseInWindow(window, mouse_x, mouse_y);
 				}
 				else if (mouse_x - mouse_x_prev != 0)
-					CameraRotateStep(0.0005 * (mouse_x - mouse_x_prev) * delta_move);
+					CameraRotateStep(0.05 * (mouse_x - mouse_x_prev) * delta_move);
 			}
 
 			mouse_x_prev = mouse_x;

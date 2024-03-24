@@ -14,10 +14,10 @@ void CameraInit(void) {
 	cam.x = 0.0;
 	cam.y = 2.0;
 	cam.z = -10.0;
-	cam.rotation_angle = 0.0;
-	cam.lx = cam.x + (GLfloat)sin(cam.rotation_angle*1.7453293f);
+	cam.rotation_angle = 0.000001;
+	cam.lx = cam.x + (GLfloat)sin(cam.rotation_angle * (M_PI/180.0));
 	cam.ly = 2.0;
-	cam.lz = cam.z + (GLfloat)cos(cam.rotation_angle*1.7453293f);
+	cam.lz = cam.z + (GLfloat)cos(cam.rotation_angle * (M_PI/180.0));
 	cam.moving = MOVE_NONE;
 	cam.thr = 25.0;
 	sprintf(cam.thr_text, "%d%%", (int)cam.thr);
@@ -235,9 +235,9 @@ void CameraMove(void) {
 	GLfloat mx, mz;
 	if (cam.moving & MOVE_FRONT || cam.moving & MOVE_BACK) {
 		// 1.7453293 is PI/180*100, it's used to convert degrees to radians
-		mx = (GLfloat)(sin(cam.rotation_angle*1.7453293f))
+		mx = (GLfloat)(sin(cam.rotation_angle * (M_PI/180.0)))
 			* cam.speed/100.0f * delta_move;
-		mz = (GLfloat)(cos(cam.rotation_angle*1.7453293f))
+		mz = (GLfloat)(cos(cam.rotation_angle * (M_PI/180.0)))
 			* cam.speed/100.0f * delta_move;
 		cam.x += mx;
 		cam.lx += mx;
@@ -245,9 +245,9 @@ void CameraMove(void) {
 		cam.lz += mz;
 	}
 	if (cam.moving & MOVE_LEFT || cam.moving & MOVE_RIGHT) {
-		mx = (GLfloat)(cos(cam.rotation_angle*1.7453293f))
+		mx = (GLfloat)(cos(cam.rotation_angle * (M_PI/180.0)))
 			* cam.side_speed/160.0f * delta_move;
-		mz = (GLfloat)(-sin(cam.rotation_angle*1.7453293f))
+		mz = (GLfloat)(-sin(cam.rotation_angle * (M_PI/180.0)))
 			* cam.side_speed/160.0f * delta_move;
 		cam.x += mx;
 		cam.lx += mx;
@@ -280,9 +280,9 @@ void CameraMove(void) {
 	
 	if (!goto_enabled) {
 		if (cam.moving & LOOK_LEFT)
-			CameraRotateStep(-0.01);
+			CameraRotateStep(-1.0);
 		if (cam.moving & LOOK_RIGHT)
-			CameraRotateStep(0.01);
+			CameraRotateStep(1.0);
 	}
 	
 	if (cam.moving & THR_DOWN) {
@@ -340,9 +340,9 @@ void CameraReset(void) {
 	cam.z = -10.0;
 	cam.rotation_angle = 0.0;
 	// 1.7453293 is PI/180*100, it's used to convert degrees to radians
-	cam.lx = cam.x + (GLfloat)sin(cam.rotation_angle*1.7453293f);
+	cam.lx = cam.x + (GLfloat)sin(cam.rotation_angle * (M_PI/180.0));
 	cam.ly = 2.0;
-	cam.lz = cam.z + (GLfloat)cos(cam.rotation_angle*1.7453293f);
+	cam.lz = cam.z + (GLfloat)cos(cam.rotation_angle * (M_PI/180.0));
 	cam.moving = MOVE_NONE;
 	cam.thr = 10.0;
 	sprintf(cam.thr_text, "%d%%", (int)cam.thr);
@@ -382,12 +382,12 @@ void CameraReverse(void) {
 void CameraRotateStep(GLfloat angle) {
 	cam.rotation_angle += angle;
 
-	if (cam.rotation_angle >= 3.6) cam.rotation_angle -= 3.6;
-	if (cam.rotation_angle < 0.0) cam.rotation_angle += 3.6;
+	if (cam.rotation_angle >= 360.0) cam.rotation_angle -= 360.0;
+	if (cam.rotation_angle < 0.0) cam.rotation_angle += 360.0;
 	
 	// 1.7453293 is PI/180*100, it's used to convert degrees to radians
-	cam.lx = cam.x + (GLfloat)sin(cam.rotation_angle*1.7453293f);
-	cam.lz = cam.z + (GLfloat)cos(cam.rotation_angle*1.7453293f);
+	cam.lx = cam.x + (GLfloat)sin(cam.rotation_angle * (M_PI/180.0));
+	cam.lz = cam.z + (GLfloat)cos(cam.rotation_angle * (M_PI/180.0));
 }
 
 void CameraShowPosition(void) {

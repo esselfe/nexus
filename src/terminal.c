@@ -142,7 +142,7 @@ void TerminalParse(void) {
 		else if (strcmp(w1, "stop") == 0)
 			CameraStop();
 		else if (strcmp(w1, "turn") == 0 && strlen(w2)) {
-			cam.rotation_angle = atof(w2)/100.0;
+			cam.rotation_angle = atof(w2);
 			CameraRotateStep(0.0);
 		}
 	}

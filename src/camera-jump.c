@@ -7,8 +7,8 @@
 // Should be called from the terminal, immediately change the camera position
 void CameraJump(GLfloat x, GLfloat z) {
 	cam.x = x;
-	cam.lx = x + sin(cam.rotation_angle*1.7453293f);
+	cam.lx = x + sin(cam.rotation_angle * (M_PI/180.0));
 	cam.z = z;
-	cam.lz = z + cos(cam.rotation_angle*1.7453293f);
+	cam.lz = z + cos(cam.rotation_angle * (M_PI/180.0));
 }
 

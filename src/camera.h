@@ -28,7 +28,7 @@
 struct Camera {
 	GLfloat x, y, z, // position
 		lx, ly, lz; // look_at point position
-	GLfloat rotation_angle; // Y axis rotation
+	GLfloat rotation_angle; // Y axis rotation, 0.0-360.0 degrees
 	unsigned long moving; // Each bit is a movement flag from above
 	GLfloat thr, // Throttle
 		speed, side_speed, height_speed;
