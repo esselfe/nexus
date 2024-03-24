@@ -10,6 +10,7 @@
 #include "render.h"
 #include "sky.h"
 #include "terminal.h"
+#include "window.h"
 #include "file-browser.h"
 
 void FileBrowserRender(void) {

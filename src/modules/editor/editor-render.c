@@ -9,6 +9,7 @@
 #include "render.h"
 #include "sky.h"
 #include "terminal.h"
+#include "window.h"
 
 void EditorRender(void) {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);

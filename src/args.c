@@ -4,6 +4,7 @@
 
 #include "nexus.h"
 #include "floor.h"
+#include "window.h"
 
 // Structure of getopt options for program options and arguments processing
 static const struct option long_options[] = {

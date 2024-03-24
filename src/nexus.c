@@ -24,6 +24,7 @@
 #include "render.h"
 #include "selectID.h"
 #include "sky.h"
+#include "window.h"
 #include "modules/editor/editor.h"
 #include "modules/element/element.h"
 #include "modules/file-browser/file-browser.h"
@@ -33,12 +34,6 @@ char *nexus_version_string = "0.2.4-git";
 int verbose;
 int mainloopend; // The program should exit if set to 1
 int init_done; // Internal use
-SDL_DisplayMode display_mode;
-SDL_Window *window;
-SDL_GLContext context;
-// Window position and dimensions
-GLfloat winX = 100.0, winY = 40.0, winW = 800.0, winH = 600.0;
-char window_title[1024];
 
 // This function will be called if exit(N); is called or at the end of main()
 // It's set with the atexit() function in the main() function
@@ -73,33 +68,9 @@ int main(int argc, char **argv) {
 	
 	atexit(NexusExit);
 
-	if (SDL_Init(SDL_INIT_VIDEO) < 0) {
-		printf ("nexus: SDL_Init() failed.\n");
-		exit(1);
-	}
+	WindowInit();
 
-	// Set OpenGL API version to 1.1 and show what we got
-	int gl_major, gl_minor;
-	SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
-	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 1);
-	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 1);
-	SDL_GL_GetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, &gl_major);
-	SDL_GL_GetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, &gl_minor);
-	if (verbose) printf("Using OpenGL %d.%d\n", gl_major, gl_minor);
-
-	sprintf(window_title, "nexus %s", nexus_version_string);
-	window = SDL_CreateWindow(window_title, winX, winY, winW, winH,
-		SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN);
-
-	context = SDL_GL_CreateContext(window);
-	if (context == NULL) {
-		printf("nexus: Cannot create SDL2/GL context. Error: %s\n",
-			SDL_GetError());
-		SDL_Quit();
-		exit(1);
-	}
-
-	// Needs a context
+	// Needs a context from the window creation
 	if (verbose) printf("OpenGL %s installed\n", glGetString(GL_VERSION));
 
 	glewExperimental = GL_TRUE;

@@ -7,6 +7,7 @@
 #include "mode.h"
 #include "render.h"
 #include "terminal.h"
+#include "window.h"
 #include "modules/file-browser/file-browser.h"
 #include "modules/memory/memory.h"
 

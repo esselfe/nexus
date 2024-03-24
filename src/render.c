@@ -12,6 +12,7 @@
 #include "render.h"
 #include "sky.h"
 #include "terminal.h"
+#include "window.h"
 
 void (*RenderFunc)(void);
 

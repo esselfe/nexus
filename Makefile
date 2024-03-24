@@ -10,7 +10,8 @@ CPPFLAGS += -D_GNU_SOURCE -Isrc/
 LDLIBS += $(shell $(PKG_CONFIG) --libs $(LIBS)) -lm -lpthread
 OBJDIR := obj
 OBJ := args.o camera.o camera-goto.o camera-jump.o delta.o event.o flag.o floor.o \
-	font.o image.o mode.o moon.o nexus.o render.o selectID.o sky.o terminal.o
+	font.o image.o mode.o moon.o nexus.o render.o selectID.o sky.o terminal.o \
+	window.o
 include src/modules/file-browser/module.mk
 include src/modules/editor/module.mk
 include src/modules/element/module.mk
