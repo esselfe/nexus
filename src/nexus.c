@@ -89,10 +89,10 @@ int main(int argc, char **argv) {
 	SelectIDInit();
 	RenderInit();
 	FloorInit();
-	ElementInit();
 	FlagInit();
 	SkyInit();
 	MoonInit();
+	ElementInit();
 	FileBrowserInit();
 	EditorInit();
 	MemoryInit();
