@@ -1,13 +1,5 @@
 #include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <errno.h>
-#include <string.h>
-#include <time.h>
-#include <sys/time.h>
 #include <GL/glew.h>
-#include <GL/gl.h>
-#include <GL/glu.h>
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_opengl.h>
 
