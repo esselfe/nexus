@@ -6,6 +6,7 @@
 #include "event.h"
 #include "floor.h"
 #include "font.h"
+#include "hud.h"
 #include "render.h"
 #include "sky.h"
 #include "terminal.h"
@@ -92,17 +93,7 @@ void MemoryRender(void) {
 	// Switch to 2D rendering (HUD)
 	RenderSet2DView();
 
-	FontRender2D(BG_BLACK, 10, (int)winH-16-10, fps_text);
-
-	if (terminal_visible)
-		TerminalRender();
-	if (!mouse_held)
-		RenderCursor();
-
-	RenderThrottle();
-	RenderCompass();
-	FontRender2D(BG_BLACK, winW-strlen(daylight_amount_text)*8, 16,
-		daylight_amount_text);
+	HudRender();
 
 	SDL_GL_SwapWindow(window);
 }

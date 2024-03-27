@@ -11,6 +11,7 @@
 #include "flag.h"
 #include "floor.h"
 #include "font.h"
+#include "hud.h"
 #include "mode.h"
 #include "moon.h"
 #include "render.h"
@@ -82,6 +83,7 @@ int main(int argc, char **argv) {
 	RenderInit();
 	FloorInit();
 	FlagInit();
+	HudInit();
 	SkyInit();
 	MoonInit();
 	ElementInit();
