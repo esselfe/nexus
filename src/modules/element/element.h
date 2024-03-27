@@ -21,7 +21,7 @@ struct Element {
 	float width, height;
 	float angle_x, angle_y, angle_z;
 	GLuint texture_id;
-	unsigned int value;
+	unsigned int weight;
 };
 struct ElementList {
 	struct Element *first_element, *last_element;
@@ -41,6 +41,11 @@ extern GLuint texture_id_waste, texture_id_battery, texture_id_copper,
 extern GLfloat element_mat_amb_diff[4];
 extern struct timeval tv_score_saved;
 extern unsigned long long element_credits;
+extern GLfloat shop_x, shop_y, shop_z;
+extern GLfloat shop_width, shop_height, shop_depth;
+extern unsigned int shop_is_near_camera;
+extern unsigned int shop_convert_after_goto;
+extern char *shop_convert_element_after_goto;
 
 void ElementAdd(unsigned int count);
 void ElementCleanArea(void);
@@ -55,6 +60,7 @@ void ElementScoreLoad(void);
 void ElementScoreSave(void);
 void ElementShopInit(void);
 void ElementShopCheckCollision(void);
+void ElementShopConvert(char *type);
 void ElementShopRender(void);
 void ElementTextureInit(void);
 void ElementTextureCreate(GLuint *id, char *filename);

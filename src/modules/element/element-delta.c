@@ -25,25 +25,25 @@ void ElementCheckCollision(void) {
 			if (-cam.z > el->z - 1.5 &&
 				-cam.z < el->z + 1.5) {
 				if (el->type == ELEMENT_TYPE_WASTE)
-					total_waste += el->value;
+					total_waste += el->weight;
 				else if (el->type == ELEMENT_TYPE_BATTERY)
-					total_battery += el->value;
+					total_battery += el->weight;
 				else if (el->type == ELEMENT_TYPE_COPPER)
-					total_copper += el->value;
+					total_copper += el->weight;
 				else if (el->type == ELEMENT_TYPE_GOLD)
-					total_gold += el->value;
+					total_gold += el->weight;
 				else if (el->type == ELEMENT_TYPE_IRON)
-					total_iron += el->value;
+					total_iron += el->weight;
 				else if (el->type == ELEMENT_TYPE_MAGNET)
-					total_magnet += el->value;
+					total_magnet += el->weight;
 				else if (el->type == ELEMENT_TYPE_ROCK)
-					total_rock += el->value;
+					total_rock += el->weight;
 				else if (el->type == ELEMENT_TYPE_RUBBER)
-					total_rubber += el->value;
+					total_rubber += el->weight;
 				else if (el->type == ELEMENT_TYPE_SILVER)
-					total_silver += el->value;
+					total_silver += el->weight;
 				else if (el->type == ELEMENT_TYPE_WOOD)
-					total_wood += el->value;
+					total_wood += el->weight;
 
 				ElementRemove(el);
 				if (elnext) {

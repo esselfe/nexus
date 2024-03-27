@@ -57,43 +57,43 @@ void ElementAdd(unsigned int count) {
 		switch (elem->type) {
 		case ELEMENT_TYPE_WASTE:
 			elem->texture_id = texture_id_waste;
-			elem->value = (rand() % 1000) + 100;
+			elem->weight = (rand() % 1000) + 100;
 			break;
 		case ELEMENT_TYPE_BATTERY:
 			elem->texture_id = texture_id_battery;
-			elem->value = 1;
+			elem->weight = 1;
 			break;
 		case ELEMENT_TYPE_COPPER:
 			elem->texture_id = texture_id_copper;
-			elem->value = (rand() % 100) + 100;
+			elem->weight = (rand() % 100) + 100;
 			break;
 		case ELEMENT_TYPE_GOLD:
 			elem->texture_id = texture_id_gold;
-			elem->value = (rand() % 100) + 100;
+			elem->weight = (rand() % 100) + 100;
 			break;
 		case ELEMENT_TYPE_IRON:
 			elem->texture_id = texture_id_iron;
-			elem->value = (rand() % 1000) + 100;
+			elem->weight = (rand() % 1000) + 100;
 			break;
 		case ELEMENT_TYPE_MAGNET:
 			elem->texture_id = texture_id_magnet;
-			elem->value = (rand() % 100) + 100;
+			elem->weight = (rand() % 100) + 100;
 			break;
 		case ELEMENT_TYPE_ROCK:
 			elem->texture_id = texture_id_rock;
-			elem->value = (rand() % 1000) + 100;
+			elem->weight = (rand() % 1000) + 100;
 			break;
 		case ELEMENT_TYPE_RUBBER:
 			elem->texture_id = texture_id_rubber;
-			elem->value = (rand() % 1000) + 100;
+			elem->weight = (rand() % 1000) + 100;
 			break;
 		case ELEMENT_TYPE_SILVER:
 			elem->texture_id = texture_id_silver;
-			elem->value = (rand() % 100) + 100;
+			elem->weight = (rand() % 100) + 100;
 			break;
 		case ELEMENT_TYPE_WOOD:
 			elem->texture_id = texture_id_wood;
-			elem->value = (rand() % 1000) + 100;
+			elem->weight = (rand() % 1000) + 100;
 			break;
 		}
 		elem->x = rand() % ((int)floor_size + (int)(floor_size/2.0));

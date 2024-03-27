@@ -115,6 +115,24 @@ void TerminalParse(void) {
 		else if (strcmp(w1, "element") == 0 && strlen(w2)) {
 			if (strcmp(w2, "add") == 0)
 				ElementAdd(atoi(w3));
+			else if (strcmp(w2, "convert") == 0) {
+				if (strlen(w3)) {
+					if (!shop_is_near_camera) {
+						CameraGoto(shop_x, shop_z - 15.0);
+						shop_convert_after_goto = 1;
+						if (strcmp(w3, "all") == 0)
+							shop_convert_element_after_goto = NULL;
+						else
+							shop_convert_element_after_goto = strdup(w3);
+					}
+					else {
+						if (strcmp(w3, "all") == 0)
+							ElementShopConvert(NULL);
+						else
+							ElementShopConvert(w3);
+					}
+				}
+			}
 		}
 		else if (strcmp(w1, "floor") == 0 && strlen(w2)) {
 			if (strcmp(w2, "freeze") == 0) {
