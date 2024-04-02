@@ -1,5 +1,4 @@
 #include <stdio.h>
-//#include <GL/glew.h>
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_opengl.h>
 
@@ -65,14 +64,6 @@ int main(int argc, char **argv) {
 
 	// Needs a context from the window creation
 	if (verbose) printf("OpenGL %s installed\n", glGetString(GL_VERSION));
-
-	/*glewExperimental = GL_TRUE;
-	if (glewInit() != GLEW_OK) {
-		printf ("nexus: Cannot initialize GLEW.\n");
-		SDL_GL_DeleteContext(context);
-		SDL_Quit();
-		exit(1);
-	}*/
 
 	ModeSet(MODE_MAIN);
 	EventInit();

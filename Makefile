@@ -4,7 +4,6 @@ PROG := nexus
 
 PKG_CONFIG ?= pkg-config
 
-#LIBS := gl sdl2 glew glu libpng
 LIBS := gl sdl2 glu libpng
 CFLAGS += $(shell $(PKG_CONFIG) --cflags $(LIBS)) -std=c17 -MMD -MP
 CPPFLAGS += -D_GNU_SOURCE -Isrc/
