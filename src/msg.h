@@ -21,6 +21,7 @@ extern struct MessageBoard message_board;
 void MsgInit(void);
 void MsgAdd(char *text);
 void MsgHide(void);
+void MsgMoveAllUp(void);
 void MsgPopFirst(void);
 void MsgRender(void);
 void MsgShow(void);

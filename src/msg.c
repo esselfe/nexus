@@ -40,6 +40,8 @@ struct MessageBoard {
 void MsgAdd(char *text) {
     struct Message *msg = malloc(sizeof(struct Message));
 
+    MsgMoveAllUp();
+
     if (message_board.total_messages == 0) {
         message_board.first_message = msg;
         msg->prev = NULL;
@@ -51,7 +53,7 @@ void MsgAdd(char *text) {
         message_board.last_message->next = msg;
         msg->prev = message_board.last_message;
         msg->next = NULL;
-        msg->y = msg->prev->y + 20.0;
+        msg->y = msg->prev->y - 20.0;
     }
     msg->x = message_board.x;
     msg->total_lines = (strlen(text) * 8) / (message_board.width / 8);
@@ -65,6 +67,15 @@ void MsgAdd(char *text) {
 
 void MsgHide(void) {
     message_board.visible = 0;
+}
+
+void MsgMoveAllUp(void) {
+    struct Message *msg = message_board.first_message;
+    
+    while (msg != NULL) {
+        msg->y += 20.0;
+        msg = msg->next;
+    }
 }
 
 void MsgPopFirst(void);
