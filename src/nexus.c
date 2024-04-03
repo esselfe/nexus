@@ -13,6 +13,7 @@
 #include "hud.h"
 #include "mode.h"
 #include "moon.h"
+#include "msg.h"
 #include "render.h"
 #include "selectID.h"
 #include "sky.h"
@@ -66,6 +67,7 @@ int main(int argc, char **argv) {
 	if (verbose) printf("OpenGL %s installed\n", glGetString(GL_VERSION));
 
 	ModeSet(MODE_MAIN);
+	MsgInit();
 	EventInit();
 	DeltaInit();
 	CameraInit();

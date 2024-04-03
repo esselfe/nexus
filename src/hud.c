@@ -4,6 +4,7 @@
 #include "event.h"
 #include "font.h"
 #include "image.h"
+#include "msg.h"
 #include "render.h"
 #include "sky.h"
 #include "terminal.h"
@@ -30,6 +31,8 @@ void HudInit(void) {
 
 void HudRender(void) {
     FontRender2D(BG_BLACK, 10, (int)winH-16-10, fps_text);
+	if (message_board.visible)
+		MsgRender();
 	if (terminal_visible)
 		TerminalRender();
 	if (!mouse_held)

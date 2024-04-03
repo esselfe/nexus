@@ -5,6 +5,7 @@
 #include "delta.h"
 #include "event.h"
 #include "mode.h"
+#include "msg.h"
 #include "render.h"
 #include "terminal.h"
 #include "window.h"
@@ -261,6 +262,12 @@ void EventCheck(void) {
 				break;
 			case SDLK_F1:
 				ModeSet(MODE_MAIN);
+				break;
+			case SDLK_F2:
+				if (message_board.visible)
+					MsgHide();
+				else
+					MsgShow();
 				break;
 			case SDLK_b:
 				if (ModeGet() != MODE_FILE_BROWSER)
