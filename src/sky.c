@@ -117,31 +117,31 @@ void SkyInit(void) {
 	glNewList(daylight_list, GL_COMPILE);
 	
 	glBegin(GL_POLYGON);
-	 glVertex3f(-975.0, -975.0, -975.0);
-	 glVertex3f(-975.0, 975.0, -975.0);
-	 glVertex3f(975.0, 975.0, -975.0);
-	 glVertex3f(975.0, -975.0, -975.0);
+	 glVertex3f(-950.0, -950.0, -950.0);
+	 glVertex3f(-950.0, 950.0, -950.0);
+	 glVertex3f(950.0, 950.0, -950.0);
+	 glVertex3f(950.0, -950.0, -950.0);
 	glEnd();
 	
 	glBegin(GL_POLYGON);
-	 glVertex3f(975.0, -975.0, -975.0);
-	 glVertex3f(975.0, 975.0, -975.0);
-	 glVertex3f(975.0, 975.0, 975.0);
-	 glVertex3f(975.0, -975.0, 975.0);
+	 glVertex3f(950.0, -950.0, -950.0);
+	 glVertex3f(950.0, 950.0, -950.0);
+	 glVertex3f(950.0, 950.0, 950.0);
+	 glVertex3f(950.0, -950.0, 950.0);
 	glEnd();
 	
 	glBegin(GL_POLYGON);
-	 glVertex3f(975.0, -975.0, 975.0);
-	 glVertex3f(975.0, 975.0, 975.0);
-	 glVertex3f(-975.0, 975.0, 975.0);
-	 glVertex3f(-975.0, -975.0, 975.0);
+	 glVertex3f(950.0, -950.0, 950.0);
+	 glVertex3f(950.0, 950.0, 950.0);
+	 glVertex3f(-950.0, 950.0, 950.0);
+	 glVertex3f(-950.0, -950.0, 950.0);
 	glEnd();
 	
 	glBegin(GL_POLYGON);
-	 glVertex3f(-975.0, -975.0, 975.0);
-	 glVertex3f(-975.0, 975.0, 975.0);
-	 glVertex3f(-975.0, 975.0, -975.0);
-	 glVertex3f(-975.0, -975.0, -975.0);
+	 glVertex3f(-950.0, -950.0, 950.0);
+	 glVertex3f(-950.0, 950.0, 950.0);
+	 glVertex3f(-950.0, 950.0, -950.0);
+	 glVertex3f(-950.0, -950.0, -950.0);
 	glEnd();
 	
 	glEndList();
